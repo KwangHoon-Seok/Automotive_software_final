@@ -1,0 +1,14 @@
+[35m[1mConsolidate compiler generated dependencies of target lane_detection[0m
+[ 14%] [32mBuilding CXX object CMakeFiles/vehicle.dir/src/vehicle/vehicle_simulator_node.cpp.o[0m
+[ 28%] [32mBuilding CXX object CMakeFiles/display.dir/src/display/display_node.cpp.o[0m
+[ 42%] [32mBuilding CXX object CMakeFiles/lane_detection.dir/src/lane_detection/lane_detection_node.cpp.o[0m
+[01m[Kc++:[m[K [01;31m[Kfatal error: [m[KKilled signal terminated program cc1plus
+compilation terminated.
+gmake[2]: *** [CMakeFiles/display.dir/build.make:76: CMakeFiles/display.dir/src/display/display_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:193: CMakeFiles/display.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+[ 57%] [32m[1mLinking CXX executable lane_detection[0m
+[ 71%] Built target lane_detection
+[ 85%] [32m[1mLinking CXX executable vehicle[0m
+[ 85%] Built target vehicle
+gmake: *** [Makefile:146: all] Error 2

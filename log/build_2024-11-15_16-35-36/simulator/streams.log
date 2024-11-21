@@ -1,0 +1,16 @@
+[0.060s] Invoking command in '/home/seok/automotive_software_final/build/simulator': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/simulator -- -j8 -l8
+[0.119s] [35m[1mConsolidate compiler generated dependencies of target lane_detection[0m
+[0.160s] [ 14%] [32mBuilding CXX object CMakeFiles/vehicle.dir/src/vehicle/vehicle_simulator_node.cpp.o[0m
+[0.161s] [ 28%] [32mBuilding CXX object CMakeFiles/display.dir/src/display/display_node.cpp.o[0m
+[0.171s] [ 42%] [32mBuilding CXX object CMakeFiles/lane_detection.dir/src/lane_detection/lane_detection_node.cpp.o[0m
+[102.478s] [01m[Kc++:[m[K [01;31m[Kfatal error: [m[KKilled signal terminated program cc1plus
+[102.509s] compilation terminated.
+[102.511s] gmake[2]: *** [CMakeFiles/display.dir/build.make:76: CMakeFiles/display.dir/src/display/display_node.cpp.o] Error 1
+[102.511s] gmake[1]: *** [CMakeFiles/Makefile2:193: CMakeFiles/display.dir/all] Error 2
+[102.511s] gmake[1]: *** Waiting for unfinished jobs....
+[114.157s] [ 57%] [32m[1mLinking CXX executable lane_detection[0m
+[115.678s] [ 71%] Built target lane_detection
+[127.573s] [ 85%] [32m[1mLinking CXX executable vehicle[0m
+[128.575s] [ 85%] Built target vehicle
+[128.590s] gmake: *** [Makefile:146: all] Error 2
+[128.649s] Invoked command in '/home/seok/automotive_software_final/build/simulator' returned '2': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/simulator -- -j8 -l8

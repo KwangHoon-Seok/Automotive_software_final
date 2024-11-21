@@ -27,6 +27,21 @@
 #include <cmath>
 #include <chrono>
 
+// Ros Header
+#include <rclcpp/rclcpp.hpp>
+#include <rclcpp/message_info.hpp>
+
+// Ros Message Header
+#include <ad_msgs/msg/polyfit_lane_data_array.hpp>
+#include <ad_msgs/msg/lane_point_data_array.hpp>
+#include <ad_msgs/msg/lane_point_data.hpp>
+#include <ad_msgs/msg/vehicle_input.hpp>
+#include <ad_msgs/msg/vehicle_output.hpp>
+#include <ad_msgs/msg/obstacles.hpp>
+#include <std_msgs/msg/float32.hpp>
+#include <geometry_msgs/msg/point.hpp>
+#include <geometry_msgs/msg/point_stamped.hpp>
+
 // Bridge Header
 #include "ros2_bridge_vehicle.hpp"
 #include "ros2_bridge_lane.hpp"
@@ -34,6 +49,10 @@
 
 // Parameter Header
 #include "autonomous_driving_config.hpp"
+
+// Algorithm Header
+#include <eigen3/Eigen/Dense>
+#include <fstream>
 
 class AutonomousDriving : public rclcpp::Node {
     public:

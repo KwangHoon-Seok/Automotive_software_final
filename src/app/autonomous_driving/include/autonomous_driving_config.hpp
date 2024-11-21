@@ -19,7 +19,7 @@
 typedef struct {
     std::string vehicle_namespace{""};
     double loop_rate_hz{100.0};
-    bool use_manual_inputs{false};
+    bool use_manual_inputs{true};
 
     ////////////////////// TODO //////////////////////
     // TODO: Add more parameters

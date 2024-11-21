@@ -1,0 +1,8 @@
+[35m[1mConsolidate compiler generated dependencies of target lane_detection[0m
+[ 14%] [32mBuilding CXX object CMakeFiles/vehicle.dir/src/vehicle/vehicle_simulator_node.cpp.o[0m
+[ 28%] [32mBuilding CXX object CMakeFiles/display.dir/src/display/display_node.cpp.o[0m
+[ 42%] [32mBuilding CXX object CMakeFiles/lane_detection.dir/src/lane_detection/lane_detection_node.cpp.o[0m
+[ 57%] [32m[1mLinking CXX executable lane_detection[0m
+[ 71%] Built target lane_detection
+[ 85%] [32m[1mLinking CXX executable vehicle[0m
+[ 85%] Built target vehicle
