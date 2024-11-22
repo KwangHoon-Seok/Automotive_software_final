@@ -1,0 +1,11 @@
+[0.035s] Invoking command in '/home/seok/automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28
+[0.067s] [ 50%] [32mBuilding CXX object CMakeFiles/autonomous_driving.dir/src/autonomous_driving_node.cpp.o[0m
+[0.187s] In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/autonomous_driving_node.cpp:17[m[K:
+[0.187s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/autonomous_driving_node.hpp:38:10:[m[K [01;31m[Kfatal error: [m[Kad_msgs/msg/vehicle_input.hpp: No such file or directory
+[0.187s]    38 | #include [01;31m[K<ad_msgs/msg/vehicle_input.hpp>[m[K
+[0.187s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.187s] compilation terminated.
+[0.189s] gmake[2]: *** [CMakeFiles/autonomous_driving.dir/build.make:76: CMakeFiles/autonomous_driving.dir/src/autonomous_driving_node.cpp.o] Error 1
+[0.189s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/autonomous_driving.dir/all] Error 2
+[0.189s] gmake: *** [Makefile:146: all] Error 2
+[0.190s] Invoked command in '/home/seok/automotive_software_final/build/autonomous_driving' returned '2': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28

@@ -1,0 +1,81 @@
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/autonomous_driving_node.cpp:17[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/autonomous_driving_node.hpp:38:10:[m[K [01;31m[Kfatal error: [m[Kad_msgs/msg/vehicle_input.hpp: No such file or directory
+   38 | #include [01;31m[K<ad_msgs/msg/vehicle_input.hpp>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/autonomous_driving_node.dir/build.make:76: CMakeFiles/autonomous_driving_node.dir/src/autonomous_driving_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/autonomous_driving_node.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:98:40:[m[K [01;31m[Kerror: [m[K‘[01m[KVehicleOutput[m[K’ is not a member of ‘[01m[Kad_msgs::msg[m[K’
+   98 |     rclcpp::Subscription<ad_msgs::msg::[01;31m[KVehicleOutput[m[K>::SharedPtr s_vehicle_state_;
+      |                                        [01;31m[K^~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:98:53:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+   98 |     rclcpp::Subscription<ad_msgs::msg::VehicleOutput[01;31m[K>[m[K::SharedPtr s_vehicle_state_;
+      |                                                     [01;31m[K^[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:98:53:[m[K [01;31m[Kerror: [m[Ktemplate argument 3 is invalid
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:98:53:[m[K [01;31m[Kerror: [m[Ktemplate argument 4 is invalid
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:98:53:[m[K [01;31m[Kerror: [m[Ktemplate argument 5 is invalid
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:98:56:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ at end of member declaration
+   98 |     rclcpp::Subscription<ad_msgs::msg::VehicleOutput>::[01;31m[KSharedPtr[m[K s_vehicle_state_;
+      |                                                        [01;31m[K^~~~~~~~~[m[K
+      |                                                                 [32m[K;[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:98:66:[m[K [01;31m[Kerror: [m[K‘[01m[Ks_vehicle_state_[m[K’ does not name a type
+   98 |     rclcpp::Subscription<ad_msgs::msg::VehicleOutput>::SharedPtr [01;31m[Ks_vehicle_state_[m[K;
+      |                                                                  [01;31m[K^~~~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:106:58:[m[K [01;31m[Kerror: [m[K‘[01m[KVehicleOutput[m[K’ in namespace ‘[01m[Kad_msgs::msg[m[K’ does not name a type
+  106 |     inline void CallbackVehicleState(const ad_msgs::msg::[01;31m[KVehicleOutput[m[K::SharedPtr msg) {
+      |                                                          [01;31m[K^~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:106:83:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[Kmsg[m[K’
+  106 |     inline void CallbackVehicleState(const ad_msgs::msg::VehicleOutput::SharedPtr [01;31m[Kmsg[m[K) {
+      |                                                                                   [01;31m[K^~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:106:82:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K)[m[K’ before ‘[01m[Kmsg[m[K’
+  106 |     inline void CallbackVehicleState[34m[K([m[Kconst ad_msgs::msg::VehicleOutput::SharedPtr[01;31m[K [m[K[32m[Kmsg[m[K) {
+      |                                     [34m[K~[m[K                                            [01;31m[K^[m[K[32m[K~~~[m[K
+      |                                                                                  [32m[K)[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:106:73:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ at end of member declaration
+  106 |     inline void CallbackVehicleState(const ad_msgs::msg::VehicleOutput::[01;31m[KSharedPtr[m[K msg) {
+      |                                                                         [01;31m[K^~~~~~~~~[m[K
+      |                                                                                  [32m[K;[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:106:83:[m[K [01;31m[Kerror: [m[K‘[01m[Kmsg[m[K’ does not name a type
+  106 |     inline void CallbackVehicleState(const ad_msgs::msg::VehicleOutput::SharedPtr [01;31m[Kmsg[m[K) {
+      |                                                                                   [01;31m[K^~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:116:19:[m[K [01;31m[Kerror: [m[K‘[01m[KVehicleOutput[m[K’ in namespace ‘[01m[Kad_msgs::msg[m[K’ does not name a type
+  116 |     ad_msgs::msg::[01;31m[KVehicleOutput[m[K i_vehicle_state_;
+      |                   [01;31m[K^~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kstd::vector<int> DrivingWayNode::regionQuery(const std::vector<Point>&, int, float)[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:67:13:[m[K [01;31m[Kerror: [m[K‘[01m[Kdistance[m[K’ was not declared in this scope; did you mean ‘[01m[Kstd::distance[m[K’?
+   67 |         if ([01;31m[Kdistance[m[K(points[pointIdx], points[i]) <= epsilon) {
+      |             [01;31m[K^~~~~~~~[m[K
+      |             [32m[Kstd::distance[m[K
+In file included from [01m[K/usr/include/c++/11/bits/stl_algobase.h:66[m[K,
+                 from [01m[K/usr/include/c++/11/memory:63[m[K,
+                 from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+                 from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[01m[K/usr/include/c++/11/bits/stl_iterator_base_funcs.h:138:5:[m[K [01;36m[Knote: [m[K‘[01m[Kstd::distance[m[K’ declared here
+  138 |     [01;36m[Kdistance[m[K(_InputIterator __first, _InputIterator __last)
+      |     [01;36m[K^~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::process_lanes()[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:174:16:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KDrivingWayNode::applyRANSAC(ad_msgs::msg::LanePointData&, ad_msgs::msg::LanePointData&)[m[K’
+  174 |     [01;31m[KapplyRANSAC(lane_point_LEFT, inliers_LEFT)[m[K;
+      |     [01;31m[K~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:62:10:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kvoid DrivingWayNode::applyRANSAC(ad_msgs::msg::LanePointData&, ad_msgs::msg::LanePointData&, int, double)[m[K’
+   62 |     void [01;36m[KapplyRANSAC[m[K(ad_msgs::msg::LanePointData& lane_points, ad_msgs::msg::LanePointData& inliers,
+      |          [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:62:10:[m[K [01;36m[Knote: [m[K  candidate expects 4 arguments, 2 provided
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:175:16:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KDrivingWayNode::applyRANSAC(ad_msgs::msg::LanePointData&, ad_msgs::msg::LanePointData&)[m[K’
+  175 |     [01;31m[KapplyRANSAC(lane_point_RIGHT, inliers_RIGHT)[m[K;
+      |     [01;31m[K~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:62:10:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kvoid DrivingWayNode::applyRANSAC(ad_msgs::msg::LanePointData&, ad_msgs::msg::LanePointData&, int, double)[m[K’
+   62 |     void [01;36m[KapplyRANSAC[m[K(ad_msgs::msg::LanePointData& lane_points, ad_msgs::msg::LanePointData& inliers,
+      |          [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:62:10:[m[K [01;36m[Knote: [m[K  candidate expects 4 arguments, 2 provided
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:369:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  369 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+      |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/driving_way_node.dir/build.make:76: CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:165: CMakeFiles/driving_way_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

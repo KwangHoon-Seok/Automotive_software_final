@@ -61,6 +61,10 @@ void DrivingWayNode::Run(const rclcpp::Time& current_time) {
 }
 
 // Functions
+float DrivingWayNode::distance(const Point& a, const Point& b) {
+    return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
+}
+
 std::vector<int> DrivingWayNode::regionQuery(const std::vector<Point>& points, int pointIdx, float epsilon) {
     std::vector<int> neighbors;
     for (size_t i = 0; i < points.size(); ++i) {
@@ -367,6 +371,7 @@ void DrivingWayNode::populateCenterLane(ad_msgs::msg::PolyfitLaneData& driving_w
 //-------------------------------------------------------------------------------------------------------------------//
 
 void DrivingWayNode::PublishDrivingWay(const rclcpp::Time& current_time) {
+    RCLCPP_INFO(this->get_logger(), "Publishing at time: %f", current_time.seconds());
     p_driving_way_->publish(o_driving_way_);
     p_poly_lanes_->publish(o_poly_lanes_);
 }

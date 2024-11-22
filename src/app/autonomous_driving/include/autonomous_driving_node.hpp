@@ -35,9 +35,8 @@
 #include <ad_msgs/msg/polyfit_lane_data_array.hpp>
 #include <ad_msgs/msg/lane_point_data_array.hpp>
 #include <ad_msgs/msg/lane_point_data.hpp>
-#include <ad_msgs/msg/vehicle_input.hpp>
-#include <ad_msgs/msg/vehicle_output.hpp>
-#include <ad_msgs/msg/obstacles.hpp>
+#include <ad_msgs/msg/vehicle_state.hpp>
+#include <ad_msgs/msg/vehicle_command.hpp>
 #include <std_msgs/msg/float32.hpp>
 #include <geometry_msgs/msg/point.hpp>
 #include <geometry_msgs/msg/point_stamped.hpp>

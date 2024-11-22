@@ -13,6 +13,8 @@
 // ROS Header
 #include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/point.hpp>
+#include <ad_msgs/msg/vehicle_state.hpp>
+#include <ad_msgs/msg/vehicle_command.hpp>
 #include <ad_msgs/msg/lane_point_data_array.hpp>
 #include <ad_msgs/msg/lane_point_data.hpp>
 #include <ad_msgs/msg/polyfit_lane_data.hpp>
@@ -60,7 +62,7 @@ private:
     void splitLanePoints(const ad_msgs::msg::LanePointData& lane_points);
     void process_lanes();
     void applyRANSAC(ad_msgs::msg::LanePointData& lane_points, ad_msgs::msg::LanePointData& inliers,
-                     int maxIterations, double distanceThreshold);
+                     int maxIterations = 20, double distanceThreshold = 1.0);
     std::tuple<double, double, double, double> computeCubicModel(const geometry_msgs::msg::Point& p1,
                                                                  const geometry_msgs::msg::Point& p2,
                                                                  const geometry_msgs::msg::Point& p3,
@@ -68,7 +70,8 @@ private:
     double pointToCubicDistance(const geometry_msgs::msg::Point& point, double a, double b, double c, double d);
     Eigen::Vector4d calculateA(const Eigen::VectorXd& X, const Eigen::VectorXd& Y);
     std::string Vector4dToString(const Eigen::Vector4d& vec);
-
+    float distance(const Point& a, const Point& b);
+    
     // Variables for Algorithm
     ad_msgs::msg::LanePointData lane_point_LEFT;
     ad_msgs::msg::LanePointData lane_point_RIGHT;
@@ -95,7 +98,7 @@ private:
 
     // Subscribers
     rclcpp::Subscription<ad_msgs::msg::LanePointData>::SharedPtr s_lane_points_;
-    rclcpp::Subscription<ad_msgs::msg::VehicleOutput>::SharedPtr s_vehicle_state_;
+    rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;
 
     // Callback Functions
     inline void CallbackLanePoints(const ad_msgs::msg::LanePointData::SharedPtr msg) {
@@ -103,7 +106,7 @@ private:
         i_lane_points_ = *msg;
     }
 
-    inline void CallbackVehicleState(const ad_msgs::msg::VehicleOutput::SharedPtr msg) {
+    inline void CallbackVehicleState(const ad_msgs::msg::VehicleState::SharedPtr msg) {
         std::lock_guard<std::mutex> lock(mutex_vehicle_state_);
         i_vehicle_state_ = *msg;
     }
@@ -113,7 +116,7 @@ private:
 
     // Inputs
     ad_msgs::msg::LanePointData i_lane_points_;
-    ad_msgs::msg::VehicleOutput i_vehicle_state_;
+    ad_msgs::msg::VehicleState i_vehicle_state_;
 
     // Outputs
     ad_msgs::msg::PolyfitLaneData o_driving_way_;

@@ -9,4 +9,10 @@
         <param name="autonomous_driving/loop_rate_hz" value="$(var loop_rate_hz)"/>
         <param name="autonomous_driving/use_manual_inputs" value="$(var use_manual_inputs)"/>
     </node>
+
+    <!-- Driving Way Node 실행 -->
+    <node pkg="autonomous_driving" exec="driving_way_node" name="driving_way_node" namespace="$(var ns1)" output="screen">
+        <param name="driving_way_node/loop_rate_hz" value="$(var loop_rate_hz)"/>
+    </node>
+    
 </launch>

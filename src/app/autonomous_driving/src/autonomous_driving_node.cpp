@@ -25,7 +25,7 @@ AutonomousDriving::AutonomousDriving(const std::string &node_name, const rclcpp:
     // Parameters
     this->declare_parameter("autonomous_driving/ns", "");
     this->declare_parameter("autonomous_driving/loop_rate_hz", 100.0);
-    this->declare_parameter("autonomous_driving/use_manual_inputs", false);    
+    this->declare_parameter("autonomous_driving/use_manual_inputs", true);    
     ////////////////////// TODO //////////////////////
     // TODO: Add more parameters
 

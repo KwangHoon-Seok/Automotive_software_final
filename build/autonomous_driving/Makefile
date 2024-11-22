@@ -198,24 +198,37 @@ autonomous_driving_uninstall/fast:
 .PHONY : autonomous_driving_uninstall/fast
 
 #=============================================================================
-# Target rules for targets named autonomous_driving
+# Target rules for targets named autonomous_driving_node
 
 # Build rule for target.
-autonomous_driving: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 autonomous_driving
-.PHONY : autonomous_driving
+autonomous_driving_node: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 autonomous_driving_node
+.PHONY : autonomous_driving_node
 
 # fast build rule for target.
-autonomous_driving/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomous_driving.dir/build.make CMakeFiles/autonomous_driving.dir/build
-.PHONY : autonomous_driving/fast
+autonomous_driving_node/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomous_driving_node.dir/build.make CMakeFiles/autonomous_driving_node.dir/build
+.PHONY : autonomous_driving_node/fast
+
+#=============================================================================
+# Target rules for targets named driving_way_node
+
+# Build rule for target.
+driving_way_node: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 driving_way_node
+.PHONY : driving_way_node
+
+# fast build rule for target.
+driving_way_node/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/driving_way_node.dir/build.make CMakeFiles/driving_way_node.dir/build
+.PHONY : driving_way_node/fast
 
 src/autonomous_driving_node.o: src/autonomous_driving_node.cpp.o
 .PHONY : src/autonomous_driving_node.o
 
 # target to build an object file
 src/autonomous_driving_node.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomous_driving.dir/build.make CMakeFiles/autonomous_driving.dir/src/autonomous_driving_node.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomous_driving_node.dir/build.make CMakeFiles/autonomous_driving_node.dir/src/autonomous_driving_node.cpp.o
 .PHONY : src/autonomous_driving_node.cpp.o
 
 src/autonomous_driving_node.i: src/autonomous_driving_node.cpp.i
@@ -223,7 +236,7 @@ src/autonomous_driving_node.i: src/autonomous_driving_node.cpp.i
 
 # target to preprocess a source file
 src/autonomous_driving_node.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomous_driving.dir/build.make CMakeFiles/autonomous_driving.dir/src/autonomous_driving_node.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomous_driving_node.dir/build.make CMakeFiles/autonomous_driving_node.dir/src/autonomous_driving_node.cpp.i
 .PHONY : src/autonomous_driving_node.cpp.i
 
 src/autonomous_driving_node.s: src/autonomous_driving_node.cpp.s
@@ -231,8 +244,32 @@ src/autonomous_driving_node.s: src/autonomous_driving_node.cpp.s
 
 # target to generate assembly for a file
 src/autonomous_driving_node.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomous_driving.dir/build.make CMakeFiles/autonomous_driving.dir/src/autonomous_driving_node.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomous_driving_node.dir/build.make CMakeFiles/autonomous_driving_node.dir/src/autonomous_driving_node.cpp.s
 .PHONY : src/autonomous_driving_node.cpp.s
+
+src/driving_way_node.o: src/driving_way_node.cpp.o
+.PHONY : src/driving_way_node.o
+
+# target to build an object file
+src/driving_way_node.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/driving_way_node.dir/build.make CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o
+.PHONY : src/driving_way_node.cpp.o
+
+src/driving_way_node.i: src/driving_way_node.cpp.i
+.PHONY : src/driving_way_node.i
+
+# target to preprocess a source file
+src/driving_way_node.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/driving_way_node.dir/build.make CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.i
+.PHONY : src/driving_way_node.cpp.i
+
+src/driving_way_node.s: src/driving_way_node.cpp.s
+.PHONY : src/driving_way_node.s
+
+# target to generate assembly for a file
+src/driving_way_node.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/driving_way_node.dir/build.make CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.s
+.PHONY : src/driving_way_node.cpp.s
 
 # Help Target
 help:
@@ -249,10 +286,14 @@ help:
 	@echo "... test"
 	@echo "... autonomous_driving_uninstall"
 	@echo "... uninstall"
-	@echo "... autonomous_driving"
+	@echo "... autonomous_driving_node"
+	@echo "... driving_way_node"
 	@echo "... src/autonomous_driving_node.o"
 	@echo "... src/autonomous_driving_node.i"
 	@echo "... src/autonomous_driving_node.s"
+	@echo "... src/driving_way_node.o"
+	@echo "... src/driving_way_node.i"
+	@echo "... src/driving_way_node.s"
 .PHONY : help
 
 

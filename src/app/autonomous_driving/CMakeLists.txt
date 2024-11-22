@@ -2,6 +2,7 @@
 # Set minimum required version of cmake, project name and compile options
 ################################################################################
 cmake_minimum_required(VERSION 3.5)
+# package name은 패키지 이름임
 project(autonomous_driving)
 
 if(NOT CMAKE_C_STANDARD)
@@ -24,6 +25,8 @@ find_package(std_msgs REQUIRED)
 find_package(ad_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
+find_package(Eigen3 REQUIRED)
+
 
 ## Add include directories
 include_directories(
@@ -33,26 +36,50 @@ include_directories(
 )
 
 ## Declare a C++ executable
-add_executable(${PROJECT_NAME}
+add_executable(autonomous_driving_node
     src/autonomous_driving_node.cpp
+    # src/driving_way_node.cpp
+)
+
+add_executable(driving_way_node
+    # src/autonomous_driving_node.cpp
+    src/driving_way_node.cpp
 )
 
 ## Link libraries to the executable
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(autonomous_driving_node
+    Eigen3::Eigen
 )
 
 ## Add dependencies to the executable
-ament_target_dependencies(${PROJECT_NAME}
+ament_target_dependencies(autonomous_driving_node
     rclcpp
     std_msgs
     ad_msgs
     tf2
     tf2_ros
+    Eigen3
+    geometry_msgs
 )
 
+target_link_libraries(driving_way_node
+    Eigen3::Eigen
+)
+
+ament_target_dependencies(driving_way_node
+    rclcpp
+    std_msgs
+    ad_msgs
+    Eigen3
+    geometry_msgs
+)
 ## Install the executable
-install(TARGETS ${PROJECT_NAME}
+install(TARGETS autonomous_driving_node
     DESTINATION lib/${PROJECT_NAME})
+
+install(TARGETS driving_way_node
+    DESTINATION lib/${PROJECT_NAME})
+
 
 install(DIRECTORY launch
     DESTINATION share/${PROJECT_NAME})
