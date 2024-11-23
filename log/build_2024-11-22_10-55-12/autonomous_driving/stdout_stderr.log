@@ -1,0 +1,14 @@
+[35m[1mConsolidate compiler generated dependencies of target driving_way_node[0m
+[35m[1mConsolidate compiler generated dependencies of target autonomous_driving_node[0m
+[ 25%] [32mBuilding CXX object CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o[0m
+[ 75%] Built target autonomous_driving_node
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::populateCenterLane(ad_msgs::msg::PolyfitLaneData&)[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:357:38:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ before ‘[01m[Kdriving_way[m[K’
+  357 |     driving_way.frame_id = "ego/body"
+      |                                      [01;31m[K^[m[K
+      |                                      [32m[K;[m[K
+  358 |     [32m[Kdriving_way[m[K.id = "0"; // id 설정 아직 중앙이 0인줄 모름
+      |     [32m[K~~~~~~~~~~~[m[K                       
+gmake[2]: *** [CMakeFiles/driving_way_node.dir/build.make:76: CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:165: CMakeFiles/driving_way_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

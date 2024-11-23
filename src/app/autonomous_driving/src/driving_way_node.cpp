@@ -49,7 +49,7 @@ void DrivingWayNode::Run(const rclcpp::Time& current_time) {
     inliers_RIGHT.point.clear();
 
     splitLanePoints(lane_points);
-    number_point = 4;
+    number_point = 8;
     process_lanes();
     populatePolyLanes(poly_lanes);
     populateCenterLane(driving_way);
@@ -354,7 +354,7 @@ void DrivingWayNode::populatePolyLanes(ad_msgs::msg::PolyfitLaneDataArray& poly_
 }
 
 void DrivingWayNode::populateCenterLane(ad_msgs::msg::PolyfitLaneData& driving_way) {
-
+    driving_way.frame_id = "ego/body";
     driving_way.id = "0"; // id 설정 아직 중앙이 0인줄 모름
     A_MID(0) = (A_RIGHT(3) + A_LEFT(3)) / 2.0;  // a0 계수
     A_MID(1) = (A_RIGHT(2) + A_LEFT(2)) / 2.0;  // a1 계수

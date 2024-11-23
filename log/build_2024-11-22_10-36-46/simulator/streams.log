@@ -1,0 +1,32 @@
+[0.101s] Invoking command in '/home/seok/automotive_software_final/build/simulator': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/simulator -- -j28 -l28
+[0.146s] [35m[1mConsolidate compiler generated dependencies of target display[0m
+[0.157s] [ 28%] Built target vehicle
+[0.164s] [ 71%] Built target lane_detection
+[0.169s] [ 85%] [32mBuilding CXX object CMakeFiles/display.dir/src/display/display_node.cpp.o[0m
+[21.206s] [100%] [32m[1mLinking CXX executable display[0m
+[22.616s] [100%] Built target display
+[22.628s] Invoked command in '/home/seok/automotive_software_final/build/simulator' returned '0': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/simulator -- -j28 -l28
+[22.663s] Invoking command in '/home/seok/automotive_software_final/build/simulator': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/seok/automotive_software_final/build/simulator
+[22.670s] -- Install configuration: ""
+[22.670s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/lib/simulator/vehicle
+[22.670s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/lib/simulator/lane_detection
+[22.670s] -- Installing: /home/seok/automotive_software_final/install/simulator/lib/simulator/display
+[22.685s] -- Set runtime path of "/home/seok/automotive_software_final/install/simulator/lib/simulator/display" to ""
+[22.686s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/launch
+[22.686s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/launch/simulation.launch.xml
+[22.686s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/ament_index/resource_index/package_run_dependencies/simulator
+[22.686s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/ament_index/resource_index/parent_prefix_path/simulator
+[22.686s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/environment/ament_prefix_path.sh
+[22.686s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/environment/ament_prefix_path.dsv
+[22.687s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/environment/path.sh
+[22.687s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/environment/path.dsv
+[22.687s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/local_setup.bash
+[22.687s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/local_setup.sh
+[22.688s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/local_setup.zsh
+[22.688s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/local_setup.dsv
+[22.689s] -- Installing: /home/seok/automotive_software_final/install/simulator/share/simulator/package.dsv
+[22.689s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/ament_index/resource_index/packages/simulator
+[22.689s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/cmake/simulatorConfig.cmake
+[22.690s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/cmake/simulatorConfig-version.cmake
+[22.691s] -- Up-to-date: /home/seok/automotive_software_final/install/simulator/share/simulator/package.xml
+[22.693s] Invoked command in '/home/seok/automotive_software_final/build/simulator' returned '0': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/seok/automotive_software_final/build/simulator
