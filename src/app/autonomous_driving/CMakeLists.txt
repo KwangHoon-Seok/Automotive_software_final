@@ -46,7 +46,12 @@ add_executable(driving_way_node
     src/driving_way_node.cpp
 )
 
+add_executable(behavior_planner_node
+    src/behavior_planner_node.cpp
+)
+
 ## Link libraries to the executable
+#------------------------ autonomous_driving_node-----------------------------#
 target_link_libraries(autonomous_driving_node
     Eigen3::Eigen
 )
@@ -62,6 +67,7 @@ ament_target_dependencies(autonomous_driving_node
     geometry_msgs
 )
 
+#------------------------ driving_way_node-----------------------------#
 target_link_libraries(driving_way_node
     Eigen3::Eigen
 )
@@ -73,6 +79,14 @@ ament_target_dependencies(driving_way_node
     Eigen3
     geometry_msgs
 )
+
+#------------------------ behavior_planner_node-----------------------------#
+ament_target_dependencies(behavior_planner_node
+    rclcpp
+    std_msgs
+    ad_msgs
+)
+
 ## Install the executable
 install(TARGETS autonomous_driving_node
     DESTINATION lib/${PROJECT_NAME})
@@ -80,6 +94,8 @@ install(TARGETS autonomous_driving_node
 install(TARGETS driving_way_node
     DESTINATION lib/${PROJECT_NAME})
 
+install(TARGETS behavior_planner_node
+    DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch
     DESTINATION share/${PROJECT_NAME})

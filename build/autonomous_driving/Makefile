@@ -223,6 +223,19 @@ driving_way_node/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/driving_way_node.dir/build.make CMakeFiles/driving_way_node.dir/build
 .PHONY : driving_way_node/fast
 
+#=============================================================================
+# Target rules for targets named behavior_planner_node
+
+# Build rule for target.
+behavior_planner_node: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 behavior_planner_node
+.PHONY : behavior_planner_node
+
+# fast build rule for target.
+behavior_planner_node/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/behavior_planner_node.dir/build.make CMakeFiles/behavior_planner_node.dir/build
+.PHONY : behavior_planner_node/fast
+
 src/autonomous_driving_node.o: src/autonomous_driving_node.cpp.o
 .PHONY : src/autonomous_driving_node.o
 
@@ -246,6 +259,30 @@ src/autonomous_driving_node.s: src/autonomous_driving_node.cpp.s
 src/autonomous_driving_node.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/autonomous_driving_node.dir/build.make CMakeFiles/autonomous_driving_node.dir/src/autonomous_driving_node.cpp.s
 .PHONY : src/autonomous_driving_node.cpp.s
+
+src/behavior_planner_node.o: src/behavior_planner_node.cpp.o
+.PHONY : src/behavior_planner_node.o
+
+# target to build an object file
+src/behavior_planner_node.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/behavior_planner_node.dir/build.make CMakeFiles/behavior_planner_node.dir/src/behavior_planner_node.cpp.o
+.PHONY : src/behavior_planner_node.cpp.o
+
+src/behavior_planner_node.i: src/behavior_planner_node.cpp.i
+.PHONY : src/behavior_planner_node.i
+
+# target to preprocess a source file
+src/behavior_planner_node.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/behavior_planner_node.dir/build.make CMakeFiles/behavior_planner_node.dir/src/behavior_planner_node.cpp.i
+.PHONY : src/behavior_planner_node.cpp.i
+
+src/behavior_planner_node.s: src/behavior_planner_node.cpp.s
+.PHONY : src/behavior_planner_node.s
+
+# target to generate assembly for a file
+src/behavior_planner_node.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/behavior_planner_node.dir/build.make CMakeFiles/behavior_planner_node.dir/src/behavior_planner_node.cpp.s
+.PHONY : src/behavior_planner_node.cpp.s
 
 src/driving_way_node.o: src/driving_way_node.cpp.o
 .PHONY : src/driving_way_node.o
@@ -287,10 +324,14 @@ help:
 	@echo "... autonomous_driving_uninstall"
 	@echo "... uninstall"
 	@echo "... autonomous_driving_node"
+	@echo "... behavior_planner_node"
 	@echo "... driving_way_node"
 	@echo "... src/autonomous_driving_node.o"
 	@echo "... src/autonomous_driving_node.i"
 	@echo "... src/autonomous_driving_node.s"
+	@echo "... src/behavior_planner_node.o"
+	@echo "... src/behavior_planner_node.i"
+	@echo "... src/behavior_planner_node.s"
 	@echo "... src/driving_way_node.o"
 	@echo "... src/driving_way_node.i"
 	@echo "... src/driving_way_node.s"

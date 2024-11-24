@@ -1,0 +1,11 @@
+[35m[1mConsolidate compiler generated dependencies of target behavior_planner_node[0m
+[ 33%] Built target driving_way_node
+[ 50%] [32mBuilding CXX object CMakeFiles/behavior_planner_node.dir/src/behavior_planner_node.cpp.o[0m
+[ 83%] Built target autonomous_driving_node
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:78:80:[m[K [01;31m[Kerror: [m[K‘[01m[Kqos_profile[m[K’ was not declared in this scope
+   78 |     auto node = std::make_shared<BehaviorPlannerNode>("behavior_planner_node", [01;31m[Kqos_profile[m[K);
+      |                                                                                [01;31m[K^~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/behavior_planner_node.dir/build.make:76: CMakeFiles/behavior_planner_node.dir/src/behavior_planner_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:193: CMakeFiles/behavior_planner_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

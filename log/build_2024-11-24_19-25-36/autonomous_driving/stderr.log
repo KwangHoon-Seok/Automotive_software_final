@@ -1,0 +1,8 @@
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:[m[K In member function ‘[01m[Kvoid BehaviorPlannerNode::updatePlannerState()[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:83:9:[m[K [01;31m[Kerror: [m[K‘[01m[Ko_behavior_state[m[K’ was not declared in this scope; did you mean ‘[01m[Ko_behavior_state_[m[K’?
+   83 |         [01;31m[Ko_behavior_state[m[K = ACC;
+      |         [01;31m[K^~~~~~~~~~~~~~~~[m[K
+      |         [32m[Ko_behavior_state_[m[K
+gmake[2]: *** [CMakeFiles/behavior_planner_node.dir/build.make:76: CMakeFiles/behavior_planner_node.dir/src/behavior_planner_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:193: CMakeFiles/behavior_planner_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

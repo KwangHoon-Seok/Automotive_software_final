@@ -1,0 +1,11 @@
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:1[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:[m[K In constructor ‘[01m[KBehaviorPlannerNode::BehaviorPlannerNode(const string&, const double&, const rclcpp::NodeOptions&)[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:91:15:[m[K [01;35m[Kwarning: [m[K‘[01m[KBehaviorPlannerNode::o_behavior_state_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+   91 |         float [01;35m[Ko_behavior_state_[m[K;  // 1: ACC, 2: AEB, 3: Merge, 4: Reference Velocity Tracking
+      |               [01;35m[K^~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:48:16:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kdouble BehaviorPlannerNode::ref_vel_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+   48 |         double [01;35m[Kref_vel_[m[K;
+      |                [01;35m[K^~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:5:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+    5 | [01;35m[KBehaviorPlannerNode[m[K::BehaviorPlannerNode(const std::string& node_name, const double& loop_rate,
+      | [01;35m[K^~~~~~~~~~~~~~~~~~~[m[K

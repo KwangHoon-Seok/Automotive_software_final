@@ -1,0 +1,31 @@
+[0.047s] Invoking command in '/home/seok/automotive_software_final/build/autonomous_driving': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28
+[0.092s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.197s] -- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+[0.324s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.327s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.335s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.345s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.357s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.390s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.392s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[2.720s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.763s] -- Found ad_msgs: 0.0.0 (/home/seok/automotive_software_final/install/ad_msgs/share/ad_msgs/cmake)
+[2.826s] -- Found tf2: 0.25.8 (/opt/ros/humble/share/tf2/cmake)
+[2.830s] -- Found tf2_ros: 0.25.8 (/opt/ros/humble/share/tf2_ros/cmake)
+[2.928s] -- Configuring done
+[2.940s] -- Generating done
+[2.942s] -- Build files have been written to: /home/seok/automotive_software_final/build/autonomous_driving
+[2.956s] [35m[1mConsolidate compiler generated dependencies of target driving_way_node[0m
+[2.956s] [35m[1mConsolidate compiler generated dependencies of target autonomous_driving_node[0m
+[2.958s] [ 16%] [32mBuilding CXX object CMakeFiles/behavior_planner_node.dir/src/behavior_planner_node.cpp.o[0m
+[2.965s] [ 50%] Built target driving_way_node
+[2.967s] [ 83%] Built target autonomous_driving_node
+[3.001s] In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:1[m[K:
+[3.001s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:8:10:[m[K [01;31m[Kfatal error: [m[Krclcpp/rclcpp.hpp: No such file or directory
+[3.001s]     8 | #include [01;31m[K<rclcpp/rclcpp.hpp>[m[K
+[3.001s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~[m[K
+[3.001s] compilation terminated.
+[3.002s] gmake[2]: *** [CMakeFiles/behavior_planner_node.dir/build.make:76: CMakeFiles/behavior_planner_node.dir/src/behavior_planner_node.cpp.o] Error 1
+[3.003s] gmake[1]: *** [CMakeFiles/Makefile2:193: CMakeFiles/behavior_planner_node.dir/all] Error 2
+[3.003s] gmake: *** [Makefile:146: all] Error 2
+[3.004s] Invoked command in '/home/seok/automotive_software_final/build/autonomous_driving' returned '2': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28

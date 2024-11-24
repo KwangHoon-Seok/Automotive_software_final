@@ -167,7 +167,7 @@ void DrivingWayNode::splitLanePoints(const ad_msgs::msg::LanePointData& lane_poi
         }
     }
 
-    RCLCPP_INFO(this->get_logger(), "Lane points split using DBSCAN with initial points p0 and p1.");
+    // RCLCPP_INFO(this->get_logger(), "Lane points split using DBSCAN with initial points p0 and p1.");
 }
 
 void DrivingWayNode::process_lanes() {
@@ -232,7 +232,7 @@ void DrivingWayNode::process_lanes() {
 
 void DrivingWayNode::applyRANSAC(ad_msgs::msg::LanePointData& lane_points, ad_msgs::msg::LanePointData& inliers, int maxIterations, double distanceThreshold) {
     if (lane_points.point.size() < 4) {  // 최소 네 개의 포인트가 필요
-        RCLCPP_WARN(this->get_logger(), "Not enough points for cubic RANSAC.");
+        // RCLCPP_WARN(this->get_logger(), "Not enough points for cubic RANSAC.");
         return;
     }
 
@@ -270,7 +270,7 @@ void DrivingWayNode::applyRANSAC(ad_msgs::msg::LanePointData& lane_points, ad_ms
     inliers.point = bestInliers;
 
     // 디버깅 로그
-    RCLCPP_INFO(this->get_logger(), "RANSAC with cubic model: Number of inliers = %zu", inliers.point.size());
+    // RCLCPP_INFO(this->get_logger(), "RANSAC with cubic model: Number of inliers = %zu", inliers.point.size());
 }
 
 std::tuple<double, double, double, double> DrivingWayNode::computeCubicModel(
@@ -371,7 +371,7 @@ void DrivingWayNode::populateCenterLane(ad_msgs::msg::PolyfitLaneData& driving_w
 //-------------------------------------------------------------------------------------------------------------------//
 
 void DrivingWayNode::PublishDrivingWay(const rclcpp::Time& current_time) {
-    RCLCPP_INFO(this->get_logger(), "Publishing at time: %f", current_time.seconds());
+    // RCLCPP_INFO(this->get_logger(), "Publishing at time: %f", current_time.seconds());
     p_driving_way_->publish(o_driving_way_);
     p_poly_lanes_->publish(o_poly_lanes_);
 }

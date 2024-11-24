@@ -1,0 +1,34 @@
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:1[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:23:39:[m[K [01;31m[Kerror: [m[K‘[01m[KNodeOptiosn[m[K’ in namespace ‘[01m[Krclcpp[m[K’ does not name a type; did you mean ‘[01m[KNodeOptions[m[K’?
+   23 |                         const rclcpp::[01;31m[KNodeOptiosn[m[K& optios = rclcpp::NodeOptions());
+      |                                       [01;31m[K^~~~~~~~~~~[m[K
+      |                                       [32m[KNodeOptions[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:23:69:[m[K [01;31m[Kerror: [m[Kcould not convert ‘[01m[Krclcpp::NodeOptions(rcutils_get_default_allocator())[m[K’ from ‘[01m[Krclcpp::NodeOptions[m[K’ to ‘[01m[Kconst int&[m[K’
+   23 |                         const rclcpp::NodeOptiosn& optios = rclcpp::[01;31m[KNodeOptions()[m[K);
+      |                                                                     [01;31m[K^~~~~~~~~~~~~[m[K
+      |                                                                     [01;31m[K|[m[K
+      |                                                                     [01;31m[Krclcpp::NodeOptions[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:5:1:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[KBehaviorPlannerNode::BehaviorPlannerNode(const string&, const double&, const rclcpp::NodeOptions&)[m[K’
+    5 | [01;31m[KBehaviorPlannerNode[m[K::BehaviorPlannerNode(const std::string& node_name, const double& loop_rate,
+      | [01;31m[K^~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:1[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:20:7:[m[K [01;36m[Knote: [m[Kcandidates are: ‘[01m[KBehaviorPlannerNode::BehaviorPlannerNode(const BehaviorPlannerNode&)[m[K’
+   20 | class [01;36m[KBehaviorPlannerNode[m[K : public rclcpp::Node {
+      |       [01;36m[K^~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:22:9:[m[K [01;36m[Knote: [m[K                ‘[01m[KBehaviorPlannerNode::BehaviorPlannerNode(const string&, const double&, const int&)[m[K’
+   22 |         [01;36m[KBehaviorPlannerNode[m[K(const std::string& node_name, const double& loop_rate,
+      |         [01;36m[K^~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:20:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass BehaviorPlannerNode[m[K’ defined here
+   20 | class [01;36m[KBehaviorPlannerNode[m[K : public rclcpp::Node {
+      |       [01;36m[K^~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:34:6:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[Kvoid BehaviorPlannerNode::Run()[m[K’
+   34 | void [01;31m[KBehaviorPlannerNode[m[K::Run()
+      |      [01;31m[K^~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:34:6:[m[K [01;36m[Knote: [m[Kno functions named ‘[01m[Kvoid BehaviorPlannerNode::Run()[m[K’
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:1[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:20:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass BehaviorPlannerNode[m[K’ defined here
+   20 | class [01;36m[KBehaviorPlannerNode[m[K : public rclcpp::Node {
+      |       [01;36m[K^~~~~~~~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/behavior_planner_node.dir/build.make:76: CMakeFiles/behavior_planner_node.dir/src/behavior_planner_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:193: CMakeFiles/behavior_planner_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

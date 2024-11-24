@@ -1,0 +1,45 @@
+[0.047s] Invoking command in '/home/seok/automotive_software_final/build/autonomous_driving': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28
+[0.067s] [35m[1mConsolidate compiler generated dependencies of target behavior_planner_node[0m
+[0.074s] [ 33%] Built target driving_way_node
+[0.076s] [ 66%] Built target autonomous_driving_node
+[0.077s] [ 83%] [32mBuilding CXX object CMakeFiles/behavior_planner_node.dir/src/behavior_planner_node.cpp.o[0m
+[1.317s] In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:1[m[K:
+[1.317s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:[m[K In constructor ‘[01m[KBehaviorPlannerNode::BehaviorPlannerNode(const string&, const double&, const rclcpp::NodeOptions&)[m[K’:
+[1.317s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:91:15:[m[K [01;35m[Kwarning: [m[K‘[01m[KBehaviorPlannerNode::o_behavior_state_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[1.318s]    91 |         float [01;35m[Ko_behavior_state_[m[K;  // 1: ACC, 2: AEB, 3: Merge, 4: Reference Velocity Tracking
+[1.318s]       |               [01;35m[K^~~~~~~~~~~~~~~~~[m[K
+[1.318s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/behavior_planner_node.hpp:48:16:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kdouble BehaviorPlannerNode::ref_vel_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[1.318s]    48 |         double [01;35m[Kref_vel_[m[K;
+[1.318s]       |                [01;35m[K^~~~~~~~[m[K
+[1.318s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/behavior_planner_node.cpp:5:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[1.318s]     5 | [01;35m[KBehaviorPlannerNode[m[K::BehaviorPlannerNode(const std::string& node_name, const double& loop_rate,
+[1.318s]       | [01;35m[K^~~~~~~~~~~~~~~~~~~[m[K
+[5.828s] [100%] [32m[1mLinking CXX executable behavior_planner_node[0m
+[6.125s] [100%] Built target behavior_planner_node
+[6.130s] Invoked command in '/home/seok/automotive_software_final/build/autonomous_driving' returned '0': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28
+[6.145s] Invoking command in '/home/seok/automotive_software_final/build/autonomous_driving': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/seok/automotive_software_final/build/autonomous_driving
+[6.148s] -- Install configuration: ""
+[6.148s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/autonomous_driving_node
+[6.148s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/driving_way_node
+[6.148s] -- Installing: /home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/behavior_planner_node
+[6.152s] -- Set runtime path of "/home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/behavior_planner_node" to ""
+[6.152s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch
+[6.152s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch/manual_driving.launch.xml
+[6.152s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch/autonomous_driving.launch.xml
+[6.152s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/simultaneous_inputs.py
+[6.152s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/package_run_dependencies/autonomous_driving
+[6.152s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/parent_prefix_path/autonomous_driving
+[6.152s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/ament_prefix_path.sh
+[6.152s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/ament_prefix_path.dsv
+[6.152s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/path.sh
+[6.152s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/path.dsv
+[6.153s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.bash
+[6.153s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.sh
+[6.153s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.zsh
+[6.153s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.dsv
+[6.153s] -- Installing: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/package.dsv
+[6.153s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/packages/autonomous_driving
+[6.153s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/cmake/autonomous_drivingConfig.cmake
+[6.153s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/cmake/autonomous_drivingConfig-version.cmake
+[6.153s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/package.xml
+[6.154s] Invoked command in '/home/seok/automotive_software_final/build/autonomous_driving' returned '0': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/seok/automotive_software_final/build/autonomous_driving
