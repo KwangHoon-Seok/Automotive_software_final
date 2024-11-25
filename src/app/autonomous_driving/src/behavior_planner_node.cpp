@@ -58,7 +58,9 @@ void BehaviorPlannerNode::updatePlannerState()
     // Variables to store the closest distances
     double closest_static_distance = 10000; 
     double closest_dynamic_distance = 10000;
-
+    const double lane_width_threshold = 3.0;
+    double yaw = i_vehicle_state_.yaw;
+    
     // Iterate through all objects in the /ego/mission message
     for (const auto &object : i_mission_state_.objects) {
         // Calculate the distance between ego vehicle and the mission object
@@ -66,17 +68,23 @@ void BehaviorPlannerNode::updatePlannerState()
         double dy = object.y - i_vehicle_state_.y;
         double distance = std::sqrt(dx * dx + dy * dy);
 
+        // global -> local coordinate
+        double dx_local = std::cos(yaw) * dx + std::sin(yaw) * dy;
+        double dy_local = -std::sin(yaw) * dx + std::cos(yaw) * dy;
+
         // Update the closest distances based on object type
-        if (object.object_type == "Static") {
-            if (dx > 0){
-                if (distance < closest_static_distance) {
-                closest_static_distance = distance; // Update closest static distance
-                }
-            }  
-        } else if (object.object_type == "Dynamic") {
-            if (dx > 0){
-                if (distance < closest_dynamic_distance) {
-                closest_dynamic_distance = distance; // Update closest dynamic distance
+        if(dx_local > 0 && std::abs(dy_local) <= lane_width_threshold){
+            if (object.object_type == "Static") {
+                if (dx > 0){
+                    if (distance < closest_static_distance) {
+                    closest_static_distance = distance; // Update closest static distance
+                    }
+                }  
+            } else if (object.object_type == "Dynamic") {
+                if (dx > 0){
+                    if (distance < closest_dynamic_distance) {
+                    closest_dynamic_distance = distance; // Update closest dynamic distance
+                    }
                 }
             }
         }
