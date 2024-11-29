@@ -365,7 +365,7 @@ void DrivingWayNode::populateCenterLane(ad_msgs::msg::PolyfitLaneData& driving_w
     driving_way.a1 = A_MID(1);  // a1 계수
     driving_way.a2 = A_MID(2);  // a2 계수
     driving_way.a3 = A_MID(3);  // a3 계수
-
+    // 석광훈 
 }
 
 //-------------------------------------------------------------------------------------------------------------------//
