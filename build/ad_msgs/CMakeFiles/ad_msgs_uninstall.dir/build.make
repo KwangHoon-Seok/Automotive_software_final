@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/seok/automotive_software_final/src/rte/msg/ad_msgs
+CMAKE_SOURCE_DIR = /home/jeongwoo/Automotive_software_final/src/rte/msg/ad_msgs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/seok/automotive_software_final/build/ad_msgs
+CMAKE_BINARY_DIR = /home/jeongwoo/Automotive_software_final/build/ad_msgs
 
 # Utility rule file for ad_msgs_uninstall.
 
@@ -67,7 +67,7 @@ include CMakeFiles/ad_msgs_uninstall.dir/compiler_depend.make
 include CMakeFiles/ad_msgs_uninstall.dir/progress.make
 
 CMakeFiles/ad_msgs_uninstall:
-	/usr/bin/cmake -P /home/seok/automotive_software_final/build/ad_msgs/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
+	/usr/bin/cmake -P /home/jeongwoo/Automotive_software_final/build/ad_msgs/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
 
 ad_msgs_uninstall: CMakeFiles/ad_msgs_uninstall
 ad_msgs_uninstall: CMakeFiles/ad_msgs_uninstall.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/ad_msgs_uninstall.dir/clean:
 .PHONY : CMakeFiles/ad_msgs_uninstall.dir/clean
 
 CMakeFiles/ad_msgs_uninstall.dir/depend:
-	cd /home/seok/automotive_software_final/build/ad_msgs && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/seok/automotive_software_final/src/rte/msg/ad_msgs /home/seok/automotive_software_final/src/rte/msg/ad_msgs /home/seok/automotive_software_final/build/ad_msgs /home/seok/automotive_software_final/build/ad_msgs /home/seok/automotive_software_final/build/ad_msgs/CMakeFiles/ad_msgs_uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jeongwoo/Automotive_software_final/build/ad_msgs && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jeongwoo/Automotive_software_final/src/rte/msg/ad_msgs /home/jeongwoo/Automotive_software_final/src/rte/msg/ad_msgs /home/jeongwoo/Automotive_software_final/build/ad_msgs /home/jeongwoo/Automotive_software_final/build/ad_msgs /home/jeongwoo/Automotive_software_final/build/ad_msgs/CMakeFiles/ad_msgs_uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ad_msgs_uninstall.dir/depend
 

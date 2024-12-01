@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/seok/automotive_software_final/src/app/autonomous_driving
+CMAKE_SOURCE_DIR = /home/jeongwoo/Automotive_software_final/src/app/autonomous_driving
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/seok/automotive_software_final/build/autonomous_driving
+CMAKE_BINARY_DIR = /home/jeongwoo/Automotive_software_final/build/autonomous_driving
 
 # Utility rule file for autonomous_driving_uninstall.
 
@@ -67,7 +67,7 @@ include CMakeFiles/autonomous_driving_uninstall.dir/compiler_depend.make
 include CMakeFiles/autonomous_driving_uninstall.dir/progress.make
 
 CMakeFiles/autonomous_driving_uninstall:
-	/usr/bin/cmake -P /home/seok/automotive_software_final/build/autonomous_driving/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
+	/usr/bin/cmake -P /home/jeongwoo/Automotive_software_final/build/autonomous_driving/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
 
 autonomous_driving_uninstall: CMakeFiles/autonomous_driving_uninstall
 autonomous_driving_uninstall: CMakeFiles/autonomous_driving_uninstall.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/autonomous_driving_uninstall.dir/clean:
 .PHONY : CMakeFiles/autonomous_driving_uninstall.dir/clean
 
 CMakeFiles/autonomous_driving_uninstall.dir/depend:
-	cd /home/seok/automotive_software_final/build/autonomous_driving && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/seok/automotive_software_final/src/app/autonomous_driving /home/seok/automotive_software_final/src/app/autonomous_driving /home/seok/automotive_software_final/build/autonomous_driving /home/seok/automotive_software_final/build/autonomous_driving /home/seok/automotive_software_final/build/autonomous_driving/CMakeFiles/autonomous_driving_uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jeongwoo/Automotive_software_final/build/autonomous_driving && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jeongwoo/Automotive_software_final/src/app/autonomous_driving /home/jeongwoo/Automotive_software_final/src/app/autonomous_driving /home/jeongwoo/Automotive_software_final/build/autonomous_driving /home/jeongwoo/Automotive_software_final/build/autonomous_driving /home/jeongwoo/Automotive_software_final/build/autonomous_driving/CMakeFiles/autonomous_driving_uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/autonomous_driving_uninstall.dir/depend
 

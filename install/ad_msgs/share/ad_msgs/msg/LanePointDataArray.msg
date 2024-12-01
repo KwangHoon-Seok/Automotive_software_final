@@ -1,3 +1,1 @@
-string frame_id
-string id 
-LanePointData[] lane
+/home/jeongwoo/Automotive_software_final/src/rte/msg/ad_msgs/msg/LanePointDataArray.msg

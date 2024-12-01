@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/jeongwoo/Automotive_software_final/build/autonomous_driving/behavior_planner_node" "TARGETS" "behavior_planner_node" "DESTINATION" "lib/autonomous_driving")

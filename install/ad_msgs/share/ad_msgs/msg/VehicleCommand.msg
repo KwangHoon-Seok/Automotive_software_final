@@ -1,3 +1,1 @@
-float64 steering
-float64 accel
-float64 brake
+/home/jeongwoo/Automotive_software_final/src/rte/msg/ad_msgs/msg/VehicleCommand.msg

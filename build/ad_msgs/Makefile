@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/seok/automotive_software_final/src/rte/msg/ad_msgs
+CMAKE_SOURCE_DIR = /home/jeongwoo/Automotive_software_final/src/rte/msg/ad_msgs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/seok/automotive_software_final/build/ad_msgs
+CMAKE_BINARY_DIR = /home/jeongwoo/Automotive_software_final/build/ad_msgs
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,9 +142,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/seok/automotive_software_final/build/ad_msgs/CMakeFiles /home/seok/automotive_software_final/build/ad_msgs//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jeongwoo/Automotive_software_final/build/ad_msgs/CMakeFiles /home/jeongwoo/Automotive_software_final/build/ad_msgs//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/seok/automotive_software_final/build/ad_msgs/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jeongwoo/Automotive_software_final/build/ad_msgs/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -315,17 +315,17 @@ ad_msgs__rosidl_typesupport_cpp/fast:
 .PHONY : ad_msgs__rosidl_typesupport_cpp/fast
 
 #=============================================================================
-# Target rules for targets named ament_cmake_python_copy_ad_msgs
+# Target rules for targets named ament_cmake_python_symlink_ad_msgs
 
 # Build rule for target.
-ament_cmake_python_copy_ad_msgs: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ament_cmake_python_copy_ad_msgs
-.PHONY : ament_cmake_python_copy_ad_msgs
+ament_cmake_python_symlink_ad_msgs: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ament_cmake_python_symlink_ad_msgs
+.PHONY : ament_cmake_python_symlink_ad_msgs
 
 # fast build rule for target.
-ament_cmake_python_copy_ad_msgs/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ament_cmake_python_copy_ad_msgs.dir/build.make CMakeFiles/ament_cmake_python_copy_ad_msgs.dir/build
-.PHONY : ament_cmake_python_copy_ad_msgs/fast
+ament_cmake_python_symlink_ad_msgs/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ament_cmake_python_symlink_ad_msgs.dir/build.make CMakeFiles/ament_cmake_python_symlink_ad_msgs.dir/build
+.PHONY : ament_cmake_python_symlink_ad_msgs/fast
 
 #=============================================================================
 # Target rules for targets named ament_cmake_python_build_ad_msgs_egg
@@ -2415,7 +2415,7 @@ help:
 	@echo "... ad_msgs__py"
 	@echo "... ad_msgs_uninstall"
 	@echo "... ament_cmake_python_build_ad_msgs_egg"
-	@echo "... ament_cmake_python_copy_ad_msgs"
+	@echo "... ament_cmake_python_symlink_ad_msgs"
 	@echo "... uninstall"
 	@echo "... ad_msgs__rosidl_generator_c"
 	@echo "... ad_msgs__rosidl_generator_py"

@@ -1,11 +1,1 @@
-// generated from rosidl_generator_cpp/resource/idl.hpp.em
-// generated code does not contain a copyright notice
-
-#ifndef AD_MSGS__MSG__MISSION_DISPLAY_HPP_
-#define AD_MSGS__MSG__MISSION_DISPLAY_HPP_
-
-#include "ad_msgs/msg/detail/mission_display__struct.hpp"
-#include "ad_msgs/msg/detail/mission_display__builder.hpp"
-#include "ad_msgs/msg/detail/mission_display__traits.hpp"
-
-#endif  // AD_MSGS__MSG__MISSION_DISPLAY_HPP_
+/home/jeongwoo/Automotive_software_final/build/ad_msgs/rosidl_generator_cpp/ad_msgs/msg/mission_display.hpp

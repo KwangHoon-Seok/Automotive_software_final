@@ -1,2 +1,1 @@
-source;share/evaluation/environment/ament_prefix_path.sh
-source;share/evaluation/environment/path.sh
+/home/jeongwoo/Automotive_software_final/build/evaluation/ament_cmake_environment_hooks/local_setup.dsv

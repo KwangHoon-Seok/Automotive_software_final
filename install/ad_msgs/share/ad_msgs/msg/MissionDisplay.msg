@@ -1,2 +1,1 @@
-MissionObject[] objects
-MissionRegion[] regions
+/home/jeongwoo/Automotive_software_final/src/rte/msg/ad_msgs/msg/MissionDisplay.msg

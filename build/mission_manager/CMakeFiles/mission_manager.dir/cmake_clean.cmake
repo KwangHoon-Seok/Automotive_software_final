@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/mission_manager.dir/home/seok/automotive_software_final/src/bsw/system/interface/interface_lane.cpp.o"
-  "CMakeFiles/mission_manager.dir/home/seok/automotive_software_final/src/bsw/system/interface/interface_lane.cpp.o.d"
+  "CMakeFiles/mission_manager.dir/home/jeongwoo/Automotive_software_final/src/bsw/system/interface/interface_lane.cpp.o"
+  "CMakeFiles/mission_manager.dir/home/jeongwoo/Automotive_software_final/src/bsw/system/interface/interface_lane.cpp.o.d"
   "CMakeFiles/mission_manager.dir/src/mission_manager_node.cpp.o"
   "CMakeFiles/mission_manager.dir/src/mission_manager_node.cpp.o.d"
   "mission_manager"
