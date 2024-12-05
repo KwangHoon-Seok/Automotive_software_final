@@ -19,8 +19,9 @@ BehaviorPlannerNode::BehaviorPlannerNode(const std::string& node_name, const dou
 
 
     // Publishers
-    p_behavior_state_ = this->create_publisher<std_msgs::msg::Float32>("/behavior_state", qos_profile);
+    p_behavior_state_ = this->create_publisher<std_msgs::msg::Float32>("/ego/behavior_state", qos_profile);
     p_ref_velocity_ = this->create_publisher<std_msgs::msg::Float32>("/ego/ref_vel", qos_profile);
+    p_lead_distance_ = this->create_publisher<std_msgs::msg::Float32>("/ego/lead_distance", qos_profile);
 
     // Timer
     t_run_node_ = this->create_wall_timer(
@@ -39,6 +40,7 @@ void BehaviorPlannerNode::Run()
 
     // Update behavior state based on the latest vehicle and mission data
     updatePlannerState();
+    velocity_planner();
 
     // Publish the behavior state
     std_msgs::msg::Float32 state_msg;
@@ -48,6 +50,10 @@ void BehaviorPlannerNode::Run()
     std_msgs::msg::Float32 ref_velocity_msg;
     ref_velocity_msg.data = o_ref_velocity_;
     p_ref_velocity_->publish(ref_velocity_msg);
+
+    std_msgs::msg::Float32 lead_distance_msg;
+    lead_distance_msg.data = o_lead_distance_;
+    p_lead_distance_->publish(lead_distance_msg);
 
     // RCLCPP_INFO(this->get_logger(),
     //             "Behavior State: %.1f", o_behavior_state_);
@@ -90,6 +96,8 @@ void BehaviorPlannerNode::updatePlannerState()
         }
     }
 
+    o_lead_distance_ = closest_dynamic_distance;
+
     // Decide behavior state based on the closest distances
         // Decide behavior state with priority: Static > Dynamic
     if (closest_static_distance < 20.0) {
@@ -104,9 +112,9 @@ void BehaviorPlannerNode::updatePlannerState()
     }
 
     // Log the results
-    RCLCPP_INFO(this->get_logger(),
-                "Closest Static Distance: %.2f, Closest Dynamic Distance: %.2f, Behavior State: %s",
-                closest_static_distance, closest_dynamic_distance, BEHAVIOR_STATE_TO_STRING(o_behavior_state_));
+    // RCLCPP_INFO(this->get_logger(),
+    //             "Closest Static Distance: %.2f, Closest Dynamic Distance: %.2f, Behavior State: %s",
+    //             closest_static_distance, closest_dynamic_distance, BEHAVIOR_STATE_TO_STRING(o_behavior_state_));
 }
 
 void BehaviorPlannerNode::velocity_planner(){

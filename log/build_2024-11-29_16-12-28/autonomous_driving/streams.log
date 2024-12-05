@@ -1,0 +1,115 @@
+[0.050s] Invoking command in '/home/seok/automotive_software_final/build/autonomous_driving': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28
+[0.094s] [35m[1mConsolidate compiler generated dependencies of target behavior_planner_node[0m
+[0.102s] [35m[1mConsolidate compiler generated dependencies of target trajectory_planner_node[0m
+[0.128s] [ 25%] Built target behavior_planner_node
+[0.128s] [ 37%] [32mBuilding CXX object CMakeFiles/trajectory_planner_node.dir/src/trajectory_planner_node.cpp.o[0m
+[0.129s] [ 62%] Built target driving_way_node
+[0.131s] [ 87%] Built target autonomous_driving_node
+[1.744s] In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:1[m[K:
+[1.744s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/trajectory_planner_node.hpp:72:79:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ at end of member declaration
+[1.744s]    72 |         State ComputeEndpoint(const std::vector<double> &p, const State &start[01;31m[K)[m[K
+[1.744s]       |                                                                               [01;31m[K^[m[K
+[1.744s]       |                                                                                [32m[K;[m[K
+[1.797s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K In constructor ‘[01m[KTrajectoryNode::TrajectoryNode(const string&, const double&, const rclcpp::NodeOptions&)[m[K’:
+[1.798s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:5:9:[m[K [01;31m[Kerror: [m[K‘[01m[Ktimer_[m[K’ was not declared in this scope; did you mean ‘[01m[Ktimer_t[m[K’?
+[1.798s]     5 |         [01;31m[Ktimer_[m[K = this->create_wall_timer(
+[1.798s]       |         [01;31m[K^~~~~~[m[K
+[1.798s]       |         [32m[Ktimer_t[m[K
+[1.813s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K In member function ‘[01m[Kvoid TrajectoryNode::Run()[m[K’:
+[1.813s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:36:20:[m[K [01;31m[Kerror: [m[K‘[01m[Ki_vehicle_state[m[K’ was not declared in this scope; did you mean ‘[01m[Ki_vehicle_state_[m[K’?
+[1.813s]    36 |     start_.theta = [01;31m[Ki_vehicle_state[m[K.yaw;
+[1.813s]       |                    [01;31m[K^~~~~~~~~~~~~~~[m[K
+[1.813s]       |                    [32m[Ki_vehicle_state_[m[K
+[1.813s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:49:63:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KTrajectoryNode::GenerateCubicSpiralCoefficients(std::vector<State>&)[m[K’
+[1.813s]    49 |     auto cubic_spiral_coeffs = [01;31m[KGenerateCubicSpiralCoefficients(sl_grid)[m[K;
+[1.813s]       |                                [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~[m[K
+[1.813s] In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:1[m[K:
+[1.813s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/trajectory_planner_node.hpp:70:46:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kstd::vector<CubicSpiralCoefficients> TrajectoryNode::GenerateCubicSpiralCoefficients(const std::vector<State>&, const State&)[m[K’
+[1.813s]    70 |         std::vector<CubicSpiralCoefficients> [01;36m[KGenerateCubicSpiralCoefficients[m[K(const std::vector<State> &sl_grid, const State &start);
+[1.813s]       |                                              [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[1.813s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/trajectory_planner_node.hpp:70:46:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+[1.822s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K In member function ‘[01m[Kstd::vector<State> TrajectoryNode::SelectTargetPoints(const std::vector<State>&)[m[K’:
+[1.822s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:134:26:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst struct State[m[K’ has no member named ‘[01m[Kl[m[K’
+[1.822s]   134 |         double l = point.[01;31m[Kl[m[K;
+[1.822s]       |                          [01;31m[K^[m[K
+[1.822s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:135:65:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst struct State[m[K’ has no member named ‘[01m[Ks[m[K’
+[1.822s]   135 |         if (max_s_points.find(l) == max_s_points.end() || point.[01;31m[Ks[m[K > max_s_points[l].s) {
+[1.822s]       |                                                                 [01;31m[K^[m[K
+[1.822s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:135:85:[m[K [01;31m[Kerror: [m[K‘[01m[Kstd::unordered_map<double, State>::mapped_type[m[K’ {aka ‘[01m[Kstruct State[m[K’} has no member named ‘[01m[Ks[m[K’
+[1.822s]   135 |         if (max_s_points.find(l) == max_s_points.end() || point.s > max_s_points[l].[01;31m[Ks[m[K) {
+[1.822s]       |                                                                                     [01;31m[K^[m[K
+[2.003s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K In lambda function:
+[2.003s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:208:24:[m[K [01;31m[Kerror: [m[K‘[01m[Ka[m[K’ was not declared in this scope
+[2.003s]   208 |                 return [01;31m[Ka[m[K + b * s + c * s * s + d * s * s * s;
+[2.003s]       |                        [01;31m[K^[m[K
+[2.005s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:208:28:[m[K [01;31m[Kerror: [m[K‘[01m[Kb[m[K’ was not declared in this scope
+[2.005s]   208 |                 return a + [01;31m[Kb[m[K * s + c * s * s + d * s * s * s;
+[2.005s]       |                            [01;31m[K^[m[K
+[2.008s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:208:36:[m[K [01;31m[Kerror: [m[K‘[01m[Kc[m[K’ was not declared in this scope
+[2.008s]   208 |                 return a + b * s + [01;31m[Kc[m[K * s * s + d * s * s * s;
+[2.008s]       |                                    [01;31m[K^[m[K
+[2.010s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:208:48:[m[K [01;31m[Kerror: [m[K‘[01m[Kd[m[K’ was not declared in this scope
+[2.010s]   208 |                 return a + b * s + c * s * s + [01;31m[Kd[m[K * s * s * s;
+[2.010s]       |                                                [01;31m[K^[m[K
+[2.011s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K In lambda function:
+[2.011s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:207:46:[m[K [01;31m[Kerror: [m[Kcannot convert ‘[01m[KTrajectoryNode::ComputeJacobian(const std::vector<double, std::allocator<double> >&, const State&, const State&)::<lambda(double)>::<lambda(double)>[m[K’ to ‘[01m[Kconst std::function<double(double)>&[m[K’
+[2.011s]   207 |             double theta = [01;31m[KSimpsonIntegration(0, s, [&](double s) {[m[K
+[2.011s]       |                            [01;31m[K~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.011s]   208 | [01;31m[K                return a + b * s + c * s * s + d * s * s * s;[m[K
+[2.011s]       |                 [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.011s]   209 | [01;31m[K            })[m[K;
+[2.011s]       |             [01;31m[K~~[m[K                                
+[2.011s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:148:100:[m[K [01;36m[Knote: [m[K  initializing argument 3 of ‘[01m[Kdouble TrajectoryNode::SimpsonIntegration(double, double, const std::function<double(double)>&, int)[m[K’
+[2.011s]   148 | double TrajectoryNode::SimpsonIntegration(double a, double b, [01;36m[Kconst std::function<double(double)> &f[m[K, int n) {
+[2.011s]       |                                                               [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[2.014s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K In lambda function:
+[2.014s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:215:24:[m[K [01;31m[Kerror: [m[K‘[01m[Ka[m[K’ was not declared in this scope
+[2.014s]   215 |                 return [01;31m[Ka[m[K + b * s + c * s * s + d * s * s * s;
+[2.014s]       |                        [01;31m[K^[m[K
+[2.017s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:215:28:[m[K [01;31m[Kerror: [m[K‘[01m[Kb[m[K’ was not declared in this scope
+[2.017s]   215 |                 return a + [01;31m[Kb[m[K * s + c * s * s + d * s * s * s;
+[2.017s]       |                            [01;31m[K^[m[K
+[2.019s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:215:36:[m[K [01;31m[Kerror: [m[K‘[01m[Kc[m[K’ was not declared in this scope
+[2.019s]   215 |                 return a + b * s + [01;31m[Kc[m[K * s * s + d * s * s * s;
+[2.019s]       |                                    [01;31m[K^[m[K
+[2.022s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:215:48:[m[K [01;31m[Kerror: [m[K‘[01m[Kd[m[K’ was not declared in this scope
+[2.022s]   215 |                 return a + b * s + c * s * s + [01;31m[Kd[m[K * s * s * s;
+[2.022s]       |                                                [01;31m[K^[m[K
+[2.022s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K In lambda function:
+[2.022s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:214:46:[m[K [01;31m[Kerror: [m[Kcannot convert ‘[01m[KTrajectoryNode::ComputeJacobian(const std::vector<double, std::allocator<double> >&, const State&, const State&)::<lambda(double)>::<lambda(double)>[m[K’ to ‘[01m[Kconst std::function<double(double)>&[m[K’
+[2.022s]   214 |             double theta = [01;31m[KSimpsonIntegration(0, s, [&](double s) {[m[K
+[2.022s]       |                            [01;31m[K~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.022s]   215 | [01;31m[K                return a + b * s + c * s * s + d * s * s * s;[m[K
+[2.022s]       |                 [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.022s]   216 | [01;31m[K            })[m[K;
+[2.022s]       |             [01;31m[K~~[m[K                                
+[2.022s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:148:100:[m[K [01;36m[Knote: [m[K  initializing argument 3 of ‘[01m[Kdouble TrajectoryNode::SimpsonIntegration(double, double, const std::function<double(double)>&, int)[m[K’
+[2.022s]   148 | double TrajectoryNode::SimpsonIntegration(double a, double b, [01;36m[Kconst std::function<double(double)> &f[m[K, int n) {
+[2.022s]       |                                                               [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[2.025s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K In member function ‘[01m[KEigen::MatrixXd TrajectoryNode::ComputeJacobian(const std::vector<double, std::allocator<double> >&, const State&, const State&)[m[K’:
+[2.025s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:199:92:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstart[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[2.025s]   199 | Eigen::MatrixXd TrajectoryNode::ComputeJacobian(const std::vector<double> &p, [01;35m[Kconst State &start[m[K, const State &end) {
+[2.025s]       |                                                                               [01;35m[K~~~~~~~~~~~~~^~~~~[m[K
+[2.025s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:199:112:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kend[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[2.025s]   199 | Eigen::MatrixXd TrajectoryNode::ComputeJacobian(const std::vector<double> &p, const State &start, [01;35m[Kconst State &end[m[K) {
+[2.025s]       |                                                                                                   [01;35m[K~~~~~~~~~~~~~^~~[m[K
+[2.025s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K In member function ‘[01m[Kdouble TrajectoryNode::PartialKappa(double, const std::vector<double, std::allocator<double> >&, int)[m[K’:
+[2.025s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:233:74:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kp[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[2.025s]   233 | double TrajectoryNode::PartialKappa(double s, [01;35m[Kconst std::vector<double> &p[m[K, int i) {
+[2.025s]       |                                               [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[2.026s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K At global scope:
+[2.026s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:248:38:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[Kstd::vector<CubicSpiralCoefficients> TrajectoryNode::GenerateCubicSpiralCoefficients(const std::vector<State>&)[m[K’
+[2.026s]   248 | std::vector<CubicSpiralCoefficients> [01;31m[KTrajectoryNode[m[K::GenerateCubicSpiralCoefficients(const std::vector<State> &sl_grid)
+[2.026s]       |                                      [01;31m[K^~~~~~~~~~~~~~[m[K
+[2.026s] In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:1[m[K:
+[2.026s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/trajectory_planner_node.hpp:70:46:[m[K [01;36m[Knote: [m[Kcandidate is: ‘[01m[Kstd::vector<CubicSpiralCoefficients> TrajectoryNode::GenerateCubicSpiralCoefficients(const std::vector<State>&, const State&)[m[K’
+[2.026s]    70 |         std::vector<CubicSpiralCoefficients> [01;36m[KGenerateCubicSpiralCoefficients[m[K(const std::vector<State> &sl_grid, const State &start);
+[2.026s]       |                                              [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.026s] In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:1[m[K:
+[2.026s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/trajectory_planner_node.hpp:53:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass TrajectoryNode[m[K’ defined here
+[2.026s]    53 | class [01;36m[KTrajectoryNode[m[K : public rclcpp::Node
+[2.026s]       |       [01;36m[K^~~~~~~~~~~~~~[m[K
+[3.899s] gmake[2]: *** [CMakeFiles/trajectory_planner_node.dir/build.make:76: CMakeFiles/trajectory_planner_node.dir/src/trajectory_planner_node.cpp.o] Error 1
+[3.899s] gmake[1]: *** [CMakeFiles/Makefile2:221: CMakeFiles/trajectory_planner_node.dir/all] Error 2
+[3.899s] gmake: *** [Makefile:146: all] Error 2
+[3.901s] Invoked command in '/home/seok/automotive_software_final/build/autonomous_driving' returned '2': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28

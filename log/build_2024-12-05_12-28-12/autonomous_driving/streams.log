@@ -1,0 +1,31 @@
+[0.045s] Invoking command in '/home/seok/automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28
+[0.071s] [35m[1mConsolidate compiler generated dependencies of target control_node[0m
+[0.076s] [ 20%] Built target driving_way_node
+[0.077s] [ 40%] Built target autonomous_driving_node
+[0.078s] [ 60%] Built target behavior_planner_node
+[0.080s] [ 80%] Built target trajectory_planner_node
+[0.082s] [ 90%] [32mBuilding CXX object CMakeFiles/control_node.dir/src/control_node.cpp.o[0m
+[1.555s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:[m[K In member function ‘[01m[Kdouble ControlNode::computePID(double, double, const rclcpp::Time&, double)[m[K’:
+[1.555s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:62:30:[m[K [01;31m[Kerror: [m[K‘[01m[Kki[m[K’ was not declared in this scope; did you mean ‘[01m[Kpi[m[K’?
+[1.555s]    62 |     speed_error_integral_ += [01;31m[Kki[m[K * speed_error * dt;
+[1.555s]       |                              [01;31m[K^~[m[K
+[1.555s]       |                              [32m[Kpi[m[K
+[1.555s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:56:95:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[1.555s]    56 | double ControlNode::computePID(double target_speed, double current_speed, [01;35m[Kconst rclcpp::Time& current_time[m[K, double kp)
+[1.555s]       |                                                                           [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[1.558s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:[m[K In member function ‘[01m[Kdouble ControlNode::computePID_ACC(double, double, const rclcpp::Time&, double)[m[K’:
+[1.558s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:77:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kdistance_error_integral_[m[K’ was not declared in this scope; did you mean ‘[01m[Kdistnace_error_integral_[m[K’?
+[1.558s]    77 |     [01;31m[Kdistance_error_integral_[m[K += ki * distance_error * dt;
+[1.558s]       |     [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[1.558s]       |     [32m[Kdistnace_error_integral_[m[K
+[1.561s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:77:33:[m[K [01;31m[Kerror: [m[K‘[01m[Kki[m[K’ was not declared in this scope; did you mean ‘[01m[Kpi[m[K’?
+[1.561s]    77 |     distance_error_integral_ += [01;31m[Kki[m[K * distance_error * dt;
+[1.561s]       |                                 [01;31m[K^~[m[K
+[1.561s]       |                                 [32m[Kpi[m[K
+[1.561s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:71:106:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrnet_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[1.561s]    71 | double ControlNode::computePID_ACC(double target_distance, double obstacle_distance, [01;35m[Kconst rclcpp::Time& currnet_time[m[K, double kp)
+[1.561s]       |                                                                                      [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[4.790s] gmake[2]: *** [CMakeFiles/control_node.dir/build.make:76: CMakeFiles/control_node.dir/src/control_node.cpp.o] Error 1
+[4.790s] gmake[1]: *** [CMakeFiles/Makefile2:249: CMakeFiles/control_node.dir/all] Error 2
+[4.790s] gmake: *** [Makefile:146: all] Error 2
+[4.792s] Invoked command in '/home/seok/automotive_software_final/build/autonomous_driving' returned '2': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28

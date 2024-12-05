@@ -1,0 +1,30 @@
+[0.046s] Invoking command in '/home/seok/automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28
+[0.078s] [35m[1mConsolidate compiler generated dependencies of target control_node[0m
+[0.090s] [ 20%] Built target driving_way_node
+[0.092s] [ 40%] Built target trajectory_planner_node
+[0.093s] [ 50%] [32mBuilding CXX object CMakeFiles/control_node.dir/src/control_node.cpp.o[0m
+[0.095s] [ 70%] Built target autonomous_driving_node
+[0.095s] [ 90%] Built target behavior_planner_node
+[1.783s] In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:1[m[K:
+[1.783s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:19:1:[m[K [01;31m[Kerror: [m[Knew types may not be defined in a return type
+[1.783s]    19 | [01;31m[Kclass[m[K ControlNode : public rclcpp::Node {
+[1.783s]       | [01;31m[K^~~~~[m[K
+[1.783s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:19:1:[m[K [01;36m[Knote: [m[K(perhaps a semicolon is missing after the definition of ‘[01m[KControlNode[m[K’)
+[1.784s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:19:1:[m[K [01;31m[Kerror: [m[Kreturn type specification for constructor invalid
+[1.804s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:[m[K In constructor ‘[01m[KControlNode::ControlNode(const string&, const double&, const rclcpp::NodeOptions&)[m[K’:
+[1.804s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:34:33:[m[K [01;31m[Kerror: [m[K‘[01m[KRun[m[K’ is not a member of ‘[01m[KControlNode[m[K’
+[1.804s]    34 |         std::bind(&ControlNode::[01;31m[KRun[m[K, this));
+[1.804s]       |                                 [01;31m[K^~~[m[K
+[1.805s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:[m[K At global scope:
+[1.805s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:41:6:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[Kvoid ControlNode::Run()[m[K’
+[1.805s]    41 | void [01;31m[KControlNode[m[K::Run() {
+[1.805s]       |      [01;31m[K^~~~~~~~~~~[m[K
+[1.805s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:41:6:[m[K [01;36m[Knote: [m[Kno functions named ‘[01m[Kvoid ControlNode::Run()[m[K’
+[1.805s] In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:1[m[K:
+[1.805s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:19:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass ControlNode[m[K’ defined here
+[1.805s]    19 | class [01;36m[KControlNode[m[K : public rclcpp::Node {
+[1.805s]       |       [01;36m[K^~~~~~~~~~~[m[K
+[5.641s] gmake[2]: *** [CMakeFiles/control_node.dir/build.make:76: CMakeFiles/control_node.dir/src/control_node.cpp.o] Error 1
+[5.641s] gmake[1]: *** [CMakeFiles/Makefile2:249: CMakeFiles/control_node.dir/all] Error 2
+[5.642s] gmake: *** [Makefile:146: all] Error 2
+[5.643s] Invoked command in '/home/seok/automotive_software_final/build/autonomous_driving' returned '2': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28

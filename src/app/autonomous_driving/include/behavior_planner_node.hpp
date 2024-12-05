@@ -38,7 +38,7 @@ class BehaviorPlannerNode : public rclcpp::Node {
 
         
     private:
-        // Algorithm Functiosn
+        // Algorithm Function
         void Run();
         void updatePlannerState();
         void velocity_planner();
@@ -49,6 +49,7 @@ class BehaviorPlannerNode : public rclcpp::Node {
         // Publishers
         rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_behavior_state_;
         rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_ref_velocity_;
+        rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_lead_distance_;
 
         // Subscribers
         rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;
@@ -90,7 +91,8 @@ class BehaviorPlannerNode : public rclcpp::Node {
         // Outputs 
         float o_behavior_state_;  // 1: ACC, 2: AEB, 3: Merge, 4: Reference Velocity Tracking
         float o_ref_velocity_;
-        
+        float o_lead_distance_;
+
         // Mutex
         std::mutex mutex_vehicle_state_;
         std::mutex mutex_driving_way_;

@@ -1,0 +1,19 @@
+[0.045s] Invoking command in '/home/seok/automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28
+[0.072s] [35m[1mConsolidate compiler generated dependencies of target control_node[0m
+[0.078s] [ 20%] Built target behavior_planner_node
+[0.081s] [ 40%] Built target driving_way_node
+[0.083s] [ 60%] Built target trajectory_planner_node
+[0.086s] [ 80%] Built target autonomous_driving_node
+[0.088s] [ 90%] [32mBuilding CXX object CMakeFiles/control_node.dir/src/control_node.cpp.o[0m
+[1.885s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:[m[K In member function ‘[01m[Kvoid ControlNode::Run()[m[K’:
+[1.885s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:76:49:[m[K [01;31m[Kerror: [m[K‘[01m[Kcontrol_singal[m[K’ was not declared in this scope; did you mean ‘[01m[Kcontrol_signal[m[K’?
+[1.885s]    76 |             o_vehicle_command_.accel = std::min([01;31m[Kcontrol_singal[m[K, 0.5);
+[1.885s]       |                                                 [01;31m[K^~~~~~~~~~~~~~[m[K
+[1.885s]       |                                                 [32m[Kcontrol_signal[m[K
+[1.885s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:51:12:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Ktarget_speed[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[1.885s]    51 |     double [01;35m[Ktarget_speed[m[K = static_cast<double>(ref_vel_float.data);
+[1.885s]       |            [01;35m[K^~~~~~~~~~~~[m[K
+[6.172s] gmake[2]: *** [CMakeFiles/control_node.dir/build.make:76: CMakeFiles/control_node.dir/src/control_node.cpp.o] Error 1
+[6.172s] gmake[1]: *** [CMakeFiles/Makefile2:249: CMakeFiles/control_node.dir/all] Error 2
+[6.173s] gmake: *** [Makefile:146: all] Error 2
+[6.175s] Invoked command in '/home/seok/automotive_software_final/build/autonomous_driving' returned '2': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28

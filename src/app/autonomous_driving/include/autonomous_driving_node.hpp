@@ -118,8 +118,8 @@ class AutonomousDriving : public rclcpp::Node {
 
         // Publisher
         rclcpp::Publisher<ad_msgs::msg::VehicleCommand>::SharedPtr          p_vehicle_command_;
-        rclcpp::Publisher<ad_msgs::msg::PolyfitLaneData>::SharedPtr         p_driving_way_;
-        rclcpp::Publisher<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr    p_poly_lanes_;
+        // rclcpp::Publisher<ad_msgs::msg::PolyfitLaneData>::SharedPtr         p_driving_way_;
+        // rclcpp::Publisher<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr    p_poly_lanes_;
         
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;

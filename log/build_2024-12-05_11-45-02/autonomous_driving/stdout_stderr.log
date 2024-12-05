@@ -1,0 +1,28 @@
+[35m[1mConsolidate compiler generated dependencies of target control_node[0m
+[ 20%] Built target driving_way_node
+[ 40%] Built target trajectory_planner_node
+[ 50%] [32mBuilding CXX object CMakeFiles/control_node.dir/src/control_node.cpp.o[0m
+[ 70%] Built target autonomous_driving_node
+[ 90%] Built target behavior_planner_node
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:1[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:19:1:[m[K [01;31m[Kerror: [m[Knew types may not be defined in a return type
+   19 | [01;31m[Kclass[m[K ControlNode : public rclcpp::Node {
+      | [01;31m[K^~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:19:1:[m[K [01;36m[Knote: [m[K(perhaps a semicolon is missing after the definition of ‘[01m[KControlNode[m[K’)
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:19:1:[m[K [01;31m[Kerror: [m[Kreturn type specification for constructor invalid
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:[m[K In constructor ‘[01m[KControlNode::ControlNode(const string&, const double&, const rclcpp::NodeOptions&)[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:34:33:[m[K [01;31m[Kerror: [m[K‘[01m[KRun[m[K’ is not a member of ‘[01m[KControlNode[m[K’
+   34 |         std::bind(&ControlNode::[01;31m[KRun[m[K, this));
+      |                                 [01;31m[K^~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:[m[K At global scope:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:41:6:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[Kvoid ControlNode::Run()[m[K’
+   41 | void [01;31m[KControlNode[m[K::Run() {
+      |      [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:41:6:[m[K [01;36m[Knote: [m[Kno functions named ‘[01m[Kvoid ControlNode::Run()[m[K’
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:1[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:19:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass ControlNode[m[K’ defined here
+   19 | class [01;36m[KControlNode[m[K : public rclcpp::Node {
+      |       [01;36m[K^~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/control_node.dir/build.make:76: CMakeFiles/control_node.dir/src/control_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:249: CMakeFiles/control_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

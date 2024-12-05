@@ -1,0 +1,47 @@
+[0.046s] Invoking command in '/home/seok/automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28
+[0.068s] [35m[1mConsolidate compiler generated dependencies of target trajectory_planner_node[0m
+[0.076s] [ 12%] [32mBuilding CXX object CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o[0m
+[0.077s] [ 37%] Built target behavior_planner_node
+[0.080s] [ 50%] [32mBuilding CXX object CMakeFiles/trajectory_planner_node.dir/src/trajectory_planner_node.cpp.o[0m
+[0.081s] [ 75%] Built target autonomous_driving_node
+[1.536s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K In constructor ‘[01m[KTrajectoryNode::TrajectoryNode(const string&, const double&, const rclcpp::NodeOptions&)[m[K’:
+[1.536s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:3:76:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kloop_rate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[1.536s]     3 | TrajectoryNode::TrajectoryNode(const std::string &node_name, [01;35m[Kconst double &loop_rate[m[K, const rclcpp::NodeOptions & options)
+[1.536s]       |                                                              [01;35m[K~~~~~~~~~~~~~~^~~~~~~~~[m[K
+[1.953s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[1.953s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:373:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[1.953s]   373 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+[1.953s]       |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[5.425s] [ 87%] [32m[1mLinking CXX executable trajectory_planner_node[0m
+[5.711s] [ 87%] Built target trajectory_planner_node
+[20.545s] [100%] [32m[1mLinking CXX executable driving_way_node[0m
+[21.199s] [100%] Built target driving_way_node
+[21.206s] Invoked command in '/home/seok/automotive_software_final/build/autonomous_driving' returned '0': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28
+[21.221s] Invoking command in '/home/seok/automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/seok/automotive_software_final/build/autonomous_driving
+[21.224s] -- Install configuration: ""
+[21.224s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/autonomous_driving_node
+[21.225s] -- Installing: /home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/driving_way_node
+[21.231s] -- Set runtime path of "/home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/driving_way_node" to ""
+[21.231s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/behavior_planner_node
+[21.231s] -- Installing: /home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/trajectory_planner_node
+[21.233s] -- Set runtime path of "/home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/trajectory_planner_node" to ""
+[21.233s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch
+[21.233s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch/manual_driving.launch.xml
+[21.233s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch/autonomous_driving.launch.xml
+[21.233s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/lib/autonomous_driving/simultaneous_inputs.py
+[21.233s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/package_run_dependencies/autonomous_driving
+[21.233s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/parent_prefix_path/autonomous_driving
+[21.233s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/ament_prefix_path.sh
+[21.233s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/ament_prefix_path.dsv
+[21.234s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/path.sh
+[21.234s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/path.dsv
+[21.234s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.bash
+[21.234s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.sh
+[21.234s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.zsh
+[21.234s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.dsv
+[21.234s] -- Installing: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/package.dsv
+[21.234s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/packages/autonomous_driving
+[21.234s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/cmake/autonomous_drivingConfig.cmake
+[21.234s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/cmake/autonomous_drivingConfig-version.cmake
+[21.234s] -- Up-to-date: /home/seok/automotive_software_final/install/autonomous_driving/share/autonomous_driving/package.xml
+[21.235s] Invoked command in '/home/seok/automotive_software_final/build/autonomous_driving' returned '0': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/seok/automotive_software_final/build/autonomous_driving

@@ -1,0 +1,27 @@
+[0.033s] Invoking command in '/home/seok/automotive_software_final/build/evaluation': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/seok/automotive_software_final/build/evaluation -- -j28 -l28
+[0.065s] [ 33%] [32mBuilding CXX object CMakeFiles/evaluation.dir/src/evaluation_node.cpp.o[0m
+[7.658s] [ 66%] [32m[1mLinking CXX executable evaluation[0m
+[8.072s] [100%] Built target evaluation
+[8.077s] Invoked command in '/home/seok/automotive_software_final/build/evaluation' returned '0': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/seok/automotive_software_final/build/evaluation -- -j28 -l28
+[8.091s] Invoking command in '/home/seok/automotive_software_final/build/evaluation': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/seok/automotive_software_final/build/evaluation
+[8.094s] -- Install configuration: ""
+[8.094s] -- Installing: /home/seok/automotive_software_final/install/evaluation/lib/evaluation/evaluation
+[8.097s] -- Set runtime path of "/home/seok/automotive_software_final/install/evaluation/lib/evaluation/evaluation" to ""
+[8.097s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/launch
+[8.098s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/launch/evaluation.launch.xml
+[8.098s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/ament_index/resource_index/package_run_dependencies/evaluation
+[8.098s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/ament_index/resource_index/parent_prefix_path/evaluation
+[8.098s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/environment/ament_prefix_path.sh
+[8.098s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/environment/ament_prefix_path.dsv
+[8.098s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/environment/path.sh
+[8.098s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/environment/path.dsv
+[8.098s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/local_setup.bash
+[8.098s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/local_setup.sh
+[8.098s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/local_setup.zsh
+[8.099s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/local_setup.dsv
+[8.099s] -- Installing: /home/seok/automotive_software_final/install/evaluation/share/evaluation/package.dsv
+[8.099s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/ament_index/resource_index/packages/evaluation
+[8.099s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/cmake/evaluationConfig.cmake
+[8.099s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/cmake/evaluationConfig-version.cmake
+[8.099s] -- Up-to-date: /home/seok/automotive_software_final/install/evaluation/share/evaluation/package.xml
+[8.100s] Invoked command in '/home/seok/automotive_software_final/build/evaluation' returned '0': AMENT_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seok/automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seok/automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/seok/automotive_software_final/build/evaluation

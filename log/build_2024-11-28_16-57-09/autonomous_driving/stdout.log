@@ -1,0 +1,4 @@
+[ 12%] [32mBuilding CXX object CMakeFiles/trajectory_planner_node.dir/src/trajectory_planner_node.cpp.o[0m
+[ 37%] Built target driving_way_node
+[ 62%] Built target autonomous_driving_node
+[ 87%] Built target behavior_planner_node

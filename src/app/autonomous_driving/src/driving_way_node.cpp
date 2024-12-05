@@ -36,7 +36,7 @@ void DrivingWayNode::Run(const rclcpp::Time& current_time) {
     }
 
     if (lane_points.point.empty()) {
-        RCLCPP_WARN(this->get_logger(), "No lane points received. Skipping processing...");
+        // RCLCPP_WARN(this->get_logger(), "No lane points received. Skipping processing...");
         return;
     }
 
@@ -201,7 +201,7 @@ void DrivingWayNode::process_lanes() {
         A_RIGHT = calculateA(X_RIGHT, Y_RIGHT);
         // RCLCPP_INFO(this->get_logger(), "[1-5] RIGHT LANE A: [%s]", this->Vector4dToString(A_RIGHT).c_str());
     } else {
-        RCLCPP_WARN(this->get_logger(), "No inliers found for RIGHT lane.");
+        // RCLCPP_WARN(this->get_logger(), "No inliers found for RIGHT lane.");
     }
 
     // 왼쪽 차선의 inliers로부터 A_LEFT 계산
@@ -226,7 +226,7 @@ void DrivingWayNode::process_lanes() {
         A_LEFT = calculateA(X_LEFT, Y_LEFT);
         
     } else {
-        RCLCPP_WARN(this->get_logger(), "No inliers found for LEFT lane.");
+        // RCLCPP_WARN(this->get_logger(), "No inliers found for LEFT lane.");
     }
 }
 

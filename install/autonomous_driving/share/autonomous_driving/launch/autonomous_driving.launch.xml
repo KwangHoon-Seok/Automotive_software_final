@@ -4,10 +4,10 @@
     <arg name="loop_rate_hz" default="100.0"/>
     <arg name="use_manual_inputs" default="true" />
 
-    <node pkg="autonomous_driving" exec="autonomous_driving" name="autonomous_driving" namespace="$(var ns1)" output="screen">
-        <param name="autonomous_driving/ns" value="$(var ns1)"/>
-        <param name="autonomous_driving/loop_rate_hz" value="$(var loop_rate_hz)"/>
-        <param name="autonomous_driving/use_manual_inputs" value="$(var use_manual_inputs)"/>
+    <node pkg="autonomous_driving" exec="autonomous_driving_node" name="autonomous_driving_node" namespace="$(var ns1)" output="screen">
+        <param name="autonomous_driving_node/ns" value="$(var ns1)"/>
+        <param name="autonomous_driving_node/loop_rate_hz" value="$(var loop_rate_hz)"/>
+        <param name="autonomous_driving_node/use_manual_inputs" value="$(var use_manual_inputs)"/>
     </node>
 
     <!-- Driving Way Node 실행 -->
@@ -20,4 +20,13 @@
         <param name="behavior_planner_node/loop_rate_hz" value="$(var loop_rate_hz)"/>
     </node>
     
+    <!-- Trajectory Planner Node 실행 -->
+    <!-- <node pkg="autonomous_driving" exec="trajectory_planner_node" name="trajectory_planner_node" namespace="$(var ns1)" output="screen">
+        <param name="trajectory_planner_node/loop_rate_hz" value="$(var loop_rate_hz)"/>
+    </node> -->
+
+    <!-- Control Node 실행 -->
+    <node pkg="autonomous_driving" exec="control_node" name="control_node" namespace="$(var ns1)" output="screen">
+        <param name="control_node/loop_rate_hz" value="$(var loop_rate_hz)"/>
+    </node>
 </launch>

@@ -908,4 +908,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/autonomous_driving_node.dir/DependInfo.cmake"
   "CMakeFiles/driving_way_node.dir/DependInfo.cmake"
   "CMakeFiles/behavior_planner_node.dir/DependInfo.cmake"
+  "CMakeFiles/trajectory_planner_node.dir/DependInfo.cmake"
+  "CMakeFiles/control_node.dir/DependInfo.cmake"
   )

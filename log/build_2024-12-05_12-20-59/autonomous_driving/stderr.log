@@ -1,0 +1,91 @@
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:[m[K In member function ‘[01m[Kdouble ControlNode::computePID(double, double, const rclcpp::Time&, double)[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:61:5:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K;[m[K’ before ‘[01m[Kdouble[m[K’
+   61 |     [01;31m[Kdouble[m[K p_term = kp * speed_error;
+      |     [01;31m[K^~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:62:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kspeed_error_integral_[m[K’ was not declared in this scope
+   62 |     [01;31m[Kspeed_error_integral_[m[K += ki * speed_error * dt;
+      |     [01;31m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:62:30:[m[K [01;31m[Kerror: [m[K‘[01m[Kki[m[K’ was not declared in this scope; did you mean ‘[01m[Kkp[m[K’?
+   62 |     speed_error_integral_ += [01;31m[Kki[m[K * speed_error * dt;
+      |                              [01;31m[K^~[m[K
+      |                              [32m[Kkp[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:63:64:[m[K [01;31m[Kerror: [m[K‘[01m[Kmax_brake[m[K’ was not declared in this scope
+   63 |     speed_error_integral_ = std::clamp(speed_error_integral_, -[01;31m[Kmax_brake[m[K, max_accel);
+      |                                                                [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:63:75:[m[K [01;31m[Kerror: [m[K‘[01m[Kmax_accel[m[K’ was not declared in this scope
+   63 |     speed_error_integral_ = std::clamp(speed_error_integral_, -max_brake, [01;31m[Kmax_accel[m[K);
+      |                                                                           [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:65:29:[m[K [01;31m[Kerror: [m[K‘[01m[Kp_term[m[K’ was not declared in this scope
+   65 |     double control_signal = [01;31m[Kp_term[m[K + speed_error_integral_;
+      |                             [01;31m[K^~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:67:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kspeed_error_prev_[m[K’ was not declared in this scope; did you mean ‘[01m[Kspeed_error[m[K’?
+   67 |     [01;31m[Kspeed_error_prev_[m[K = speed_error;
+      |     [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+      |     [32m[Kspeed_error[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:56:95:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrnet_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   56 | double ControlNode::computePID(double target_speed, double current_speed, [01;35m[Kconst rclcpp::Time& currnet_time[m[K, double kp)
+      |                                                                           [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:56:116:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kkp[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   56 | double ControlNode::computePID(double target_speed, double current_speed, const rclcpp::Time& currnet_time, [01;35m[Kdouble kp[m[K)
+      |                                                                                                             [01;35m[K~~~~~~~^~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:[m[K In member function ‘[01m[Kdouble ControlNode::computePID_ACC(double, double, const rclcpp::Time&, double)[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:76:5:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K;[m[K’ before ‘[01m[Kdouble[m[K’
+   76 |     [01;31m[Kdouble[m[K p_term = kp * distance_error;
+      |     [01;31m[K^~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:77:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kdistance_error_integral_[m[K’ was not declared in this scope
+   77 |     [01;31m[Kdistance_error_integral_[m[K += ki * distance_error * dt;
+      |     [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:77:33:[m[K [01;31m[Kerror: [m[K‘[01m[Kki[m[K’ was not declared in this scope; did you mean ‘[01m[Kkp[m[K’?
+   77 |     distance_error_integral_ += [01;31m[Kki[m[K * distance_error * dt;
+      |                                 [01;31m[K^~[m[K
+      |                                 [32m[Kkp[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:78:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kspeed_error_integral_[m[K’ was not declared in this scope
+   78 |     [01;31m[Kspeed_error_integral_[m[K = std::clamp(distance_error_integral_, -max_brake, max_accel);
+      |     [01;31m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:78:67:[m[K [01;31m[Kerror: [m[K‘[01m[Kmax_brake[m[K’ was not declared in this scope
+   78 |     speed_error_integral_ = std::clamp(distance_error_integral_, -[01;31m[Kmax_brake[m[K, max_accel);
+      |                                                                   [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:78:78:[m[K [01;31m[Kerror: [m[K‘[01m[Kmax_accel[m[K’ was not declared in this scope
+   78 |     speed_error_integral_ = std::clamp(distance_error_integral_, -max_brake, [01;31m[Kmax_accel[m[K);
+      |                                                                              [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:80:29:[m[K [01;31m[Kerror: [m[K‘[01m[Kp_term[m[K’ was not declared in this scope
+   80 |     double control_signal = [01;31m[Kp_term[m[K + distance_error_integral_;
+      |                             [01;31m[K^~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:82:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kdistance_error_prev_[m[K’ was not declared in this scope; did you mean ‘[01m[Kdistance_error[m[K’?
+   82 |     [01;31m[Kdistance_error_prev_[m[K = distance_error;
+      |     [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+      |     [32m[Kdistance_error[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:71:106:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrnet_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   71 | double ControlNode::computePID_ACC(double target_distance, double obstacle_distance, [01;35m[Kconst rclcpp::Time& currnet_time[m[K, double kp)
+      |                                                                                      [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:71:127:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kkp[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   71 | double ControlNode::computePID_ACC(double target_distance, double obstacle_distance, const rclcpp::Time& currnet_time, [01;35m[Kdouble kp[m[K)
+      |                                                                                                                        [01;35m[K~~~~~~~^~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:[m[K In member function ‘[01m[Kdouble ControlNode::PurePursuit(const PolyfitLaneData&)[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:92:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kg_y[m[K’ was not declared in this scope
+   92 |     [01;31m[Kg_y[m[K = a3 * std::pow(g_x, 3) + a2 * std::pow(g_x, 2) + a1 * g_x + a0;
+      |     [01;31m[K^~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:92:25:[m[K [01;31m[Kerror: [m[K‘[01m[Kg_x[m[K’ was not declared in this scope
+   92 |     g_y = a3 * std::pow([01;31m[Kg_x[m[K, 3) + a2 * std::pow(g_x, 2) + a1 * g_x + a0;
+      |                         [01;31m[K^~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:93:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kl_d[m[K’ was not declared in this scope
+   93 |     [01;31m[Kl_d[m[K = std::sqrt(std::pow(g_x, 2) + std::pow(g_y, 2));
+      |     [01;31m[K^~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:94:5:[m[K [01;31m[Kerror: [m[K‘[01m[Ke_ld[m[K’ was not declared in this scope
+   94 |     [01;31m[Ke_ld[m[K = g_y;
+      |     [01;31m[K^~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:95:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kyaw[m[K’ was not declared in this scope
+   95 |     [01;31m[Kyaw[m[K = std::atan2(2 * L * g_y, std::pow(l_d, 2));
+      |     [01;31m[K^~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:95:26:[m[K [01;31m[Kerror: [m[K‘[01m[KL[m[K’ was not declared in this scope
+   95 |     yaw = std::atan2(2 * [01;31m[KL[m[K * g_y, std::pow(l_d, 2));
+      |                          [01;31m[K^[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:97:15:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ before ‘[01m[K}[m[K’ token
+   97 |     return yaw
+      |               [01;31m[K^[m[K
+      |               [32m[K;[m[K
+   98 | [32m[K}[m[K
+      | [32m[K~[m[K              
+gmake[2]: *** [CMakeFiles/control_node.dir/build.make:76: CMakeFiles/control_node.dir/src/control_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:249: CMakeFiles/control_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

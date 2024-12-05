@@ -1,0 +1,37 @@
+[0.050s] Invoking command in '/home/seok/automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28
+[0.075s] [35m[1mConsolidate compiler generated dependencies of target control_node[0m
+[0.082s] [ 20%] Built target driving_way_node
+[0.085s] [ 40%] Built target autonomous_driving_node
+[0.086s] [ 60%] Built target trajectory_planner_node
+[0.088s] [ 80%] Built target behavior_planner_node
+[0.089s] [ 90%] [32mBuilding CXX object CMakeFiles/control_node.dir/src/control_node.cpp.o[0m
+[1.720s] In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:1[m[K:
+[1.721s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:19:1:[m[K [01;31m[Kerror: [m[Knew types may not be defined in a return type
+[1.721s]    19 | [01;31m[Kclass[m[K ControlNode : public rclcpp::Node {
+[1.721s]       | [01;31m[K^~~~~[m[K
+[1.721s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:19:1:[m[K [01;36m[Knote: [m[K(perhaps a semicolon is missing after the definition of ‘[01m[KControlNode[m[K’)
+[1.721s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:19:1:[m[K [01;31m[Kerror: [m[Kreturn type specification for constructor invalid
+[1.742s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[1.742s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[1.742s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[1.742s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[1.742s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[1.742s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[1.742s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[1.742s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[1.742s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[1.742s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[1.742s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[1.742s]                  from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/control_node.hpp:8[m[K,
+[1.742s]                  from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:1[m[K:
+[1.742s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:[m[K In member function ‘[01m[Kvoid ControlNode::Run()[m[K’:
+[1.742s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:55:36:[m[K [01;31m[Kerror: [m[K‘[01m[Kusing VehicleCommand = struct ad_msgs::msg::VehicleCommand_<std::allocator<void> >[m[K’ {aka ‘[01m[Kstruct ad_msgs::msg::VehicleCommand_<std::allocator<void> >[m[K’} has no member named ‘[01m[Kvelocity[m[K’
+[1.742s]    55 |                 o_vehicle_command_.[01;31m[Kvelocity[m[K, o_vehicle_command_.steering_angle);
+[1.742s]       |                                    [01;31m[K^~~~~~~~[m[K
+[1.742s] [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/control_node.cpp:55:65:[m[K [01;31m[Kerror: [m[K‘[01m[Kusing VehicleCommand = struct ad_msgs::msg::VehicleCommand_<std::allocator<void> >[m[K’ {aka ‘[01m[Kstruct ad_msgs::msg::VehicleCommand_<std::allocator<void> >[m[K’} has no member named ‘[01m[Ksteering_angle[m[K’
+[1.742s]    55 |                 o_vehicle_command_.velocity, o_vehicle_command_.[01;31m[Ksteering_angle[m[K);
+[1.742s]       |                                                                 [01;31m[K^~~~~~~~~~~~~~[m[K
+[5.533s] gmake[2]: *** [CMakeFiles/control_node.dir/build.make:76: CMakeFiles/control_node.dir/src/control_node.cpp.o] Error 1
+[5.534s] gmake[1]: *** [CMakeFiles/Makefile2:249: CMakeFiles/control_node.dir/all] Error 2
+[5.534s] gmake: *** [Makefile:146: all] Error 2
+[5.535s] Invoked command in '/home/seok/automotive_software_final/build/autonomous_driving' returned '2': CMAKE_PREFIX_PATH=/home/seok/automotive_software_final/install/ad_msgs:/home/seok/automotive_software_final/install/simulator:/home/seok/automotive_software_final/install/mission_manager:/home/seok/automotive_software_final/install/evaluation:/home/seok/automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/seok/automotive_software_final/build/autonomous_driving -- -j28 -l28

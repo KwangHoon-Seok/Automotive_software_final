@@ -1,0 +1,35 @@
+[35m[1mConsolidate compiler generated dependencies of target trajectory_planner_node[0m
+[ 25%] Built target driving_way_node
+[ 50%] Built target autonomous_driving_node
+[ 75%] Built target behavior_planner_node
+[ 87%] [32mBuilding CXX object CMakeFiles/trajectory_planner_node.dir/src/trajectory_planner_node.cpp.o[0m
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:1[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/trajectory_planner_node.hpp:[m[K In member function ‘[01m[Kbool State::operator==(const State&) const[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/trajectory_planner_node.hpp:39:41:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst struct State[m[K’ has no member named ‘[01m[Kkappe[m[K’; did you mean ‘[01m[Kkappa[m[K’?
+   39 |                 std::fabs(kappa - other.[01;31m[Kkappe[m[K) < 1e-4;
+      |                                         [01;31m[K^~~~~[m[K
+      |                                         [32m[Kkappa[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K At global scope:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:3:60:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K...[m[K’ before ‘[01m[K.[m[K’ token
+    3 | TrajectoryNode::TrajectoryNode(const std::string &node_name[01;31m[K.[m[K const double &loop_rate, const rclcpp::NodeOptions & options)
+      |                                                            [01;31m[K^[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:3:1:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[KTrajectoryNode::TrajectoryNode(const string&)[m[K’
+    3 | [01;31m[KTrajectoryNode[m[K::TrajectoryNode(const std::string &node_name. const double &loop_rate, const rclcpp::NodeOptions & options)
+      | [01;31m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:1[m[K:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/trajectory_planner_node.hpp:43:7:[m[K [01;36m[Knote: [m[Kcandidates are: ‘[01m[KTrajectoryNode::TrajectoryNode(const TrajectoryNode&)[m[K’
+   43 | class [01;36m[KTrajectoryNode[m[K : public rclcpp::Node
+      |       [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/trajectory_planner_node.hpp:46:9:[m[K [01;36m[Knote: [m[K                ‘[01m[KTrajectoryNode::TrajectoryNode(const string&, const double&, const rclcpp::NodeOptions&)[m[K’
+   46 |         [01;36m[KTrajectoryNode[m[K(const std::string& node_name, const double& loop_rate,
+      |         [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/include/trajectory_planner_node.hpp:43:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass TrajectoryNode[m[K’ defined here
+   43 | class [01;36m[KTrajectoryNode[m[K : public rclcpp::Node
+      |       [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:[m[K In member function ‘[01m[Kvoid TrajectoryNode::GenerateReferencePath(const PolyfitLaneData&)[m[K’:
+[01m[K/home/seok/automotive_software_final/src/app/autonomous_driving/src/trajectory_planner_node.cpp:22:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kreference_path_[m[K’ was not declared in this scope
+   22 |     [01;31m[Kreference_path_[m[K.clear();
+      |     [01;31m[K^~~~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/trajectory_planner_node.dir/build.make:76: CMakeFiles/trajectory_planner_node.dir/src/trajectory_planner_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:221: CMakeFiles/trajectory_planner_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
