@@ -1,1 +1,3 @@
-/home/jeongwoo/Automotive_software_final/src/rte/msg/ad_msgs/msg/LanePointData.msg
+string frame_id
+string id 
+geometry_msgs/Point[] point

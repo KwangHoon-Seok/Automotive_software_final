@@ -1,1 +1,0 @@
-ament_cmake_symlink_install_targets("TARGET_FILES" "/home/jeongwoo/Automotive_software_final/build/autonomous_driving/driving_way_node" "TARGETS" "driving_way_node" "DESTINATION" "lib/autonomous_driving")

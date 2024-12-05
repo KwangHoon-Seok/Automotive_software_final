@@ -57,12 +57,9 @@ private:
     // Algorithm Functions
     void populatePolyLanes(ad_msgs::msg::PolyfitLaneDataArray& poly_lanes);
     void populateCenterLane(ad_msgs::msg::PolyfitLaneData& driving_way);
-    std::vector<int> regionQuery(const std::vector<Point>& points, int pointIdx, float epsilon);
-    void expandCluster(std::vector<Point>& points, int pointIdx, int clusterID, float epsilon, size_t min_samples);
     void splitLanePoints(const ad_msgs::msg::LanePointData& lane_points);
     void process_lanes();
-    void applyRANSAC(ad_msgs::msg::LanePointData& lane_points, ad_msgs::msg::LanePointData& inliers,
-                     int maxIterations = 20, double distanceThreshold = 1.0);
+    
     std::tuple<double, double, double, double> computeCubicModel(const geometry_msgs::msg::Point& p1,
                                                                  const geometry_msgs::msg::Point& p2,
                                                                  const geometry_msgs::msg::Point& p3,
@@ -73,6 +70,9 @@ private:
     float distance(const Point& a, const Point& b);
     
     // Variables for Algorithm
+    bool is_init = false;
+
+    ad_msgs::msg::PolyfitLaneData prev_driving_way_;
     ad_msgs::msg::LanePointData lane_point_LEFT;
     ad_msgs::msg::LanePointData lane_point_RIGHT;
     ad_msgs::msg::LanePointData inliers_LEFT;

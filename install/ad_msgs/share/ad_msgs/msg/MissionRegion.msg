@@ -1,1 +1,5 @@
-/home/jeongwoo/Automotive_software_final/src/rte/msg/ad_msgs/msg/MissionRegion.msg
+float64 x
+float64 y
+float64 radius
+string  mission
+string  sub_type

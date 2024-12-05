@@ -1,1 +1,0 @@
-/home/jeongwoo/Automotive_software_final/build/ad_msgs/rosidl_generator_py/ad_msgs/__init__.py

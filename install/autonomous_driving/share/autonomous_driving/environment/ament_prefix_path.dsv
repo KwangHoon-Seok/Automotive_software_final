@@ -1,1 +1,1 @@
-/home/jeongwoo/Automotive_software_final/build/autonomous_driving/ament_cmake_environment_hooks/ament_prefix_path.dsv
+prepend-non-duplicate;AMENT_PREFIX_PATH;

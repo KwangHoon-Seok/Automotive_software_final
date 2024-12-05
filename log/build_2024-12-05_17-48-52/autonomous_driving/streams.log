@@ -1,0 +1,295 @@
+[0.137s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/automotive_software_mid-term/install/simulator:/home/jeongwoo/automotive_software_mid-term/install/scenario_runner:/home/jeongwoo/automotive_software_mid-term/install/evaluation:/home/jeongwoo/automotive_software_mid-term/install/autonomous_driving:/home/jeongwoo/automotive_software_mid-term/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/home/jeongwoo/automotive_software_final2/install/simulator:/home/jeongwoo/automotive_software_final2/install/mission_manager:/home/jeongwoo/automotive_software_final2/install/evaluation:/home/jeongwoo/automotive_software_final2/install/autonomous_driving:/home/jeongwoo/automotive_software_final2/install/ad_msgs:/home/jeongwoo/test/install/my_test_pkg:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:/home/jeongwoo/automotive_software_mid-term/install/ad_msgs/lib:/home/jeongwoo/automotive_software_final2/install/ad_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake /home/jeongwoo/Automotive_software_final/src/app/autonomous_driving -DCMAKE_INSTALL_PREFIX=/home/jeongwoo/Automotive_software_final/install/autonomous_driving
+[0.458s] -- The C compiler identification is GNU 11.4.0
+[1.285s] -- The CXX compiler identification is GNU 11.4.0
+[1.570s] -- Detecting C compiler ABI info
+[1.894s] -- Detecting C compiler ABI info - done
+[1.947s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.947s] -- Detecting C compile features
+[1.949s] -- Detecting C compile features - done
+[1.968s] -- Detecting CXX compiler ABI info
+[2.351s] -- Detecting CXX compiler ABI info - done
+[2.384s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[2.384s] -- Detecting CXX compile features
+[2.386s] -- Detecting CXX compile features - done
+[2.394s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[2.851s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[3.159s] -- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+[3.546s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[3.568s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[3.604s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[3.655s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[3.728s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.894s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[3.902s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[6.299s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[8.807s] -- Found FastRTPS: /opt/ros/humble/include  
+[13.215s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[13.253s] -- Looking for pthread.h
+[13.590s] -- Looking for pthread.h - found
+[13.592s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[13.924s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[13.930s] -- Found Threads: TRUE  
+[14.141s] -- Found ad_msgs: 0.0.0 (/home/jeongwoo/Automotive_software_final/install/ad_msgs/share/ad_msgs/cmake)
+[14.502s] -- Found tf2: 0.25.8 (/opt/ros/humble/share/tf2/cmake)
+[14.540s] -- Found tf2_ros: 0.25.8 (/opt/ros/humble/share/tf2_ros/cmake)
+[15.106s] -- Configuring done
+[15.202s] -- Generating done
+[15.207s] -- Build files have been written to: /home/jeongwoo/Automotive_software_final/build/autonomous_driving
+[15.264s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving' returned '0': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/automotive_software_mid-term/install/simulator:/home/jeongwoo/automotive_software_mid-term/install/scenario_runner:/home/jeongwoo/automotive_software_mid-term/install/evaluation:/home/jeongwoo/automotive_software_mid-term/install/autonomous_driving:/home/jeongwoo/automotive_software_mid-term/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/home/jeongwoo/automotive_software_final2/install/simulator:/home/jeongwoo/automotive_software_final2/install/mission_manager:/home/jeongwoo/automotive_software_final2/install/evaluation:/home/jeongwoo/automotive_software_final2/install/autonomous_driving:/home/jeongwoo/automotive_software_final2/install/ad_msgs:/home/jeongwoo/test/install/my_test_pkg:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:/home/jeongwoo/automotive_software_mid-term/install/ad_msgs/lib:/home/jeongwoo/automotive_software_final2/install/ad_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake /home/jeongwoo/Automotive_software_final/src/app/autonomous_driving -DCMAKE_INSTALL_PREFIX=/home/jeongwoo/Automotive_software_final/install/autonomous_driving
+[15.266s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/automotive_software_mid-term/install/simulator:/home/jeongwoo/automotive_software_mid-term/install/scenario_runner:/home/jeongwoo/automotive_software_mid-term/install/evaluation:/home/jeongwoo/automotive_software_mid-term/install/autonomous_driving:/home/jeongwoo/automotive_software_mid-term/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/home/jeongwoo/automotive_software_final2/install/simulator:/home/jeongwoo/automotive_software_final2/install/mission_manager:/home/jeongwoo/automotive_software_final2/install/evaluation:/home/jeongwoo/automotive_software_final2/install/autonomous_driving:/home/jeongwoo/automotive_software_final2/install/ad_msgs:/home/jeongwoo/test/install/my_test_pkg:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:/home/jeongwoo/automotive_software_mid-term/install/ad_msgs/lib:/home/jeongwoo/automotive_software_final2/install/ad_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8
+[15.471s] [ 16%] [32mBuilding CXX object CMakeFiles/autonomous_driving_node.dir/src/autonomous_driving_node.cpp.o[0m
+[15.485s] [ 33%] [32mBuilding CXX object CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o[0m
+[15.498s] [ 50%] [32mBuilding CXX object CMakeFiles/behavior_planner_node.dir/src/behavior_planner_node.cpp.o[0m
+[33.672s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:103:6:[m[K [01;31m[Kerror: [m[K‘[01m[KAutonomousDriving[m[K’ has not been declared
+[33.672s]   103 | void [01;31m[KAutonomousDriving[m[K::splitLanePoints(const ad_msgs::msg::LanePointData& lane_points){
+[33.672s]       |      [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+[33.710s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In function ‘[01m[Kvoid splitLanePoints(const LanePointData&)[m[K’:
+[33.711s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:104:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kis_init[m[K’ was not declared in this scope; did you mean ‘[01m[Kisdigit[m[K’?
+[33.711s]   104 |     if(![01;31m[Kis_init[m[K){
+[33.711s]       |         [01;31m[K^~~~~~~[m[K
+[33.712s]       |         [32m[Kisdigit[m[K
+[33.754s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:123:9:[m[K [01;31m[Kerror: [m[K‘[01m[Klane_point_LEFT[m[K’ was not declared in this scope; did you mean ‘[01m[Klane_points[m[K’?
+[33.755s]   123 |         [01;31m[Klane_point_LEFT[m[K.point.clear();
+[33.755s]       |         [01;31m[K^~~~~~~~~~~~~~~[m[K
+[33.755s]       |         [32m[Klane_points[m[K
+[33.835s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:124:9:[m[K [01;31m[Kerror: [m[K‘[01m[Klane_point_RIGHT[m[K’ was not declared in this scope; did you mean ‘[01m[Klane_points[m[K’?
+[33.835s]   124 |         [01;31m[Klane_point_RIGHT[m[K.point.clear();
+[33.836s]       |         [01;31m[K^~~~~~~~~~~~~~~~[m[K
+[33.836s]       |         [32m[Klane_points[m[K
+[33.839s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[33.840s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[33.840s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[33.840s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[33.840s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[33.841s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[33.841s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[33.842s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[33.842s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[33.842s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[33.843s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[33.843s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[33.844s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:135:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[33.848s]   135 |         RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "[--1st--] Split Lane Points");
+[33.849s]       |                     [01;31m[K^~~~[m[K
+[33.850s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:135:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[33.852s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:135:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[33.853s]   135 |         [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "[--1st--] Split Lane Points");
+[33.853s]       |         [01;31m[K^~~~~~~~~~~[m[K
+[33.854s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:135:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[33.854s]   135 |         [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "[--1st--] Split Lane Points");
+[33.855s]       |         [01;31m[K^~~~~~~~~~~[m[K
+[33.857s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:135:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[33.857s]   135 |         [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "[--1st--] Split Lane Points");
+[33.857s]       |         [01;31m[K^~~~~~~~~~~[m[K
+[33.858s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[33.863s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[33.864s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[33.864s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[33.864s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[33.864s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[33.864s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[33.865s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[33.865s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[33.865s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[33.865s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[33.865s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[33.866s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[33.866s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:135:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[33.870s]   135 |         RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "[--1st--] Split Lane Points");
+[33.871s]       |                     [01;31m[K^~~~[m[K
+[33.916s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:135:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[33.916s]   135 |         RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "[--1st--] Split Lane Points");
+[33.916s]       |                     [01;31m[K^~~~[m[K
+[33.917s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:158:9:[m[K [01;31m[Kerror: [m[K‘[01m[Klane_point_LEFT[m[K’ was not declared in this scope; did you mean ‘[01m[Klane_points[m[K’?
+[33.917s]   158 |         [01;31m[Klane_point_LEFT[m[K.point.clear();
+[33.917s]       |         [01;31m[K^~~~~~~~~~~~~~~[m[K
+[33.918s]       |         [32m[Klane_points[m[K
+[33.956s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:159:9:[m[K [01;31m[Kerror: [m[K‘[01m[Klane_point_RIGHT[m[K’ was not declared in this scope; did you mean ‘[01m[Klane_points[m[K’?
+[33.956s]   159 |         [01;31m[Klane_point_RIGHT[m[K.point.clear();
+[33.957s]       |         [01;31m[K^~~~~~~~~~~~~~~~[m[K
+[33.957s]       |         [32m[Klane_points[m[K
+[33.992s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:168:28:[m[K [01;31m[Kerror: [m[K‘[01m[Kprev_driving_way_[m[K’ was not declared in this scope
+[33.992s]   168 |             float Y_poly = [01;31m[Kprev_driving_way_[m[K.a3 * std::pow(x, 3) +
+[33.992s]       |                            [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+[33.993s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[33.993s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[33.993s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[33.993s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[33.994s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[33.994s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[33.994s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[33.995s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[33.995s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[33.995s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[33.995s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[33.996s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[33.996s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:187:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[33.996s]   187 |         RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "[--2st--] Split Lane Points with prev_driving_way_");
+[33.996s]       |                     [01;31m[K^~~~[m[K
+[33.997s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:187:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[33.997s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:187:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[33.997s]   187 |         [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "[--2st--] Split Lane Points with prev_driving_way_");
+[33.998s]       |         [01;31m[K^~~~~~~~~~~[m[K
+[33.998s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:187:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[33.998s]   187 |         [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "[--2st--] Split Lane Points with prev_driving_way_");
+[33.999s]       |         [01;31m[K^~~~~~~~~~~[m[K
+[33.999s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:187:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[33.999s]   187 |         [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "[--2st--] Split Lane Points with prev_driving_way_");
+[33.999s]       |         [01;31m[K^~~~~~~~~~~[m[K
+[33.999s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[34.000s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[34.025s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[34.025s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[34.025s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[34.026s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[34.026s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[34.026s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[34.026s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[34.027s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[34.027s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[34.027s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[34.027s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[34.028s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:187:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[34.028s]   187 |         RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "[--2st--] Split Lane Points with prev_driving_way_");
+[34.028s]       |                     [01;31m[K^~~~[m[K
+[34.028s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:187:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[34.029s]   187 |         RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "[--2st--] Split Lane Points with prev_driving_way_");
+[34.029s]       |                     [01;31m[K^~~~[m[K
+[34.029s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K At global scope:
+[34.029s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:193:6:[m[K [01;31m[Kerror: [m[K‘[01m[KAutonomousDriving[m[K’ has not been declared
+[34.030s]   193 | void [01;31m[KAutonomousDriving[m[K::process_lanes() {
+[34.030s]       |      [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+[34.069s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In function ‘[01m[Kvoid process_lanes()[m[K’:
+[34.070s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:195:5:[m[K [01;31m[Kerror: [m[K‘[01m[Knum_points_LEFT[m[K’ was not declared in this scope
+[34.070s]   195 |     [01;31m[Knum_points_LEFT[m[K = lane_point_LEFT.point.size();
+[34.070s]       |     [01;31m[K^~~~~~~~~~~~~~~[m[K
+[34.122s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:195:23:[m[K [01;31m[Kerror: [m[K‘[01m[Klane_point_LEFT[m[K’ was not declared in this scope
+[34.122s]   195 |     num_points_LEFT = [01;31m[Klane_point_LEFT[m[K.point.size();
+[34.122s]       |                       [01;31m[K^~~~~~~~~~~~~~~[m[K
+[34.171s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:196:5:[m[K [01;31m[Kerror: [m[K‘[01m[Knum_points_RIGHT[m[K’ was not declared in this scope
+[34.172s]   196 |     [01;31m[Knum_points_RIGHT[m[K = lane_point_RIGHT.point.size();
+[34.172s]       |     [01;31m[K^~~~~~~~~~~~~~~~[m[K
+[34.188s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:196:24:[m[K [01;31m[Kerror: [m[K‘[01m[Klane_point_RIGHT[m[K’ was not declared in this scope
+[34.188s]   196 |     num_points_RIGHT = [01;31m[Klane_point_RIGHT[m[K.point.size();
+[34.189s]       |                        [01;31m[K^~~~~~~~~~~~~~~~[m[K
+[34.208s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:197:5:[m[K [01;31m[Kerror: [m[K‘[01m[KX_LEFT[m[K’ was not declared in this scope
+[34.209s]   197 |     [01;31m[KX_LEFT[m[K.resize(num_points_LEFT);
+[34.209s]       |     [01;31m[K^~~~~~[m[K
+[34.233s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:198:5:[m[K [01;31m[Kerror: [m[K‘[01m[KY_LEFT[m[K’ was not declared in this scope
+[34.235s]   198 |     [01;31m[KY_LEFT[m[K.resize(num_points_LEFT);
+[34.236s]       |     [01;31m[K^~~~~~[m[K
+[34.256s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:199:5:[m[K [01;31m[Kerror: [m[K‘[01m[KX_RIGHT[m[K’ was not declared in this scope
+[34.256s]   199 |     [01;31m[KX_RIGHT[m[K.resize(num_points_RIGHT);
+[34.257s]       |     [01;31m[K^~~~~~~[m[K
+[34.288s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:200:5:[m[K [01;31m[Kerror: [m[K‘[01m[KY_RIGHT[m[K’ was not declared in this scope
+[34.289s]   200 |     [01;31m[KY_RIGHT[m[K.resize(num_points_RIGHT);
+[34.289s]       |     [01;31m[K^~~~~~~[m[K
+[34.310s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:212:9:[m[K [01;31m[Kerror: [m[K‘[01m[KA_LEFT[m[K’ was not declared in this scope
+[34.310s]   212 |         [01;31m[KA_LEFT[m[K = calculateA(X_LEFT, Y_LEFT);
+[34.311s]       |         [01;31m[K^~~~~~[m[K
+[34.354s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:212:18:[m[K [01;31m[Kerror: [m[K‘[01m[KcalculateA[m[K’ was not declared in this scope
+[34.355s]   212 |         A_LEFT = [01;31m[KcalculateA[m[K(X_LEFT, Y_LEFT);
+[34.355s]       |                  [01;31m[K^~~~~~~~~~[m[K
+[34.385s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:213:9:[m[K [01;31m[Kerror: [m[K‘[01m[KA_RIGHT[m[K’ was not declared in this scope
+[34.386s]   213 |         [01;31m[KA_RIGHT[m[K = calculateA(X_RIGHT, Y_RIGHT);
+[34.386s]       |         [01;31m[K^~~~~~~[m[K
+[34.392s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[34.392s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[34.392s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[34.392s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[34.392s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[34.393s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[34.393s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[34.393s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[34.393s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[34.394s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[34.394s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[34.394s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[34.394s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:215:17:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[34.394s]   215 |     RCLCPP_WARN([01;31m[Kthis[m[K->get_logger(), "Number of points in LEFT lane: %zu", num_points_LEFT);
+[34.395s]       |                 [01;31m[K^~~~[m[K
+[34.395s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:215:17:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[34.395s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:215:5:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[34.395s]   215 |     [01;31m[KRCLCPP_WARN[m[K(this->get_logger(), "Number of points in LEFT lane: %zu", num_points_LEFT);
+[34.396s]       |     [01;31m[K^~~~~~~~~~~[m[K
+[34.396s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:215:5:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[34.396s]   215 |     [01;31m[KRCLCPP_WARN[m[K(this->get_logger(), "Number of points in LEFT lane: %zu", num_points_LEFT);
+[34.396s]       |     [01;31m[K^~~~~~~~~~~[m[K
+[34.396s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:215:5:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[34.397s]   215 |     [01;31m[KRCLCPP_WARN[m[K(this->get_logger(), "Number of points in LEFT lane: %zu", num_points_LEFT);
+[34.397s]       |     [01;31m[K^~~~~~~~~~~[m[K
+[34.421s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[34.421s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[34.421s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[34.421s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[34.422s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[34.422s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[34.422s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[34.422s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[34.422s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[34.422s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[34.422s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[34.423s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[34.423s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[34.423s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:215:17:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[34.423s]   215 |     RCLCPP_WARN([01;31m[Kthis[m[K->get_logger(), "Number of points in LEFT lane: %zu", num_points_LEFT);
+[34.423s]       |                 [01;31m[K^~~~[m[K
+[34.424s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:215:17:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[34.424s]   215 |     RCLCPP_WARN([01;31m[Kthis[m[K->get_logger(), "Number of points in LEFT lane: %zu", num_points_LEFT);
+[34.424s]       |                 [01;31m[K^~~~[m[K
+[34.424s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[34.424s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[34.424s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[34.425s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[34.425s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[34.426s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[34.426s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[34.426s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[34.427s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[34.459s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[34.460s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[34.460s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[34.460s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:216:17:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[34.460s]   216 |     RCLCPP_WARN([01;31m[Kthis[m[K->get_logger(), "Number of points in RIGHT lane: %zu", num_points_RIGHT);
+[34.460s]       |                 [01;31m[K^~~~[m[K
+[34.461s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:216:17:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[34.461s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:216:5:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[34.461s]   216 |     [01;31m[KRCLCPP_WARN[m[K(this->get_logger(), "Number of points in RIGHT lane: %zu", num_points_RIGHT);
+[34.461s]       |     [01;31m[K^~~~~~~~~~~[m[K
+[34.461s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:216:5:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[34.462s]   216 |     [01;31m[KRCLCPP_WARN[m[K(this->get_logger(), "Number of points in RIGHT lane: %zu", num_points_RIGHT);
+[34.462s]       |     [01;31m[K^~~~~~~~~~~[m[K
+[34.462s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:216:5:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[34.462s]   216 |     [01;31m[KRCLCPP_WARN[m[K(this->get_logger(), "Number of points in RIGHT lane: %zu", num_points_RIGHT);
+[34.462s]       |     [01;31m[K^~~~~~~~~~~[m[K
+[34.462s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[34.463s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[34.463s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[34.463s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[34.475s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[34.475s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[34.475s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[34.475s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[34.475s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[34.476s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[34.476s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[34.476s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[34.476s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[34.476s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:216:17:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[34.476s]   216 |     RCLCPP_WARN([01;31m[Kthis[m[K->get_logger(), "Number of points in RIGHT lane: %zu", num_points_RIGHT);
+[34.477s]       |                 [01;31m[K^~~~[m[K
+[34.477s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:216:17:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[34.477s]   216 |     RCLCPP_WARN([01;31m[Kthis[m[K->get_logger(), "Number of points in RIGHT lane: %zu", num_points_RIGHT);
+[34.477s]       |                 [01;31m[K^~~~[m[K
+[35.315s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[35.315s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:317:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[35.316s]   317 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+[35.316s]       |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[80.865s] [ 66%] [32m[1mLinking CXX executable behavior_planner_node[0m
+[83.707s] [ 66%] Built target behavior_planner_node
+[102.726s] [ 83%] [32m[1mLinking CXX executable autonomous_driving_node[0m
+[105.397s] [ 83%] Built target autonomous_driving_node
+[116.770s] gmake[2]: *** [CMakeFiles/driving_way_node.dir/build.make:76: CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o] Error 1
+[116.771s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/driving_way_node.dir/all] Error 2
+[116.771s] gmake: *** [Makefile:146: all] Error 2
+[116.775s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving' returned '2': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/automotive_software_mid-term/install/simulator:/home/jeongwoo/automotive_software_mid-term/install/scenario_runner:/home/jeongwoo/automotive_software_mid-term/install/evaluation:/home/jeongwoo/automotive_software_mid-term/install/autonomous_driving:/home/jeongwoo/automotive_software_mid-term/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/home/jeongwoo/automotive_software_final2/install/simulator:/home/jeongwoo/automotive_software_final2/install/mission_manager:/home/jeongwoo/automotive_software_final2/install/evaluation:/home/jeongwoo/automotive_software_final2/install/autonomous_driving:/home/jeongwoo/automotive_software_final2/install/ad_msgs:/home/jeongwoo/test/install/my_test_pkg:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:/home/jeongwoo/automotive_software_mid-term/install/ad_msgs/lib:/home/jeongwoo/automotive_software_final2/install/ad_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8

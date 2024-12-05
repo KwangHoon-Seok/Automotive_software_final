@@ -1,1 +1,2 @@
-/home/jeongwoo/Automotive_software_final/src/rte/msg/ad_msgs/msg/PolyfitLaneDataArray.msg
+string frame_id
+PolyfitLaneData[] polyfitlanes

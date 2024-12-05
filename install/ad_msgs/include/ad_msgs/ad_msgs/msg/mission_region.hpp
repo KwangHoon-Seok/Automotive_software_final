@@ -1,1 +1,11 @@
-/home/jeongwoo/Automotive_software_final/build/ad_msgs/rosidl_generator_cpp/ad_msgs/msg/mission_region.hpp
+// generated from rosidl_generator_cpp/resource/idl.hpp.em
+// generated code does not contain a copyright notice
+
+#ifndef AD_MSGS__MSG__MISSION_REGION_HPP_
+#define AD_MSGS__MSG__MISSION_REGION_HPP_
+
+#include "ad_msgs/msg/detail/mission_region__struct.hpp"
+#include "ad_msgs/msg/detail/mission_region__builder.hpp"
+#include "ad_msgs/msg/detail/mission_region__traits.hpp"
+
+#endif  // AD_MSGS__MSG__MISSION_REGION_HPP_

@@ -9,7 +9,7 @@
 /home/jeongwoo/Automotive_software_final/build/ad_msgs/CMakeFiles/ad_msgs__rosidl_typesupport_fastrtps_cpp.dir
 /home/jeongwoo/Automotive_software_final/build/ad_msgs/CMakeFiles/ad_msgs__rosidl_typesupport_introspection_cpp.dir
 /home/jeongwoo/Automotive_software_final/build/ad_msgs/CMakeFiles/ad_msgs__rosidl_typesupport_cpp.dir
-/home/jeongwoo/Automotive_software_final/build/ad_msgs/CMakeFiles/ament_cmake_python_symlink_ad_msgs.dir
+/home/jeongwoo/Automotive_software_final/build/ad_msgs/CMakeFiles/ament_cmake_python_copy_ad_msgs.dir
 /home/jeongwoo/Automotive_software_final/build/ad_msgs/CMakeFiles/ament_cmake_python_build_ad_msgs_egg.dir
 /home/jeongwoo/Automotive_software_final/build/ad_msgs/CMakeFiles/ad_msgs__rosidl_generator_py.dir
 /home/jeongwoo/Automotive_software_final/build/ad_msgs/CMakeFiles/ad_msgs__rosidl_typesupport_fastrtps_c__pyext.dir
