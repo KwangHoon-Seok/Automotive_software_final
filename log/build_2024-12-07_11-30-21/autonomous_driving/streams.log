@@ -1,0 +1,30 @@
+[0.173s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving': AMENT_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8
+[0.294s] [35m[1mConsolidate compiler generated dependencies of target driving_way_node[0m
+[0.348s] [ 33%] Built target behavior_planner_node
+[0.376s] [ 66%] Built target autonomous_driving_node
+[0.376s] [ 83%] [32mBuilding CXX object CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o[0m
+[7.522s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::Run(const rclcpp::Time&)[m[K’:
+[7.522s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:52:5:[m[K [01;31m[Kerror: [m[K‘[01m[Klane_condition[m[K’ was not declared in this scope
+[7.522s]    52 |     [01;31m[Klane_condition[m[K();
+[7.522s]       |     [01;31m[K^~~~~~~~~~~~~~[m[K
+[7.523s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K At global scope:
+[7.523s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:67:6:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[Kvoid DrivingWayNode::lane_condition()[m[K’
+[7.523s]    67 | void [01;31m[KDrivingWayNode[m[K::lane_condition(){
+[7.523s]       |      [01;31m[K^~~~~~~~~~~~~~[m[K
+[7.523s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:67:6:[m[K [01;36m[Knote: [m[Kno functions named ‘[01m[Kvoid DrivingWayNode::lane_condition()[m[K’
+[7.523s] In file included from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.524s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:45:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass DrivingWayNode[m[K’ defined here
+[7.524s]    45 | class [01;36m[KDrivingWayNode[m[K : public rclcpp::Node {
+[7.524s]       |       [01;36m[K^~~~~~~~~~~~~~[m[K
+[7.542s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::splitLanePoints(const LanePointData&)[m[K’:
+[7.543s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:269:39:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before ‘[01m[K)[m[K’ token
+[7.543s]   269 |                 if (point.cluster ==  [01;31m[K)[m[K {  // 좌측 차선에 속하는 포인트
+[7.543s]       |                                       [01;31m[K^[m[K
+[7.742s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[7.742s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:426:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[7.742s]   426 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+[7.743s]       |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[38.251s] gmake[2]: *** [CMakeFiles/driving_way_node.dir/build.make:76: CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o] Error 1
+[38.251s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/driving_way_node.dir/all] Error 2
+[38.252s] gmake: *** [Makefile:146: all] Error 2
+[38.260s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving' returned '2': AMENT_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8

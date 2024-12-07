@@ -1,0 +1,35 @@
+[35m[1mConsolidate compiler generated dependencies of target driving_way_node[0m
+[ 33%] Built target autonomous_driving_node
+[ 66%] Built target behavior_planner_node
+[ 83%] [32mBuilding CXX object CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o[0m
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::Run(const rclcpp::Time&)[m[K’:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:67:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kdriving_way_[m[K’ was not declared in this scope; did you mean ‘[01m[Kdriving_way[m[K’?
+   67 |         [01;31m[Kdriving_way_[m[K = prev_driving_way_;
+      |         [01;31m[K^~~~~~~~~~~~[m[K
+      |         [32m[Kdriving_way[m[K
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:69:19:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KDrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData&, std_msgs::msg::Float32&)[m[K’
+   69 |     [01;31m[Klane_condition(driving_way, behavior_state)[m[K;
+      |     [01;31m[K~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:59:10:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kvoid DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData&)[m[K’
+   59 |     void [01;36m[Klane_condition[m[K(ad_msgs::msg::PolyfitLaneData& driving_way);
+      |          [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:59:10:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 2 provided
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K At global scope:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:81:6:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[Kvoid DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData&, const Float32&)[m[K’
+   81 | void [01;31m[KDrivingWayNode[m[K::lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, const std_msgs::msg::Float32& behavior_state){
+      |      [01;31m[K^~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:59:10:[m[K [01;36m[Knote: [m[Kcandidate is: ‘[01m[Kvoid DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData&)[m[K’
+   59 |     void [01;36m[Klane_condition[m[K(ad_msgs::msg::PolyfitLaneData& driving_way);
+      |          [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:46:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass DrivingWayNode[m[K’ defined here
+   46 | class [01;36m[KDrivingWayNode[m[K : public rclcpp::Node {
+      |       [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:434:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  434 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+      |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/driving_way_node.dir/build.make:76: CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/driving_way_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

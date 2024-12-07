@@ -1,0 +1,19 @@
+[0.143s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8
+[0.249s] [ 33%] Built target behavior_planner_node
+[0.251s] [ 50%] [32mBuilding CXX object CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o[0m
+[0.254s] [ 83%] Built target autonomous_driving_node
+[6.652s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::splitLanePoints(const LanePointData&)[m[K’:
+[6.652s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:198:13:[m[K [01;31m[Kerror: [m[K‘[01m[KexpandCluster[m[K’ was not declared in this scope
+[6.652s]   198 |             [01;31m[KexpandCluster[m[K(points, p0_index, 0, epsilon, min_samples); // 좌측 클러스터 ID는 0
+[6.652s]       |             [01;31m[K^~~~~~~~~~~~~[m[K
+[6.674s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:214:13:[m[K [01;31m[Kerror: [m[K‘[01m[KexpandCluster[m[K’ was not declared in this scope
+[6.674s]   214 |             [01;31m[KexpandCluster[m[K(points, p1_index, 1, epsilon, min_samples); // 우측 클러스터 ID는 1
+[6.675s]       |             [01;31m[K^~~~~~~~~~~~~[m[K
+[6.850s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[6.850s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:359:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[6.850s]   359 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+[6.850s]       |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[34.082s] gmake[2]: *** [CMakeFiles/driving_way_node.dir/build.make:76: CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o] Error 1
+[34.083s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/driving_way_node.dir/all] Error 2
+[34.083s] gmake: *** [Makefile:146: all] Error 2
+[34.086s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving' returned '2': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8

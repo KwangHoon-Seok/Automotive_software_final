@@ -1,0 +1,9 @@
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData&, const Float32&)[m[K’:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:77:111:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kbehavior_state[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   77 | ayNode::lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, [01;35m[Kconst std_msgs::msg::Float32& behavior_state[m[K){
+      |                                                                    [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~[m[K
+
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:430:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  430 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+      |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K

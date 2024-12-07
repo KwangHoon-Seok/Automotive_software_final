@@ -1,0 +1,33 @@
+[0.180s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving': AMENT_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8
+[0.305s] [35m[1mConsolidate compiler generated dependencies of target driving_way_node[0m
+[0.359s] [ 33%] Built target behavior_planner_node
+[0.366s] [ 66%] Built target autonomous_driving_node
+[0.399s] [ 83%] [32mBuilding CXX object CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o[0m
+[5.596s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::Run(const rclcpp::Time&)[m[K’:
+[5.596s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:57:19:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KDrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData&)[m[K’
+[5.597s]    57 |     [01;31m[Klane_condition(driving_way)[m[K;
+[5.597s]       |     [01;31m[K~~~~~~~~~~~~~~^~~~~~~~~~~~~[m[K
+[5.597s] In file included from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[5.597s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:58:10:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kvoid DrivingWayNode::lane_condition()[m[K’
+[5.597s]    58 |     void [01;36m[Klane_condition[m[K();
+[5.597s]       |          [01;36m[K^~~~~~~~~~~~~~[m[K
+[5.597s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:58:10:[m[K [01;36m[Knote: [m[K  candidate expects 0 arguments, 1 provided
+[5.597s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K At global scope:
+[5.598s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:69:6:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[Kvoid DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData&)[m[K’
+[5.598s]    69 | void [01;31m[KDrivingWayNode[m[K::lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way){
+[5.598s]       |      [01;31m[K^~~~~~~~~~~~~~[m[K
+[5.598s] In file included from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[5.598s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:58:10:[m[K [01;36m[Knote: [m[Kcandidate is: ‘[01m[Kvoid DrivingWayNode::lane_condition()[m[K’
+[5.598s]    58 |     void [01;36m[Klane_condition[m[K();
+[5.598s]       |          [01;36m[K^~~~~~~~~~~~~~[m[K
+[5.599s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:45:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass DrivingWayNode[m[K’ defined here
+[5.599s]    45 | class [01;36m[KDrivingWayNode[m[K : public rclcpp::Node {
+[5.599s]       |       [01;36m[K^~~~~~~~~~~~~~[m[K
+[5.778s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[5.778s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:428:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[5.778s]   428 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+[5.778s]       |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[13.960s] gmake[2]: *** [CMakeFiles/driving_way_node.dir/build.make:76: CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o] Interrupt
+[13.960s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/driving_way_node.dir/all] Interrupt
+[13.960s] gmake: *** [Makefile:146: all] Interrupt
+[14.027s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving' returned '-2': AMENT_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8

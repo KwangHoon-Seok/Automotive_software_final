@@ -1,0 +1,24 @@
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::Run(const rclcpp::Time&)[m[K’:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:52:5:[m[K [01;31m[Kerror: [m[K‘[01m[Klane_condition[m[K’ was not declared in this scope
+   52 |     [01;31m[Klane_condition[m[K();
+      |     [01;31m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K At global scope:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:67:6:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[Kvoid DrivingWayNode::lane_condition()[m[K’
+   67 | void [01;31m[KDrivingWayNode[m[K::lane_condition(){
+      |      [01;31m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:67:6:[m[K [01;36m[Knote: [m[Kno functions named ‘[01m[Kvoid DrivingWayNode::lane_condition()[m[K’
+In file included from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:45:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass DrivingWayNode[m[K’ defined here
+   45 | class [01;36m[KDrivingWayNode[m[K : public rclcpp::Node {
+      |       [01;36m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::splitLanePoints(const LanePointData&)[m[K’:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:269:39:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before ‘[01m[K)[m[K’ token
+  269 |                 if (point.cluster ==  [01;31m[K)[m[K {  // 좌측 차선에 속하는 포인트
+      |                                       [01;31m[K^[m[K
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:426:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  426 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+      |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/driving_way_node.dir/build.make:76: CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/driving_way_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

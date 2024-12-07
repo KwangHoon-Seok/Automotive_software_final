@@ -1,0 +1,24 @@
+[0.331s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/evaluation': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/evaluation -- -j8 -l8
+[0.703s] [100%] Built target evaluation
+[0.804s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/evaluation' returned '0': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/evaluation -- -j8 -l8
+[1.112s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/evaluation': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/jeongwoo/Automotive_software_final/build/evaluation
+[1.137s] -- Install configuration: ""
+[1.138s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/lib/evaluation/evaluation
+[1.138s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/launch
+[1.139s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/launch/evaluation.launch.xml
+[1.139s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/ament_index/resource_index/package_run_dependencies/evaluation
+[1.139s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/ament_index/resource_index/parent_prefix_path/evaluation
+[1.141s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/environment/ament_prefix_path.sh
+[1.141s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/environment/ament_prefix_path.dsv
+[1.141s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/environment/path.sh
+[1.141s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/environment/path.dsv
+[1.142s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/local_setup.bash
+[1.142s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/local_setup.sh
+[1.142s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/local_setup.zsh
+[1.142s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/local_setup.dsv
+[1.142s] -- Installing: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/package.dsv
+[1.159s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/ament_index/resource_index/packages/evaluation
+[1.160s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/cmake/evaluationConfig.cmake
+[1.160s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/cmake/evaluationConfig-version.cmake
+[1.160s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/evaluation/share/evaluation/package.xml
+[1.175s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/evaluation' returned '0': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/jeongwoo/Automotive_software_final/build/evaluation

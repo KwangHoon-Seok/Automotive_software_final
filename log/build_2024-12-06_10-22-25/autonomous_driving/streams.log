@@ -1,0 +1,38 @@
+[0.125s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8
+[0.228s] [35m[1mConsolidate compiler generated dependencies of target driving_way_node[0m
+[0.276s] [ 16%] [32mBuilding CXX object CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o[0m
+[0.290s] [ 50%] Built target autonomous_driving_node
+[0.291s] [ 83%] Built target behavior_planner_node
+[6.551s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[6.551s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:395:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[6.551s]   395 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+[6.551s]       |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[51.381s] [100%] [32m[1mLinking CXX executable driving_way_node[0m
+[53.907s] [100%] Built target driving_way_node
+[53.924s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving' returned '0': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8
+[53.964s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/jeongwoo/Automotive_software_final/build/autonomous_driving
+[53.972s] -- Install configuration: ""
+[53.973s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/lib/autonomous_driving/autonomous_driving_node
+[53.973s] -- Installing: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/lib/autonomous_driving/driving_way_node
+[53.989s] -- Set runtime path of "/home/jeongwoo/Automotive_software_final/install/autonomous_driving/lib/autonomous_driving/driving_way_node" to ""
+[53.989s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/lib/autonomous_driving/behavior_planner_node
+[53.990s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch
+[53.990s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch/manual_driving.launch.xml
+[53.990s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch/autonomous_driving.launch.xml
+[53.991s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/lib/autonomous_driving/simultaneous_inputs.py
+[53.991s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/package_run_dependencies/autonomous_driving
+[53.991s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/parent_prefix_path/autonomous_driving
+[53.991s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/ament_prefix_path.sh
+[53.991s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/ament_prefix_path.dsv
+[53.991s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/path.sh
+[53.991s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/path.dsv
+[53.992s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.bash
+[53.992s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.sh
+[53.992s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.zsh
+[53.992s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.dsv
+[53.992s] -- Installing: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/package.dsv
+[53.992s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/packages/autonomous_driving
+[53.993s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/cmake/autonomous_drivingConfig.cmake
+[53.994s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/cmake/autonomous_drivingConfig-version.cmake
+[53.994s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/package.xml
+[53.996s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving' returned '0': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/jeongwoo/Automotive_software_final/build/autonomous_driving

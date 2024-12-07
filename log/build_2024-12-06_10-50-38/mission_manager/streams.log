@@ -1,0 +1,24 @@
+[0.340s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/mission_manager': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/mission_manager -- -j8 -l8
+[0.610s] [100%] Built target mission_manager
+[0.682s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/mission_manager' returned '0': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/mission_manager -- -j8 -l8
+[0.876s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/mission_manager': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/jeongwoo/Automotive_software_final/build/mission_manager
+[0.938s] -- Install configuration: ""
+[0.939s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/lib/mission_manager/mission_manager
+[0.939s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/launch
+[0.940s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/launch/mission_manager.launch.xml
+[0.942s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/ament_index/resource_index/package_run_dependencies/mission_manager
+[0.942s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/ament_index/resource_index/parent_prefix_path/mission_manager
+[0.943s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/environment/ament_prefix_path.sh
+[0.949s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/environment/ament_prefix_path.dsv
+[0.949s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/environment/path.sh
+[0.951s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/environment/path.dsv
+[0.952s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/local_setup.bash
+[0.966s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/local_setup.sh
+[0.967s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/local_setup.zsh
+[0.967s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/local_setup.dsv
+[0.968s] -- Installing: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/package.dsv
+[0.968s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/ament_index/resource_index/packages/mission_manager
+[0.968s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/cmake/mission_managerConfig.cmake
+[0.968s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/cmake/mission_managerConfig-version.cmake
+[0.968s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/mission_manager/share/mission_manager/package.xml
+[0.969s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/mission_manager' returned '0': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/jeongwoo/Automotive_software_final/build/mission_manager

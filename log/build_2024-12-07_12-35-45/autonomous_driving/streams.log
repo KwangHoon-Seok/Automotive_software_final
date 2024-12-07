@@ -1,0 +1,667 @@
+[0.116s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8
+[0.224s] [35m[1mConsolidate compiler generated dependencies of target driving_way_node[0m
+[0.244s] [ 33%] Built target behavior_planner_node
+[0.263s] [ 66%] Built target autonomous_driving_node
+[0.291s] [ 83%] [32mBuilding CXX object CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o[0m
+[7.228s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData&, const Float32&)[m[K’:
+[7.228s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:23:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator!=[m[K’ (operand types are ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} and ‘[01m[Kint[m[K’)
+[7.229s]    94 |     if([32m[Kbehavior_state[m[K [01;31m[K!=[m[K [34m[K3[m[K){
+[7.229s]       |        [32m[K~~~~~~~~~~~~~~[m[K [01;31m[K^~[m[K [34m[K~[m[K
+[7.229s]       |        [32m[K|[m[K                 [34m[K|[m[K
+[7.230s]       |        [32m[K|[m[K                 [34m[Kint[m[K
+[7.230s]       |        [32m[Kconst Float32 {aka const std_msgs::msg::Float32_<std::allocator<void> >}[m[K
+[7.231s] In file included from [01m[K/opt/ros/humble/include/std_msgs/std_msgs/msg/float32.hpp:7[m[K,
+[7.232s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:15[m[K,
+[7.232s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.233s] [01m[K/opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float32__struct.hpp:115:8:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kbool std_msgs::msg::Float32_<ContainerAllocator>::operator!=(const std_msgs::msg::Float32_<ContainerAllocator>&) const [with ContainerAllocator = std::allocator<void>][m[K’
+[7.234s]   115 |   bool [01;36m[Koperator[m[K!=(const Float32_ & other) const
+[7.234s]       |        [01;36m[K^~~~~~~~[m[K
+[7.234s] [01m[K/opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float32__struct.hpp:115:36:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kint[m[K’ to ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >&[m[K’
+[7.235s]   115 |   bool operator!=([01;36m[Kconst Float32_ & other[m[K) const
+[7.235s]       |                   [01;36m[K~~~~~~~~~~~~~~~~~^~~~~[m[K
+[7.236s] In file included from [01m[K/usr/include/c++/11/bits/stl_algobase.h:64[m[K,
+[7.240s]                  from [01m[K/usr/include/c++/11/memory:63[m[K,
+[7.241s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.242s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.243s] [01m[K/usr/include/c++/11/bits/stl_pair.h:496:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _T1, class _T2> constexpr bool std::operator!=(const std::pair<_T1, _T2>&, const std::pair<_T1, _T2>&)[m[K’
+[7.244s]   496 |     [01;36m[Koperator[m[K!=(const pair<_T1, _T2>& __x, const pair<_T1, _T2>& __y)
+[7.244s]       |     [01;36m[K^~~~~~~~[m[K
+[7.245s] [01m[K/usr/include/c++/11/bits/stl_pair.h:496:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.248s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::pair<_T1, _T2>[m[K’
+[7.249s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.249s]       |                          [01;36m[K^[m[K
+[7.249s] In file included from [01m[K/usr/include/c++/11/bits/stl_algobase.h:67[m[K,
+[7.249s]                  from [01m[K/usr/include/c++/11/memory:63[m[K,
+[7.249s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.249s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.250s] [01m[K/usr/include/c++/11/bits/stl_iterator.h:432:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Iterator> constexpr bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_Iterator>&)[m[K’
+[7.250s]   432 |     [01;36m[Koperator[m[K!=(const reverse_iterator<_Iterator>& __x,
+[7.250s]       |     [01;36m[K^~~~~~~~[m[K
+[7.250s] [01m[K/usr/include/c++/11/bits/stl_iterator.h:432:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.250s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::reverse_iterator<_Iterator>[m[K’
+[7.250s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.251s]       |                          [01;36m[K^[m[K
+[7.251s] In file included from [01m[K/usr/include/c++/11/bits/stl_algobase.h:67[m[K,
+[7.251s]                  from [01m[K/usr/include/c++/11/memory:63[m[K,
+[7.251s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.251s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.251s] [01m[K/usr/include/c++/11/bits/stl_iterator.h:471:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _IteratorL, class _IteratorR> constexpr bool std::operator!=(const std::reverse_iterator<_Iterator>&, const std::reverse_iterator<_IteratorR>&)[m[K’
+[7.252s]   471 |     [01;36m[Koperator[m[K!=(const reverse_iterator<_IteratorL>& __x,
+[7.252s]       |     [01;36m[K^~~~~~~~[m[K
+[7.252s] [01m[K/usr/include/c++/11/bits/stl_iterator.h:471:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.252s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::reverse_iterator<_Iterator>[m[K’
+[7.252s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.254s]       |                          [01;36m[K^[m[K
+[7.254s] In file included from [01m[K/usr/include/c++/11/bits/stl_algobase.h:67[m[K,
+[7.255s]                  from [01m[K/usr/include/c++/11/memory:63[m[K,
+[7.255s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.255s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.256s] [01m[K/usr/include/c++/11/bits/stl_iterator.h:1602:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _IteratorL, class _IteratorR> constexpr bool std::operator!=(const std::move_iterator<_IteratorL>&, const std::move_iterator<_IteratorR>&)[m[K’
+[7.256s]  1602 |     [01;36m[Koperator[m[K!=(const move_iterator<_IteratorL>& __x,
+[7.256s]       |     [01;36m[K^~~~~~~~[m[K
+[7.256s] [01m[K/usr/include/c++/11/bits/stl_iterator.h:1602:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.256s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::move_iterator<_IteratorL>[m[K’
+[7.256s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.256s]       |                          [01;36m[K^[m[K
+[7.256s] In file included from [01m[K/usr/include/c++/11/bits/stl_algobase.h:67[m[K,
+[7.257s]                  from [01m[K/usr/include/c++/11/memory:63[m[K,
+[7.257s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.257s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.257s] [01m[K/usr/include/c++/11/bits/stl_iterator.h:1661:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Iterator> constexpr bool std::operator!=(const std::move_iterator<_IteratorL>&, const std::move_iterator<_IteratorL>&)[m[K’
+[7.257s]  1661 |     [01;36m[Koperator[m[K!=(const move_iterator<_Iterator>& __x,
+[7.257s]       |     [01;36m[K^~~~~~~~[m[K
+[7.258s] [01m[K/usr/include/c++/11/bits/stl_iterator.h:1661:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.258s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::move_iterator<_IteratorL>[m[K’
+[7.258s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.258s]       |                          [01;36m[K^[m[K
+[7.259s] In file included from [01m[K/usr/include/c++/11/memory:64[m[K,
+[7.259s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.259s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.259s] [01m[K/usr/include/c++/11/bits/allocator.h:225:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _T1, class _T2> bool std::operator!=(const std::allocator<_Tp1>&, const std::allocator<_T2>&)[m[K’
+[7.259s]   225 |     [01;36m[Koperator[m[K!=(const allocator<_T1>&, const allocator<_T2>&)
+[7.259s]       |     [01;36m[K^~~~~~~~[m[K
+[7.259s] [01m[K/usr/include/c++/11/bits/allocator.h:225:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.259s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::allocator<_Tp1>[m[K’
+[7.259s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.259s]       |                          [01;36m[K^[m[K
+[7.260s] In file included from [01m[K/usr/include/c++/11/tuple:39[m[K,
+[7.260s]                  from [01m[K/usr/include/c++/11/bits/unique_ptr.h:37[m[K,
+[7.260s]                  from [01m[K/usr/include/c++/11/memory:76[m[K,
+[7.260s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.260s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.260s] [01m[K/usr/include/c++/11/array:305:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, long unsigned int _Nm> bool std::operator!=(const std::array<_Tp, _Nm>&, const std::array<_Tp, _Nm>&)[m[K’
+[7.260s]   305 |     [01;36m[Koperator[m[K!=(const array<_Tp, _Nm>& __one, const array<_Tp, _Nm>& __two)
+[7.260s]       |     [01;36m[K^~~~~~~~[m[K
+[7.260s] [01m[K/usr/include/c++/11/array:305:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.260s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::array<_Tp, _Nm>[m[K’
+[7.261s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.261s]       |                          [01;36m[K^[m[K
+[7.261s] In file included from [01m[K/usr/include/c++/11/bits/unique_ptr.h:37[m[K,
+[7.261s]                  from [01m[K/usr/include/c++/11/memory:76[m[K,
+[7.261s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.261s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.261s] [01m[K/usr/include/c++/11/tuple:1579:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class ... _TElements, class ... _UElements> constexpr bool std::operator!=(const std::tuple<_Tps ...>&, const std::tuple<_UTypes ...>&)[m[K’
+[7.261s]  1579 |     [01;36m[Koperator[m[K!=(const tuple<_TElements...>& __t,
+[7.261s]       |     [01;36m[K^~~~~~~~[m[K
+[7.261s] [01m[K/usr/include/c++/11/tuple:1579:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.261s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::tuple<_Tps ...>[m[K’
+[7.262s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.262s]       |                          [01;36m[K^[m[K
+[7.262s] In file included from [01m[K/usr/include/c++/11/memory:76[m[K,
+[7.262s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.262s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.262s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:774:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class _Dp, class _Up, class _Ep> bool std::operator!=(const std::unique_ptr<_Tp, _Dp>&, const std::unique_ptr<_Up, _Ep>&)[m[K’
+[7.262s]   774 |     [01;36m[Koperator[m[K!=(const unique_ptr<_Tp, _Dp>& __x,
+[7.262s]       |     [01;36m[K^~~~~~~~[m[K
+[7.262s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:774:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.262s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::unique_ptr<_Tp, _Dp>[m[K’
+[7.262s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.263s]       |                          [01;36m[K^[m[K
+[7.263s] In file included from [01m[K/usr/include/c++/11/memory:76[m[K,
+[7.263s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.263s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.263s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:781:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class _Dp> bool std::operator!=(const std::unique_ptr<_Tp, _Dp>&, std::nullptr_t)[m[K’
+[7.263s]   781 |     [01;36m[Koperator[m[K!=(const unique_ptr<_Tp, _Dp>& __x, nullptr_t) noexcept
+[7.263s]       |     [01;36m[K^~~~~~~~[m[K
+[7.263s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:781:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.263s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::unique_ptr<_Tp, _Dp>[m[K’
+[7.263s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.263s]       |                          [01;36m[K^[m[K
+[7.263s] In file included from [01m[K/usr/include/c++/11/memory:76[m[K,
+[7.264s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.264s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.264s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:787:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class _Dp> bool std::operator!=(std::nullptr_t, const std::unique_ptr<_Tp, _Dp>&)[m[K’
+[7.264s]   787 |     [01;36m[Koperator[m[K!=(nullptr_t, const unique_ptr<_Tp, _Dp>& __x) noexcept
+[7.264s]       |     [01;36m[K^~~~~~~~[m[K
+[7.264s] [01m[K/usr/include/c++/11/bits/unique_ptr.h:787:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.264s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::unique_ptr<_Tp, _Dp>[m[K’ and ‘[01m[Kint[m[K’
+[7.264s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.264s]       |                          [01;36m[K^[m[K
+[7.264s] In file included from [01m[K/usr/include/c++/11/iosfwd:40[m[K,
+[7.264s]                  from [01m[K/usr/include/c++/11/bits/shared_ptr.h:52[m[K,
+[7.264s]                  from [01m[K/usr/include/c++/11/memory:77[m[K,
+[7.264s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.265s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.265s] [01m[K/usr/include/c++/11/bits/postypes.h:227:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _StateT> bool std::operator!=(const std::fpos<_StateT>&, const std::fpos<_StateT>&)[m[K’
+[7.265s]   227 |     [01;36m[Koperator[m[K!=(const fpos<_StateT>& __lhs, const fpos<_StateT>& __rhs)
+[7.265s]       |     [01;36m[K^~~~~~~~[m[K
+[7.265s] [01m[K/usr/include/c++/11/bits/postypes.h:227:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.265s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::fpos<_StateT>[m[K’
+[7.265s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.265s]       |                          [01;36m[K^[m[K
+[7.265s] In file included from [01m[K/usr/include/c++/11/bits/shared_ptr.h:53[m[K,
+[7.265s]                  from [01m[K/usr/include/c++/11/memory:77[m[K,
+[7.266s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.266s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.266s] [01m[K/usr/include/c++/11/bits/shared_ptr_base.h:1441:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp1, class _Tp2, __gnu_cxx::_Lock_policy _Lp> bool std::operator!=(const std::__shared_ptr<_Tp1, _Lp>&, const std::__shared_ptr<_Tp2, _Lp>&)[m[K’
+[7.266s]  1441 |     [01;36m[Koperator[m[K!=(const __shared_ptr<_Tp1, _Lp>& __a,
+[7.266s]       |     [01;36m[K^~~~~~~~[m[K
+[7.266s] [01m[K/usr/include/c++/11/bits/shared_ptr_base.h:1441:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.266s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::__shared_ptr<_Tp1, _Lp>[m[K’
+[7.266s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.266s]       |                          [01;36m[K^[m[K
+[7.266s] In file included from [01m[K/usr/include/c++/11/bits/shared_ptr.h:53[m[K,
+[7.267s]                  from [01m[K/usr/include/c++/11/memory:77[m[K,
+[7.267s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.267s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.267s] [01m[K/usr/include/c++/11/bits/shared_ptr_base.h:1447:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, __gnu_cxx::_Lock_policy _Lp> bool std::operator!=(const std::__shared_ptr<_Tp, _Lp>&, std::nullptr_t)[m[K’
+[7.267s]  1447 |     [01;36m[Koperator[m[K!=(const __shared_ptr<_Tp, _Lp>& __a, nullptr_t) noexcept
+[7.267s]       |     [01;36m[K^~~~~~~~[m[K
+[7.267s] [01m[K/usr/include/c++/11/bits/shared_ptr_base.h:1447:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.267s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::__shared_ptr<_Tp, _Lp>[m[K’
+[7.267s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.267s]       |                          [01;36m[K^[m[K
+[7.267s] In file included from [01m[K/usr/include/c++/11/bits/shared_ptr.h:53[m[K,
+[7.268s]                  from [01m[K/usr/include/c++/11/memory:77[m[K,
+[7.268s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.268s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.268s] [01m[K/usr/include/c++/11/bits/shared_ptr_base.h:1452:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, __gnu_cxx::_Lock_policy _Lp> bool std::operator!=(std::nullptr_t, const std::__shared_ptr<_Tp, _Lp>&)[m[K’
+[7.268s]  1452 |     [01;36m[Koperator[m[K!=(nullptr_t, const __shared_ptr<_Tp, _Lp>& __a) noexcept
+[7.268s]       |     [01;36m[K^~~~~~~~[m[K
+[7.268s] [01m[K/usr/include/c++/11/bits/shared_ptr_base.h:1452:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.268s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::__shared_ptr<_Tp, _Lp>[m[K’ and ‘[01m[Kint[m[K’
+[7.268s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.268s]       |                          [01;36m[K^[m[K
+[7.268s] In file included from [01m[K/usr/include/c++/11/memory:77[m[K,
+[7.268s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.269s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.269s] [01m[K/usr/include/c++/11/bits/shared_ptr.h:470:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class _Up> bool std::operator!=(const std::shared_ptr<_Tp>&, const std::shared_ptr<_Tp>&)[m[K’
+[7.269s]   470 |     [01;36m[Koperator[m[K!=(const shared_ptr<_Tp>& __a, const shared_ptr<_Up>& __b) noexcept
+[7.269s]       |     [01;36m[K^~~~~~~~[m[K
+[7.269s] [01m[K/usr/include/c++/11/bits/shared_ptr.h:470:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.269s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::shared_ptr<_Tp>[m[K’
+[7.269s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.270s]       |                          [01;36m[K^[m[K
+[7.270s] In file included from [01m[K/usr/include/c++/11/memory:77[m[K,
+[7.270s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.270s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.271s] [01m[K/usr/include/c++/11/bits/shared_ptr.h:476:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp> bool std::operator!=(const std::shared_ptr<_Tp>&, std::nullptr_t)[m[K’
+[7.271s]   476 |     [01;36m[Koperator[m[K!=(const shared_ptr<_Tp>& __a, nullptr_t) noexcept
+[7.271s]       |     [01;36m[K^~~~~~~~[m[K
+[7.271s] [01m[K/usr/include/c++/11/bits/shared_ptr.h:476:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.272s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::shared_ptr<_Tp>[m[K’
+[7.272s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.272s]       |                          [01;36m[K^[m[K
+[7.273s] In file included from [01m[K/usr/include/c++/11/memory:77[m[K,
+[7.273s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:5[m[K,
+[7.273s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.273s] [01m[K/usr/include/c++/11/bits/shared_ptr.h:482:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp> bool std::operator!=(std::nullptr_t, const std::shared_ptr<_Tp>&)[m[K’
+[7.273s]   482 |     [01;36m[Koperator[m[K!=(nullptr_t, const shared_ptr<_Tp>& __a) noexcept
+[7.274s]       |     [01;36m[K^~~~~~~~[m[K
+[7.274s] [01m[K/usr/include/c++/11/bits/shared_ptr.h:482:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.274s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::shared_ptr<_Tp>[m[K’ and ‘[01m[Kint[m[K’
+[7.274s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.274s]       |                          [01;36m[K^[m[K
+[7.274s] In file included from [01m[K/usr/include/c++/11/vector:67[m[K,
+[7.274s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:6[m[K,
+[7.274s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.275s] [01m[K/usr/include/c++/11/bits/stl_vector.h:1937:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class _Alloc> bool std::operator!=(const std::vector<_Tp, _Alloc>&, const std::vector<_Tp, _Alloc>&)[m[K’
+[7.275s]  1937 |     [01;36m[Koperator[m[K!=(const vector<_Tp, _Alloc>& __x, const vector<_Tp, _Alloc>& __y)
+[7.275s]       |     [01;36m[K^~~~~~~~[m[K
+[7.275s] [01m[K/usr/include/c++/11/bits/stl_vector.h:1937:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.275s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::vector<_Tp, _Alloc>[m[K’
+[7.276s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.276s]       |                          [01;36m[K^[m[K
+[7.276s] In file included from [01m[K/usr/include/c++/11/bits/basic_string.h:48[m[K,
+[7.276s]                  from [01m[K/usr/include/c++/11/string:55[m[K,
+[7.277s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:7[m[K,
+[7.277s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.277s] [01m[K/usr/include/c++/11/string_view:570:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _CharT, class _Traits> constexpr bool std::operator!=(std::basic_string_view<_CharT, _Traits>, std::basic_string_view<_CharT, _Traits>)[m[K’
+[7.277s]   570 |     [01;36m[Koperator[m[K!=(basic_string_view<_CharT, _Traits> __x,
+[7.278s]       |     [01;36m[K^~~~~~~~[m[K
+[7.278s] [01m[K/usr/include/c++/11/string_view:570:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.278s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kstd_msgs::msg::Float32_<std::allocator<void> >[m[K’ is not derived from ‘[01m[Kstd::basic_string_view<_CharT, _Traits>[m[K’
+[7.278s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.278s]       |                          [01;36m[K^[m[K
+[7.279s] In file included from [01m[K/usr/include/c++/11/bits/basic_string.h:48[m[K,
+[7.279s]                  from [01m[K/usr/include/c++/11/string:55[m[K,
+[7.279s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:7[m[K,
+[7.279s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.279s] [01m[K/usr/include/c++/11/string_view:576:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _CharT, class _Traits> constexpr bool std::operator!=(std::basic_string_view<_CharT, _Traits>, std::__type_identity_t<std::basic_string_view<_CharT, _Traits> >)[m[K’
+[7.279s]   576 |     [01;36m[Koperator[m[K!=(basic_string_view<_CharT, _Traits> __x,
+[7.280s]       |     [01;36m[K^~~~~~~~[m[K
+[7.280s] [01m[K/usr/include/c++/11/string_view:576:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.280s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kstd_msgs::msg::Float32_<std::allocator<void> >[m[K’ is not derived from ‘[01m[Kstd::basic_string_view<_CharT, _Traits>[m[K’
+[7.280s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.280s]       |                          [01;36m[K^[m[K
+[7.280s] In file included from [01m[K/usr/include/c++/11/bits/basic_string.h:48[m[K,
+[7.280s]                  from [01m[K/usr/include/c++/11/string:55[m[K,
+[7.281s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:7[m[K,
+[7.281s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.281s] [01m[K/usr/include/c++/11/string_view:583:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _CharT, class _Traits> constexpr bool std::operator!=(std::__type_identity_t<std::basic_string_view<_CharT, _Traits> >, std::basic_string_view<_CharT, _Traits>)[m[K’
+[7.281s]   583 |     [01;36m[Koperator[m[K!=(__type_identity_t<basic_string_view<_CharT, _Traits>> __x,
+[7.281s]       |     [01;36m[K^~~~~~~~[m[K
+[7.281s] [01m[K/usr/include/c++/11/string_view:583:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.282s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::basic_string_view<_CharT, _Traits>[m[K’ and ‘[01m[Kint[m[K’
+[7.282s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.282s]       |                          [01;36m[K^[m[K
+[7.282s] In file included from [01m[K/usr/include/c++/11/string:55[m[K,
+[7.282s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:7[m[K,
+[7.282s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.282s] [01m[K/usr/include/c++/11/bits/basic_string.h:6302:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&, const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&)[m[K’
+[7.283s]  6302 |     [01;36m[Koperator[m[K!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+[7.283s]       |     [01;36m[K^~~~~~~~[m[K
+[7.283s] [01m[K/usr/include/c++/11/bits/basic_string.h:6302:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.283s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::__cxx11::basic_string<_CharT, _Traits, _Allocator>[m[K’
+[7.283s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.283s]       |                          [01;36m[K^[m[K
+[7.284s] In file included from [01m[K/usr/include/c++/11/string:55[m[K,
+[7.284s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:7[m[K,
+[7.284s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.284s] [01m[K/usr/include/c++/11/bits/basic_string.h:6315:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const _CharT*, const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&)[m[K’
+[7.284s]  6315 |     [01;36m[Koperator[m[K!=(const _CharT* __lhs,
+[7.285s]       |     [01;36m[K^~~~~~~~[m[K
+[7.285s] [01m[K/usr/include/c++/11/bits/basic_string.h:6315:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.285s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst _CharT*[m[K’ and ‘[01m[Kstd_msgs::msg::Float32_<std::allocator<void> >[m[K’
+[7.285s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.286s]       |                          [01;36m[K^[m[K
+[7.286s] In file included from [01m[K/usr/include/c++/11/string:55[m[K,
+[7.287s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:7[m[K,
+[7.289s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.289s] [01m[K/usr/include/c++/11/bits/basic_string.h:6327:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _CharT, class _Traits, class _Alloc> bool std::operator!=(const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&, const _CharT*)[m[K’
+[7.289s]  6327 |     [01;36m[Koperator[m[K!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+[7.289s]       |     [01;36m[K^~~~~~~~[m[K
+[7.289s] [01m[K/usr/include/c++/11/bits/basic_string.h:6327:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.290s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::__cxx11::basic_string<_CharT, _Traits, _Allocator>[m[K’
+[7.290s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.290s]       |                          [01;36m[K^[m[K
+[7.290s] In file included from [01m[K/usr/include/c++/11/future:47[m[K,
+[7.290s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:18[m[K,
+[7.291s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.291s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.291s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.291s] [01m[K/usr/include/c++/11/bits/std_function.h:737:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Res, class ... _Args> bool std::operator!=(const std::function<_Res(_ArgTypes ...)>&, std::nullptr_t)[m[K’
+[7.291s]   737 |     [01;36m[Koperator[m[K!=(const function<_Res(_Args...)>& __f, nullptr_t) noexcept
+[7.291s]       |     [01;36m[K^~~~~~~~[m[K
+[7.292s] [01m[K/usr/include/c++/11/bits/std_function.h:737:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.292s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::function<_Res(_ArgTypes ...)>[m[K’
+[7.292s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.292s]       |                          [01;36m[K^[m[K
+[7.292s] In file included from [01m[K/usr/include/c++/11/future:47[m[K,
+[7.292s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:18[m[K,
+[7.292s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.293s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.293s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.293s] [01m[K/usr/include/c++/11/bits/std_function.h:743:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Res, class ... _Args> bool std::operator!=(std::nullptr_t, const std::function<_Res(_ArgTypes ...)>&)[m[K’
+[7.293s]   743 |     [01;36m[Koperator[m[K!=(nullptr_t, const function<_Res(_Args...)>& __f) noexcept
+[7.293s]       |     [01;36m[K^~~~~~~~[m[K
+[7.293s] [01m[K/usr/include/c++/11/bits/std_function.h:743:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.294s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::function<_Res(_ArgTypes ...)>[m[K’ and ‘[01m[Kint[m[K’
+[7.294s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.294s]       |                          [01;36m[K^[m[K
+[7.294s] In file included from [01m[K/usr/include/c++/11/set:61[m[K,
+[7.294s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:21[m[K,
+[7.295s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.295s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.295s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.295s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.295s] [01m[K/usr/include/c++/11/bits/stl_set.h:1030:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Key, class _Compare, class _Alloc> bool std::operator!=(const std::set<_Key, _Compare, _Allocator>&, const std::set<_Key, _Compare, _Allocator>&)[m[K’
+[7.296s]  1030 |     [01;36m[Koperator[m[K!=(const set<_Key, _Compare, _Alloc>& __x,
+[7.296s]       |     [01;36m[K^~~~~~~~[m[K
+[7.296s] [01m[K/usr/include/c++/11/bits/stl_set.h:1030:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.296s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::set<_Key, _Compare, _Allocator>[m[K’
+[7.296s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.296s]       |                          [01;36m[K^[m[K
+[7.296s] In file included from [01m[K/usr/include/c++/11/set:62[m[K,
+[7.297s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:21[m[K,
+[7.297s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.297s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.297s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.297s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.297s] [01m[K/usr/include/c++/11/bits/stl_multiset.h:1016:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Key, class _Compare, class _Alloc> bool std::operator!=(const std::multiset<_Key, _Compare, _Allocator>&, const std::multiset<_Key, _Compare, _Allocator>&)[m[K’
+[7.298s]  1016 |     [01;36m[Koperator[m[K!=(const multiset<_Key, _Compare, _Alloc>& __x,
+[7.298s]       |     [01;36m[K^~~~~~~~[m[K
+[7.298s] [01m[K/usr/include/c++/11/bits/stl_multiset.h:1016:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.298s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::multiset<_Key, _Compare, _Allocator>[m[K’
+[7.298s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.298s]       |                          [01;36m[K^[m[K
+[7.299s] In file included from [01m[K/usr/include/c++/11/unordered_map:47[m[K,
+[7.299s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:23[m[K,
+[7.299s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.299s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.299s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.299s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.300s] [01m[K/usr/include/c++/11/bits/unordered_map.h:2141:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Key, class _Tp, class _Hash, class _Pred, class _Alloc> bool std::operator!=(const std::unordered_map<_Key1, _Tp1, _Hash1, _Pred1, _Alloc1>&, const std::unordered_map<_Key1, _Tp1, _Hash1, _Pred1, _Alloc1>&)[m[K’
+[7.300s]  2141 |     [01;36m[Koperator[m[K!=(const unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>& __x,
+[7.300s]       |     [01;36m[K^~~~~~~~[m[K
+[7.300s] [01m[K/usr/include/c++/11/bits/unordered_map.h:2141:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.300s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::unordered_map<_Key1, _Tp1, _Hash1, _Pred1, _Alloc1>[m[K’
+[7.300s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.301s]       |                          [01;36m[K^[m[K
+[7.301s] In file included from [01m[K/usr/include/c++/11/unordered_map:47[m[K,
+[7.301s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:23[m[K,
+[7.301s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.301s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.301s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.302s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.302s] [01m[K/usr/include/c++/11/bits/unordered_map.h:2155:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Key, class _Tp, class _Hash, class _Pred, class _Alloc> bool std::operator!=(const std::unordered_multimap<_Key1, _Tp1, _Hash1, _Pred1, _Alloc1>&, const std::unordered_multimap<_Key1, _Tp1, _Hash1, _Pred1, _Alloc1>&)[m[K’
+[7.302s]  2155 |     [01;36m[Koperator[m[K!=(const unordered_multimap<_Key, _Tp, _Hash, _Pred, _Alloc>& __x,
+[7.302s]       |     [01;36m[K^~~~~~~~[m[K
+[7.302s] [01m[K/usr/include/c++/11/bits/unordered_map.h:2155:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.303s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::unordered_multimap<_Key1, _Tp1, _Hash1, _Pred1, _Alloc1>[m[K’
+[7.303s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.303s]       |                          [01;36m[K^[m[K
+[7.303s] In file included from [01m[K/usr/include/c++/11/bits/locale_facets.h:48[m[K,
+[7.304s]                  from [01m[K/usr/include/c++/11/bits/basic_ios.h:37[m[K,
+[7.305s]                  from [01m[K/usr/include/c++/11/ios:44[m[K,
+[7.305s]                  from [01m[K/usr/include/c++/11/ostream:38[m[K,
+[7.306s]                  from [01m[K/usr/include/c++/11/iostream:39[m[K,
+[7.306s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:22[m[K,
+[7.306s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.306s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.307s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.307s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.307s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.307s] [01m[K/usr/include/c++/11/bits/streambuf_iterator.h:232:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _CharT, class _Traits> bool std::operator!=(const std::istreambuf_iterator<_CharT, _Traits>&, const std::istreambuf_iterator<_CharT, _Traits>&)[m[K’
+[7.307s]   232 |     [01;36m[Koperator[m[K!=(const istreambuf_iterator<_CharT, _Traits>& __a,
+[7.307s]       |     [01;36m[K^~~~~~~~[m[K
+[7.308s] [01m[K/usr/include/c++/11/bits/streambuf_iterator.h:232:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.308s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::istreambuf_iterator<_CharT, _Traits>[m[K’
+[7.308s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.308s]       |                          [01;36m[K^[m[K
+[7.308s] In file included from [01m[K/usr/include/c++/11/list:63[m[K,
+[7.308s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:23[m[K,
+[7.308s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.308s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.308s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.308s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.309s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.309s] [01m[K/usr/include/c++/11/bits/stl_list.h:2092:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class _Alloc> bool std::operator!=(const std::__cxx11::list<_Tp, _Alloc>&, const std::__cxx11::list<_Tp, _Alloc>&)[m[K’
+[7.309s]  2092 |     [01;36m[Koperator[m[K!=(const list<_Tp, _Alloc>& __x, const list<_Tp, _Alloc>& __y)
+[7.309s]       |     [01;36m[K^~~~~~~~[m[K
+[7.309s] [01m[K/usr/include/c++/11/bits/stl_list.h:2092:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.310s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::__cxx11::list<_Tp, _Alloc>[m[K’
+[7.310s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.310s]       |                          [01;36m[K^[m[K
+[7.310s] In file included from [01m[K/usr/include/c++/11/map:61[m[K,
+[7.311s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:24[m[K,
+[7.311s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.311s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.311s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.311s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.312s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.312s] [01m[K/usr/include/c++/11/bits/stl_map.h:1508:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Key, class _Tp, class _Compare, class _Alloc> bool std::operator!=(const std::map<_Key, _Tp, _Compare, _Allocator>&, const std::map<_Key, _Tp, _Compare, _Allocator>&)[m[K’
+[7.312s]  1508 |     [01;36m[Koperator[m[K!=(const map<_Key, _Tp, _Compare, _Alloc>& __x,
+[7.312s]       |     [01;36m[K^~~~~~~~[m[K
+[7.312s] [01m[K/usr/include/c++/11/bits/stl_map.h:1508:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.313s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::map<_Key, _Tp, _Compare, _Allocator>[m[K’
+[7.313s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.313s]       |                          [01;36m[K^[m[K
+[7.313s] In file included from [01m[K/usr/include/c++/11/map:62[m[K,
+[7.313s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:24[m[K,
+[7.314s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.314s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.314s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.314s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.314s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.315s] [01m[K/usr/include/c++/11/bits/stl_multimap.h:1173:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Key, class _Tp, class _Compare, class _Alloc> bool std::operator!=(const std::multimap<_Key, _Tp, _Compare, _Allocator>&, const std::multimap<_Key, _Tp, _Compare, _Allocator>&)[m[K’
+[7.315s]  1173 |     [01;36m[Koperator[m[K!=(const multimap<_Key, _Tp, _Compare, _Alloc>& __x,
+[7.315s]       |     [01;36m[K^~~~~~~~[m[K
+[7.315s] [01m[K/usr/include/c++/11/bits/stl_multimap.h:1173:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.315s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::multimap<_Key, _Tp, _Compare, _Allocator>[m[K’
+[7.316s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.316s]       |                          [01;36m[K^[m[K
+[7.316s] In file included from [01m[K/usr/include/c++/11/unordered_set:47[m[K,
+[7.316s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/context.hpp:26[m[K,
+[7.316s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:34[m[K,
+[7.317s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.317s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.317s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.317s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.317s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.318s] [01m[K/usr/include/c++/11/bits/unordered_set.h:1811:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Value, class _Hash, class _Pred, class _Alloc> bool std::operator!=(const std::unordered_set<_Value1, _Hash1, _Pred1, _Alloc1>&, const std::unordered_set<_Value1, _Hash1, _Pred1, _Alloc1>&)[m[K’
+[7.318s]  1811 |     [01;36m[Koperator[m[K!=(const unordered_set<_Value, _Hash, _Pred, _Alloc>& __x,
+[7.318s]       |     [01;36m[K^~~~~~~~[m[K
+[7.318s] [01m[K/usr/include/c++/11/bits/unordered_set.h:1811:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.318s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::unordered_set<_Value1, _Hash1, _Pred1, _Alloc1>[m[K’
+[7.319s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.319s]       |                          [01;36m[K^[m[K
+[7.319s] In file included from [01m[K/usr/include/c++/11/unordered_set:47[m[K,
+[7.320s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/context.hpp:26[m[K,
+[7.320s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:34[m[K,
+[7.321s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.321s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.321s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.321s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.321s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.322s] [01m[K/usr/include/c++/11/bits/unordered_set.h:1825:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Value, class _Hash, class _Pred, class _Alloc> bool std::operator!=(const std::unordered_multiset<_Value1, _Hash1, _Pred1, _Alloc1>&, const std::unordered_multiset<_Value1, _Hash1, _Pred1, _Alloc1>&)[m[K’
+[7.322s]  1825 |     [01;36m[Koperator[m[K!=(const unordered_multiset<_Value, _Hash, _Pred, _Alloc>& __x,
+[7.322s]       |     [01;36m[K^~~~~~~~[m[K
+[7.322s] [01m[K/usr/include/c++/11/bits/unordered_set.h:1825:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.322s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::unordered_multiset<_Value1, _Hash1, _Pred1, _Alloc1>[m[K’
+[7.322s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.322s]       |                          [01;36m[K^[m[K
+[7.322s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:23[m[K,
+[7.322s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[7.322s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[7.323s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[7.323s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[7.323s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[7.323s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[7.323s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.323s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.323s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.323s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.323s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.323s] [01m[K/usr/include/c++/11/optional:1054:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class _Up> constexpr std::__optional_ne_t<_Tp, _Up> std::operator!=(const std::optional<_Tp>&, const std::optional<_Up>&)[m[K’
+[7.324s]  1054 |     [01;36m[Koperator[m[K!=(const optional<_Tp>& __lhs, const optional<_Up>& __rhs)
+[7.324s]       |     [01;36m[K^~~~~~~~[m[K
+[7.324s] [01m[K/usr/include/c++/11/optional:1054:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.324s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::optional<_Tp>[m[K’
+[7.324s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.324s]       |                          [01;36m[K^[m[K
+[7.324s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:23[m[K,
+[7.324s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[7.324s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[7.325s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[7.325s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[7.326s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[7.326s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[7.326s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.326s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.326s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.326s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.327s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.327s] [01m[K/usr/include/c++/11/optional:1121:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp> constexpr bool std::operator!=(const std::optional<_Tp>&, std::nullopt_t)[m[K’
+[7.327s]  1121 |     [01;36m[Koperator[m[K!=(const optional<_Tp>& __lhs, nullopt_t) noexcept
+[7.327s]       |     [01;36m[K^~~~~~~~[m[K
+[7.327s] [01m[K/usr/include/c++/11/optional:1121:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.327s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::optional<_Tp>[m[K’
+[7.327s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.327s]       |                          [01;36m[K^[m[K
+[7.327s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:23[m[K,
+[7.327s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[7.327s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[7.327s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[7.328s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[7.328s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[7.328s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[7.328s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.328s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.328s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.328s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.328s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.328s] [01m[K/usr/include/c++/11/optional:1126:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp> constexpr bool std::operator!=(std::nullopt_t, const std::optional<_Tp>&)[m[K’
+[7.328s]  1126 |     [01;36m[Koperator[m[K!=(nullopt_t, const optional<_Tp>& __rhs) noexcept
+[7.328s]       |     [01;36m[K^~~~~~~~[m[K
+[7.329s] [01m[K/usr/include/c++/11/optional:1126:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.329s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::optional<_Tp>[m[K’ and ‘[01m[Kint[m[K’
+[7.329s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.329s]       |                          [01;36m[K^[m[K
+[7.329s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:23[m[K,
+[7.329s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[7.329s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[7.329s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[7.329s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[7.330s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[7.330s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[7.330s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.330s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.330s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.330s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.330s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.330s] [01m[K/usr/include/c++/11/optional:1185:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class _Up> constexpr std::__optional_ne_t<_Tp, _Up> std::operator!=(const std::optional<_Tp>&, const _Up&)[m[K’
+[7.330s]  1185 |     [01;36m[Koperator[m[K!=(const optional<_Tp>& __lhs, const _Up& __rhs)
+[7.330s]       |     [01;36m[K^~~~~~~~[m[K
+[7.330s] [01m[K/usr/include/c++/11/optional:1185:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.331s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::optional<_Tp>[m[K’
+[7.331s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.331s]       |                          [01;36m[K^[m[K
+[7.331s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:23[m[K,
+[7.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[7.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[7.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[7.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[7.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[7.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[7.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.332s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.332s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.332s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.332s] [01m[K/usr/include/c++/11/optional:1191:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp, class _Up> constexpr std::__optional_ne_t<_Up, _Tp> std::operator!=(const _Up&, const std::optional<_Tp>&)[m[K’
+[7.332s]  1191 |     [01;36m[Koperator[m[K!=(const _Up& __lhs, const optional<_Tp>& __rhs)
+[7.332s]       |     [01;36m[K^~~~~~~~[m[K
+[7.332s] [01m[K/usr/include/c++/11/optional:1191:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.332s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::optional<_Tp>[m[K’ and ‘[01m[Kint[m[K’
+[7.332s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.332s]       |                          [01;36m[K^[m[K
+[7.332s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:28[m[K,
+[7.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[7.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[7.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[7.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[7.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[7.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[7.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.333s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.333s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.334s] [01m[K/usr/include/c++/11/variant:1233:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class ... _Types> constexpr bool std::operator!=(const std::variant<_Types ...>&, const std::variant<_Types ...>&)[m[K’
+[7.334s]  1233 |   [01;36m[K_VARIANT_RELATION_FUNCTION_TEMPLATE[m[K(!=, not_equal)
+[7.334s]       |   [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[7.334s] [01m[K/usr/include/c++/11/variant:1233:3:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.334s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::variant<_Types ...>[m[K’
+[7.334s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.334s]       |                          [01;36m[K^[m[K
+[7.334s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:50[m[K,
+[7.334s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[7.335s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:25[m[K,
+[7.335s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.335s] [01m[K/usr/include/c++/11/complex:483:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp> constexpr bool std::operator!=(const std::complex<_Tp>&, const std::complex<_Tp>&)[m[K’
+[7.335s]   483 |     [01;36m[Koperator[m[K!=(const complex<_Tp>& __x, const complex<_Tp>& __y)
+[7.335s]       |     [01;36m[K^~~~~~~~[m[K
+[7.335s] [01m[K/usr/include/c++/11/complex:483:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.335s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::complex<_Tp>[m[K’
+[7.336s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.336s]       |                          [01;36m[K^[m[K
+[7.336s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:50[m[K,
+[7.336s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[7.337s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:25[m[K,
+[7.337s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.337s] [01m[K/usr/include/c++/11/complex:488:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp> constexpr bool std::operator!=(const std::complex<_Tp>&, const _Tp&)[m[K’
+[7.337s]   488 |     [01;36m[Koperator[m[K!=(const complex<_Tp>& __x, const _Tp& __y)
+[7.337s]       |     [01;36m[K^~~~~~~~[m[K
+[7.337s] [01m[K/usr/include/c++/11/complex:488:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.337s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} is not derived from ‘[01m[Kconst std::complex<_Tp>[m[K’
+[7.338s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.338s]       |                          [01;36m[K^[m[K
+[7.338s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:50[m[K,
+[7.338s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[7.338s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:25[m[K,
+[7.338s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.338s] [01m[K/usr/include/c++/11/complex:493:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class _Tp> constexpr bool std::operator!=(const _Tp&, const std::complex<_Tp>&)[m[K’
+[7.338s]   493 |     [01;36m[Koperator[m[K!=(const _Tp& __x, const complex<_Tp>& __y)
+[7.338s]       |     [01;36m[K^~~~~~~~[m[K
+[7.338s] [01m[K/usr/include/c++/11/complex:493:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[7.339s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:94:26:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::complex<_Tp>[m[K’ and ‘[01m[Kint[m[K’
+[7.339s]    94 |     if(behavior_state != [01;36m[K3[m[K){
+[7.339s]       |                          [01;36m[K^[m[K
+[7.339s] In file included from [01m[K/usr/include/c++/11/mutex:42[m[K,
+[7.339s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:11[m[K,
+[7.339s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.339s] [01m[K/usr/include/c++/11/system_error:416:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kbool std::operator!=(const std::error_code&, const std::error_code&)[m[K’
+[7.340s]   416 |   [01;36m[Koperator[m[K!=(const error_code& __lhs, const error_code& __rhs) noexcept
+[7.340s]       |   [01;36m[K^~~~~~~~[m[K
+[7.340s] [01m[K/usr/include/c++/11/system_error:416:32:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} to ‘[01m[Kconst std::error_code&[m[K’
+[7.340s]   416 |   operator!=([01;36m[Kconst error_code& __lhs[m[K, const error_code& __rhs) noexcept
+[7.340s]       |              [01;36m[K~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[7.340s] [01m[K/usr/include/c++/11/system_error:421:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kbool std::operator!=(const std::error_code&, const std::error_condition&)[m[K’
+[7.340s]   421 |   [01;36m[Koperator[m[K!=(const error_code& __lhs, const error_condition& __rhs) noexcept
+[7.340s]       |   [01;36m[K^~~~~~~~[m[K
+[7.340s] [01m[K/usr/include/c++/11/system_error:421:32:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} to ‘[01m[Kconst std::error_code&[m[K’
+[7.340s]   421 |   operator!=([01;36m[Kconst error_code& __lhs[m[K, const error_condition& __rhs) noexcept
+[7.341s]       |              [01;36m[K~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[7.341s] [01m[K/usr/include/c++/11/system_error:426:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kbool std::operator!=(const std::error_condition&, const std::error_code&)[m[K’
+[7.341s]   426 |   [01;36m[Koperator[m[K!=(const error_condition& __lhs, const error_code& __rhs) noexcept
+[7.341s]       |   [01;36m[K^~~~~~~~[m[K
+[7.341s] [01m[K/usr/include/c++/11/system_error:426:37:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} to ‘[01m[Kconst std::error_condition&[m[K’
+[7.341s]   426 |   operator!=([01;36m[Kconst error_condition& __lhs[m[K, const error_code& __rhs) noexcept
+[7.341s]       |              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[7.341s] [01m[K/usr/include/c++/11/system_error:431:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kbool std::operator!=(const std::error_condition&, const std::error_condition&)[m[K’
+[7.341s]   431 |   [01;36m[Koperator[m[K!=(const error_condition& __lhs,
+[7.341s]       |   [01;36m[K^~~~~~~~[m[K
+[7.342s] [01m[K/usr/include/c++/11/system_error:431:37:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} to ‘[01m[Kconst std::error_condition&[m[K’
+[7.342s]   431 |   operator!=([01;36m[Kconst error_condition& __lhs[m[K,
+[7.342s]       |              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[7.342s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:22[m[K,
+[7.342s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.342s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.342s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.342s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.342s] [01m[K/usr/include/c++/11/thread:66:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kbool std::operator!=(std::thread::id, std::thread::id)[m[K’
+[7.342s]    66 |   [01;36m[Koperator[m[K!=(thread::id __x, thread::id __y) noexcept
+[7.343s]       |   [01;36m[K^~~~~~~~[m[K
+[7.343s] [01m[K/usr/include/c++/11/thread:66:25:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} to ‘[01m[Kstd::thread::id[m[K’
+[7.343s]    66 |   operator!=([01;36m[Kthread::id __x[m[K, thread::id __y) noexcept
+[7.343s]       |              [01;36m[K~~~~~~~~~~~^~~[m[K
+[7.343s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:28[m[K,
+[7.343s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[7.343s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[7.344s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[7.344s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[7.344s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[7.344s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[7.344s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[7.344s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[7.345s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[7.345s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/include/driving_way_node.hpp:14[m[K,
+[7.345s]                  from [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:1[m[K:
+[7.345s] [01m[K/usr/include/c++/11/variant:1271:18:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kconstexpr bool std::operator!=(std::monostate, std::monostate)[m[K’
+[7.346s]  1271 |   constexpr bool [01;36m[Koperator[m[K!=(monostate, monostate) noexcept { return false; }
+[7.346s]       |                  [01;36m[K^~~~~~~~[m[K
+[7.346s] [01m[K/usr/include/c++/11/variant:1271:29:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kconst Float32[m[K’ {aka ‘[01m[Kconst std_msgs::msg::Float32_<std::allocator<void> >[m[K’} to ‘[01m[Kstd::monostate[m[K’
+[7.346s]  1271 |   constexpr bool operator!=([01;36m[Kmonostate[m[K, monostate) noexcept { return false; }
+[7.346s]       |                             [01;36m[K^~~~~~~~~[m[K
+[7.346s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:95:123:[m[K [01;35m[Kwarning: [m[Ksuggest parentheses around ‘[01m[K&&[m[K’ within ‘[01m[K||[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wparentheses-Wparentheses]8;;[m[K]
+[7.346s]    95 |         if((lane_point_LEFT.point.size() < 10 && lane_point_RIGHT.point.size() > 10) || [01;35m[Klane_point_LEFT.point.size() > 10 && lane_point_RIGHT.point.size() < 10[m[K){
+[7.346s]       |                                                                                         [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[7.535s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[7.535s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:434:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[7.535s]   434 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+[7.535s]       |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[39.734s] gmake[2]: *** [CMakeFiles/driving_way_node.dir/build.make:76: CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o] Error 1
+[39.735s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/driving_way_node.dir/all] Error 2
+[39.735s] gmake: *** [Makefile:146: all] Error 2
+[39.738s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving' returned '2': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8

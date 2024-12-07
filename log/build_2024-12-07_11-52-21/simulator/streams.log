@@ -1,0 +1,28 @@
+[0.156s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/simulator': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/simulator -- -j8 -l8
+[0.300s] [ 28%] Built target vehicle
+[0.306s] [ 71%] Built target lane_detection
+[0.313s] [100%] Built target display
+[0.337s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/simulator' returned '0': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/simulator -- -j8 -l8
+[0.434s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/simulator': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/jeongwoo/Automotive_software_final/build/simulator
+[0.466s] -- Install configuration: ""
+[0.466s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/lib/simulator/vehicle
+[0.467s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/lib/simulator/lane_detection
+[0.468s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/lib/simulator/display
+[0.468s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/launch
+[0.469s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/launch/simulation.launch.xml
+[0.469s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/ament_index/resource_index/package_run_dependencies/simulator
+[0.470s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/ament_index/resource_index/parent_prefix_path/simulator
+[0.472s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/environment/ament_prefix_path.sh
+[0.473s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/environment/ament_prefix_path.dsv
+[0.473s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/environment/path.sh
+[0.473s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/environment/path.dsv
+[0.474s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/local_setup.bash
+[0.474s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/local_setup.sh
+[0.474s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/local_setup.zsh
+[0.475s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/local_setup.dsv
+[0.476s] -- Installing: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/package.dsv
+[0.479s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/ament_index/resource_index/packages/simulator
+[0.479s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/cmake/simulatorConfig.cmake
+[0.479s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/cmake/simulatorConfig-version.cmake
+[0.479s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/simulator/share/simulator/package.xml
+[0.505s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/simulator' returned '0': CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/home/jeongwoo/Automotive_software_final/install/simulator:/home/jeongwoo/Automotive_software_final/install/mission_manager:/home/jeongwoo/Automotive_software_final/install/evaluation:/home/jeongwoo/Automotive_software_final/install/autonomous_driving:/opt/ros/humble /usr/bin/cmake --install /home/jeongwoo/Automotive_software_final/build/simulator

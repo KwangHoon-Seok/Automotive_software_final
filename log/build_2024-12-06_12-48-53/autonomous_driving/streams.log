@@ -1,0 +1,38 @@
+[0.143s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving': AMENT_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8
+[0.239s] [35m[1mConsolidate compiler generated dependencies of target driving_way_node[0m
+[0.279s] [ 33%] Built target behavior_planner_node
+[0.289s] [ 66%] Built target autonomous_driving_node
+[0.291s] [ 83%] [32mBuilding CXX object CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o[0m
+[7.876s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[7.876s] [01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:401:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[7.876s]   401 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+[7.877s]       |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+[49.853s] [100%] [32m[1mLinking CXX executable driving_way_node[0m
+[52.311s] [100%] Built target driving_way_node
+[52.325s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving' returned '0': AMENT_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/jeongwoo/Automotive_software_final/build/autonomous_driving -- -j8 -l8
+[52.368s] Invoking command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving': AMENT_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/jeongwoo/Automotive_software_final/build/autonomous_driving
+[52.378s] -- Install configuration: ""
+[52.378s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/lib/autonomous_driving/autonomous_driving_node
+[52.381s] -- Installing: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/lib/autonomous_driving/driving_way_node
+[52.399s] -- Set runtime path of "/home/jeongwoo/Automotive_software_final/install/autonomous_driving/lib/autonomous_driving/driving_way_node" to ""
+[52.399s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/lib/autonomous_driving/behavior_planner_node
+[52.399s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch
+[52.400s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch/manual_driving.launch.xml
+[52.400s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/launch/autonomous_driving.launch.xml
+[52.400s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/lib/autonomous_driving/simultaneous_inputs.py
+[52.401s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/package_run_dependencies/autonomous_driving
+[52.401s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/parent_prefix_path/autonomous_driving
+[52.401s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/ament_prefix_path.sh
+[52.401s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/ament_prefix_path.dsv
+[52.401s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/path.sh
+[52.401s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/environment/path.dsv
+[52.401s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.bash
+[52.402s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.sh
+[52.402s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.zsh
+[52.402s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/local_setup.dsv
+[52.402s] -- Installing: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/package.dsv
+[52.403s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/ament_index/resource_index/packages/autonomous_driving
+[52.404s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/cmake/autonomous_drivingConfig.cmake
+[52.404s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/cmake/autonomous_drivingConfig-version.cmake
+[52.405s] -- Up-to-date: /home/jeongwoo/Automotive_software_final/install/autonomous_driving/share/autonomous_driving/package.xml
+[52.409s] Invoked command in '/home/jeongwoo/Automotive_software_final/build/autonomous_driving' returned '0': AMENT_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/jeongwoo/Automotive_software_final/install/ad_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/jeongwoo/Automotive_software_final/build/autonomous_driving

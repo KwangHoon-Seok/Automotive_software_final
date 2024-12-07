@@ -1,0 +1,17 @@
+[ 33%] Built target behavior_planner_node
+[ 50%] [32mBuilding CXX object CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o[0m
+[ 83%] Built target autonomous_driving_node
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::splitLanePoints(const LanePointData&)[m[K’:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:198:13:[m[K [01;31m[Kerror: [m[K‘[01m[KexpandCluster[m[K’ was not declared in this scope
+  198 |             [01;31m[KexpandCluster[m[K(points, p0_index, 0, epsilon, min_samples); // 좌측 클러스터 ID는 0
+      |             [01;31m[K^~~~~~~~~~~~~[m[K
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:214:13:[m[K [01;31m[Kerror: [m[K‘[01m[KexpandCluster[m[K’ was not declared in this scope
+  214 |             [01;31m[KexpandCluster[m[K(points, p1_index, 1, epsilon, min_samples); // 우측 클러스터 ID는 1
+      |             [01;31m[K^~~~~~~~~~~~~[m[K
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:[m[K In member function ‘[01m[Kvoid DrivingWayNode::PublishDrivingWay(const rclcpp::Time&)[m[K’:
+[01m[K/home/jeongwoo/Automotive_software_final/src/app/autonomous_driving/src/driving_way_node.cpp:359:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kcurrent_time[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  359 | void DrivingWayNode::PublishDrivingWay([01;35m[Kconst rclcpp::Time& current_time[m[K) {
+      |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/driving_way_node.dir/build.make:76: CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/driving_way_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

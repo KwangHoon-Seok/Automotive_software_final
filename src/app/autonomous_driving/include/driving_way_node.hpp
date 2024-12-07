@@ -12,6 +12,7 @@
 
 // ROS Header
 #include <rclcpp/rclcpp.hpp>
+#include <std_msgs/msg/float32.hpp>
 #include <geometry_msgs/msg/point.hpp>
 #include <ad_msgs/msg/vehicle_state.hpp>
 #include <ad_msgs/msg/vehicle_command.hpp>
@@ -55,6 +56,9 @@ public:
 
 private:
     // Algorithm Functions
+    void lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, const std_msgs::msg::Float32& behavior_state);
+    std::vector<int> regionQuery(const std::vector<Point>& points, int pointIdx, float epsilon);
+    void expandCluster(std::vector<Point>& points, int pointIdx, int clusterID, float epsilon, size_t min_samples);
     void populatePolyLanes(ad_msgs::msg::PolyfitLaneDataArray& poly_lanes);
     void populateCenterLane(ad_msgs::msg::PolyfitLaneData& driving_way);
     void splitLanePoints(const ad_msgs::msg::LanePointData& lane_points);
@@ -71,7 +75,13 @@ private:
     
     // Variables for Algorithm
     bool is_init = false;
+    bool is_error = false;
 
+    
+
+
+    ad_msgs::msg::PolyfitLaneData prev_lane_left_;
+    ad_msgs::msg::PolyfitLaneData prev_lane_right_;
     ad_msgs::msg::PolyfitLaneData prev_driving_way_;
     ad_msgs::msg::LanePointData lane_point_LEFT;
     ad_msgs::msg::LanePointData lane_point_RIGHT;
@@ -97,18 +107,37 @@ private:
     rclcpp::Publisher<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr p_poly_lanes_;
 
     // Subscribers
+    rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_behavior_state_;
     rclcpp::Subscription<ad_msgs::msg::LanePointData>::SharedPtr s_lane_points_;
     rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;
 
-    // Callback Functions
+    // // Callback Functions
+    // inline void CallbackLanePoints(const ad_msgs::msg::LanePointData::SharedPtr msg) {
+    //     std::lock_guard<std::mutex> lock(mutex_lane_points_);
+    //     i_lane_points_ = *msg;
+    // }
+
+    // inline void CallbackVehicleState(const ad_msgs::msg::VehicleState::SharedPtr msg) {
+    //     std::lock_guard<std::mutex> lock(mutex_vehicle_state_);
+    //     i_vehicle_state_ = *msg;
+    // }
+        // Callback Functions
     inline void CallbackLanePoints(const ad_msgs::msg::LanePointData::SharedPtr msg) {
-        std::lock_guard<std::mutex> lock(mutex_lane_points_);
+        mutex_lane_points_.lock();
         i_lane_points_ = *msg;
+        mutex_lane_points_.unlock();
     }
 
     inline void CallbackVehicleState(const ad_msgs::msg::VehicleState::SharedPtr msg) {
-        std::lock_guard<std::mutex> lock(mutex_vehicle_state_);
+        mutex_vehicle_state_.lock();
         i_vehicle_state_ = *msg;
+        mutex_vehicle_state_.unlock();
+    }
+
+    inline void CallbackBehaviorState(const std_msgs::msg::Float32::SharedPtr msg) {
+        mutex_behavior_.lock();
+        i_behavior_state_ = *msg;
+        mutex_behavior_.unlock();
     }
 
     // Timer
@@ -117,6 +146,7 @@ private:
     // Inputs
     ad_msgs::msg::LanePointData i_lane_points_;
     ad_msgs::msg::VehicleState i_vehicle_state_;
+    std_msgs::msg::Float32 i_behavior_state_;
 
     // Outputs
     ad_msgs::msg::PolyfitLaneData o_driving_way_;
@@ -125,6 +155,7 @@ private:
     // Mutex
     std::mutex mutex_lane_points_;
     std::mutex mutex_vehicle_state_;
+    std::mutex mutex_behavior_;
 };
 
 #endif // __DRIVING_WAY_NODE_HPP__
