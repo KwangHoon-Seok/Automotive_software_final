@@ -44,7 +44,7 @@ void DrivingWayNode::Run(const rclcpp::Time& current_time) {
     
     
     if (lane_points.point.empty()) {
-        RCLCPP_WARN(this->get_logger(), "No lane points received. Skipping processing...");
+        // RCLCPP_WARN(this->get_logger(), "No lane points received. Skipping processing...");
         return;
     }
     else{

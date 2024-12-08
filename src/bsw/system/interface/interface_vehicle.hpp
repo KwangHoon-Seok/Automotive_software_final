@@ -42,7 +42,7 @@ namespace interface {
         const double L_f            = 1.302;            // length from CG to front axle [m]
         const double L_r            = 1.398;            // length from CG to rear axle [m]
         const double wheel_base     = L_f + L_r;        // wheel base [m]
-
+        
         const double I_w            = 0.3312;           // inertia of wheel [kg*m^2]
         const double I_t            = 0.060;            // inertia of transmission [kg*m^2]
         const double I_m            = 0.015;            // inertia of motor [kg*m^2]

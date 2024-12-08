@@ -32,9 +32,9 @@ AutonomousDriving::AutonomousDriving(const std::string &node_name, const rclcpp:
     //////////////////////////////////////////////////
     ProcessParams();
 
-    RCLCPP_INFO(this->get_logger(), "vehicle_namespace: %s", cfg_.vehicle_namespace.c_str());
-    RCLCPP_INFO(this->get_logger(), "loop_rate_hz: %f", cfg_.loop_rate_hz);
-    RCLCPP_INFO(this->get_logger(), "use_manual_inputs: %d", cfg_.use_manual_inputs);
+    // RCLCPP_INFO(this->get_logger(), "vehicle_namespace: %s", cfg_.vehicle_namespace.c_str());
+    // RCLCPP_INFO(this->get_logger(), "loop_rate_hz: %f", cfg_.loop_rate_hz);
+    // RCLCPP_INFO(this->get_logger(), "use_manual_inputs: %d", cfg_.use_manual_inputs);
     ////////////////////// TODO //////////////////////
     // TODO: Add more parameters
 
@@ -53,10 +53,10 @@ AutonomousDriving::AutonomousDriving(const std::string &node_name, const rclcpp:
     // Publisher init
     p_vehicle_command_ = this->create_publisher<ad_msgs::msg::VehicleCommand>(
         "vehicle_command", qos_profile);
-    p_driving_way_ = this->create_publisher<ad_msgs::msg::PolyfitLaneData>(
-        "driving_way", qos_profile);
-    p_poly_lanes_ = this->create_publisher<ad_msgs::msg::PolyfitLaneDataArray>(
-        "poly_lanes", qos_profile);
+    // p_driving_way_ = this->create_publisher<ad_msgs::msg::PolyfitLaneData>(
+    //     "driving_way", qos_profile);
+    // p_poly_lanes_ = this->create_publisher<ad_msgs::msg::PolyfitLaneDataArray>(
+    //     "poly_lanes", qos_profile);
 
     // Timer init
     t_run_node_ = this->create_wall_timer(
@@ -78,7 +78,7 @@ void AutonomousDriving::ProcessParams() {
 
 void AutonomousDriving::Run() {
     auto current_time = this->now();
-    RCLCPP_INFO_THROTTLE(this->get_logger(), *get_clock(), 1000, "Running ...");
+    // RCLCPP_INFO_THROTTLE(this->get_logger(), *get_clock(), 1000, "Running ...");
     ProcessParams();
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -141,7 +141,7 @@ void AutonomousDriving::Run() {
 
     // TODO: Add lateral and longitudinal control algorithm
     interface::VehicleCommand vehicle_command;
-
+    
     //////////////////////////////////////////////////
     
     if (cfg_.use_manual_inputs == true) {
@@ -152,8 +152,8 @@ void AutonomousDriving::Run() {
     // Publish output
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
     p_vehicle_command_->publish(ros2_bridge::UpdateVehicleCommand(vehicle_command));
-    p_driving_way_->publish(ros2_bridge::UpdatePolyfitLane(driving_way));
-    p_poly_lanes_->publish(ros2_bridge::UpdatePolyfitLanes(poly_lanes));
+    // p_driving_way_->publish(ros2_bridge::UpdatePolyfitLane(driving_way));
+    // p_poly_lanes_->publish(ros2_bridge::UpdatePolyfitLanes(poly_lanes));
 }
 
 int main(int argc, char **argv) {
