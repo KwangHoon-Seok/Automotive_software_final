@@ -24,6 +24,8 @@
 #include <ad_msgs/msg/vehicle_state.hpp>
 #include <ad_msgs/msg/polyfit_lane_data.hpp>
 #include <ad_msgs/msg/polyfit_lane_data_array.hpp>
+#include <ad_msgs/msg/mission_object.hpp>
+#include <ad_msgs/msg/mission.hpp>
 
 
 
@@ -47,21 +49,23 @@ class TrajectoryNode : public rclcpp::Node
     private:
         //------------------------------Algorithm Functions-----------------------------//
         Point TargetPoint(const ad_msgs::msg::PolyfitLaneData& driving_way, double x,double lateral_offset);
-        Point LocalToGlobal(const Point& local_point, const ad_msgs::msg::VehicleState& vehicle_state, double yaw);
+        Point LocalToGlobal(const Point& local_point, const ad_msgs::msg::VehicleState& vehicle_state);
         double normalize(double yaw);
         std::vector<double> ComputeCubicSpline(const std::vector<Point>& points, double slope_start, double slope_end);
-        // 최종 후보 경로 퍼블리시 함수
+            // motion prediction
+        
         void PublishSplineCoefficients(const std::vector<double>& coeffs);
 
         // Variabls for Algorithm
-        // std::vector<Point> target_points;
+        double yaw = 0.0;
         // Publishers
         rclcpp::Publisher<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr p_trajectory_candidates_;
         
         // Subscribers
         rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneData>::SharedPtr s_driving_way_;
-        
+        rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr s_mission_state_;
+
         // Callback Functions
         inline void CallbackVehicleState(const ad_msgs::msg::VehicleState::SharedPtr msg) {
             std::lock_guard<std::mutex> lock(mutex_vehicle_state_);
@@ -73,12 +77,18 @@ class TrajectoryNode : public rclcpp::Node
             i_driving_way_ = *msg;
         }
 
+        // inline void CallbackMissionState(const ad_msgs::msg::Mission::SharedPtr msg) {
+        //     std::lock_guard<std::mutex> lock(mutex_mission_state_);
+        //     i_mission_state_ = *msg;
+        // }
+
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;
 
         // Inputs
         ad_msgs::msg::VehicleState i_vehicle_state_;
         ad_msgs::msg::PolyfitLaneData i_driving_way_;
+        ad_msgs::msg::Mission i_mission_state_;
 
         // Outputs
         ad_msgs::msg::PolyfitLaneDataArray o_trajectories_;
@@ -86,7 +96,7 @@ class TrajectoryNode : public rclcpp::Node
         // Mutex
         std::mutex mutex_vehicle_state_;
         std::mutex mutex_driving_way_;
-
+        // std::mutex mutex_mission_state_;
 };
 
 #endif 

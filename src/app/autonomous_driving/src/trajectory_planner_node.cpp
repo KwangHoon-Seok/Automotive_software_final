@@ -17,6 +17,10 @@ TrajectoryNode::TrajectoryNode(const std::string &node_name, const double &loop_
         "/ego/vehicle_state", 10,
         std::bind(&TrajectoryNode::CallbackVehicleState, this, std::placeholders::_1));
 
+    s_mission_state_ = this->create_subscription<ad_msgs::msg::Mission>(
+        "/ego/mission", 10,
+        std::bind(&TrajectoryNode::CallbackMissionState, this, std::placeholders::_1));
+
     // Publishers
     p_trajectory_candidates_ = this->create_publisher<ad_msgs::msg::PolyfitLaneDataArray>(
         "/ego/local_path_array", rclcpp::QoS(10));
@@ -55,11 +59,11 @@ void TrajectoryNode::Run() {
     std::vector<Point> target_points;
     
     Point current_position = {0.0 , 0.0};
-    double yaw = normalize(static_cast<double>(vehicle_state.yaw));
+    yaw = normalize(static_cast<double>(vehicle_state.yaw));
     
     double x = 40.0;
-    double lateral_offset_min = -4.0;
-    double lateral_offset_max = 4.0;
+    double lateral_offset_min = -5.0;
+    double lateral_offset_max = 5.0;
     double lateral_offset_step = 2.0;
 
     target_points.clear();
@@ -94,12 +98,31 @@ void TrajectoryNode::Run() {
 
         spline_array_msg.polyfitlanes.push_back(spline_msg);
     }
+    // Evaluate costs and select the best trajectory
+    // double min_ttc = std::numeric_limits<double>::max();
+    // ad_msgs::msg::PolyfitLaneData best_path;
+
+    // for (const auto& path : spline_array_msg.polyfitlanes) {
+    //     double ttc = CalculateTTC(path, vehicle_state, i_mission_state_, 5.0, 0.1, 1.5);
+    //     // RCLCPP_INFO(this->get_logger(), "Path ID: %s, TTC: %.2f seconds", path.id.c_str(), ttc);
+    //     if (ttc < min_ttc) {
+    //         min_ttc = ttc;
+    //         best_path = path;
+    //     }
+    // }
+
+    // if (min_ttc == std::numeric_limits<double>::max()) {
+    //     RCLCPP_WARN(this->get_logger(), "No safe found. Using default path.");
+    //     best_path = spline_array_msg.polyfitlanes[0];
+    // }
+
     o_trajectories_ = spline_array_msg;
     p_trajectory_candidates_->publish(o_trajectories_);
 }
 
 
-Point TrajectoryNode::LocalToGlobal(const Point& local_point, const ad_msgs::msg::VehicleState& vehicle_state, double yaw) {
+
+Point TrajectoryNode::LocalToGlobal(const Point& local_point, const ad_msgs::msg::VehicleState& vehicle_state) {
     double x_global = vehicle_state.x + local_point.x * std::cos(yaw) - local_point.y * std::sin(yaw);
     double y_global = vehicle_state.y + local_point.x * std::sin(yaw) + local_point.y * std::cos(yaw); 
     return {x_global, y_global};

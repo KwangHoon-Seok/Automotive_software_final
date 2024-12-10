@@ -906,5 +906,13 @@ CMakeFiles/trajectory_planner_node.dir/src/trajectory_planner_node.cpp.o
  /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/detail/polyfit_lane_data_array__struct.hpp
  /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/detail/polyfit_lane_data_array__builder.hpp
  /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/detail/polyfit_lane_data_array__traits.hpp
+ /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/mission_object.hpp
+ /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/detail/mission_object__struct.hpp
+ /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/detail/mission_object__builder.hpp
+ /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/detail/mission_object__traits.hpp
+ /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/mission.hpp
+ /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/detail/mission__struct.hpp
+ /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/detail/mission__builder.hpp
+ /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/detail/mission__traits.hpp
  /home/seok/automotive_software_final/src/app/autonomous_driving/include/autonomous_driving_config.hpp
 
