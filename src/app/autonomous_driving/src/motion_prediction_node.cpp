@@ -1,6 +1,14 @@
 # include "motion_prediction_node.hpp"
-
-
+/* psuedo code
+input : vehicle_state , Mission
+output : ad_msgs::msg::Mission motion_;
+         -> motion_.objects의 x,y,time이 각각 predictioned 위치(x,y), prediction time을 의미
+         ad_msgs::msg::Mission ego_motion_; 
+         -> ego_motion_.objects의 x,y,time이 각각 predictioned 위치(x,y), prediction time을 의미
+function : prediction();
+         -> motion_ : CV Model (yaw_rate의 부재)
+         -> ego_motion_ : CTRV Model (yaw_rate가 존재)
+*/
 MotionPredictionNode::MotionPredictionNode(const std::string& node_name, const double& loop_rate, const rclcpp::NodeOptions& options)
     : Node(node_name, options){
     RCLCPP_INFO(this->get_logger(), "Initializing MotionPredictionNode..." );
@@ -39,6 +47,7 @@ void MotionPredictionNode::Run(const rclcpp::Time& current_time){
     mutex_mission_state_.unlock();
 
     motion_.objects.clear();
+    ego_motion_.objects.clear();
     prediction(vehicle_state, mission_state);
     PublishMotion(current_time);
 
@@ -48,7 +57,7 @@ void MotionPredictionNode::Run(const rclcpp::Time& current_time){
 void MotionPredictionNode::prediction(const ad_msgs::msg::VehicleState& vehicle_state, const ad_msgs::msg::Mission& mission_state){
     ad_msgs::msg::MissionObject position;
     float prediction_time = 2;
-    float interval = 2;
+    float interval = 10;
 
     if(mission_state.objects.size() > 0){
         for(const auto& object : mission_state.objects){
@@ -68,27 +77,27 @@ void MotionPredictionNode::prediction(const ad_msgs::msg::VehicleState& vehicle_
 
 
     // CTRV Model
-    
+    ad_msgs::msg::MissionObject ego_position;
     if(std::abs(vehicle_state.yaw_rate) > 1e-6){
         for(int i = 1; i < interval; i ++){
-            position.x = vehicle_state.x + (vehicle_state.velocity / vehicle_state.yaw_rate) * 
+            ego_position.x = vehicle_state.x + (vehicle_state.velocity / vehicle_state.yaw_rate) * 
                         (sin (vehicle_state.yaw + vehicle_state.yaw_rate * i * (prediction_time /interval)) 
                         - sin(vehicle_state.yaw));
-            position.y = vehicle_state.y + (vehicle_state.velocity / vehicle_state.yaw_rate) * 
+            ego_position.y = vehicle_state.y + (vehicle_state.velocity / vehicle_state.yaw_rate) * 
                         (-cos (vehicle_state.yaw + vehicle_state.yaw_rate * i * (prediction_time /interval)) 
                         + cos(vehicle_state.yaw));
-            position.time = i * (prediction_time / interval);
-            ego_motion_.objects.push_back(position);
-            RCLCPP_INFO(this->get_logger(), "TIME : %f X: %f Y: %f", position.time, position.x, position.y);
+            ego_position.time = i * (prediction_time / interval);
+            ego_motion_.objects.push_back(ego_position);
+            RCLCPP_INFO(this->get_logger(), "TIME : %f X: %f Y: %f", ego_position.time, ego_position.x, ego_position.y);
         }
     }
     else{
         for(int i = 1; i < interval; i ++){
-            position.x = vehicle_state.x + vehicle_state.velocity * cos(vehicle_state.yaw) * i * (prediction_time /interval);
-            position.y = vehicle_state.y + vehicle_state.velocity * sin(vehicle_state.yaw) * i * (prediction_time /interval);
-            position.time = i * (prediction_time / interval);
-            ego_motion_.objects.push_back(position);
-            RCLCPP_INFO(this->get_logger(), "TIME : %f X: %f Y: %f", position.time, position.x, position.y);
+            ego_position.x = vehicle_state.x + vehicle_state.velocity * cos(vehicle_state.yaw) * i * (prediction_time /interval);
+            ego_position.y = vehicle_state.y + vehicle_state.velocity * sin(vehicle_state.yaw) * i * (prediction_time /interval);
+            ego_position.time = i * (prediction_time / interval);
+            ego_motion_.objects.push_back(ego_position);
+            RCLCPP_INFO(this->get_logger(), "TIME : %f X: %f Y: %f", ego_position.time, ego_position.x, ego_position.y);
         }
     }
     
@@ -110,7 +119,7 @@ void MotionPredictionNode::PublishMotion(const rclcpp::Time& current_time) {
 
 int main(int argc, char **argv) {
     std::string node_name = "motion_prediction_node";
-    double loop_rate = 20.0;
+    double loop_rate = 100.0;
 
     // Initialize node
     rclcpp::init(argc, argv);
