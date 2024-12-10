@@ -35,7 +35,7 @@ void ad_msgs__msg__MissionObject__rosidl_typesupport_introspection_c__MissionObj
   ad_msgs__msg__MissionObject__fini(message_memory);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember ad_msgs__msg__MissionObject__rosidl_typesupport_introspection_c__MissionObject_message_member_array[6] = {
+static rosidl_typesupport_introspection_c__MessageMember ad_msgs__msg__MissionObject__rosidl_typesupport_introspection_c__MissionObject_message_member_array[7] = {
   {
     "object_type",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_STRING,  // type
@@ -137,13 +137,30 @@ static rosidl_typesupport_introspection_c__MessageMember ad_msgs__msg__MissionOb
     NULL,  // fetch(index, &value) function pointer
     NULL,  // assign(index, value) function pointer
     NULL  // resize(index) function pointer
+  },
+  {
+    "time",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_DOUBLE,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(ad_msgs__msg__MissionObject, time),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
   }
 };
 
 static const rosidl_typesupport_introspection_c__MessageMembers ad_msgs__msg__MissionObject__rosidl_typesupport_introspection_c__MissionObject_message_members = {
   "ad_msgs__msg",  // message namespace
   "MissionObject",  // message name
-  6,  // number of fields
+  7,  // number of fields
   sizeof(ad_msgs__msg__MissionObject),
   ad_msgs__msg__MissionObject__rosidl_typesupport_introspection_c__MissionObject_message_member_array,  // message members
   ad_msgs__msg__MissionObject__rosidl_typesupport_introspection_c__MissionObject_init_function,  // function to initialize message memory (memory has to be allocated)

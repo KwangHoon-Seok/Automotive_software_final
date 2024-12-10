@@ -21,16 +21,32 @@ namespace msg
 namespace builder
 {
 
+class Init_MissionObject_time
+{
+public:
+  explicit Init_MissionObject_time(::ad_msgs::msg::MissionObject & msg)
+  : msg_(msg)
+  {}
+  ::ad_msgs::msg::MissionObject time(::ad_msgs::msg::MissionObject::_time_type arg)
+  {
+    msg_.time = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::ad_msgs::msg::MissionObject msg_;
+};
+
 class Init_MissionObject_velocity
 {
 public:
   explicit Init_MissionObject_velocity(::ad_msgs::msg::MissionObject & msg)
   : msg_(msg)
   {}
-  ::ad_msgs::msg::MissionObject velocity(::ad_msgs::msg::MissionObject::_velocity_type arg)
+  Init_MissionObject_time velocity(::ad_msgs::msg::MissionObject::_velocity_type arg)
   {
     msg_.velocity = std::move(arg);
-    return std::move(msg_);
+    return Init_MissionObject_time(msg_);
   }
 
 private:

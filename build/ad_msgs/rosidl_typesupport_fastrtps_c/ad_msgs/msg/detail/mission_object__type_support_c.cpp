@@ -90,6 +90,11 @@ static bool _MissionObject__cdr_serialize(
     cdr << ros_message->velocity;
   }
 
+  // Field name: time
+  {
+    cdr << ros_message->time;
+  }
+
   return true;
 }
 
@@ -145,6 +150,11 @@ static bool _MissionObject__cdr_deserialize(
     cdr >> ros_message->velocity;
   }
 
+  // Field name: time
+  {
+    cdr >> ros_message->time;
+  }
+
   return true;
 }  // NOLINT(readability/fn_size)
 
@@ -193,6 +203,12 @@ size_t get_serialized_size_ad_msgs__msg__MissionObject(
   // field.name velocity
   {
     size_t item_size = sizeof(ros_message->velocity);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name time
+  {
+    size_t item_size = sizeof(ros_message->time);
     current_alignment += item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -276,6 +292,14 @@ size_t max_serialized_size_ad_msgs__msg__MissionObject(
     current_alignment += array_size * sizeof(uint64_t) +
       eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
   }
+  // member: time
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint64_t);
+    current_alignment += array_size * sizeof(uint64_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
+  }
 
   size_t ret_val = current_alignment - initial_alignment;
   if (is_plain) {
@@ -285,7 +309,7 @@ size_t max_serialized_size_ad_msgs__msg__MissionObject(
     using DataType = ad_msgs__msg__MissionObject;
     is_plain =
       (
-      offsetof(DataType, velocity) +
+      offsetof(DataType, time) +
       last_member_size
       ) == ret_val;
   }

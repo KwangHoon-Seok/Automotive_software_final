@@ -23,8 +23,15 @@ class MotionPredictionNode : public rclcpp::Node {
 
 
     private:
-        void Run();
-        void prediction(const ad_msgs::msg::VehicleState& vehicle_state, const ad_ms::msg::Mission& mission_state);
+        void Run(const rclcpp::Time& current_time);
+        void prediction(const ad_msgs::msg::VehicleState& vehicle_state, const ad_msgs::msg::Mission& mission_state);
+        void PublishMotion(const rclcpp::Time& current_time);
+
+
+        rclcpp::TimerBase::SharedPtr t_run_node_;
+
+        rclcpp::Publisher<ad_msgs::msg::Mission>::SharedPtr p_motion_;
+        rclcpp::Publisher<ad_msgs::msg::Mission>::SharedPtr p_ego_motion_;
 
         rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;
         rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr s_mission_state_;
@@ -45,6 +52,7 @@ class MotionPredictionNode : public rclcpp::Node {
         std::mutex mutex_vehicle_state_;
         std::mutex mutex_mission_state_;
 
-        std::vector<geometry_msgs::msg::Point> motion_;
-}
+        ad_msgs::msg::Mission motion_;
+        ad_msgs::msg::Mission ego_motion_;
+};
 #endif //__MOTION_PREDICTION_NODE_HPP__

@@ -30,6 +30,7 @@ typedef struct ad_msgs__msg__MissionObject
   double y;
   double yaw;
   double velocity;
+  double time;
 } ad_msgs__msg__MissionObject;
 
 // Struct for a sequence of ad_msgs__msg__MissionObject.

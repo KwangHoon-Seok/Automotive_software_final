@@ -31,6 +31,7 @@ ad_msgs__msg__MissionObject__init(ad_msgs__msg__MissionObject * msg)
   // y
   // yaw
   // velocity
+  // time
   return true;
 }
 
@@ -47,6 +48,7 @@ ad_msgs__msg__MissionObject__fini(ad_msgs__msg__MissionObject * msg)
   // y
   // yaw
   // velocity
+  // time
 }
 
 bool
@@ -81,6 +83,10 @@ ad_msgs__msg__MissionObject__are_equal(const ad_msgs__msg__MissionObject * lhs, 
   if (lhs->velocity != rhs->velocity) {
     return false;
   }
+  // time
+  if (lhs->time != rhs->time) {
+    return false;
+  }
   return true;
 }
 
@@ -108,6 +114,8 @@ ad_msgs__msg__MissionObject__copy(
   output->yaw = input->yaw;
   // velocity
   output->velocity = input->velocity;
+  // time
+  output->time = input->time;
   return true;
 }
 

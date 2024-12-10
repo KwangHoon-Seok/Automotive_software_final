@@ -113,6 +113,15 @@ bool ad_msgs__msg__mission_object__convert_from_py(PyObject * _pymsg, void * _ro
     ros_message->velocity = PyFloat_AS_DOUBLE(field);
     Py_DECREF(field);
   }
+  {  // time
+    PyObject * field = PyObject_GetAttrString(_pymsg, "time");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->time = PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
 
   return true;
 }
@@ -201,6 +210,17 @@ PyObject * ad_msgs__msg__mission_object__convert_to_py(void * raw_ros_message)
     field = PyFloat_FromDouble(ros_message->velocity);
     {
       int rc = PyObject_SetAttrString(_pymessage, "velocity", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // time
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->time);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "time", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;

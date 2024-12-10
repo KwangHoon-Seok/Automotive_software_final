@@ -262,6 +262,19 @@ control_node/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/control_node.dir/build.make CMakeFiles/control_node.dir/build
 .PHONY : control_node/fast
 
+#=============================================================================
+# Target rules for targets named motion_prediction_node
+
+# Build rule for target.
+motion_prediction_node: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 motion_prediction_node
+.PHONY : motion_prediction_node
+
+# fast build rule for target.
+motion_prediction_node/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/motion_prediction_node.dir/build.make CMakeFiles/motion_prediction_node.dir/build
+.PHONY : motion_prediction_node/fast
+
 src/autonomous_driving_node.o: src/autonomous_driving_node.cpp.o
 .PHONY : src/autonomous_driving_node.o
 
@@ -358,6 +371,30 @@ src/driving_way_node.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/driving_way_node.dir/build.make CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.s
 .PHONY : src/driving_way_node.cpp.s
 
+src/motion_prediction_node.o: src/motion_prediction_node.cpp.o
+.PHONY : src/motion_prediction_node.o
+
+# target to build an object file
+src/motion_prediction_node.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/motion_prediction_node.dir/build.make CMakeFiles/motion_prediction_node.dir/src/motion_prediction_node.cpp.o
+.PHONY : src/motion_prediction_node.cpp.o
+
+src/motion_prediction_node.i: src/motion_prediction_node.cpp.i
+.PHONY : src/motion_prediction_node.i
+
+# target to preprocess a source file
+src/motion_prediction_node.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/motion_prediction_node.dir/build.make CMakeFiles/motion_prediction_node.dir/src/motion_prediction_node.cpp.i
+.PHONY : src/motion_prediction_node.cpp.i
+
+src/motion_prediction_node.s: src/motion_prediction_node.cpp.s
+.PHONY : src/motion_prediction_node.s
+
+# target to generate assembly for a file
+src/motion_prediction_node.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/motion_prediction_node.dir/build.make CMakeFiles/motion_prediction_node.dir/src/motion_prediction_node.cpp.s
+.PHONY : src/motion_prediction_node.cpp.s
+
 src/trajectory_planner_node.o: src/trajectory_planner_node.cpp.o
 .PHONY : src/trajectory_planner_node.o
 
@@ -401,6 +438,7 @@ help:
 	@echo "... behavior_planner_node"
 	@echo "... control_node"
 	@echo "... driving_way_node"
+	@echo "... motion_prediction_node"
 	@echo "... trajectory_planner_node"
 	@echo "... src/autonomous_driving_node.o"
 	@echo "... src/autonomous_driving_node.i"
@@ -414,6 +452,9 @@ help:
 	@echo "... src/driving_way_node.o"
 	@echo "... src/driving_way_node.i"
 	@echo "... src/driving_way_node.s"
+	@echo "... src/motion_prediction_node.o"
+	@echo "... src/motion_prediction_node.i"
+	@echo "... src/motion_prediction_node.s"
 	@echo "... src/trajectory_planner_node.o"
 	@echo "... src/trajectory_planner_node.i"
 	@echo "... src/trajectory_planner_node.s"

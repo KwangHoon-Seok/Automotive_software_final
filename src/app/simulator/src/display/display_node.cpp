@@ -52,6 +52,12 @@ Display::Display(const std::string& node_name, const rclcpp::NodeOptions& option
         "poly_lanes", qos_profile, std::bind(&Display::CallbackPolyLanes, this, std::placeholders::_1));
     s_driving_way_ = this->create_subscription<ad_msgs::msg::PolyfitLaneData> (
         "driving_way", qos_profile, std::bind(&Display::CallbackDrivingWay, this, std::placeholders::_1));
+
+    // custom sub
+    s_motion_ = this->create_subscription<ad_msgs::msg::Mission>(
+        "/ego/motion", qos_profile, std::bind(&Display::CallbackMotion, this, std::placeholders::_1));
+    s_ego_motion_ = this->create_subscription<ad_msgs::msg::Mission>(
+        "/ego/ego_motion", qos_profile, std::bind(&Display::CallbackEgoMotion, this, std::placeholders::_1));
     
     // Publisher init
     p_vehicle_marker_ = this->create_publisher<visualization_msgs::msg::Marker> (
@@ -70,6 +76,12 @@ Display::Display(const std::string& node_name, const rclcpp::NodeOptions& option
         "polyfit_lanes_marker", qos_profile);
     p_driving_way_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
         "driving_way_marker", qos_profile);
+    //custom
+    p_motion_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
+        "motion_marker", qos_profile);
+    p_ego_motion_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
+        "ego_motion_marker", qos_profile);    
+
 
     // Timer init
     t_run_node_ = this->create_wall_timer(
@@ -141,6 +153,20 @@ void Display::Run() {
             mission = i_mission_;
         }
     }
+
+    ad_msgs::msg::Mission motion; {
+        if (b_is_motion_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_motion_);
+            motion = i_motion_;
+        }
+    }
+
+    ad_msgs::msg::Mission ego_motion; {
+        if (b_is_ego_motion_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_motion_);
+            ego_motion = i_ego_motion_;
+        }
+    }
     
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
     // Algorithm
@@ -151,6 +177,15 @@ void Display::Run() {
         if (b_is_mission_ == true) {
             DisplayMission(mission, vehicle_state, current_time, cfg_);
         }
+        // custom
+        if (b_is_motion_ == true) {
+            DisplayMotion(motion, vehicle_state, current_time);
+        }
+
+        if (b_is_ego_motion_ == true) {
+            DisplayEgoMotion(ego_motion, vehicle_state, current_time);
+        }
+
     }
 
     if (b_is_csv_lanes_ == true) {
@@ -372,6 +407,107 @@ void Display::DisplayMission(const ad_msgs::msg::MissionDisplay& mission,
     }
     
     p_mission_marker_->publish(mission_marker_array);
+}
+
+// custom Display Motion
+void Display::DisplayMotion(const ad_msgs::msg::Mission& motion,
+                             const ad_msgs::msg::VehicleState& vehicle_state,
+                             const rclcpp::Time& current_time){
+
+    visualization_msgs::msg::MarkerArray motion_marker_array;
+    int id = 0;
+
+    for (auto motion : motion.objects) {
+        visualization_msgs::msg::Marker motion_marker;
+        motion_marker.header.frame_id = "world";
+        motion_marker.header.stamp = current_time;
+        motion_marker.ns = "motion";
+        motion_marker.id = id;
+        motion_marker.type = visualization_msgs::msg::Marker::CYLINDER;
+
+        float radius = 2.0;
+        float height = 0.2;
+        motion_marker.scale.x = radius * 2; // 지름 = 반지름 * 2
+        motion_marker.scale.y = radius * 2;
+        motion_marker.scale.z = height;    // 높이
+
+     
+        motion_marker.color.a = 0.5 * motion.time; // 투명도
+        motion_marker.color.r = 0.0; 
+        motion_marker.color.g = 0.0; 
+        motion_marker.color.b = 1.0; 
+
+      
+        motion_marker.pose.position.x = motion.x; 
+        motion_marker.pose.position.y = motion.y;
+        motion_marker.pose.position.z = 0.05; 
+
+     
+        motion_marker.pose.orientation.x = 0.0;
+        motion_marker.pose.orientation.y = 0.0;
+        motion_marker.pose.orientation.z = 0.0;
+        motion_marker.pose.orientation.w = 1.0;
+
+
+        motion_marker.lifetime = rclcpp::Duration::from_seconds(0.01);
+        motion_marker_array.markers.push_back(motion_marker);
+
+        id++;
+    }
+
+    
+    
+    p_motion_marker_->publish(motion_marker_array);
+}
+
+void Display::DisplayEgoMotion(const ad_msgs::msg::Mission& ego_motion,
+                             const ad_msgs::msg::VehicleState& vehicle_state,
+                             const rclcpp::Time& current_time){
+
+    visualization_msgs::msg::MarkerArray ego_motion_marker_array;
+    int id = 0;
+
+    for (auto ego_motion : ego_motion.objects) {
+        visualization_msgs::msg::Marker ego_motion_marker;
+        ego_motion_marker.header.frame_id = "world";
+        ego_motion_marker.header.stamp = current_time;
+        ego_motion_marker.ns = "ego_motion";
+        ego_motion_marker.id = id;
+        ego_motion_marker.type = visualization_msgs::msg::Marker::CYLINDER;
+
+        float radius = 2.0;
+        float height = 0.2;
+        ego_motion_marker.scale.x = radius * 2; // 지름 = 반지름 * 2
+        ego_motion_marker.scale.y = radius * 2;
+        ego_motion_marker.scale.z = height;    // 높이
+
+     
+        ego_motion_marker.color.a = 0.5 * ego_motion.time; // 투명도
+        ego_motion_marker.color.r = 0.7; 
+        ego_motion_marker.color.g = 0.7; 
+        ego_motion_marker.color.b = 0.0; 
+
+      
+        ego_motion_marker.pose.position.x = ego_motion.x; 
+        ego_motion_marker.pose.position.y = ego_motion.y;
+        ego_motion_marker.pose.position.z = 0.05; 
+
+     
+        ego_motion_marker.pose.orientation.x = 0.0;
+        ego_motion_marker.pose.orientation.y = 0.0;
+        ego_motion_marker.pose.orientation.z = 0.0;
+        ego_motion_marker.pose.orientation.w = 1.0;
+
+
+        ego_motion_marker.lifetime = rclcpp::Duration::from_seconds(0.01);
+        ego_motion_marker_array.markers.push_back(ego_motion_marker);
+
+        id++;
+    }
+
+    
+    
+    p_ego_motion_marker_->publish(ego_motion_marker_array);
 }
 
 void Display::DisplayROILanes(const ad_msgs::msg::LanePointDataArray& roi_lanes,

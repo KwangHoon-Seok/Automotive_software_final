@@ -63,6 +63,7 @@ class MissionObject(metaclass=Metaclass_MissionObject):
         '_y',
         '_yaw',
         '_velocity',
+        '_time',
     ]
 
     _fields_and_field_types = {
@@ -72,11 +73,13 @@ class MissionObject(metaclass=Metaclass_MissionObject):
         'y': 'double',
         'yaw': 'double',
         'velocity': 'double',
+        'time': 'double',
     }
 
     SLOT_TYPES = (
         rosidl_parser.definition.UnboundedString(),  # noqa: E501
         rosidl_parser.definition.BasicType('boolean'),  # noqa: E501
+        rosidl_parser.definition.BasicType('double'),  # noqa: E501
         rosidl_parser.definition.BasicType('double'),  # noqa: E501
         rosidl_parser.definition.BasicType('double'),  # noqa: E501
         rosidl_parser.definition.BasicType('double'),  # noqa: E501
@@ -93,6 +96,7 @@ class MissionObject(metaclass=Metaclass_MissionObject):
         self.y = kwargs.get('y', float())
         self.yaw = kwargs.get('yaw', float())
         self.velocity = kwargs.get('velocity', float())
+        self.time = kwargs.get('time', float())
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -134,6 +138,8 @@ class MissionObject(metaclass=Metaclass_MissionObject):
         if self.yaw != other.yaw:
             return False
         if self.velocity != other.velocity:
+            return False
+        if self.time != other.time:
             return False
         return True
 
@@ -227,3 +233,18 @@ class MissionObject(metaclass=Metaclass_MissionObject):
             assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
                 "The 'velocity' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
         self._velocity = value
+
+    @builtins.property
+    def time(self):
+        """Message field 'time'."""
+        return self._time
+
+    @time.setter
+    def time(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'time' field must be of type 'float'"
+            assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
+                "The 'time' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
+        self._time = value

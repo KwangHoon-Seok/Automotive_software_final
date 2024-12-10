@@ -57,6 +57,10 @@ add_executable(trajectory_planner_node
 add_executable(control_node
     src/control_node.cpp    
 )
+
+add_executable(motion_prediction_node
+    src/motion_prediction_node.cpp    
+)
 ## Link libraries to the executable
 #------------------------ autonomous_driving_node-----------------------------#
 target_link_libraries(autonomous_driving_node
@@ -112,6 +116,12 @@ ament_target_dependencies(control_node
     std_msgs
     ad_msgs
 )
+#------------------------ motion_prediction_node-----------------------------#
+ament_target_dependencies(motion_prediction_node
+    rclcpp
+    std_msgs
+    ad_msgs
+)
 
 ## Install the executable
 install(TARGETS autonomous_driving_node
@@ -126,7 +136,10 @@ install(TARGETS behavior_planner_node
 install(TARGETS trajectory_planner_node
     DESTINATION lib/${PROJECT_NAME})
 
-    install(TARGETS control_node
+install(TARGETS control_node
+    DESTINATION lib/${PROJECT_NAME})
+
+install(TARGETS motion_prediction_node
     DESTINATION lib/${PROJECT_NAME})
 
 

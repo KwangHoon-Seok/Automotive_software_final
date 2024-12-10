@@ -17,6 +17,8 @@ module ad_msgs {
       double yaw;
 
       double velocity;
+
+      double time;
     };
   };
 };

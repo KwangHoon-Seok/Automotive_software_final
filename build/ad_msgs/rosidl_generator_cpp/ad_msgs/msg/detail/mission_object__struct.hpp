@@ -44,6 +44,7 @@ struct MissionObject_
       this->y = 0.0;
       this->yaw = 0.0;
       this->velocity = 0.0;
+      this->time = 0.0;
     }
   }
 
@@ -59,6 +60,7 @@ struct MissionObject_
       this->y = 0.0;
       this->yaw = 0.0;
       this->velocity = 0.0;
+      this->time = 0.0;
     }
   }
 
@@ -81,6 +83,9 @@ struct MissionObject_
   using _velocity_type =
     double;
   _velocity_type velocity;
+  using _time_type =
+    double;
+  _time_type time;
 
   // setters for named parameter idiom
   Type & set__object_type(
@@ -117,6 +122,12 @@ struct MissionObject_
     const double & _arg)
   {
     this->velocity = _arg;
+    return *this;
+  }
+  Type & set__time(
+    const double & _arg)
+  {
+    this->time = _arg;
     return *this;
   }
 
@@ -178,6 +189,9 @@ struct MissionObject_
       return false;
     }
     if (this->velocity != other.velocity) {
+      return false;
+    }
+    if (this->time != other.time) {
       return false;
     }
     return true;
