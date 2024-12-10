@@ -390,79 +390,13 @@ void DrivingWayNode::process_lanes() {
             Y_RIGHT(i) = lane_point_RIGHT.point[i].y;
         }
     }
-    // // lane_point_복사
-    // if (lane_point_LEFT.point.size() + lane_point_RIGHT.point.size() < 20){
-    //     if(lane_point_LEFT.point.size() < 4 && lane_point_RIGHT.point.size() < 4){
-    //         RCLCPP_INFO(this->get_logger(), " [1] Sample copy for ALL");
-    //         X_LEFT.resize(num_points_LEFT + num_points_RIGHT);
-    //         Y_LEFT.resize(num_points_LEFT + num_points_RIGHT);
-    //         X_RIGHT.resize(num_points_LEFT + num_points_RIGHT);
-    //         Y_RIGHT.resize(num_points_LEFT + num_points_RIGHT);
-    //         for (size_t i = 0; i < num_points_LEFT; ++i) {
-    //             X_LEFT(i) = lane_point_LEFT.point[i].x;
-    //             Y_LEFT(i) = lane_point_LEFT.point[i].y;
-    //         }
-    //         for (size_t i = 0; i < num_points_RIGHT; ++i) {
-    //             X_RIGHT(i) = lane_point_RIGHT.point[i].x;
-    //             Y_RIGHT(i) = lane_point_RIGHT.point[i].y;
-    //         }
-
-    //         for(size_t i = 0; i < num_points_RIGHT; ++i){
-    //             X_LEFT(num_points_LEFT + i) = lane_point_RIGHT.point[i].x;
-    //             Y_LEFT(num_points_LEFT + i) = lane_point_RIGHT.point[i].y - offset;
-    //         }
-
-    //         for(size_t i = 0; i < num_points_LEFT; ++i){
-    //             X_RIGHT(num_points_RIGHT + i) = lane_point_LEFT.point[i].x;
-    //             Y_RIGHT(num_points_RIGHT + i) = lane_point_LEFT.point[i].y + offset;
-    //         }
-    //     }
-
-    //     else if(lane_point_LEFT.point.size() < lane_point_RIGHT.point.size()){
-    //         RCLCPP_INFO(this->get_logger(), " [2] Sample copy for Left");
-    //         X_RIGHT.resize(num_points_RIGHT);
-    //         Y_RIGHT.resize(num_points_RIGHT);
-    //         X_LEFT.resize(num_points_LEFT + num_points_RIGHT);
-    //         Y_LEFT.resize(num_points_LEFT + num_points_RIGHT);
-    //         for (size_t i = 0; i < num_points_RIGHT; ++i) {
-    //             X_RIGHT(i) = lane_point_RIGHT.point[i].x;
-    //             Y_RIGHT(i) = lane_point_RIGHT.point[i].y;
-    //         }
-
-    //         for(size_t i = 0; i < num_points_RIGHT; ++i){
-    //             X_LEFT(num_points_LEFT + i) = lane_point_RIGHT.point[i].x;
-    //             Y_LEFT(num_points_LEFT + i) = lane_point_RIGHT.point[i].y - offset;
-    //         }
-            
-    //     }
-    //     else if(lane_point_LEFT.point.size() >= lane_point_RIGHT.point.size()){
-    //         RCLCPP_INFO(this->get_logger(), " [3] Sample copy for Right ");
-    //         X_LEFT.resize(num_points_LEFT);
-    //         Y_LEFT.resize(num_points_LEFT);
-    //         X_RIGHT.resize(num_points_LEFT + num_points_RIGHT);
-    //         Y_RIGHT.resize(num_points_LEFT + num_points_RIGHT);
-
-    //         for (size_t i = 0; i < num_points_LEFT; ++i) {
-    //             X_LEFT(i) = lane_point_LEFT.point[i].x;
-    //             Y_LEFT(i) = lane_point_LEFT.point[i].y;
-    //         }
-
-    //         for(size_t i = 0; i < num_points_LEFT; ++i){
-    //             X_RIGHT(num_points_RIGHT + i) = lane_point_LEFT.point[i].x;
-    //             Y_RIGHT(num_points_RIGHT + i) = lane_point_LEFT.point[i].y + offset;
-    //         }
-    //     }
-    // }
     
-   
     
     if (X_LEFT.size() >= 4 && X_RIGHT.size() >= 4){
         A_LEFT = calculateA(X_LEFT, Y_LEFT);
         A_RIGHT = calculateA(X_RIGHT, Y_RIGHT);
     }
-    // RCLCPP_INFO(this->get_logger(), "Number of points in LEFT lane: %zu", lane_point_LEFT.point.size());
-    // RCLCPP_WARN(this->get_logger(), "Number of points in RIGHT lane: %zu", lane_point_RIGHT.point.size());
-
+   
 }
 
 std::tuple<double, double, double, double> DrivingWayNode::computeCubicModel(
