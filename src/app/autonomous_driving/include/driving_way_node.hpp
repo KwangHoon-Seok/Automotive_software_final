@@ -76,13 +76,16 @@ private:
     // Variables for Algorithm
     bool is_init = false;
     bool is_error = false;
-
     
 
 
-    ad_msgs::msg::PolyfitLaneData prev_lane_left_;
-    ad_msgs::msg::PolyfitLaneData prev_lane_right_;
+    
     ad_msgs::msg::PolyfitLaneData prev_driving_way_;
+    ad_msgs::msg::PolyfitLaneData prev_lane_LEFT_;
+    ad_msgs::msg::PolyfitLaneData prev_lane_RIGHT_;
+
+    ad_msgs::msg::LanePointData sub_lane_point_LEFT_;
+    ad_msgs::msg::LanePointData sub_lane_point_RIGHT_;
     ad_msgs::msg::LanePointData lane_point_LEFT;
     ad_msgs::msg::LanePointData lane_point_RIGHT;
     ad_msgs::msg::LanePointData inliers_LEFT;
@@ -90,6 +93,8 @@ private:
 
     size_t num_points_LEFT;
     size_t num_points_RIGHT;
+    size_t num_sub_points_LEFT;
+    size_t num_sub_points_RIGHT;
     size_t number_point;
 
     Eigen::VectorXd X_LEFT;

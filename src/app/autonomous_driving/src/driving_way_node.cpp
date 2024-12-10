@@ -76,15 +76,16 @@ void DrivingWayNode::Run(const rclcpp::Time& current_time) {
 
 void DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, const std_msgs::msg::Float32& behavior_state){
 
-    // is_error를 판별하는 조건문
-    if((driving_way.a3 > 0.1 || driving_way.a3 < -8.1) || (lane_point_LEFT.point.size() < 3 && lane_point_RIGHT.point.size() < 3) ){
+    // is_error를 판별하는 조건문 -> merge때 나 아예 경로 이탈을 해결
+    if((driving_way.a3 > 0.1 || driving_way.a3 < -8.1)){
         is_error = true;
-        // is_pass = false;
+        // RCLCPP_INFO(this->get_logger(), " ERROR ");
     }
     else{
         prev_driving_way_ = driving_way;
         is_error = false;
-        // is_pass = false;
+        // RCLCPP_INFO(this->get_logger(), " Normal driving mode ");
+        
     }
 
     // if(behavior_state.data != 3.0){
@@ -93,7 +94,7 @@ void DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, 
     //     }
     // }
 
-    RCLCPP_INFO(this->get_logger(), "is_error = %s", is_error ? "true" : "false");
+    // RCLCPP_INFO(this->get_logger(), "is_error = %s", is_error ? "true" : "false");
     lane_point_LEFT.point.clear();
     lane_point_RIGHT.point.clear();
 }
@@ -296,37 +297,171 @@ void DrivingWayNode::splitLanePoints(const ad_msgs::msg::LanePointData& lane_poi
             }
         }
 
-        RCLCPP_INFO(this->get_logger(), "Lane points split using DBSCAN with initial points p0 and p1.");
+        // RCLCPP_INFO(this->get_logger(), "Lane points split using DBSCAN with initial points p0 and p1.");
     }
     
 
 
 }
 
+
+// 이전 Polyfit Lane LEFT와 RIGHT를 기준으로 3만큼의 Sub point를 생성해 보조 주행 수행 추가
 void DrivingWayNode::process_lanes() {
     
     num_points_LEFT = lane_point_LEFT.point.size();
     num_points_RIGHT = lane_point_RIGHT.point.size();
-    X_LEFT.resize(num_points_LEFT);
-    Y_LEFT.resize(num_points_LEFT);
-    X_RIGHT.resize(num_points_RIGHT);
-    Y_RIGHT.resize(num_points_RIGHT);
-
-    for (size_t i = 0; i < num_points_LEFT; ++i) {
-        X_LEFT(i) = lane_point_LEFT.point[i].x;
-        Y_LEFT(i) = lane_point_LEFT.point[i].y;
+    if(lane_point_LEFT.point.size() > 5){
+        sub_lane_point_LEFT_.point.clear();
     }
-
-    for (size_t i = 0; i < num_points_RIGHT; ++i) {
-        X_RIGHT(i) = lane_point_RIGHT.point[i].x;
-        Y_RIGHT(i) = lane_point_RIGHT.point[i].y;
+    if(lane_point_LEFT.point.size() > 5){
+        sub_lane_point_RIGHT_.point.clear();
     }
+    float offset = 2;
+    geometry_msgs::msg::Point sub_point;
+    if (lane_point_LEFT.point.size() + lane_point_RIGHT.point.size() < 25){
+        RCLCPP_INFO(this->get_logger(), " Sub LANE ");
+        for (int i = 0; i <= 10; ++i) { // 0부터 4까지 총 5개 점 생성
+            float x = i * (3.0 / 10.0); // 0, 0.75, 1.5, 2.25, 3의 값 생성
+            float y = A_LEFT(0) * std::pow(x, 3) +
+                    A_LEFT(1) * std::pow(x, 2) +
+                    A_LEFT(2) * x +
+                    A_LEFT(3);
+
+            sub_point.x = x;
+            sub_point.y = y;
+            sub_point.z = 0.0;
+
+            sub_lane_point_LEFT_.point.push_back(sub_point);
+        }
+
+        for (int i = 0; i <= 10; ++i) { // 0부터 4까지 총 5개 점 생성
+            float x = i * (3.0 / 10.0); // 0, 0.75, 1.5, 2.25, 3의 값 생성
+            float y = A_RIGHT(0) * std::pow(x, 3) +
+                    A_RIGHT(1) * std::pow(x, 2) +
+                    A_RIGHT(2) * x +
+                    A_RIGHT(3);
+
+            sub_point.x = x;
+            sub_point.y = y;
+            sub_point.z = 0.0;
+
+            sub_lane_point_RIGHT_.point.push_back(sub_point);
+        }
+        num_sub_points_LEFT = sub_lane_point_LEFT_.point.size();
+        num_sub_points_RIGHT = sub_lane_point_RIGHT_.point.size();
+
+        X_LEFT.resize(num_points_LEFT + num_sub_points_LEFT);
+        Y_LEFT.resize(num_points_LEFT + num_sub_points_LEFT);
+        X_RIGHT.resize(num_points_RIGHT + num_sub_points_RIGHT);
+        Y_RIGHT.resize(num_points_RIGHT + num_sub_points_RIGHT);
+
+        for (size_t i = 0; i < num_points_LEFT; ++i) {
+            X_LEFT(i) = lane_point_LEFT.point[i].x;
+            Y_LEFT(i) = lane_point_LEFT.point[i].y;
+        }
+
+        for (size_t i = 0; i < num_points_RIGHT; ++i) {
+            X_RIGHT(i) = lane_point_RIGHT.point[i].x;
+            Y_RIGHT(i) = lane_point_RIGHT.point[i].y;
+        }
+        for(size_t i = 0; i < num_sub_points_LEFT; ++i){
+            X_LEFT(num_points_LEFT + i) = sub_lane_point_LEFT_.point[i].x;
+            Y_LEFT(num_points_LEFT + i) = sub_lane_point_LEFT_.point[i].y;
+        }
+
+        for(size_t i = 0; i < num_sub_points_RIGHT; ++i){
+            X_RIGHT(num_points_RIGHT + i) = sub_lane_point_RIGHT_.point[i].x;
+            Y_RIGHT(num_points_RIGHT + i) = sub_lane_point_RIGHT_.point[i].y;
+        }
+
+    }
+    else{
+        X_LEFT.resize(num_points_LEFT);
+        Y_LEFT.resize(num_points_LEFT);
+        X_RIGHT.resize(num_points_RIGHT);
+        Y_RIGHT.resize(num_points_RIGHT);
+        for (size_t i = 0; i < num_points_LEFT; ++i) {
+            X_LEFT(i) = lane_point_LEFT.point[i].x;
+            Y_LEFT(i) = lane_point_LEFT.point[i].y;
+        }
+
+        for (size_t i = 0; i < num_points_RIGHT; ++i) {
+            X_RIGHT(i) = lane_point_RIGHT.point[i].x;
+            Y_RIGHT(i) = lane_point_RIGHT.point[i].y;
+        }
+    }
+    // // lane_point_복사
+    // if (lane_point_LEFT.point.size() + lane_point_RIGHT.point.size() < 20){
+    //     if(lane_point_LEFT.point.size() < 4 && lane_point_RIGHT.point.size() < 4){
+    //         RCLCPP_INFO(this->get_logger(), " [1] Sample copy for ALL");
+    //         X_LEFT.resize(num_points_LEFT + num_points_RIGHT);
+    //         Y_LEFT.resize(num_points_LEFT + num_points_RIGHT);
+    //         X_RIGHT.resize(num_points_LEFT + num_points_RIGHT);
+    //         Y_RIGHT.resize(num_points_LEFT + num_points_RIGHT);
+    //         for (size_t i = 0; i < num_points_LEFT; ++i) {
+    //             X_LEFT(i) = lane_point_LEFT.point[i].x;
+    //             Y_LEFT(i) = lane_point_LEFT.point[i].y;
+    //         }
+    //         for (size_t i = 0; i < num_points_RIGHT; ++i) {
+    //             X_RIGHT(i) = lane_point_RIGHT.point[i].x;
+    //             Y_RIGHT(i) = lane_point_RIGHT.point[i].y;
+    //         }
+
+    //         for(size_t i = 0; i < num_points_RIGHT; ++i){
+    //             X_LEFT(num_points_LEFT + i) = lane_point_RIGHT.point[i].x;
+    //             Y_LEFT(num_points_LEFT + i) = lane_point_RIGHT.point[i].y - offset;
+    //         }
+
+    //         for(size_t i = 0; i < num_points_LEFT; ++i){
+    //             X_RIGHT(num_points_RIGHT + i) = lane_point_LEFT.point[i].x;
+    //             Y_RIGHT(num_points_RIGHT + i) = lane_point_LEFT.point[i].y + offset;
+    //         }
+    //     }
+
+    //     else if(lane_point_LEFT.point.size() < lane_point_RIGHT.point.size()){
+    //         RCLCPP_INFO(this->get_logger(), " [2] Sample copy for Left");
+    //         X_RIGHT.resize(num_points_RIGHT);
+    //         Y_RIGHT.resize(num_points_RIGHT);
+    //         X_LEFT.resize(num_points_LEFT + num_points_RIGHT);
+    //         Y_LEFT.resize(num_points_LEFT + num_points_RIGHT);
+    //         for (size_t i = 0; i < num_points_RIGHT; ++i) {
+    //             X_RIGHT(i) = lane_point_RIGHT.point[i].x;
+    //             Y_RIGHT(i) = lane_point_RIGHT.point[i].y;
+    //         }
+
+    //         for(size_t i = 0; i < num_points_RIGHT; ++i){
+    //             X_LEFT(num_points_LEFT + i) = lane_point_RIGHT.point[i].x;
+    //             Y_LEFT(num_points_LEFT + i) = lane_point_RIGHT.point[i].y - offset;
+    //         }
+            
+    //     }
+    //     else if(lane_point_LEFT.point.size() >= lane_point_RIGHT.point.size()){
+    //         RCLCPP_INFO(this->get_logger(), " [3] Sample copy for Right ");
+    //         X_LEFT.resize(num_points_LEFT);
+    //         Y_LEFT.resize(num_points_LEFT);
+    //         X_RIGHT.resize(num_points_LEFT + num_points_RIGHT);
+    //         Y_RIGHT.resize(num_points_LEFT + num_points_RIGHT);
+
+    //         for (size_t i = 0; i < num_points_LEFT; ++i) {
+    //             X_LEFT(i) = lane_point_LEFT.point[i].x;
+    //             Y_LEFT(i) = lane_point_LEFT.point[i].y;
+    //         }
+
+    //         for(size_t i = 0; i < num_points_LEFT; ++i){
+    //             X_RIGHT(num_points_RIGHT + i) = lane_point_LEFT.point[i].x;
+    //             Y_RIGHT(num_points_RIGHT + i) = lane_point_LEFT.point[i].y + offset;
+    //         }
+    //     }
+    // }
+    
+   
+    
     if (X_LEFT.size() >= 4 && X_RIGHT.size() >= 4){
         A_LEFT = calculateA(X_LEFT, Y_LEFT);
         A_RIGHT = calculateA(X_RIGHT, Y_RIGHT);
     }
-    RCLCPP_INFO(this->get_logger(), "Number of points in LEFT lane: %zu", lane_point_LEFT.point.size());
-    RCLCPP_WARN(this->get_logger(), "Number of points in RIGHT lane: %zu", lane_point_RIGHT.point.size());
+    // RCLCPP_INFO(this->get_logger(), "Number of points in LEFT lane: %zu", lane_point_LEFT.point.size());
+    // RCLCPP_WARN(this->get_logger(), "Number of points in RIGHT lane: %zu", lane_point_RIGHT.point.size());
 
 }
 
@@ -384,45 +519,47 @@ std::string DrivingWayNode::Vector4dToString(const Eigen::Vector4d& vec) {
 }
 
 void DrivingWayNode::populatePolyLanes(ad_msgs::msg::PolyfitLaneDataArray& poly_lanes) {
+    if (X_LEFT.size() >= 4 && X_RIGHT.size() >= 4){
+        // poly_lanes 초기화
+        poly_lanes.polyfitlanes.clear(); // 이전 데이터 초기화
 
-    // poly_lanes 초기화
-    poly_lanes.polyfitlanes.clear(); // 이전 데이터 초기화
+        // 오른쪽 차선 (id = "1", A_RIGHT)
+        ad_msgs::msg::PolyfitLaneData lane_right;
+        lane_right.id = "1";  // id 설정
+        lane_right.a0 = A_RIGHT(3);  // a0 계수
+        lane_right.a1 = A_RIGHT(2);  // a1 계수
+        lane_right.a2 = A_RIGHT(1);  // a2 계수
+        lane_right.a3 = A_RIGHT(0);  // a3 계수
+        lane_right.frame_id = "ego/body";  // frame_id 설정
+        poly_lanes.polyfitlanes.push_back(lane_right);  // 오른쪽 차선을 polyfitlanes에 추가
 
-    // 오른쪽 차선 (id = "1", A_RIGHT)
-    ad_msgs::msg::PolyfitLaneData lane_right;
-    lane_right.id = "1";  // id 설정
-    lane_right.a0 = A_RIGHT(3);  // a0 계수
-    lane_right.a1 = A_RIGHT(2);  // a1 계수
-    lane_right.a2 = A_RIGHT(1);  // a2 계수
-    lane_right.a3 = A_RIGHT(0);  // a3 계수
-    lane_right.frame_id = "ego/body";  // frame_id 설정
-    poly_lanes.polyfitlanes.push_back(lane_right);  // 오른쪽 차선을 polyfitlanes에 추가
-
-    // 왼쪽 차선 (id = "2", A_LEFT)
-    ad_msgs::msg::PolyfitLaneData lane_left;
-    lane_left.id = "2";  // id 설정
-    lane_left.a0 = A_LEFT(3);  // a0 계수
-    lane_left.a1 = A_LEFT(2);  // a1 계수
-    lane_left.a2 = A_LEFT(1);  // a2 계수
-    lane_left.a3 = A_LEFT(0);  // a3 계수
-    lane_left.frame_id = "ego/body";  // frame_id 설정
-    poly_lanes.polyfitlanes.push_back(lane_left);  // 왼쪽 차선을 polyfitlanes에 추가
-
+        // 왼쪽 차선 (id = "2", A_LEFT)
+        ad_msgs::msg::PolyfitLaneData lane_left;
+        lane_left.id = "2";  // id 설정
+        lane_left.a0 = A_LEFT(3);  // a0 계수
+        lane_left.a1 = A_LEFT(2);  // a1 계수
+        lane_left.a2 = A_LEFT(1);  // a2 계수
+        lane_left.a3 = A_LEFT(0);  // a3 계수
+        lane_left.frame_id = "ego/body";  // frame_id 설정
+        poly_lanes.polyfitlanes.push_back(lane_left);  // 왼쪽 차선을 polyfitlanes에 추가
+    }
 }
 
 void DrivingWayNode::populateCenterLane(ad_msgs::msg::PolyfitLaneData& driving_way) {
-    driving_way.frame_id = "ego/body";
-    driving_way.id = "0"; // id 설정 아직 중앙이 0인줄 모름
-    A_MID(0) = (A_RIGHT(3) + A_LEFT(3)) / 2.0;  // a0 계수
-    A_MID(1) = (A_RIGHT(2) + A_LEFT(2)) / 2.0;  // a1 계수
-    A_MID(2) = (A_RIGHT(1) + A_LEFT(1)) / 2.0;  // a2 계수
-    A_MID(3) = (A_RIGHT(0) + A_LEFT(0)) / 2.0;  // a3 계수
+    if (X_LEFT.size() >= 4 && X_RIGHT.size() >= 4){
+        driving_way.frame_id = "ego/body";
+        driving_way.id = "0"; // id 설정 아직 중앙이 0인줄 모름
+        A_MID(0) = (A_RIGHT(3) + A_LEFT(3)) / 2.0;  // a0 계수
+        A_MID(1) = (A_RIGHT(2) + A_LEFT(2)) / 2.0;  // a1 계수
+        A_MID(2) = (A_RIGHT(1) + A_LEFT(1)) / 2.0;  // a2 계수
+        A_MID(3) = (A_RIGHT(0) + A_LEFT(0)) / 2.0;  // a3 계수
 
-    driving_way.a0 = A_MID(0);  // a0 계수
-    driving_way.a1 = A_MID(1);  // a1 계수
-    driving_way.a2 = A_MID(2);  // a2 계수
-    driving_way.a3 = A_MID(3);  // a3 계수
-    // 석광훈 
+        driving_way.a0 = A_MID(0);  // a0 계수
+        driving_way.a1 = A_MID(1);  // a1 계수
+        driving_way.a2 = A_MID(2);  // a2 계수
+        driving_way.a3 = A_MID(3);  // a3 계수
+    }
+    // RCLCPP_INFO(this->get_logger(), "Current Driving way A3 Coefficient: %f", driving_way.a3);
 }
 
 //-------------------------------------------------------------------------------------------------------------------//

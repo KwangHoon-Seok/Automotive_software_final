@@ -56,7 +56,7 @@ void ControlNode::Run() {
     
     if (drive_mode == REF_VEL_TRACKING)
     {
-        control_signal = computePID(5, vehicle_state.velocity, 0.6);
+        control_signal = computePID(15, vehicle_state.velocity, 0.6);
         if (control_signal > 0)
         {
             o_vehicle_command_.accel = std::min(control_signal, 0.5);
@@ -97,7 +97,9 @@ void ControlNode::Run() {
     }
     o_vehicle_command_.steering = yaw;  // 조향각 0도로 직진
 
-    // Publish Vehicle Command
+    // Publish Vehicle 
+
+
     p_vehicle_command_->publish(o_vehicle_command_);
 
 
