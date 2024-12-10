@@ -262,19 +262,6 @@ control_node/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/control_node.dir/build.make CMakeFiles/control_node.dir/build
 .PHONY : control_node/fast
 
-#=============================================================================
-# Target rules for targets named ego_velocity_state_listener
-
-# Build rule for target.
-ego_velocity_state_listener: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ego_velocity_state_listener
-.PHONY : ego_velocity_state_listener
-
-# fast build rule for target.
-ego_velocity_state_listener/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ego_velocity_state_listener.dir/build.make CMakeFiles/ego_velocity_state_listener.dir/build
-.PHONY : ego_velocity_state_listener/fast
-
 src/autonomous_driving_node.o: src/autonomous_driving_node.cpp.o
 .PHONY : src/autonomous_driving_node.o
 
@@ -371,30 +358,6 @@ src/driving_way_node.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/driving_way_node.dir/build.make CMakeFiles/driving_way_node.dir/src/driving_way_node.cpp.s
 .PHONY : src/driving_way_node.cpp.s
 
-src/get_ref.o: src/get_ref.cpp.o
-.PHONY : src/get_ref.o
-
-# target to build an object file
-src/get_ref.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ego_velocity_state_listener.dir/build.make CMakeFiles/ego_velocity_state_listener.dir/src/get_ref.cpp.o
-.PHONY : src/get_ref.cpp.o
-
-src/get_ref.i: src/get_ref.cpp.i
-.PHONY : src/get_ref.i
-
-# target to preprocess a source file
-src/get_ref.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ego_velocity_state_listener.dir/build.make CMakeFiles/ego_velocity_state_listener.dir/src/get_ref.cpp.i
-.PHONY : src/get_ref.cpp.i
-
-src/get_ref.s: src/get_ref.cpp.s
-.PHONY : src/get_ref.s
-
-# target to generate assembly for a file
-src/get_ref.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ego_velocity_state_listener.dir/build.make CMakeFiles/ego_velocity_state_listener.dir/src/get_ref.cpp.s
-.PHONY : src/get_ref.cpp.s
-
 src/trajectory_planner_node.o: src/trajectory_planner_node.cpp.o
 .PHONY : src/trajectory_planner_node.o
 
@@ -438,7 +401,6 @@ help:
 	@echo "... behavior_planner_node"
 	@echo "... control_node"
 	@echo "... driving_way_node"
-	@echo "... ego_velocity_state_listener"
 	@echo "... trajectory_planner_node"
 	@echo "... src/autonomous_driving_node.o"
 	@echo "... src/autonomous_driving_node.i"
@@ -452,9 +414,6 @@ help:
 	@echo "... src/driving_way_node.o"
 	@echo "... src/driving_way_node.i"
 	@echo "... src/driving_way_node.s"
-	@echo "... src/get_ref.o"
-	@echo "... src/get_ref.i"
-	@echo "... src/get_ref.s"
 	@echo "... src/trajectory_planner_node.o"
 	@echo "... src/trajectory_planner_node.i"
 	@echo "... src/trajectory_planner_node.s"

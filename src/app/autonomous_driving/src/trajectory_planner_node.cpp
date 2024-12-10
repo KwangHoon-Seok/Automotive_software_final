@@ -17,9 +17,9 @@ TrajectoryNode::TrajectoryNode(const std::string &node_name, const double &loop_
         "/ego/vehicle_state", 10,
         std::bind(&TrajectoryNode::CallbackVehicleState, this, std::placeholders::_1));
 
-    s_mission_state_ = this->create_subscription<ad_msgs::msg::Mission>(
-        "/ego/mission", 10,
-        std::bind(&TrajectoryNode::CallbackMissionState, this, std::placeholders::_1));
+    // s_mission_state_ = this->create_subscription<ad_msgs::msg::Mission>(
+    //     "/ego/mission", 10,
+    //     std::bind(&TrajectoryNode::CallbackMissionState, this, std::placeholders::_1));
 
     // Publishers
     p_trajectory_candidates_ = this->create_publisher<ad_msgs::msg::PolyfitLaneDataArray>(

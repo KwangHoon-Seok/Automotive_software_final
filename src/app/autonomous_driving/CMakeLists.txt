@@ -58,9 +58,6 @@ add_executable(control_node
     src/control_node.cpp    
 )
 
-add_executable(ego_velocity_state_listener
-    src/get_ref.cpp
-)
 ## Link libraries to the executable
 #------------------------ autonomous_driving_node-----------------------------#
 target_link_libraries(autonomous_driving_node
@@ -117,12 +114,7 @@ ament_target_dependencies(control_node
     ad_msgs
 )
 
-#------------------------ get_ref_node-----------------------------#
-ament_target_dependencies(ego_velocity_state_listener
-    rclcpp
-    std_msgs
-    ad_msgs
-)
+
 ## Install the executable
 install(TARGETS autonomous_driving_node
     DESTINATION lib/${PROJECT_NAME})
@@ -139,8 +131,7 @@ install(TARGETS trajectory_planner_node
 install(TARGETS control_node
     DESTINATION lib/${PROJECT_NAME})
 
-install(TARGETS ego_velocity_state_listener
-    DESTINATION lib/${PROJECT_NAME})
+
 
 
 # -----------------------------------------------#
