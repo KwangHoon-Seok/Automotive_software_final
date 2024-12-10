@@ -95,12 +95,12 @@ void ControlNode::Run() {
         // merge algorithm 실행 끝나면 merge flag = 1
         // merge flag 1 이면 break 되게끔 
     }
+    
+    o_vehicle_command_.accel = 0.0;
     o_vehicle_command_.steering = yaw;  // 조향각 0도로 직진
 
     // Publish Vehicle Command
     p_vehicle_command_->publish(o_vehicle_command_);
-
-
 }
 
 double ControlNode::computePID(double target_speed, double current_speed, double kp)

@@ -10,6 +10,10 @@ DrivingWayNode::DrivingWayNode(const std::string& node_name, const double& loop_
     s_lane_points_ = this->create_subscription<ad_msgs::msg::LanePointData>(
         "/ego/lane_points", qos_profile,
         std::bind(&DrivingWayNode::CallbackLanePoints, this, std::placeholders::_1));
+
+    s_behavior_state_ = this->create_subscription<std_msgs::msg::Float32>(
+        "/behavior_state", qos_profile, 
+        std::bind(&DrivingWayNode::CallbackBehaviorState, this, std::placeholders::_1));
     
     // Publishers
     p_driving_way_ = this->create_publisher<ad_msgs::msg::PolyfitLaneData>("/ego/driving_way", qos_profile);
@@ -29,42 +33,79 @@ DrivingWayNode::DrivingWayNode(const std::string& node_name, const double& loop_
 DrivingWayNode::~DrivingWayNode() {}
 
 void DrivingWayNode::Run(const rclcpp::Time& current_time) {
-    ad_msgs::msg::LanePointData lane_points;
-    {
-        std::lock_guard<std::mutex> lock(mutex_lane_points_);
-        lane_points = i_lane_points_;
-    }
+    
+    mutex_lane_points_.lock();
+    ad_msgs::msg::LanePointData lane_points = i_lane_points_;
+    mutex_lane_points_.unlock();
 
+    mutex_behavior_.lock();
+    std_msgs::msg::Float32 behavior_state = i_behavior_state_;
+    mutex_behavior_.unlock();
+    
+    
     if (lane_points.point.empty()) {
         // RCLCPP_WARN(this->get_logger(), "No lane points received. Skipping processing...");
         return;
     }
+    else{
+        // RCLCPP_INFO(this->get_logger(), " lane point size: %zu", lane_points.point.size());
+    }
 
     ad_msgs::msg::PolyfitLaneDataArray poly_lanes;
+    poly_lanes.frame_id = "ego/body";
     ad_msgs::msg::PolyfitLaneData driving_way;
-
-    lane_point_LEFT.point.clear();
-    lane_point_RIGHT.point.clear();
-    inliers_LEFT.point.clear();
-    inliers_RIGHT.point.clear();
-
+    driving_way.frame_id = "ego/body";
+    
+    
+    
     splitLanePoints(lane_points);
-    number_point = 8;
     process_lanes();
     populatePolyLanes(poly_lanes);
     populateCenterLane(driving_way);
-
+    lane_condition(driving_way, behavior_state);
+    
+    
     o_driving_way_ = driving_way;
     o_poly_lanes_ = poly_lanes;
 
+
     PublishDrivingWay(current_time);
 }
+// driving_way가 너무 꺾이면 error라고 생각해서 -> DBSCAN으로 분류
+
+
+void DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, const std_msgs::msg::Float32& behavior_state){
+
+    // is_error를 판별하는 조건문
+    if((driving_way.a3 > 0.1 || driving_way.a3 < -8.1) || (lane_point_LEFT.point.size() < 3 && lane_point_RIGHT.point.size() < 3) ){
+        is_error = true;
+        // is_pass = false;
+    }
+    else{
+        prev_driving_way_ = driving_way;
+        is_error = false;
+        // is_pass = false;
+    }
+
+    // if(behavior_state.data != 3.0){
+    //     if((lane_point_LEFT.point.size() < 10 && lane_point_RIGHT.point.size() > 10) || lane_point_LEFT.point.size() > 10 && lane_point_RIGHT.point.size() < 10){
+    //         is_pass = true;
+    //     }
+    // }
+
+    // RCLCPP_INFO(this->get_logger(), "is_error = %s", is_error ? "true" : "false");
+    lane_point_LEFT.point.clear();
+    lane_point_RIGHT.point.clear();
+}
+
+
 
 // Functions
 float DrivingWayNode::distance(const Point& a, const Point& b) {
     return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
 }
 
+// regionQuery 함수: 특정 점을 기준으로 epsilon 거리 내의 이웃 포인트들을 찾음
 std::vector<int> DrivingWayNode::regionQuery(const std::vector<Point>& points, int pointIdx, float epsilon) {
     std::vector<int> neighbors;
     for (size_t i = 0; i < points.size(); ++i) {
@@ -75,6 +116,7 @@ std::vector<int> DrivingWayNode::regionQuery(const std::vector<Point>& points, i
     return neighbors;
 }
 
+// expandCluster 함수: DBSCAN에서 클러스터 확장 수행
 void DrivingWayNode::expandCluster(std::vector<Point>& points, int pointIdx, int clusterID, float epsilon, size_t min_samples) {
     std::vector<int> seeds = regionQuery(points, pointIdx, epsilon);
     if (seeds.size() < min_samples) {
@@ -101,176 +143,191 @@ void DrivingWayNode::expandCluster(std::vector<Point>& points, int pointIdx, int
     }
 }
 
-void DrivingWayNode::splitLanePoints(const ad_msgs::msg::LanePointData& lane_points) {
-    float epsilon = 3.5;  // 밀도 거리
-    size_t min_samples = 3;  // 최소 포인트 개수
+void DrivingWayNode::splitLanePoints(const ad_msgs::msg::LanePointData& lane_points){
+    if(!is_init){
+        std::vector<geometry_msgs::msg::Point> points;
+        for (const auto& point : lane_points.point) {
+            // geometry_msgs::msg::Point 객체 생성
+            geometry_msgs::msg::Point new_point;
+            new_point.x = static_cast<float>(point.x);  // x 좌표 설정
+            new_point.y = static_cast<float>(point.y);  // y 좌표 설정
+            new_point.z = static_cast<float>(point.z);  // z 좌표 설정
 
-    // 1. lane_points를 vector<Point>로 변환
-    std::vector<Point> points;
-    for (const auto& point : lane_points.point) {
-        points.push_back({static_cast<float>(point.x), static_cast<float>(point.y), static_cast<float>(point.z)});
-    }
-
-    // 2. y > 0과 y < 0에 따라 가장 가까운 포인트(p0, p1)를 선택
-    Point p0, p1;
-    bool p0_found = false, p1_found = false;
-    float min_distance_p0 = std::numeric_limits<float>::max();
-    float min_distance_p1 = std::numeric_limits<float>::max();
-
-    for (const auto& point : points) {
-        float distance = std::hypot(point.x, point.y);
-        if (point.y > 0 && distance < min_distance_p0) {
-            min_distance_p0 = distance;
-            p0 = point;
-            p0_found = true;
-        } else if (point.y < 0 && distance < min_distance_p1) {
-            min_distance_p1 = distance;
-            p1 = point;
-            p1_found = true;
+            // 생성된 new_point를 points에 추가
+            points.push_back(new_point);
         }
-    }
+        
+        // 차량 좌표계 x축을 기준으로 sort
+        std::sort(points.begin(), points.end(), [](const Point& p1, const Point& p2){
+            return p1.x < p2.x;
+        });
 
-    // 3. 초기 좌/우 차선에 대해 클러스터링을 수행할 준비
-    lane_point_LEFT.point.clear();
-    lane_point_RIGHT.point.clear();
+        // // lane_point 초기화
+        // lane_point_LEFT.point.clear();
+        // lane_point_RIGHT.point.clear();
 
-    // 4. 좌측 차선 DBSCAN 시작 (p0 기준으로 expandCluster 호출)
-    if (p0_found) {
-        size_t p0_index = std::distance(points.begin(), std::find(points.begin(), points.end(), p0));
-        expandCluster(points, p0_index, 0, epsilon, min_samples); // 좌측 클러스터 ID는 0
-        geometry_msgs::msg::Point new_point;
-
-        for (const auto& point : points) {
-            if (point.cluster == 0) {  // 좌측 차선에 속하는 포인트
-                new_point.x = point.x;
-                new_point.y = point.y;
-                new_point.z = point.z;
-                lane_point_LEFT.point.push_back(new_point);
+        for(const auto & point : points){
+            if(point.y < 0){
+                lane_point_RIGHT.point.push_back(point);
+            }
+            else if(point.y > 0){
+                lane_point_LEFT.point.push_back(point);
             }
         }
+        is_init = true;
+        // RCLCPP_INFO(this->get_logger(), "[--1st--] Split Lane Points");
+        
     }
 
-    // 5. 우측 차선 DBSCAN 시작 (p1 기준으로 expandCluster 호출)
-    if (p1_found) {
-        size_t p1_index = std::distance(points.begin(), std::find(points.begin(), points.end(), p1));
-        expandCluster(points, p1_index, 1, epsilon, min_samples); // 우측 클러스터 ID는 1
-        geometry_msgs::msg::Point new_point;
+    else if (is_init && !is_error) {
+        std::vector<geometry_msgs::msg::Point> points;
+        for (const auto& point : lane_points.point) {
+            // geometry_msgs::msg::Point 객체 생성
+            geometry_msgs::msg::Point new_point;
+            new_point.x = static_cast<float>(point.x);  // x 좌표 설정
+            new_point.y = static_cast<float>(point.y);  // y 좌표 설정
+            new_point.z = static_cast<float>(point.z);  // z 좌표 설정
 
+            // 생성된 new_point를 points에 추가
+            points.push_back(new_point);
+        }
+        
+        // 차량 좌표계 x축을 기준으로 sort
+        std::sort(points.begin(), points.end(), [](const Point& p1, const Point& p2){
+            return p1.x < p2.x;
+        });
+
+        // // lane_point 초기화
+        // lane_point_LEFT.point.clear();
+        // lane_point_RIGHT.point.clear();
+
+        // prev_driving_way_를 기반으로 차선 분류
+        float distance;
         for (const auto& point : points) {
-            if (point.cluster == 1) {  // 우측 차선에 속하는 포인트
-                
-                new_point.x = point.x;
-                new_point.y = point.y;
-                new_point.z = point.z;
-                lane_point_RIGHT.point.push_back(new_point);
+            float x = point.x;
+            float y = point.y;
+
+            // prev_driving_way_의 계수를 사용하여 도로 경로의 Y 값을 계산
+            float Y_poly = prev_driving_way_.a3 * std::pow(x, 3) +
+                           prev_driving_way_.a2 * std::pow(x, 2) +
+                           prev_driving_way_.a1 * x +
+                           prev_driving_way_.a0;
+
+            // 도로 경로에 대한 Y 값에 따라 좌측과 우측 차선 분류
+            distance = abs(Y_poly - y);
+            if (distance < 2.2) {
+                if (y < Y_poly) {
+                    // y가 도로 경로보다 크면 우측 차선
+                    lane_point_RIGHT.point.push_back(point);
+                }
+                else if (y > Y_poly) {
+                    // y가 도로 경로보다 작으면 좌측 차선
+                    lane_point_LEFT.point.push_back(point);
+                }
             }
         }
+
+        // RCLCPP_INFO(this->get_logger(), "[--2st--] Split Lane Points with prev_driving_way_");
     }
 
-    // RCLCPP_INFO(this->get_logger(), "Lane points split using DBSCAN with initial points p0 and p1.");
+    else if(is_init && is_error){
+        float epsilon = 3.5;  // 밀도 거리
+        size_t min_samples = 3;  // 최소 포인트 개수
+
+        // 1. lane_points를 vector<Point>로 변환
+        std::vector<Point> points;
+        for (const auto& point : lane_points.point) {
+            points.push_back({static_cast<float>(point.x), static_cast<float>(point.y), static_cast<float>(point.z)});
+        }
+
+        // 2. y > 0과 y < 0에 따라 가장 가까운 포인트(p0, p1)를 선택
+        Point p0, p1;
+        bool p0_found = false, p1_found = false;
+        float min_distance_p0 = std::numeric_limits<float>::max();
+        float min_distance_p1 = std::numeric_limits<float>::max();
+
+        for (const auto& point : points) {
+            float distance = std::hypot(point.x, point.y);
+            if (point.y > 0 && distance < min_distance_p0) {
+                min_distance_p0 = distance;
+                p0 = point;
+                p0_found = true;
+            } else if (point.y < 0 && distance < min_distance_p1) {
+                min_distance_p1 = distance;
+                p1 = point;
+                p1_found = true;
+            }
+        }
+
+        // 3. 초기 좌/우 차선에 대해 클러스터링을 수행할 준비
+        // lane_point_LEFT.point.clear();
+        // lane_point_RIGHT.point.clear();
+
+        // 4. 좌측 차선 DBSCAN 시작 (p0 기준으로 expandCluster 호출)
+        if (p0_found) {
+            size_t p0_index = std::distance(points.begin(), std::find(points.begin(), points.end(), p0));
+            expandCluster(points, p0_index, 0, epsilon, min_samples); // 좌측 클러스터 ID는 0
+            geometry_msgs::msg::Point new_point;
+
+            for (const auto& point : points) {
+                if (point.cluster == 0) {  // 좌측 차선에 속하는 포인트
+                    new_point.x = point.x;
+                    new_point.y = point.y;
+                    new_point.z = point.z;
+                    lane_point_LEFT.point.push_back(new_point);
+                }
+            }
+        }
+
+        // 5. 우측 차선 DBSCAN 시작 (p1 기준으로 expandCluster 호출)
+        if (p1_found) {
+            size_t p1_index = std::distance(points.begin(), std::find(points.begin(), points.end(), p1));
+            expandCluster(points, p1_index, 1, epsilon, min_samples); // 우측 클러스터 ID는 1
+            geometry_msgs::msg::Point new_point;
+
+            for (const auto& point : points) {
+                if (point.cluster == 1) {  // 우측 차선에 속하는 포인트
+                    
+                    new_point.x = point.x;
+                    new_point.y = point.y;
+                    new_point.z = point.z;
+                    lane_point_RIGHT.point.push_back(new_point);
+                }
+            }
+        }
+
+        // RCLCPP_INFO(this->get_logger(), "Lane points split using DBSCAN with initial points p0 and p1.");
+    }
+    
+
+
 }
 
 void DrivingWayNode::process_lanes() {
-    // RCLCPP_INFO(this->get_logger(), "[1-3] Processing Lanes");
+    
+    num_points_LEFT = lane_point_LEFT.point.size();
+    num_points_RIGHT = lane_point_RIGHT.point.size();
+    X_LEFT.resize(num_points_LEFT);
+    Y_LEFT.resize(num_points_LEFT);
+    X_RIGHT.resize(num_points_RIGHT);
+    Y_RIGHT.resize(num_points_RIGHT);
 
-    // RANSAC을 통해 각 차선의 inliers를 계산합니다.
-   
-    applyRANSAC(lane_point_LEFT, inliers_LEFT);
-    applyRANSAC(lane_point_RIGHT, inliers_RIGHT);
-
-
-    // 오른쪽 차선의 inliers로부터 A_RIGHT 계산
-    if (inliers_RIGHT.point.size() > 0) {
-        // x 좌표 기준으로 정렬
-        std::sort(inliers_RIGHT.point.begin(), inliers_RIGHT.point.end(),
-                  [](const geometry_msgs::msg::Point& a, const geometry_msgs::msg::Point& b) {
-                      return a.x < b.x;
-                  });
-
-        // 일정 간격으로 포인트를 추출
-        size_t interval = inliers_RIGHT.point.size() / number_point;
-        num_points_RIGHT = number_point;
-        X_RIGHT.resize(num_points_RIGHT);
-        Y_RIGHT.resize(num_points_RIGHT);
-
-        for (size_t i = 0; i < number_point; ++i) {
-            X_RIGHT(i) = inliers_RIGHT.point[i * interval].x;
-            Y_RIGHT(i) = inliers_RIGHT.point[i * interval].y;
-        }
-        
-        A_RIGHT = calculateA(X_RIGHT, Y_RIGHT);
-        // RCLCPP_INFO(this->get_logger(), "[1-5] RIGHT LANE A: [%s]", this->Vector4dToString(A_RIGHT).c_str());
-    } else {
-        // RCLCPP_WARN(this->get_logger(), "No inliers found for RIGHT lane.");
+    for (size_t i = 0; i < num_points_LEFT; ++i) {
+        X_LEFT(i) = lane_point_LEFT.point[i].x;
+        Y_LEFT(i) = lane_point_LEFT.point[i].y;
     }
 
-    // 왼쪽 차선의 inliers로부터 A_LEFT 계산
-    if (inliers_LEFT.point.size() > 0) {
-        // x 좌표 기준으로 정렬
-        std::sort(inliers_LEFT.point.begin(), inliers_LEFT.point.end(),
-                  [](const geometry_msgs::msg::Point& a, const geometry_msgs::msg::Point& b) {
-                      return a.x < b.x;
-                  });
-
-        // 일정 간격으로 포인트를 추출
-        size_t interval = inliers_LEFT.point.size() / number_point;
-        num_points_LEFT = number_point;
-        X_LEFT.resize(num_points_LEFT);
-        Y_LEFT.resize(num_points_LEFT);
-
-        for (size_t i = 0; i < number_point; ++i) {
-            X_LEFT(i) = inliers_LEFT.point[i * interval].x;
-            Y_LEFT(i) = inliers_LEFT.point[i * interval].y;
-        }
-        
+    for (size_t i = 0; i < num_points_RIGHT; ++i) {
+        X_RIGHT(i) = lane_point_RIGHT.point[i].x;
+        Y_RIGHT(i) = lane_point_RIGHT.point[i].y;
+    }
+    if (X_LEFT.size() >= 4 && X_RIGHT.size() >= 4){
         A_LEFT = calculateA(X_LEFT, Y_LEFT);
-        
-    } else {
-        // RCLCPP_WARN(this->get_logger(), "No inliers found for LEFT lane.");
+        A_RIGHT = calculateA(X_RIGHT, Y_RIGHT);
     }
-}
+    // RCLCPP_INFO(this->get_logger(), "Number of points in LEFT lane: %zu", lane_point_LEFT.point.size());
+    // RCLCPP_WARN(this->get_logger(), "Number of points in RIGHT lane: %zu", lane_point_RIGHT.point.size());
 
-void DrivingWayNode::applyRANSAC(ad_msgs::msg::LanePointData& lane_points, ad_msgs::msg::LanePointData& inliers, int maxIterations, double distanceThreshold) {
-    if (lane_points.point.size() < 4) {  // 최소 네 개의 포인트가 필요
-        // RCLCPP_WARN(this->get_logger(), "Not enough points for cubic RANSAC.");
-        return;
-    }
-
-    std::vector<geometry_msgs::msg::Point>& points = lane_points.point;
-    std::vector<geometry_msgs::msg::Point> bestInliers;
-    srand(static_cast<unsigned>(time(0)));  // 시드 초기화
-
-    for (int i = 0; i < maxIterations; ++i) {
-        // 포인트 중에서 랜덤하게 4개 선택
-        int idx1 = rand() % points.size();
-        int idx2 = rand() % points.size();
-        int idx3 = rand() % points.size();
-        int idx4 = rand() % points.size();
-        while (idx2 == idx1) idx2 = rand() % points.size();
-        while (idx3 == idx1 || idx3 == idx2) idx3 = rand() % points.size();
-        while (idx4 == idx1 || idx4 == idx2 || idx4 == idx3) idx4 = rand() % points.size();
-
-        // 3차 함수 모델을 계산
-        auto [a, b, c, d] = computeCubicModel(points[idx1], points[idx2], points[idx3], points[idx4]);
-
-        // 인라이어를 찾음
-        std::vector<geometry_msgs::msg::Point> currentInliers;
-        for (const auto& point : points) {
-            if (pointToCubicDistance(point, a, b, c, d) < distanceThreshold) {
-                currentInliers.push_back(point);
-            }
-        }
-
-        // 더 많은 인라이어를 가진 모델을 저장
-        if (currentInliers.size() > bestInliers.size()) {
-            bestInliers = currentInliers;
-        }
-    }
-
-    inliers.point = bestInliers;
-
-    // 디버깅 로그
-    // RCLCPP_INFO(this->get_logger(), "RANSAC with cubic model: Number of inliers = %zu", inliers.point.size());
 }
 
 std::tuple<double, double, double, double> DrivingWayNode::computeCubicModel(
@@ -365,7 +422,7 @@ void DrivingWayNode::populateCenterLane(ad_msgs::msg::PolyfitLaneData& driving_w
     driving_way.a1 = A_MID(1);  // a1 계수
     driving_way.a2 = A_MID(2);  // a2 계수
     driving_way.a3 = A_MID(3);  // a3 계수
-
+    // 석광훈 
 }
 
 //-------------------------------------------------------------------------------------------------------------------//
@@ -385,4 +442,3 @@ int main(int argc, char **argv) {
     rclcpp::shutdown();
     return 0;
 }
-

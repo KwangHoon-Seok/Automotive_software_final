@@ -53,6 +53,9 @@ Display::Display(const std::string& node_name, const rclcpp::NodeOptions& option
     s_driving_way_ = this->create_subscription<ad_msgs::msg::PolyfitLaneData> (
         "driving_way", qos_profile, std::bind(&Display::CallbackDrivingWay, this, std::placeholders::_1));
     
+    s_local_path_ = this->create_subscription<ad_msgs::msg::PolyfitLaneDataArray> (
+        "/ego/local_path_array", qos_profile, std::bind(&Display::CallbackLocalPath, this, std::placeholders::_1));
+
     // Publisher init
     p_vehicle_marker_ = this->create_publisher<visualization_msgs::msg::Marker> (
         "vehicle_marker", qos_profile);
@@ -70,6 +73,9 @@ Display::Display(const std::string& node_name, const rclcpp::NodeOptions& option
         "polyfit_lanes_marker", qos_profile);
     p_driving_way_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
         "driving_way_marker", qos_profile);
+
+    p_local_path_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
+        "local_path_marker", qos_profile);
 
     // Timer init
     t_run_node_ = this->create_wall_timer(
@@ -142,6 +148,13 @@ void Display::Run() {
         }
     }
     
+    // ad_msgs::msg::PolyfitLaneData local_path; {
+    //     if (b_is_local_path_ == true){
+    //         std::lock_guard<std::mutex> lock(mutex_local_path_);
+    //         local_path = i_local_path_;
+    //     }
+    // }
+    
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
     // Algorithm
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - // 
@@ -185,6 +198,19 @@ void Display::Run() {
         if ((current_time.seconds() - time_driving_way_marker_) > 0.2) {
             time_driving_way_marker_ = current_time.seconds();
             DisplayDrivingWay(driving_way, current_time, 0.1, 30.0);
+        }
+    }
+
+    // if (b_is_local_path_ == true) {
+    //     if ((current_time.seconds() - time_local_path_marker_) > 0.2) {
+    //         time_local_path_marker_ = current_time.seconds();
+    //         DisplayLocalPath(i_local_path_, current_time, 0.1, 50.0);
+    //     }
+    // }
+    if (b_is_local_path_ == true) {
+        if ((current_time.seconds() - time_local_path_marker_) > 0.2) {
+            time_local_path_marker_ = current_time.seconds();
+            DisplayLocalPath(i_local_path_, current_time, 0.1, vehicle_state);
         }
     }
 }
@@ -635,6 +661,82 @@ void Display::DisplayCsvLanes(const ad_msgs::msg::LanePointDataArray& csv_lanes,
     }
     p_csv_lanes_marker_->publish(markerArray);
 }
+
+void Display::DisplayLocalPath(const ad_msgs::msg::PolyfitLaneDataArray& local_path_array,
+                                const rclcpp::Time& current_time,
+                                const double& interval,
+                                const ad_msgs::msg::VehicleState& vehicle_state) {
+    if (local_path_array.polyfitlanes.empty()) {
+        RCLCPP_WARN(this->get_logger(),"No local paths available in the received data.");
+        return;
+    }
+    // yaw 및 차량 위치 정보 추출
+    double yaw = static_cast<double>(vehicle_state.yaw);
+    double vehicle_x = vehicle_state.x;
+    double vehicle_y = vehicle_state.y;
+    
+    // 초기화                   // x 시작점
+    double x_max = 40.0;                // x의 최대값 설정 (필요에 따라 변경 가능)
+    static int base_id = 40000;          // ID 충돌 방지
+    
+    visualization_msgs::msg::MarkerArray markerArray;
+
+    for (const auto& local_path : local_path_array.polyfitlanes) {
+        double a0 = local_path.a0;
+        double a1 = local_path.a1;
+        double a2 = local_path.a2;
+        double a3 = local_path.a3;
+
+        double x = 0.0;    
+        while (x <= x_max) {
+            double y = a0 + a1 * x + a2 * x * x + a3 * x * x * x;
+            visualization_msgs::msg::Marker marker;
+            marker.header.frame_id = local_path.frame_id;
+            marker.header.stamp = current_time;
+            marker.ns = local_path.id;
+            marker.id = base_id++;
+            
+            marker.type = visualization_msgs::msg::Marker::CYLINDER;
+            marker.action = visualization_msgs::msg::Marker::ADD;
+
+            marker.pose.position.x = x;
+            marker.pose.position.y = y;
+            marker.pose.position.z = 0.0;
+            marker.pose.orientation.x = 0.0;
+            marker.pose.orientation.y = 0.0;
+            marker.pose.orientation.z = 0.1;
+            marker.pose.orientation.w = 1.0;
+            
+            marker.color.r = 0.0f;
+            marker.color.g = 0.0f;
+            marker.color.b = 1.0f; // 파란색
+            marker.color.a = 1.0;
+            marker.scale.x = 0.2;
+            marker.scale.y = 0.2;
+            marker.scale.z = 0.2;
+
+            // 수명 설정
+            marker.lifetime = rclcpp::Duration(0, int64_t(0.2 * 1e9));
+
+            // 마커 배열에 추가
+            markerArray.markers.push_back(marker);
+
+            // x 증가
+            x += interval;
+        }
+    }
+    // ID 갱신
+    base_id += markerArray.markers.size(); // 다음 호출에서 ID 충돌 방지
+
+    // 마커 퍼블리시
+    p_local_path_marker_->publish(markerArray);
+
+    // 디버깅 로그
+    // RCLCPP_INFO(this->get_logger(), "Published %d markers for local_path", markerArray.markers.size());
+}
+
+
+
 
 int main(int argc, char **argv) {
     std::string node_name = "display";

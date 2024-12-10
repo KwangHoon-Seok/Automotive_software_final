@@ -743,5 +743,7 @@ CMakeFiles/display.dir/src/display/display_node.cpp.o
  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float32__struct.hpp
  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float32__builder.hpp
  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float32__traits.hpp
+ /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/polyfit_lane_data.hpp
+ /home/seok/automotive_software_final/install/ad_msgs/include/ad_msgs/ad_msgs/msg/detail/polyfit_lane_data__builder.hpp
  /home/seok/automotive_software_final/src/app/simulator/include/display/display_config.hpp
 

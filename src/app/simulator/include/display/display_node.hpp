@@ -47,6 +47,7 @@
 #include <visualization_msgs/msg/marker_array.hpp>
 #include <std_msgs/msg/color_rgba.hpp>
 #include <std_msgs/msg/float32.hpp>
+#include <ad_msgs/msg/polyfit_lane_data.hpp>
 
 // Parameter Header
 #include "display/display_config.hpp"
@@ -93,6 +94,13 @@ class Display : public rclcpp::Node {
             b_is_driving_way_ = true;
         }
 
+        // MY Callback
+        inline void CallbackLocalPath(const ad_msgs::msg::PolyfitLaneDataArray::SharedPtr msg) {
+            i_local_path_ = *msg;
+            b_is_local_path_ = true;
+            RCLCPP_INFO(this->get_logger(), "Callback local path");
+        }
+
         // Algorithm function
         void DisplayVehicle(const ad_msgs::msg::VehicleState& vehicle_state,
                             const rclcpp::Time& current_time,
@@ -113,7 +121,14 @@ class Display : public rclcpp::Node {
                                const double& interval, const double& ROILength);
         void DisplayCsvLanes(const ad_msgs::msg::LanePointDataArray& csv_lanes,
                              const rclcpp::Time& current_time);
-        
+        // MY display
+        // void DisplayLocalPath(const ad_msgs::msg::PolyfitLaneData& local_path,
+        //                     const rclcpp::Time& current_time,
+        //                     const double& interval, const double& ROILength);
+        void DisplayLocalPath(const ad_msgs::msg::PolyfitLaneDataArray& local_path,
+                                const rclcpp::Time& current_time,
+                                const double& interval,
+                                const ad_msgs::msg::VehicleState& vehicle_state);
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
         // Variable
 
@@ -125,6 +140,7 @@ class Display : public rclcpp::Node {
         rclcpp::Subscription<ad_msgs::msg::LanePointData>::SharedPtr        s_lane_points_;
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr s_poly_lanes_;
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneData>::SharedPtr      s_driving_way_;
+        rclcpp::Subscription<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr      s_local_path_;
 
         // Input
         ad_msgs::msg::VehicleState          i_vehicle_state_;
@@ -134,6 +150,7 @@ class Display : public rclcpp::Node {
         ad_msgs::msg::LanePointDataArray    i_roi_lanes_;
         ad_msgs::msg::PolyfitLaneDataArray  i_poly_lanes_;
         ad_msgs::msg::PolyfitLaneData       i_driving_way_;
+        ad_msgs::msg::PolyfitLaneDataArray       i_local_path_;
 
         // Mutex
         std::mutex mutex_vehicle_state_;
@@ -143,7 +160,8 @@ class Display : public rclcpp::Node {
         std::mutex mutex_roi_lanes_;
         std::mutex mutex_poly_lanes_;
         std::mutex mutex_driving_way_;
-        
+        std::mutex mutex_local_path_;
+
         // Publisher
         rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr       p_vehicle_marker_;
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_mission_marker_;
@@ -153,6 +171,7 @@ class Display : public rclcpp::Node {
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_roi_lanes_marker_;
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_poly_lanes_marker_;
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_driving_way_marker_;
+        rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_local_path_marker_;
 
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;
@@ -168,6 +187,7 @@ class Display : public rclcpp::Node {
         bool b_is_lane_points_      = false;
         bool b_is_poly_lanes_       = false;
         bool b_is_driving_way_      = false;
+        bool b_is_local_path_       = false;
 
         // Global Variable
         double time_vehicle_marker_ = 0.0;
@@ -176,6 +196,7 @@ class Display : public rclcpp::Node {
         double time_lane_points_marker_ = 0.0;
         double time_poly_lanes_marker_ = 0.0;
         double time_driving_way_marker_ = 0.0;
+        double time_local_path_marker_ = 0.0;
 };
 
 #endif // __DISPLAY_NODE_HPP__

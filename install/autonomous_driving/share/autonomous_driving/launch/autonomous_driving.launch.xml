@@ -21,9 +21,9 @@
     </node>
     
     <!-- Trajectory Planner Node 실행 -->
-    <!-- <node pkg="autonomous_driving" exec="trajectory_planner_node" name="trajectory_planner_node" namespace="$(var ns1)" output="screen">
+    <node pkg="autonomous_driving" exec="trajectory_planner_node" name="trajectory_planner_node" namespace="$(var ns1)" output="screen">
         <param name="trajectory_planner_node/loop_rate_hz" value="$(var loop_rate_hz)"/>
-    </node> -->
+    </node>
 
     <!-- Control Node 실행 -->
     <node pkg="autonomous_driving" exec="control_node" name="control_node" namespace="$(var ns1)" output="screen">

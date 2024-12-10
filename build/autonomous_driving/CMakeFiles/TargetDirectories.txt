@@ -5,6 +5,7 @@
 /home/seok/automotive_software_final/build/autonomous_driving/CMakeFiles/behavior_planner_node.dir
 /home/seok/automotive_software_final/build/autonomous_driving/CMakeFiles/trajectory_planner_node.dir
 /home/seok/automotive_software_final/build/autonomous_driving/CMakeFiles/control_node.dir
+/home/seok/automotive_software_final/build/autonomous_driving/CMakeFiles/ego_velocity_state_listener.dir
 /home/seok/automotive_software_final/build/autonomous_driving/CMakeFiles/test.dir
 /home/seok/automotive_software_final/build/autonomous_driving/CMakeFiles/edit_cache.dir
 /home/seok/automotive_software_final/build/autonomous_driving/CMakeFiles/rebuild_cache.dir
