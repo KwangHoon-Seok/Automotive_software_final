@@ -320,8 +320,8 @@ void DrivingWayNode::process_lanes() {
     geometry_msgs::msg::Point sub_point;
     if (lane_point_LEFT.point.size() + lane_point_RIGHT.point.size() < 25){
         RCLCPP_INFO(this->get_logger(), " Sub LANE ");
-        for (int i = 0; i <= 10; ++i) { // 0부터 4까지 총 5개 점 생성
-            float x = i * (3.0 / 10.0); // 0, 0.75, 1.5, 2.25, 3의 값 생성
+        for (int i = 0; i <= 20; ++i) { 
+            float x = i * (10.0 / 20.0); 
             float y = A_LEFT(0) * std::pow(x, 3) +
                     A_LEFT(1) * std::pow(x, 2) +
                     A_LEFT(2) * x +
@@ -334,8 +334,8 @@ void DrivingWayNode::process_lanes() {
             sub_lane_point_LEFT_.point.push_back(sub_point);
         }
 
-        for (int i = 0; i <= 10; ++i) { // 0부터 4까지 총 5개 점 생성
-            float x = i * (3.0 / 10.0); // 0, 0.75, 1.5, 2.25, 3의 값 생성
+        for (int i = 0; i <= 20; ++i) { 
+            float x = i * (10.0 / 20.0); 
             float y = A_RIGHT(0) * std::pow(x, 3) +
                     A_RIGHT(1) * std::pow(x, 2) +
                     A_RIGHT(2) * x +
