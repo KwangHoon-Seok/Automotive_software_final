@@ -100,7 +100,18 @@ class Display : public rclcpp::Node {
             b_is_local_path_ = true;
             RCLCPP_INFO(this->get_logger(), "Callback local path");
         }
-
+        inline void CallbackMotion(const ad_msgs::msg::Mission::SharedPtr msg) {
+            i_motion_ = *msg;
+            b_is_motion_ = true;
+        }
+        inline void CallbackEgoMotion(const ad_msgs::msg::Mission::SharedPtr msg) {
+            i_ego_motion_ = *msg;
+            b_is_ego_motion_ = true;
+        }
+        inline void CallbackBestPath(const ad_msgs::msg::PolyfitLaneData::SharedPtr msg) {
+            i_best_path_ = *msg;
+            b_is_best_path_ = true;
+        }
         // Algorithm function
         void DisplayVehicle(const ad_msgs::msg::VehicleState& vehicle_state,
                             const rclcpp::Time& current_time,
@@ -129,6 +140,17 @@ class Display : public rclcpp::Node {
                                 const rclcpp::Time& current_time,
                                 const double& interval,
                                 const ad_msgs::msg::VehicleState& vehicle_state);
+
+        void DisplayMotion(const ad_msgs::msg::Mission& motion,
+                             const ad_msgs::msg::VehicleState& vehicle_state,
+                             const rclcpp::Time& current_time);
+
+        void DisplayEgoMotion(const ad_msgs::msg::Mission& ego_motion,
+                                    const ad_msgs::msg::VehicleState& vehicle_state,
+                                    const rclcpp::Time& current_time);
+        void DisplayBestPath(const ad_msgs::msg::PolyfitLaneData& best_path,
+                            const rclcpp::Time& current_time);
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
         // Variable
 
@@ -141,6 +163,9 @@ class Display : public rclcpp::Node {
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr s_poly_lanes_;
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneData>::SharedPtr      s_driving_way_;
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr      s_local_path_;
+        rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr              s_motion_;
+        rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr              s_ego_motion_;
+        rclcpp::Subscription<ad_msgs::msg::PolyfitLaneData>::SharedPtr      s_best_path_;
 
         // Input
         ad_msgs::msg::VehicleState          i_vehicle_state_;
@@ -151,6 +176,9 @@ class Display : public rclcpp::Node {
         ad_msgs::msg::PolyfitLaneDataArray  i_poly_lanes_;
         ad_msgs::msg::PolyfitLaneData       i_driving_way_;
         ad_msgs::msg::PolyfitLaneDataArray       i_local_path_;
+        ad_msgs::msg::Mission               i_motion_;
+        ad_msgs::msg::Mission               i_ego_motion_;
+        ad_msgs::msg::PolyfitLaneData       i_best_path_;
 
         // Mutex
         std::mutex mutex_vehicle_state_;
@@ -161,6 +189,9 @@ class Display : public rclcpp::Node {
         std::mutex mutex_poly_lanes_;
         std::mutex mutex_driving_way_;
         std::mutex mutex_local_path_;
+        std::mutex mutex_motion_;
+        std::mutex mutex_ego_motion_;
+        std::mutex mutex_best_path_;
 
         // Publisher
         rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr       p_vehicle_marker_;
@@ -172,6 +203,9 @@ class Display : public rclcpp::Node {
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_poly_lanes_marker_;
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_driving_way_marker_;
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_local_path_marker_;
+        rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_motion_marker_;
+        rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_ego_motion_marker_;
+        rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_best_path_marker_;
 
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;
@@ -188,7 +222,9 @@ class Display : public rclcpp::Node {
         bool b_is_poly_lanes_       = false;
         bool b_is_driving_way_      = false;
         bool b_is_local_path_       = false;
-
+        bool b_is_motion_           = false;
+        bool b_is_ego_motion_       = false;
+        bool b_is_best_path_        = false;
         // Global Variable
         double time_vehicle_marker_ = 0.0;
         double time_csv_lanes_marker_ = 0.0;

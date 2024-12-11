@@ -62,6 +62,7 @@ class ControlNode : public rclcpp::Node {
         rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_lead_distance_;
         rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_behavior_state_;
         rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_ref_vel_;
+        rclcpp::Subscription<ad_msgs::msg::PolyfitLaneData>::SharedPtr s_merge_path_;
 
         // Callback Functions
         inline void CallbackVehicleState(const ad_msgs::msg::VehicleState::SharedPtr msg) {
@@ -79,6 +80,7 @@ class ControlNode : public rclcpp::Node {
         inline void CallbackLeadDistance(const std_msgs::msg::Float32::SharedPtr msg) {
             std::lock_guard<std::mutex> lock(mutex_lead_distance_);
             i_lead_distance_ = *msg;
+            // RCLCPP_INFO(this->get_logger(), "그렇다면 나는?");
         }
         inline void CallbackBehaviorState(const std_msgs::msg::Float32::SharedPtr msg) {
             std::lock_guard<std::mutex> lock(mutex_behavior_state_);
@@ -88,7 +90,11 @@ class ControlNode : public rclcpp::Node {
             std::lock_guard<std::mutex> lock(mutex_ref_vel_);
             i_ref_vel_ = *msg;
         }
-
+        inline void CallbackMergePath(const ad_msgs::msg::PolyfitLaneData::SharedPtr msg) {
+            std::lock_guard<std::mutex> lock(mutex_merge_path_);
+            i_merge_path_ = *msg;
+            RCLCPP_INFO(this->get_logger(), "제발 나 좀 받아와라");
+        }
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;
 
@@ -99,6 +105,7 @@ class ControlNode : public rclcpp::Node {
         std_msgs::msg::Float32 i_lead_distance_;
         std_msgs::msg::Float32 i_behavior_state_;
         std_msgs::msg::Float32 i_ref_vel_;
+        ad_msgs::msg::PolyfitLaneData i_merge_path_;
 
         // Outputs 
         ad_msgs::msg::VehicleCommand o_vehicle_command_;
@@ -110,5 +117,6 @@ class ControlNode : public rclcpp::Node {
         std::mutex mutex_lead_distance_;
         std::mutex mutex_behavior_state_;
         std::mutex mutex_ref_vel_;
-};
+        std::mutex mutex_merge_path_;
+};  
 #endif

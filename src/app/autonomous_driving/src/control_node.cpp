@@ -24,6 +24,10 @@ ControlNode::ControlNode(const std::string& node_name, const double& loop_rate,
     s_ref_vel_ = this->create_subscription<std_msgs::msg::Float32>(
         "/ego/ref_vel", qos_profile,
         std::bind(&ControlNode::CallbackRefVel, this, std::placeholders::_1));
+    s_merge_path_ = this->create_subscription<ad_msgs::msg::PolyfitLaneData>(
+        "/ego/merge_path", qos_profile,
+        std::bind(&ControlNode::CallbackMergePath, this, std::placeholders::_1));
+
 
     // Publisher
     p_vehicle_command_ = this->create_publisher<ad_msgs::msg::VehicleCommand>("/ego/vehicle_command", qos_profile);
@@ -43,6 +47,7 @@ void ControlNode::Run() {
     std::lock_guard<std::mutex> lock_vehicle_state(mutex_vehicle_state_);
     std::lock_guard<std::mutex> lock_ref_vel(mutex_ref_vel_);
     std::lock_guard<std::mutex> lock_behavior_state(mutex_behavior_state_);
+    std::lock_guard<std::mutex> lock_merge_path(mutex_merge_path_);
 
     ad_msgs::msg::VehicleState vehicle_state = i_vehicle_state_;
     std_msgs::msg::Float32 behavior_state_float = i_behavior_state_;
@@ -50,10 +55,11 @@ void ControlNode::Run() {
     std_msgs::msg::Float32 ref_vel_float = i_ref_vel_;
     double target_speed = static_cast<double>(ref_vel_float.data);
     std_msgs::msg::Float32 lead_distance_float = i_lead_distance_;
+    ad_msgs::msg::PolyfitLaneData merge_path = i_merge_path_;
     double lead_distance = static_cast<double>(lead_distance_float.data);
     double target_distance = 15;
     double control_signal;
-    
+//---------------------------------REF_VEL_TRACKING---------------------------------------//
     if (drive_mode == REF_VEL_TRACKING)
     {
         control_signal = computePID(5, vehicle_state.velocity, 0.6);
@@ -67,7 +73,7 @@ void ControlNode::Run() {
         }
         yaw = PurePursuit(i_driving_way_);
     }
-
+//--------------------------------------ACC--------------------------------------------------//
     if (drive_mode == ACC)
     {
         control_signal = computePID_ACC(target_distance, lead_distance, 0.25);
@@ -81,23 +87,86 @@ void ControlNode::Run() {
         }
         yaw = PurePursuit(i_driving_way_);
     }
-
+//------------------------------------AEB-------------------------------------------//
     if (drive_mode == AEB)
     {
         o_vehicle_command_.accel = 0.0;
         o_vehicle_command_.brake = 0.0;
     }
 
-    if (drive_mode == MERGE)
-    {
-        // merge flag = 0
-        // merge algorithm 실행
-        // merge algorithm 실행 끝나면 merge flag = 1
-        // merge flag 1 이면 break 되게끔 
+//------------------------------------MERGE------------------------------------------//
+    if (drive_mode == MERGE) {
+        static bool merge_completed = false;
+        static bool path_initialized = false;
+        static ad_msgs::msg::PolyfitLaneData tracked_path; // 유효한 경로를 저장
+
+        // 반복문 외부에서 vehicle_state와 target_x 설정
+        ad_msgs::msg::VehicleState current_vehicle_state = i_vehicle_state_;
+        double target_x = current_vehicle_state.x + 5.0;
+
+        // 유효한 경로가 올 때까지 정지
+        while (!path_initialized) {
+            
+            if ((merge_path.id == "5")) {
+                tracked_path = merge_path;
+                path_initialized = true;
+                RCLCPP_INFO(this->get_logger(), "Valid path received. Starting merge with path ID: %s", tracked_path.id.c_str());
+            } else {
+                o_vehicle_command_.accel = 0.0;
+                o_vehicle_command_.brake = 1.0;
+                o_vehicle_command_.steering = 0.0;
+                p_vehicle_command_->publish(o_vehicle_command_);  
+                RCLCPP_WARN(this->get_logger(), "Waiting for a valid path...");
+                rclcpp::Rate(0.1).sleep();
+            }
+        }
+
+        // 병합 동작
+        while (!merge_completed) {
+            double current_x = current_vehicle_state.x;
+
+            if (current_x >= target_x) { // 목표 지점 도달 확인
+                merge_completed = true;
+                RCLCPP_INFO(this->get_logger(), "Merge completed. Switching to next mode.");
+                break;
+            }
+
+            // 속도 제어 및 경로 추적
+            double control_signal = computePID(10, current_vehicle_state.velocity, 0.6);
+            if (control_signal > 0) {
+                o_vehicle_command_.accel = std::min(control_signal, 0.5);
+                o_vehicle_command_.brake = 0.0;
+            } else {
+                o_vehicle_command_.accel = 0.0;
+                o_vehicle_command_.brake = std::min(-control_signal, max_brake);
+            }
+
+            yaw = PurePursuit(tracked_path);
+            o_vehicle_command_.steering = yaw;
+
+            // 병합 도중 behavior_state 변경 방지
+            if (drive_mode != MERGE) {
+                RCLCPP_WARN(this->get_logger(), "Behavior state changed during merging. Forcing MERGE mode.");
+                drive_mode = MERGE; // 병합 모드 유지
+            }
+
+            p_vehicle_command_->publish(o_vehicle_command_);
+            rclcpp::Rate(10).sleep(); // 루프 속도 조절
+        }
+
+        // 병합 완료 후 제동
+        if (merge_completed) {
+            o_vehicle_command_.accel = 0.0;
+            o_vehicle_command_.brake = 1.0;
+            o_vehicle_command_.steering = 0.0;
+            p_vehicle_command_->publish(o_vehicle_command_);
+            rclcpp::Rate(100).sleep();
+        }
     }
-    
-    o_vehicle_command_.accel = 0.0;
-    o_vehicle_command_.steering = yaw;  // 조향각 0도로 직진
+
+
+    //o_vehicle_command_.accel = 0.0;
+    o_vehicle_command_.steering = yaw;  
 
     // Publish Vehicle Command
     p_vehicle_command_->publish(o_vehicle_command_);

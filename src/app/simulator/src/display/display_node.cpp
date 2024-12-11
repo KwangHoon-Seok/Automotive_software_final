@@ -52,9 +52,16 @@ Display::Display(const std::string& node_name, const rclcpp::NodeOptions& option
         "poly_lanes", qos_profile, std::bind(&Display::CallbackPolyLanes, this, std::placeholders::_1));
     s_driving_way_ = this->create_subscription<ad_msgs::msg::PolyfitLaneData> (
         "driving_way", qos_profile, std::bind(&Display::CallbackDrivingWay, this, std::placeholders::_1));
-    
+
+    // custom sub
     s_local_path_ = this->create_subscription<ad_msgs::msg::PolyfitLaneDataArray> (
         "/ego/local_path_array", qos_profile, std::bind(&Display::CallbackLocalPath, this, std::placeholders::_1));
+    s_motion_ = this->create_subscription<ad_msgs::msg::Mission>(
+        "/ego/object_prediction", qos_profile, std::bind(&Display::CallbackMotion, this, std::placeholders::_1));
+    s_ego_motion_ = this->create_subscription<ad_msgs::msg::Mission>(
+        "/ego/ego_prediction", qos_profile, std::bind(&Display::CallbackEgoMotion, this, std::placeholders::_1));
+    s_best_path_ = this->create_subscription<ad_msgs::msg::PolyfitLaneData>(
+        "/ego/merge_path", qos_profile, std::bind(&Display::CallbackBestPath, this, std::placeholders::_1));
 
     // Publisher init
     p_vehicle_marker_ = this->create_publisher<visualization_msgs::msg::Marker> (
@@ -73,9 +80,15 @@ Display::Display(const std::string& node_name, const rclcpp::NodeOptions& option
         "polyfit_lanes_marker", qos_profile);
     p_driving_way_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
         "driving_way_marker", qos_profile);
-
+    //custom pub
     p_local_path_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
         "local_path_marker", qos_profile);
+    p_motion_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
+        "object_prediction_marker", qos_profile);
+    p_ego_motion_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
+        "ego_prediction_marker", qos_profile); 
+    p_best_path_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
+        "ego_best_path_marker", qos_profile);
 
     // Timer init
     t_run_node_ = this->create_wall_timer(
@@ -147,14 +160,21 @@ void Display::Run() {
             mission = i_mission_;
         }
     }
-    
-    // ad_msgs::msg::PolyfitLaneData local_path; {
-    //     if (b_is_local_path_ == true){
-    //         std::lock_guard<std::mutex> lock(mutex_local_path_);
-    //         local_path = i_local_path_;
-    //     }
-    // }
-    
+
+    ad_msgs::msg::Mission motion; {
+        if (b_is_motion_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_motion_);
+            motion = i_motion_;
+        }
+    }
+
+    ad_msgs::msg::Mission ego_motion; {
+        if (b_is_ego_motion_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_motion_);
+            ego_motion = i_ego_motion_;
+        }
+    }
+
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
     // Algorithm
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - // 
@@ -163,6 +183,13 @@ void Display::Run() {
 
         if (b_is_mission_ == true) {
             DisplayMission(mission, vehicle_state, current_time, cfg_);
+        }
+        if (b_is_motion_ == true) {
+            DisplayMotion(motion, vehicle_state, current_time);
+        }
+
+        if (b_is_ego_motion_ == true) {
+            DisplayEgoMotion(ego_motion, vehicle_state, current_time);
         }
     }
 
@@ -201,12 +228,6 @@ void Display::Run() {
         }
     }
 
-    // if (b_is_local_path_ == true) {
-    //     if ((current_time.seconds() - time_local_path_marker_) > 0.2) {
-    //         time_local_path_marker_ = current_time.seconds();
-    //         DisplayLocalPath(i_local_path_, current_time, 0.1, 50.0);
-    //     }
-    // }
     if (b_is_local_path_ == true) {
         if ((current_time.seconds() - time_local_path_marker_) > 0.2) {
             time_local_path_marker_ = current_time.seconds();
@@ -735,8 +756,156 @@ void Display::DisplayLocalPath(const ad_msgs::msg::PolyfitLaneDataArray& local_p
     // RCLCPP_INFO(this->get_logger(), "Published %d markers for local_path", markerArray.markers.size());
 }
 
+void Display::DisplayMotion(const ad_msgs::msg::Mission& motion,
+                             const ad_msgs::msg::VehicleState& vehicle_state,
+                             const rclcpp::Time& current_time){
+
+    visualization_msgs::msg::MarkerArray motion_marker_array;
+    int id = 0;
+
+    for (auto motion : motion.objects) {
+        visualization_msgs::msg::Marker motion_marker;
+        motion_marker.header.frame_id = "world";
+        motion_marker.header.stamp = current_time;
+        motion_marker.ns = "motion";
+        motion_marker.id = id;
+        motion_marker.type = visualization_msgs::msg::Marker::CYLINDER;
+
+        float radius = 2.0;
+        float height = 0.2;
+        motion_marker.scale.x = radius * 2; // 지름 = 반지름 * 2
+        motion_marker.scale.y = radius * 2;
+        motion_marker.scale.z = height;    // 높이
+
+     
+        motion_marker.color.a = 0.5 * motion.time; // 투명도
+        motion_marker.color.r = 0.0; 
+        motion_marker.color.g = 0.0; 
+        motion_marker.color.b = 1.0; 
+
+      
+        motion_marker.pose.position.x = motion.x; 
+        motion_marker.pose.position.y = motion.y;
+        motion_marker.pose.position.z = 0.05; 
+
+     
+        motion_marker.pose.orientation.x = 0.0;
+        motion_marker.pose.orientation.y = 0.0;
+        motion_marker.pose.orientation.z = 0.0;
+        motion_marker.pose.orientation.w = 1.0;
 
 
+        motion_marker.lifetime = rclcpp::Duration::from_seconds(0.01);
+        motion_marker_array.markers.push_back(motion_marker);
+
+        id++;
+    }
+
+    
+    
+    p_motion_marker_->publish(motion_marker_array);
+}
+
+void Display::DisplayEgoMotion(const ad_msgs::msg::Mission& ego_motion,
+                             const ad_msgs::msg::VehicleState& vehicle_state,
+                             const rclcpp::Time& current_time){
+
+    visualization_msgs::msg::MarkerArray ego_motion_marker_array;
+    int id = 0;
+
+    for (auto ego_motion : ego_motion.objects) {
+        visualization_msgs::msg::Marker ego_motion_marker;
+        ego_motion_marker.header.frame_id = "world";
+        ego_motion_marker.header.stamp = current_time;
+        ego_motion_marker.ns = "ego_motion";
+        ego_motion_marker.id = id;
+        ego_motion_marker.type = visualization_msgs::msg::Marker::CYLINDER;
+
+        float radius = 2.0;
+        float height = 0.2;
+        ego_motion_marker.scale.x = radius * 2; // 지름 = 반지름 * 2
+        ego_motion_marker.scale.y = radius * 2;
+        ego_motion_marker.scale.z = height;    // 높이
+
+     
+        ego_motion_marker.color.a = 0.5 * ego_motion.time; // 투명도
+        ego_motion_marker.color.r = 0.7; 
+        ego_motion_marker.color.g = 0.7; 
+        ego_motion_marker.color.b = 0.0; 
+
+      
+        ego_motion_marker.pose.position.x = ego_motion.x; 
+        ego_motion_marker.pose.position.y = ego_motion.y;
+        ego_motion_marker.pose.position.z = 0.05; 
+
+     
+        ego_motion_marker.pose.orientation.x = 0.0;
+        ego_motion_marker.pose.orientation.y = 0.0;
+        ego_motion_marker.pose.orientation.z = 0.0;
+        ego_motion_marker.pose.orientation.w = 1.0;
+
+
+        ego_motion_marker.lifetime = rclcpp::Duration::from_seconds(0.01);
+        ego_motion_marker_array.markers.push_back(ego_motion_marker);
+
+        id++;
+    }
+
+    
+    
+    p_ego_motion_marker_->publish(ego_motion_marker_array);
+}
+
+void Display::DisplayBestPath(const ad_msgs::msg::PolyfitLaneData& best_path,
+                                const rclcpp::Time& current_time) {
+
+    double x_max = 40.0;                // x의 최대값 설정 (필요에 따라 변경 가능)
+    static int base_id = 60000;
+    double interval = 0.1;
+    double a0 = best_path.a0;
+    double a1 = best_path.a1;
+    double a2 = best_path.a2;
+    double a3 = best_path.a3;
+
+    double x = 0.0;
+    double y = a0;
+
+    visualization_msgs::msg::MarkerArray markerArray;
+    while (x <= x_max) {
+        y = a0 + a1 * x + a2 * x * x + a3 * x * x * x;
+        visualization_msgs::msg::Marker marker;
+        marker.header.frame_id = best_path.frame_id;
+        marker.header.stamp = current_time;
+
+        marker.ns = best_path.id;
+        marker.id = base_id++;
+
+        marker.type = visualization_msgs::msg::Marker::CYLINDER;
+        marker.action = visualization_msgs::msg::Marker::ADD;
+
+        marker.pose.position.x = x;
+        marker.pose.position.y = y;
+        marker.pose.position.z = 0.0;
+        marker.pose.orientation.x = 0.0;
+        marker.pose.orientation.y = 0.0;
+        marker.pose.orientation.z = 0.1;
+        marker.pose.orientation.w = 1.0;
+        marker.color.r = 1.0f;
+        marker.color.g = 0.0f;
+        marker.color.b = 0.0f;
+        marker.color.a = 1.0;
+        marker.scale.x = 0.3;
+        marker.scale.y = 0.3;
+        marker.scale.z = 0.3;
+        marker.lifetime = rclcpp::Duration(0, int64_t(0.2*1e9));
+
+        markerArray.markers.push_back(marker);
+        x += interval;
+    }
+    base_id += markerArray.markers.size();
+    
+    p_driving_way_marker_->publish(markerArray);
+}
 
 int main(int argc, char **argv) {
     std::string node_name = "display";

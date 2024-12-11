@@ -6,7 +6,7 @@ BehaviorPlannerNode::BehaviorPlannerNode(const std::string& node_name, const dou
                                          const rclcpp::NodeOptions& options)
     : Node(node_name, options), current_velocity_(0.0), ref_vel_(40.0), o_behavior_state_(0.0)
 {
-    auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(10));
+    auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(10)).reliable();
 
     // Subscribers
     s_vehicle_state_ = this->create_subscription<ad_msgs::msg::VehicleState>(
@@ -56,7 +56,7 @@ void BehaviorPlannerNode::Run()
     p_lead_distance_->publish(lead_distance_msg);
 
     // RCLCPP_INFO(this->get_logger(),
-    //             "Behavior State: %.1f", o_behavior_state_);
+    //              "Behavior State: %.1f", o_behavior_state_);
 }
 
 void BehaviorPlannerNode::updatePlannerState()
@@ -64,7 +64,7 @@ void BehaviorPlannerNode::updatePlannerState()
     // Variables to store the closest distances
     double closest_static_distance = 10000; 
     double closest_dynamic_distance = 10000;
-    const double lane_width_threshold = 3.0;
+    const double lane_width_threshold = 0.0;
     double yaw = i_vehicle_state_.yaw;
     
     // Iterate through all objects in the /ego/mission message
@@ -78,8 +78,10 @@ void BehaviorPlannerNode::updatePlannerState()
         double dx_local = std::cos(yaw) * dx + std::sin(yaw) * dy;
         double dy_local = -std::sin(yaw) * dx + std::cos(yaw) * dy;
 
+        //RCLCPP_INFO(this->get_logger()," x: %.2f, y: %.2f", dx_local, dy_local);
+
         // Update the closest distances based on object type
-        if(dx_local > 0 && std::abs(dy_local) <= lane_width_threshold){
+        if(dx_local > 0 && dy_local >= lane_width_threshold){
             if (object.object_type == "Static") {
                 if (dx > 0){
                     if (distance < closest_static_distance) {
@@ -100,7 +102,7 @@ void BehaviorPlannerNode::updatePlannerState()
 
     // Decide behavior state based on the closest distances
         // Decide behavior state with priority: Static > Dynamic
-    if (closest_static_distance < 20.0) {
+    if (closest_static_distance < 30.0) {
         o_behavior_state_ = MERGE; // Static obstacle within 20m
     } else if (closest_dynamic_distance < 20.0) {
         o_behavior_state_ = ACC; // Dynamic obstacle within 20m

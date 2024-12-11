@@ -29,4 +29,9 @@
     <node pkg="autonomous_driving" exec="control_node" name="control_node" namespace="$(var ns1)" output="screen">
         <param name="control_node/loop_rate_hz" value="$(var loop_rate_hz)"/>
     </node>
+
+    <!-- Motion Prediction Node 실행 -->
+    <node pkg="autonomous_driving" exec="motion_prediction_node" name="motion_prediction_node" namespace="$(var ns1)" output="screen">
+        <param name="motion_prediction_node/loop_rate_hz" value="$(var loop_rate_hz)"/>
+    </node>
 </launch>
