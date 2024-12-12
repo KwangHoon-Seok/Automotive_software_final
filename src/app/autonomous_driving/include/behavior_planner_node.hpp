@@ -23,8 +23,8 @@
 #include <ad_msgs/msg/polyfit_lane_data_array.hpp>
 #include <ad_msgs/msg/polyfit_lane_data.hpp>
 #include <ad_msgs/msg/mission.hpp>
-
 #include <std_msgs/msg/float32.hpp>
+#include <geometry_msgs/msg/point.hpp>
 
 
 // Algorithm Header
@@ -46,10 +46,12 @@ class BehaviorPlannerNode : public rclcpp::Node {
         // Variables for Algorithm
         double current_velocity_;
         double ref_vel_;
+        geometry_msgs::msg::Point static_object_position_;
         // Publishers
         rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_behavior_state_;
         rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_ref_velocity_;
         rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_lead_distance_;
+        rclcpp::Publisher<geometry_msgs::msg::Point>::SharedPtr p_static_object_position_;
 
         // Subscribers
         rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;

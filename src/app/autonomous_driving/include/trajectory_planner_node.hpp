@@ -32,6 +32,7 @@
 #include <ad_msgs/msg/mission_object.hpp>
 #include <ad_msgs/msg/mission.hpp>
 #include <std_msgs/msg/float32.hpp>
+#include <geometry_msgs/msg/point.hpp>
 
 
 
@@ -74,10 +75,27 @@ class TrajectoryNode : public rclcpp::Node
                             double collision_threshold);
         std::vector<prediction_points> SampleEgoPath(const ad_msgs::msg::PolyfitLaneData& path, const ad_msgs::msg::VehicleState& ego_state, double time_horizon, double interval);
         void PublishSplineCoefficients(const std::vector<double>& coeffs);
-
+        Point GlobalToLocal(const Point& global_point, const ad_msgs::msg::VehicleState& vehicle_state);
+        //temp fucntion
+        Point RightTargetPoint(const geometry_msgs::msg::Point& static_position, double lateral_offset);
+        Point LeftTargetPoint(const geometry_msgs::msg::Point& static_position, double lateral_offset);
+        Point BackTargetPoint(const geometry_msgs::msg::Point& static_position, double back_distance);
+        std::vector<double> ComputeQuinticSpline(const std::vector<Point>& points, double slope_start, double slope_first_right, double slope_first_list, double slope_second_right, double slope_second_left, double slope_end, const ad_msgs::msg::VehicleState vehicle_state);
         // Variabls for Algorithm
         double yaw = 0.0;
         int path_flag = 0;
+        double slope_start = 0.0;
+        double slope_end_right = 0.0;
+        double slope_end_left = 0.0;
+
+        double slope_second_right = 0.0;
+        double slope_second_left = 0.0;
+        double slope_first_right = 0.0;
+        double slope_first_left = 0.0;
+        
+
+        double slope_end = 0.0;
+        std::vector<Point> target_points;
         // Publishers
         rclcpp::Publisher<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr p_trajectory_candidates_;
         rclcpp::Publisher<ad_msgs::msg::PolyfitLaneData>::SharedPtr p_best_trajectory_;
@@ -88,6 +106,7 @@ class TrajectoryNode : public rclcpp::Node
         rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr s_ego_prediction_;
         rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr s_object_prediction_;
         rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_behavior_state_;
+        rclcpp::Subscription<geometry_msgs::msg::Point>::SharedPtr s_static_position_;
 
         // Callback Functions
         inline void CallbackVehicleState(const ad_msgs::msg::VehicleState::SharedPtr msg) {
@@ -115,6 +134,11 @@ class TrajectoryNode : public rclcpp::Node
             i_behavior_state_ = *msg;
         }
 
+        inline void CallbackStaticPosition(const geometry_msgs::msg::Point::SharedPtr msg) {
+            std::lock_guard<std::mutex> lock(mutex_static_position_);
+            i_static_position_ = *msg;
+        }
+
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;
 
@@ -125,6 +149,7 @@ class TrajectoryNode : public rclcpp::Node
         ad_msgs::msg::Mission i_ego_prediction_;
         ad_msgs::msg::Mission i_object_prediction_;
         std_msgs::msg::Float32 i_behavior_state_;
+        geometry_msgs::msg::Point i_static_position_;
 
         // Outputs
         ad_msgs::msg::PolyfitLaneDataArray o_trajectories_;
@@ -136,6 +161,7 @@ class TrajectoryNode : public rclcpp::Node
         std::mutex mutex_ego_prediction_;
         std::mutex mutex_obeject_prediction_;
         std::mutex mutex_behavior_state_;
+        std::mutex mutex_static_position_;
 };
 
 #endif 

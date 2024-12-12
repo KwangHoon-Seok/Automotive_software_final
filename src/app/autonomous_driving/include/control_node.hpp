@@ -51,7 +51,11 @@ class ControlNode : public rclcpp::Node {
         double distance_error_prev_ = 0.0;
 
         double behavior_state = 0.0;
-
+        // merge 관련 flag 전역 선언
+        bool merge_completed = false;
+        bool path_initialized = false;
+        bool merge_flag = false;
+        double target_x;
         // Publishers
         rclcpp::Publisher<ad_msgs::msg::VehicleCommand>::SharedPtr p_vehicle_command_;
 
@@ -93,7 +97,7 @@ class ControlNode : public rclcpp::Node {
         inline void CallbackMergePath(const ad_msgs::msg::PolyfitLaneData::SharedPtr msg) {
             std::lock_guard<std::mutex> lock(mutex_merge_path_);
             i_merge_path_ = *msg;
-            RCLCPP_INFO(this->get_logger(), "제발 나 좀 받아와라");
+            // RCLCPP_INFO(this->get_logger(), "제발 나 좀 받아와라");
         }
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;

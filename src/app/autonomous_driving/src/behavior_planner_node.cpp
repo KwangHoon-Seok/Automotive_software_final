@@ -22,6 +22,7 @@ BehaviorPlannerNode::BehaviorPlannerNode(const std::string& node_name, const dou
     p_behavior_state_ = this->create_publisher<std_msgs::msg::Float32>("/ego/behavior_state", qos_profile);
     p_ref_velocity_ = this->create_publisher<std_msgs::msg::Float32>("/ego/ref_vel", qos_profile);
     p_lead_distance_ = this->create_publisher<std_msgs::msg::Float32>("/ego/lead_distance", qos_profile);
+    p_static_object_position_ = this->create_publisher<geometry_msgs::msg::Point>("/static/position", qos_profile);
 
     // Timer
     t_run_node_ = this->create_wall_timer(
@@ -67,6 +68,9 @@ void BehaviorPlannerNode::updatePlannerState()
     const double lane_width_threshold = 0.0;
     double yaw = i_vehicle_state_.yaw;
     
+    bool static_object_found = false;
+
+
     // Iterate through all objects in the /ego/mission message
     for (const auto &object : i_mission_state_.objects) {
         // Calculate the distance between ego vehicle and the mission object
@@ -85,7 +89,11 @@ void BehaviorPlannerNode::updatePlannerState()
             if (object.object_type == "Static") {
                 if (dx > 0){
                     if (distance < closest_static_distance) {
-                    closest_static_distance = distance; // Update closest static distance
+                        closest_static_distance = distance; // Update closest static distance
+                        static_object_position_.x = object.x;
+                        static_object_position_.y = object.y;
+                        static_object_position_.z = 0.0;
+                        static_object_found = true;
                     }
                 }  
             } else if (object.object_type == "Dynamic") {
@@ -102,7 +110,7 @@ void BehaviorPlannerNode::updatePlannerState()
 
     // Decide behavior state based on the closest distances
         // Decide behavior state with priority: Static > Dynamic
-    if (closest_static_distance < 30.0) {
+    if (closest_static_distance < 50.0) {
         o_behavior_state_ = MERGE; // Static obstacle within 20m
     } else if (closest_dynamic_distance < 20.0) {
         o_behavior_state_ = ACC; // Dynamic obstacle within 20m
@@ -113,21 +121,37 @@ void BehaviorPlannerNode::updatePlannerState()
         o_behavior_state_ = REF_VEL_TRACKING; // No obstacles in significant range
     }
 
+    // Static object 좌표 퍼블리시
+    if (static_object_found == true) {
+        p_static_object_position_ -> publish(static_object_position_);
+    }
+
     // Log the results
     // RCLCPP_INFO(this->get_logger(),
     //             "Closest Static Distance: %.2f, Closest Dynamic Distance: %.2f, Behavior State: %s",
     //             closest_static_distance, closest_dynamic_distance, BEHAVIOR_STATE_TO_STRING(o_behavior_state_));
 }
 
-void BehaviorPlannerNode::velocity_planner(){
-    if(i_mission_state_.road_condition == "None")
-    {
-        o_ref_velocity_ = 40.0;
-    }
-    else{
-        o_ref_velocity_ = 20.0;
+void BehaviorPlannerNode::velocity_planner() {
+    if (i_mission_state_.road_condition == "None") {
+        bool has_static_object = false;
+
+        for (const auto& object : i_mission_state_.objects) {
+            if (object.object_type == "Static") {
+                has_static_object = true;
+                break;
+            }
+        }
+        if (has_static_object) {
+            o_ref_velocity_ = 5.0;
+        } else {
+            o_ref_velocity_ = 15.0;
+        }
+    } else {
+        o_ref_velocity_ = 7.5;
     }
 }
+
 
 
 int main(int argc, char **argv) {

@@ -96,6 +96,7 @@ ament_target_dependencies(behavior_planner_node
     rclcpp
     std_msgs
     ad_msgs
+    geometry_msgs
 )
 
 #------------------------ trajectory_planner_node-----------------------------#
@@ -108,6 +109,7 @@ ament_target_dependencies(trajectory_planner_node
     std_msgs
     ad_msgs
     Eigen3
+    geometry_msgs
 )
 
 #------------------------ control_node-----------------------------#

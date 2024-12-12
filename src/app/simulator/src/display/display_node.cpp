@@ -699,53 +699,104 @@ void Display::DisplayLocalPath(const ad_msgs::msg::PolyfitLaneDataArray& local_p
     // 초기화                   // x 시작점
     double x_max = 40.0;                // x의 최대값 설정 (필요에 따라 변경 가능)
     static int base_id = 40000;          // ID 충돌 방지
-    
     visualization_msgs::msg::MarkerArray markerArray;
-
     for (const auto& local_path : local_path_array.polyfitlanes) {
-        double a0 = local_path.a0;
-        double a1 = local_path.a1;
-        double a2 = local_path.a2;
-        double a3 = local_path.a3;
+        if (local_path.merge == 0.0)
+        {
+            double a0 = local_path.a0;
+            double a1 = local_path.a1;
+            double a2 = local_path.a2;
+            double a3 = local_path.a3;
 
-        double x = 0.0;    
-        while (x <= x_max) {
-            double y = a0 + a1 * x + a2 * x * x + a3 * x * x * x;
-            visualization_msgs::msg::Marker marker;
-            marker.header.frame_id = local_path.frame_id;
-            marker.header.stamp = current_time;
-            marker.ns = local_path.id;
-            marker.id = base_id++;
-            
-            marker.type = visualization_msgs::msg::Marker::CYLINDER;
-            marker.action = visualization_msgs::msg::Marker::ADD;
+            double x = 0.0;    
+            while (x <= x_max) 
+            {
+                double y = a0 + a1 * x + a2 * x * x + a3 * x * x * x;
+                visualization_msgs::msg::Marker marker;
+                marker.header.frame_id = local_path.frame_id;
+                marker.header.stamp = current_time;
+                marker.ns = local_path.id;
+                marker.id = base_id++;
+                
+                marker.type = visualization_msgs::msg::Marker::CYLINDER;
+                marker.action = visualization_msgs::msg::Marker::ADD;
 
-            marker.pose.position.x = x;
-            marker.pose.position.y = y;
-            marker.pose.position.z = 0.0;
-            marker.pose.orientation.x = 0.0;
-            marker.pose.orientation.y = 0.0;
-            marker.pose.orientation.z = 0.1;
-            marker.pose.orientation.w = 1.0;
-            
-            marker.color.r = 0.0f;
-            marker.color.g = 0.0f;
-            marker.color.b = 1.0f; // 파란색
-            marker.color.a = 1.0;
-            marker.scale.x = 0.2;
-            marker.scale.y = 0.2;
-            marker.scale.z = 0.2;
+                marker.pose.position.x = x;
+                marker.pose.position.y = y;
+                marker.pose.position.z = 0.0;
+                marker.pose.orientation.x = 0.0;
+                marker.pose.orientation.y = 0.0;
+                marker.pose.orientation.z = 0.1;
+                marker.pose.orientation.w = 1.0;
+                
+                marker.color.r = 0.0f;
+                marker.color.g = 0.0f;
+                marker.color.b = 1.0f; // 파란색
+                marker.color.a = 1.0;
+                marker.scale.x = 0.2;
+                marker.scale.y = 0.2;
+                marker.scale.z = 0.2;
 
-            // 수명 설정
-            marker.lifetime = rclcpp::Duration(0, int64_t(0.2 * 1e9));
+                // 수명 설정
+                marker.lifetime = rclcpp::Duration(0, int64_t(0.2 * 1e9));
 
-            // 마커 배열에 추가
-            markerArray.markers.push_back(marker);
+                // 마커 배열에 추가
+                markerArray.markers.push_back(marker);
 
-            // x 증가
-            x += interval;
+                // x 증가
+                x += interval;
+            }
+        }
+        else
+        {
+            double a0 = local_path.a0;
+            double a1 = local_path.a1;
+            double a2 = local_path.a2;
+            double a3 = local_path.a3;
+            double a4 = local_path.a4;
+            double a5 = local_path.a5;
+
+            double x = 0.0;    
+            while (x <= x_max) 
+            {
+                double y = a0 + a1 * x + a2 * x * x + a3 * x * x * x + a4 * x * x * x * x + a5 * x * x * x * x * x;
+                visualization_msgs::msg::Marker marker;
+                marker.header.frame_id = local_path.frame_id;
+                marker.header.stamp = current_time;
+                marker.ns = local_path.id;
+                marker.id = base_id++;
+                
+                marker.type = visualization_msgs::msg::Marker::CYLINDER;
+                marker.action = visualization_msgs::msg::Marker::ADD;
+
+                marker.pose.position.x = x;
+                marker.pose.position.y = y;
+                marker.pose.position.z = 0.0;
+                marker.pose.orientation.x = 0.0;
+                marker.pose.orientation.y = 0.0;
+                marker.pose.orientation.z = 0.1;
+                marker.pose.orientation.w = 1.0;
+                
+                marker.color.r = 0.0f;
+                marker.color.g = 0.0f;
+                marker.color.b = 1.0f; // 파란색
+                marker.color.a = 1.0;
+                marker.scale.x = 0.2;
+                marker.scale.y = 0.2;
+                marker.scale.z = 0.2;
+
+                // 수명 설정
+                marker.lifetime = rclcpp::Duration(0, int64_t(0.2 * 1e9));
+
+                // 마커 배열에 추가
+                markerArray.markers.push_back(marker);
+
+                // x 증가
+                x += interval;
+            }
         }
     }
+    
     // ID 갱신
     base_id += markerArray.markers.size(); // 다음 호출에서 ID 충돌 방지
 
