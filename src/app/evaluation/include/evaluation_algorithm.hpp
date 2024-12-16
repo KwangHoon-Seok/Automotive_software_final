@@ -6,6 +6,7 @@
  * @brief     autonomous driving algorithm evaluation tool
  * 
  * @date      2023-08-07 created by Yuseung Na (yuseungna@hanyang.ac.kr)
+ *            2024-12-09 update parking evaluation to ROS2 from 2023jasiple (sunghoon8585@gmail.com)
  */
 
 #ifndef __EVALUATION_ALGORITHM_HPP__
@@ -50,6 +51,7 @@ class EvaluationAlgorithm {
         void CalcCrossTrackError(const VehicleState& vehicle_state, const double& dt);
         bool CheckCollision(const VehicleState& vehicle_state, const std::vector<MissionObject>& obstacles);
         void CheckFailure(const bool& is_collision, const double& driving_time, const EvaluationConfig& cfg);
+        void CheckParking(const VehicleState& vehicle_state, const EvaluationConfig& cfg);
         bool IsFinished(const VehicleState& vehicle_state, const double& gain);
         std::string UpdateEvaluationInfo(const VehicleState& vehicle_state, 
                                          const double& driving_time,
@@ -79,6 +81,16 @@ class EvaluationAlgorithm {
         bool eval_is_lane_departure_ = false;
         bool eval_is_collision_ = false;
         bool eval_is_retire_ = false;
+
+        // Parking
+        bool vehicle_move_start_ = false;
+        bool parking_start_ = false;
+        bool is_parking_ = false;
+        int parking_count_ = -1;
+        unsigned int parking_success_ = ParkingStatus::APPROACHING;
+        double bonus_time_ = 0.0;
+
+
 };
 
 

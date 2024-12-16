@@ -66,6 +66,7 @@ namespace interface {
         std::string                 road_condition{"Asphalt"};
         std::string                 road_slope{"None"};
         double                      speed_limit{120.0/3.6};
+        bool                        parking{false};
     } Mission;
 
 } // namespace interface

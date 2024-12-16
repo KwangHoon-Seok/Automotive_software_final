@@ -5,12 +5,14 @@
 #define ACC 2
 #define MERGE 3
 #define REF_VEL_TRACKING 4
+#define PARKING 5
 
 
 #define BEHAVIOR_STATE_TO_STRING(state) \
     (state == AEB ? "AEB" : \
      state == ACC ? "ACC" : \
      state == MERGE ? "MERGE" : \
+     state == PARKING ? "PARKING" : \
      state == REF_VEL_TRACKING ? "REFERENCE_VELOCITY_TRACKING" : "UNKNOWN")
 
 // STD Header

@@ -118,6 +118,12 @@ ament_target_dependencies(control_node
     std_msgs
     ad_msgs
 )
+#------------------------ motion_prediction_node-----------------------------#
+ament_target_dependencies(motion_prediction_node
+    rclcpp
+    std_msgs
+    ad_msgs
+)
 
 #------------------------ motion_prediction_node-----------------------------#
 ament_target_dependencies(motion_prediction_node

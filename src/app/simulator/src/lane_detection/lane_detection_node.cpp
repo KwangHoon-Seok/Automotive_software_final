@@ -54,6 +54,8 @@ LaneDetection::LaneDetection(const std::string& node_name, const rclcpp::NodeOpt
         "ROI_lanes", qos_profile);
     p_lane_points_ = this->create_publisher<ad_msgs::msg::LanePointData>(
         "lane_points", qos_profile);
+    p_lane_points_array_ = this->create_publisher<ad_msgs::msg::LanePointDataArray>(
+        "lane_points_array", qos_profile);
 
     // Timer init
     t_run_node_ = this->create_wall_timer(
@@ -111,6 +113,7 @@ void LaneDetection::Run() {
 
     p_roi_lanes_->publish(ros2_bridge::UpdateROILanes(roi_lanes));
     p_lane_points_->publish(ros2_bridge::UpdateLanePoints(shuffled_roi_lane, cfg_.vehicle_namespace));
+    p_lane_points_array_->publish(ros2_bridge::UpdateLanePointsArray(roi_lanes, cfg_.vehicle_namespace));
 }
 
 int main(int argc, char **argv) {

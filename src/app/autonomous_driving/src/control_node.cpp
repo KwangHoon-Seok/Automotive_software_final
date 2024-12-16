@@ -186,7 +186,9 @@ void ControlNode::Run() {
     //o_vehicle_command_.accel = 0.0;
     o_vehicle_command_.steering = yaw;  
 
-    // Publish Vehicle Command
+    // Publish Vehicle 
+
+
     p_vehicle_command_->publish(o_vehicle_command_);
 }
 

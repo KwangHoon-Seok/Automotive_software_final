@@ -12,6 +12,7 @@
  *              : change to ROS2
  *            2024-11-05 updated by Yuseung Na (yuseungna@hanyang.ac.kr)
  *              : clean up
+ *            2024-12-09 update parking evaluation to ROS2 from 2023jasiple (sunghoon8585@gmail.com)
  */
 
 #ifndef __EVALUATION_NODE_HPP__
@@ -76,6 +77,7 @@ class Evaluation : public rclcpp::Node {
         
         // Publisher
         rclcpp::Publisher<rviz_2d_overlay_msgs::msg::OverlayText>::SharedPtr p_text_evaluation_result_;
+        rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr p_track_end_;
 
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;

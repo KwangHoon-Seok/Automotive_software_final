@@ -19,6 +19,7 @@
 
 // ROS Message Header
 #include <rviz_2d_overlay_msgs/msg/overlay_text.hpp>
+#include <std_msgs/msg/bool.hpp>
 
 // Interface Header
 #include "interface_mission.hpp"
@@ -47,6 +48,13 @@ namespace ros2_bridge {
         msg.line_width = 1;
         msg.text_size = 9.0;
         msg.text = evaluation_info;
+
+        return msg;
+    }
+
+    inline std_msgs::msg::Bool UpdateTrackEnd(const bool& is_finished) {
+        std_msgs::msg::Bool msg;
+        msg.data = is_finished;
 
         return msg;
     }

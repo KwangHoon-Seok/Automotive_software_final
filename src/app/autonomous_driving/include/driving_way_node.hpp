@@ -20,6 +20,8 @@
 #include <ad_msgs/msg/lane_point_data.hpp>
 #include <ad_msgs/msg/polyfit_lane_data.hpp>
 #include <ad_msgs/msg/polyfit_lane_data_array.hpp>
+#include <ad_msgs/msg/mission.hpp>
+#include <ad_msgs/msg/mission_object.hpp>
 
 // Algorithm Header
 #include <eigen3/Eigen/Dense>
@@ -56,13 +58,15 @@ public:
 
 private:
     // Algorithm Functions
-    void lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, const std_msgs::msg::Float32& behavior_state);
+    void getMeanPoints(const ad_msgs::msg::LanePointData& lane_points, ad_msgs::msg::LanePointData& left_lane, ad_msgs::msg::LanePointData& right_lane);
+    void getParkingWay(ad_msgs::msg::PolyfitLaneData& driving_way);
+    void lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, std_msgs::msg::Float32& behavior_state, const ad_msgs::msg::LanePointData& lane_points);
     std::vector<int> regionQuery(const std::vector<Point>& points, int pointIdx, float epsilon);
     void expandCluster(std::vector<Point>& points, int pointIdx, int clusterID, float epsilon, size_t min_samples);
     void populatePolyLanes(ad_msgs::msg::PolyfitLaneDataArray& poly_lanes);
     void populateCenterLane(ad_msgs::msg::PolyfitLaneData& driving_way);
     void splitLanePoints(const ad_msgs::msg::LanePointData& lane_points);
-    void process_lanes();
+    void process_lanes(ad_msgs::msg::LanePointData& left_lane, ad_msgs::msg::LanePointData& right_lane);
     
     std::tuple<double, double, double, double> computeCubicModel(const geometry_msgs::msg::Point& p1,
                                                                  const geometry_msgs::msg::Point& p2,
@@ -76,13 +80,21 @@ private:
     // Variables for Algorithm
     bool is_init = false;
     bool is_error = false;
+    bool will_parking = false;
+    bool start_parking = false;
+    bool is_completed = false;
+    float max_x;
+    
+    geometry_msgs::msg::Point mean_point;
+
 
     
-
-
-    ad_msgs::msg::PolyfitLaneData prev_lane_left_;
-    ad_msgs::msg::PolyfitLaneData prev_lane_right_;
     ad_msgs::msg::PolyfitLaneData prev_driving_way_;
+    ad_msgs::msg::PolyfitLaneData prev_lane_LEFT_;
+    ad_msgs::msg::PolyfitLaneData prev_lane_RIGHT_;
+
+    ad_msgs::msg::LanePointData sub_lane_point_LEFT_;
+    ad_msgs::msg::LanePointData sub_lane_point_RIGHT_;
     ad_msgs::msg::LanePointData lane_point_LEFT;
     ad_msgs::msg::LanePointData lane_point_RIGHT;
     ad_msgs::msg::LanePointData inliers_LEFT;
@@ -90,6 +102,8 @@ private:
 
     size_t num_points_LEFT;
     size_t num_points_RIGHT;
+    size_t num_sub_points_LEFT;
+    size_t num_sub_points_RIGHT;
     size_t number_point;
 
     Eigen::VectorXd X_LEFT;
@@ -105,11 +119,15 @@ private:
     // Publishers
     rclcpp::Publisher<ad_msgs::msg::PolyfitLaneData>::SharedPtr p_driving_way_;
     rclcpp::Publisher<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr p_poly_lanes_;
+    rclcpp::Publisher<ad_msgs::msg::LanePointData>::SharedPtr p_left_lane_;
+    rclcpp::Publisher<ad_msgs::msg::LanePointData>::SharedPtr p_right_lane_;
+
 
     // Subscribers
     rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_behavior_state_;
     rclcpp::Subscription<ad_msgs::msg::LanePointData>::SharedPtr s_lane_points_;
     rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;
+    rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr s_mission_state_;
 
     // // Callback Functions
     // inline void CallbackLanePoints(const ad_msgs::msg::LanePointData::SharedPtr msg) {
@@ -139,6 +157,11 @@ private:
         i_behavior_state_ = *msg;
         mutex_behavior_.unlock();
     }
+    inline void CallbackMissionState(const ad_msgs::msg::Mission::SharedPtr msg) {
+        mutex_mission_state_.lock();
+        i_mission_state_ = *msg;
+        mutex_mission_state_.unlock();
+        }
 
     // Timer
     rclcpp::TimerBase::SharedPtr t_run_node_;
@@ -147,15 +170,21 @@ private:
     ad_msgs::msg::LanePointData i_lane_points_;
     ad_msgs::msg::VehicleState i_vehicle_state_;
     std_msgs::msg::Float32 i_behavior_state_;
+    std_msgs::msg::Float32 i_behavior_state_;
+    ad_msgs::msg::Mission i_mission_state_;
 
     // Outputs
     ad_msgs::msg::PolyfitLaneData o_driving_way_;
     ad_msgs::msg::PolyfitLaneDataArray o_poly_lanes_;
+    ad_msgs::msg::LanePointData o_left_lane_;
+    ad_msgs::msg::LanePointData o_right_lane_;
 
     // Mutex
     std::mutex mutex_lane_points_;
     std::mutex mutex_vehicle_state_;
     std::mutex mutex_behavior_;
+    std::mutex mutex_behavior_;
+    std::mutex mutex_mission_state_;
 };
 
 #endif // __DRIVING_WAY_NODE_HPP__
