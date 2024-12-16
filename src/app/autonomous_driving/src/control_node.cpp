@@ -111,7 +111,7 @@ void ControlNode::Run() {
 
         // 유효한 경로가 올 때까지 정지
         if (path_initialized == false) {
-            if (merge_path.id == "2") {
+            if (merge_path.merge == 1) {
                 tracked_path = merge_path;
                 path_initialized = true;
                 merge_target_x = target_x;

@@ -167,7 +167,7 @@ void TrajectoryNode::Run() {
             double ttc = CalculateTTC(path, vehicle_state, object_prediction, 4.0, 0.1, 4.0);
             // Update best path only if conditions are met
             RCLCPP_INFO(this->get_logger(), "path id %s ttc: %.2f", path.id.c_str(), ttc);
-            if ((path.id == "2") && ttc >=0.5 && ttc < 1.8 && is_flag == 0) {
+            if (ttc >=0.5 && ttc < 1.8 && is_flag == 0) {
                 best_path = path;
                 is_flag = 1;
             }
