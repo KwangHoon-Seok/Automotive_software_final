@@ -12,5 +12,13 @@
     <param name="evaluation/lane_id" value="$(var lane_id)"/>
     <param name="evaluation/time_limit" value="$(var time_limit)"/>
     <param name="evaluation/lane_departure" value="$(var lane_departure)"/>
+
+    <param name="evaluation/parking_success_threshold" value="3.0"/>
+    <param name="evaluation/parking_slot_0_x" value="73.767508" />
+    <param name="evaluation/parking_slot_0_y" value="490.786463" />
+    <param name="evaluation/parking_slot_1_x" value="69.157119" />
+    <param name="evaluation/parking_slot_1_y" value="479.755528" />
+    <param name="evaluation/parking_slot_2_x" value="64.546730" />
+    <param name="evaluation/parking_slot_2_y" value="468.724593" />
   </node>
 </launch>

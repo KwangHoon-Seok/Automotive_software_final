@@ -45,6 +45,7 @@ struct Mission_
       this->road_condition = "";
       this->road_slope = "";
       this->speed_limit = 0.0;
+      this->parking = false;
     }
   }
 
@@ -58,6 +59,7 @@ struct Mission_
       this->road_condition = "";
       this->road_slope = "";
       this->speed_limit = 0.0;
+      this->parking = false;
     }
   }
 
@@ -74,6 +76,9 @@ struct Mission_
   using _speed_limit_type =
     double;
   _speed_limit_type speed_limit;
+  using _parking_type =
+    bool;
+  _parking_type parking;
 
   // setters for named parameter idiom
   Type & set__objects(
@@ -98,6 +103,12 @@ struct Mission_
     const double & _arg)
   {
     this->speed_limit = _arg;
+    return *this;
+  }
+  Type & set__parking(
+    const bool & _arg)
+  {
+    this->parking = _arg;
     return *this;
   }
 
@@ -153,6 +164,9 @@ struct Mission_
       return false;
     }
     if (this->speed_limit != other.speed_limit) {
+      return false;
+    }
+    if (this->parking != other.parking) {
       return false;
     }
     return true;

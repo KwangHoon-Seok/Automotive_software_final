@@ -54,6 +54,10 @@ class ScenarioRunner : public rclcpp::Node {
             i_vehicle_state_ = ros2_bridge::GetVehicleState(*msg);
             b_is_vehicle_state_ = true;
         }
+        inline void CallbackTrackEnd(const std_msgs::msg::Bool::SharedPtr msg) {
+            std::lock_guard<std::mutex> lock(mutex_track_end_);
+            b_track_end_ = msg->data;
+        }
 
     private:
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -61,12 +65,14 @@ class ScenarioRunner : public rclcpp::Node {
 
         // Subscriber
         rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;
+        rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr        s_track_end_;
 
         // Input
         interface::VehicleState i_vehicle_state_;
 
         // Mutex
         std::mutex mutex_vehicle_state_;
+        std::mutex mutex_track_end_;
 
         // Publisher
         rclcpp::Publisher<ad_msgs::msg::Mission>::SharedPtr         p_detected_mission_;
@@ -88,6 +94,7 @@ class ScenarioRunner : public rclcpp::Node {
 
         // Flags
         bool b_is_vehicle_state_ = false;
+        bool b_track_end_ = false;
 
         // Global Variable
         double time_prev_ = 0.0;

@@ -58,7 +58,11 @@ Display::Display(const std::string& node_name, const rclcpp::NodeOptions& option
         "/ego/motion", qos_profile, std::bind(&Display::CallbackMotion, this, std::placeholders::_1));
     s_ego_motion_ = this->create_subscription<ad_msgs::msg::Mission>(
         "/ego/ego_motion", qos_profile, std::bind(&Display::CallbackEgoMotion, this, std::placeholders::_1));
-    
+    s_left_lane_ = this->create_subscription<ad_msgs::msg::LanePointData>(
+        "/ego/left_lane", qos_profile, std::bind(&Display::CallbackLeftLane, this, std::placeholders::_1));
+    s_right_lane_ = this->create_subscription<ad_msgs::msg::LanePointData>(
+        "/ego/right_lane", qos_profile, std::bind(&Display::CallbackRightLane, this, std::placeholders::_1));
+
     // Publisher init
     p_vehicle_marker_ = this->create_publisher<visualization_msgs::msg::Marker> (
         "vehicle_marker", qos_profile);
@@ -81,7 +85,10 @@ Display::Display(const std::string& node_name, const rclcpp::NodeOptions& option
         "motion_marker", qos_profile);
     p_ego_motion_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
         "ego_motion_marker", qos_profile);    
-
+    p_left_lane_marker_ = this->create_publisher<visualization_msgs::msg::Marker> (
+        "left_lane_marker", qos_profile);
+    p_right_lane_marker_ = this->create_publisher<visualization_msgs::msg::Marker> (
+        "right_lane_marker", qos_profile);
 
     // Timer init
     t_run_node_ = this->create_wall_timer(
@@ -163,11 +170,22 @@ void Display::Run() {
 
     ad_msgs::msg::Mission ego_motion; {
         if (b_is_ego_motion_ == true) {
-            std::lock_guard<std::mutex> lock(mutex_motion_);
+            std::lock_guard<std::mutex> lock(mutex_ego_motion_);
             ego_motion = i_ego_motion_;
         }
     }
-    
+    ad_msgs::msg::LanePointData left_lane; {
+        if (b_is_left_lane_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_left_lane_);
+            left_lane = i_left_lane_;
+        }
+    }
+    ad_msgs::msg::LanePointData right_lane; {
+        if (b_is_right_lane_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_right_lane_);
+            right_lane = i_right_lane_;
+        }
+    }
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
     // Algorithm
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - // 
@@ -220,6 +238,18 @@ void Display::Run() {
         if ((current_time.seconds() - time_driving_way_marker_) > 0.2) {
             time_driving_way_marker_ = current_time.seconds();
             DisplayDrivingWay(driving_way, current_time, 0.1, 30.0);
+        }
+    }
+    if (b_is_left_lane_ == true) {
+        if ((current_time.seconds() - time_left_lane_marker_) > 0.2) {
+            time_left_lane_marker_ = current_time.seconds();
+            DisplayLeftLane(left_lane, current_time);
+        }
+    }
+    if (b_is_right_lane_ == true) {
+        if ((current_time.seconds() - time_right_lane_marker_) > 0.2) {
+            time_right_lane_marker_ = current_time.seconds();
+            DisplayRightLane(right_lane, current_time);
         }
     }
 }
@@ -509,6 +539,71 @@ void Display::DisplayEgoMotion(const ad_msgs::msg::Mission& ego_motion,
     
     p_ego_motion_marker_->publish(ego_motion_marker_array);
 }
+
+void Display::DisplayLeftLane(const ad_msgs::msg::LanePointData& left_lane,
+                                   const rclcpp::Time& current_time) {
+    visualization_msgs::msg::Marker left_lane_marker;
+    left_lane_marker.header.frame_id = left_lane.frame_id;
+    left_lane_marker.header.stamp = current_time;
+
+    left_lane_marker.ns = left_lane.id;
+    left_lane_marker.id = 0;
+
+    left_lane_marker.type = visualization_msgs::msg::Marker::POINTS;
+    left_lane_marker.action = visualization_msgs::msg::Marker::ADD;
+    
+    left_lane_marker.color.r = 0.0f;
+    left_lane_marker.color.g = 1.0f;
+    left_lane_marker.color.b = 0.0f;
+    left_lane_marker.color.a = 1.0;
+    left_lane_marker.scale.x = 0.25;
+    left_lane_marker.scale.y = 0.25;
+    left_lane_marker.lifetime = rclcpp::Duration(0, int64_t(0.2*1e9));
+
+    for (auto& point : left_lane.point) {
+        geometry_msgs::msg::Point p;
+        p.x = point.x;
+        p.y = point.y;
+        p.z = 0.0;
+
+        left_lane_marker.points.push_back(p);
+    }
+
+    p_left_lane_marker_->publish(left_lane_marker);
+}
+
+void Display::DisplayRightLane(const ad_msgs::msg::LanePointData& right_lane,
+                                   const rclcpp::Time& current_time) {
+    visualization_msgs::msg::Marker right_lane_marker;
+    right_lane_marker.header.frame_id = right_lane.frame_id;
+    right_lane_marker.header.stamp = current_time;
+
+    right_lane_marker.ns = right_lane.id;
+    right_lane_marker.id = 0;
+
+    right_lane_marker.type = visualization_msgs::msg::Marker::POINTS;
+    right_lane_marker.action = visualization_msgs::msg::Marker::ADD;
+    
+    right_lane_marker.color.r = 1.0f;
+    right_lane_marker.color.g = 0.0f;
+    right_lane_marker.color.b = 0.0f;
+    right_lane_marker.color.a = 1.0;
+    right_lane_marker.scale.x = 0.25;
+    right_lane_marker.scale.y = 0.25;
+    right_lane_marker.lifetime = rclcpp::Duration(0, int64_t(0.2*1e9));
+
+    for (auto& point : right_lane.point) {
+        geometry_msgs::msg::Point p;
+        p.x = point.x;
+        p.y = point.y;
+        p.z = 0.0;
+
+        right_lane_marker.points.push_back(p);
+    }
+
+    p_right_lane_marker_->publish(right_lane_marker);
+}
+
 
 void Display::DisplayROILanes(const ad_msgs::msg::LanePointDataArray& roi_lanes,
                               const rclcpp::Time& current_time) {

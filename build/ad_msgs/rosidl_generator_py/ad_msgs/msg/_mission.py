@@ -65,6 +65,7 @@ class Mission(metaclass=Metaclass_Mission):
         '_road_condition',
         '_road_slope',
         '_speed_limit',
+        '_parking',
     ]
 
     _fields_and_field_types = {
@@ -72,6 +73,7 @@ class Mission(metaclass=Metaclass_Mission):
         'road_condition': 'string',
         'road_slope': 'string',
         'speed_limit': 'double',
+        'parking': 'boolean',
     }
 
     SLOT_TYPES = (
@@ -79,6 +81,7 @@ class Mission(metaclass=Metaclass_Mission):
         rosidl_parser.definition.UnboundedString(),  # noqa: E501
         rosidl_parser.definition.UnboundedString(),  # noqa: E501
         rosidl_parser.definition.BasicType('double'),  # noqa: E501
+        rosidl_parser.definition.BasicType('boolean'),  # noqa: E501
     )
 
     def __init__(self, **kwargs):
@@ -89,6 +92,7 @@ class Mission(metaclass=Metaclass_Mission):
         self.road_condition = kwargs.get('road_condition', str())
         self.road_slope = kwargs.get('road_slope', str())
         self.speed_limit = kwargs.get('speed_limit', float())
+        self.parking = kwargs.get('parking', bool())
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -126,6 +130,8 @@ class Mission(metaclass=Metaclass_Mission):
         if self.road_slope != other.road_slope:
             return False
         if self.speed_limit != other.speed_limit:
+            return False
+        if self.parking != other.parking:
             return False
         return True
 
@@ -198,3 +204,16 @@ class Mission(metaclass=Metaclass_Mission):
             assert not (value < -1.7976931348623157e+308 or value > 1.7976931348623157e+308) or math.isinf(value), \
                 "The 'speed_limit' field must be a double in [-1.7976931348623157e+308, 1.7976931348623157e+308]"
         self._speed_limit = value
+
+    @builtins.property
+    def parking(self):
+        """Message field 'parking'."""
+        return self._parking
+
+    @parking.setter
+    def parking(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, bool), \
+                "The 'parking' field must be of type 'bool'"
+        self._parking = value

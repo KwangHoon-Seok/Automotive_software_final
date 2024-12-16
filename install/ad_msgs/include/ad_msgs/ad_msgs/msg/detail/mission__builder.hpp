@@ -21,16 +21,32 @@ namespace msg
 namespace builder
 {
 
+class Init_Mission_parking
+{
+public:
+  explicit Init_Mission_parking(::ad_msgs::msg::Mission & msg)
+  : msg_(msg)
+  {}
+  ::ad_msgs::msg::Mission parking(::ad_msgs::msg::Mission::_parking_type arg)
+  {
+    msg_.parking = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::ad_msgs::msg::Mission msg_;
+};
+
 class Init_Mission_speed_limit
 {
 public:
   explicit Init_Mission_speed_limit(::ad_msgs::msg::Mission & msg)
   : msg_(msg)
   {}
-  ::ad_msgs::msg::Mission speed_limit(::ad_msgs::msg::Mission::_speed_limit_type arg)
+  Init_Mission_parking speed_limit(::ad_msgs::msg::Mission::_speed_limit_type arg)
   {
     msg_.speed_limit = std::move(arg);
-    return std::move(msg_);
+    return Init_Mission_parking(msg_);
   }
 
 private:

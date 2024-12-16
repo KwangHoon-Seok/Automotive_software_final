@@ -40,6 +40,7 @@ ad_msgs__msg__Mission__init(ad_msgs__msg__Mission * msg)
     return false;
   }
   // speed_limit
+  // parking
   return true;
 }
 
@@ -56,6 +57,7 @@ ad_msgs__msg__Mission__fini(ad_msgs__msg__Mission * msg)
   // road_slope
   rosidl_runtime_c__String__fini(&msg->road_slope);
   // speed_limit
+  // parking
 }
 
 bool
@@ -84,6 +86,10 @@ ad_msgs__msg__Mission__are_equal(const ad_msgs__msg__Mission * lhs, const ad_msg
   }
   // speed_limit
   if (lhs->speed_limit != rhs->speed_limit) {
+    return false;
+  }
+  // parking
+  if (lhs->parking != rhs->parking) {
     return false;
   }
   return true;
@@ -117,6 +123,8 @@ ad_msgs__msg__Mission__copy(
   }
   // speed_limit
   output->speed_limit = input->speed_limit;
+  // parking
+  output->parking = input->parking;
   return true;
 }
 

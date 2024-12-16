@@ -72,6 +72,8 @@ cdr_serialize(
   cdr << ros_message.road_slope;
   // Member: speed_limit
   cdr << ros_message.speed_limit;
+  // Member: parking
+  cdr << (ros_message.parking ? true : false);
   return true;
 }
 
@@ -101,6 +103,13 @@ cdr_deserialize(
 
   // Member: speed_limit
   cdr >> ros_message.speed_limit;
+
+  // Member: parking
+  {
+    uint8_t tmp;
+    cdr >> tmp;
+    ros_message.parking = tmp ? true : false;
+  }
 
   return true;
 }
@@ -142,6 +151,12 @@ get_serialized_size(
   // Member: speed_limit
   {
     size_t item_size = sizeof(ros_message.speed_limit);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // Member: parking
+  {
+    size_t item_size = sizeof(ros_message.parking);
     current_alignment += item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -227,6 +242,14 @@ max_serialized_size_Mission(
       eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
   }
 
+  // Member: parking
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint8_t);
+    current_alignment += array_size * sizeof(uint8_t);
+  }
+
   size_t ret_val = current_alignment - initial_alignment;
   if (is_plain) {
     // All members are plain, and type is not empty.
@@ -235,7 +258,7 @@ max_serialized_size_Mission(
     using DataType = ad_msgs::msg::Mission;
     is_plain =
       (
-      offsetof(DataType, speed_limit) +
+      offsetof(DataType, parking) +
       last_member_size
       ) == ret_val;
   }

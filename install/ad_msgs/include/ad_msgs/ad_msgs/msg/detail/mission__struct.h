@@ -31,6 +31,7 @@ typedef struct ad_msgs__msg__Mission
   rosidl_runtime_c__String road_condition;
   rosidl_runtime_c__String road_slope;
   double speed_limit;
+  bool parking;
 } ad_msgs__msg__Mission;
 
 // Struct for a sequence of ad_msgs__msg__Mission.

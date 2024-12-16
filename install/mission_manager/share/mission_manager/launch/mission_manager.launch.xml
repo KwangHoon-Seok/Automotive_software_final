@@ -11,7 +11,7 @@
   <arg name="id_merging_lane" default="1" />
   <arg name="detection_range" default="20.0" />
   <arg name="object_max_accel" default="3.0" />
-  <arg name="merging_section_length" default="30.0" />
+  <arg name="merging_section_length" default="25.0" />
   <arg name="merging_interval" default="10.0" />
   <arg name="merging_speed" default="30.0" />
   <arg name="merging_target_speed" default="50.0" />

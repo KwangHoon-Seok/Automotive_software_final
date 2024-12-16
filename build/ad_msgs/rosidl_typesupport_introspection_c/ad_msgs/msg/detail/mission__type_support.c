@@ -95,7 +95,7 @@ bool ad_msgs__msg__Mission__rosidl_typesupport_introspection_c__resize_function_
   return ad_msgs__msg__MissionObject__Sequence__init(member, size);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember ad_msgs__msg__Mission__rosidl_typesupport_introspection_c__Mission_message_member_array[4] = {
+static rosidl_typesupport_introspection_c__MessageMember ad_msgs__msg__Mission__rosidl_typesupport_introspection_c__Mission_message_member_array[5] = {
   {
     "objects",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
@@ -163,13 +163,30 @@ static rosidl_typesupport_introspection_c__MessageMember ad_msgs__msg__Mission__
     NULL,  // fetch(index, &value) function pointer
     NULL,  // assign(index, value) function pointer
     NULL  // resize(index) function pointer
+  },
+  {
+    "parking",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_BOOLEAN,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(ad_msgs__msg__Mission, parking),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
   }
 };
 
 static const rosidl_typesupport_introspection_c__MessageMembers ad_msgs__msg__Mission__rosidl_typesupport_introspection_c__Mission_message_members = {
   "ad_msgs__msg",  // message namespace
   "Mission",  // message name
-  4,  // number of fields
+  5,  // number of fields
   sizeof(ad_msgs__msg__Mission),
   ad_msgs__msg__Mission__rosidl_typesupport_introspection_c__Mission_message_member_array,  // message members
   ad_msgs__msg__Mission__rosidl_typesupport_introspection_c__Mission_init_function,  // function to initialize message memory (memory has to be allocated)

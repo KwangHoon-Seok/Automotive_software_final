@@ -12,6 +12,7 @@
  *              : change to ROS2
  *            2024-11-05 updated by Yuseung Na (yuseungna@hanyang.ac.kr)
  *              : clean up
+ *            2024-12-09 update parking evaluation to ROS2 from 2023jasiple (sunghoon8585@gmail.com)
  */
 
 #include "evaluation_node.hpp"
@@ -27,6 +28,14 @@ Evaluation::Evaluation(const std::string& node_name, const rclcpp::NodeOptions& 
     this->declare_parameter("evaluation/lane_id", "");
     this->declare_parameter("evaluation/time_limit", 0.0);
     this->declare_parameter("evaluation/lane_departure", 0.0);
+
+    this->declare_parameter("evaluation/parking_success_threshold", 0.0);
+    this->declare_parameter("evaluation/parking_slot_0_x", 0.0);
+    this->declare_parameter("evaluation/parking_slot_0_y", 0.0);
+    this->declare_parameter("evaluation/parking_slot_1_x", 0.0);
+    this->declare_parameter("evaluation/parking_slot_1_y", 0.0);
+    this->declare_parameter("evaluation/parking_slot_2_x", 0.0);
+    this->declare_parameter("evaluation/parking_slot_2_y", 0.0);
     ProcessParams();
 
     RCLCPP_INFO(this->get_logger(), "loop_rate_hz: %f", cfg_.loop_rate_hz);
@@ -48,6 +57,8 @@ Evaluation::Evaluation(const std::string& node_name, const rclcpp::NodeOptions& 
     // Publisher init
     p_text_evaluation_result_ = this->create_publisher<rviz_2d_overlay_msgs::msg::OverlayText>(
         "/text_evaluation_result", qos_profile);
+    p_track_end_ = this->create_publisher<std_msgs::msg::Bool>(
+        "/ego/track_end", qos_profile);
 
     // Timer init
     t_run_node_ = this->create_wall_timer(
@@ -69,6 +80,14 @@ void Evaluation::ProcessParams() {
     this->get_parameter("evaluation/lane_id", cfg_.lane_id);
     this->get_parameter("evaluation/time_limit", cfg_.eval_time_limit);
     this->get_parameter("evaluation/lane_departure", cfg_.eval_lane_departure);    
+
+    this->get_parameter("evaluation/parking_success_threshold", cfg_.parking.parking_success_threshold);
+    this->get_parameter("evaluation/parking_slot_0_x", cfg_.parking.slot_0_x);
+    this->get_parameter("evaluation/parking_slot_0_y", cfg_.parking.slot_0_y);
+    this->get_parameter("evaluation/parking_slot_1_x", cfg_.parking.slot_1_x);
+    this->get_parameter("evaluation/parking_slot_1_y", cfg_.parking.slot_1_y);
+    this->get_parameter("evaluation/parking_slot_2_x", cfg_.parking.slot_2_x);
+    this->get_parameter("evaluation/parking_slot_2_y", cfg_.parking.slot_2_y);
 }
 
 void Evaluation::Run() {
@@ -107,8 +126,13 @@ void Evaluation::Run() {
 
     // Run evaluation algorithm
     if (b_is_finished_ == false) {
+        cfg_.parking.status = ParkingStatus::APPROACHING;
         time_eval_driving_ = curr_evaluation_time - time_start_;
         b_is_finished_ = alg_evaluation_->RunAlgorithm(vehicle_state, mission, time_eval_driving_, time_dt, 6.0, cfg_);        
+    }
+    else if (b_is_finished_ == true) {
+        cfg_.parking.status = ParkingStatus::IN_PROGRESS;
+        alg_evaluation_->RunAlgorithm(vehicle_state, mission, time_eval_driving_, time_dt, 6.0, cfg_);
     }
     std::string evaluation_info = alg_evaluation_->GetEvaluationInfo();
 
@@ -116,6 +140,7 @@ void Evaluation::Run() {
     // Publish output
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
     p_text_evaluation_result_->publish(ros2_bridge::UpdateEvaluationResult(evaluation_info));
+    p_track_end_->publish(ros2_bridge::UpdateTrackEnd(b_is_finished_));
 }
 
 int main(int argc, char **argv) {

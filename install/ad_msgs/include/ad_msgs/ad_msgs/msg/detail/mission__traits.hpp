@@ -65,6 +65,13 @@ inline void to_flow_style_yaml(
   {
     out << "speed_limit: ";
     rosidl_generator_traits::value_to_yaml(msg.speed_limit, out);
+    out << ", ";
+  }
+
+  // member: parking
+  {
+    out << "parking: ";
+    rosidl_generator_traits::value_to_yaml(msg.parking, out);
   }
   out << "}";
 }  // NOLINT(readability/fn_size)
@@ -119,6 +126,16 @@ inline void to_block_style_yaml(
     }
     out << "speed_limit: ";
     rosidl_generator_traits::value_to_yaml(msg.speed_limit, out);
+    out << "\n";
+  }
+
+  // member: parking
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "parking: ";
+    rosidl_generator_traits::value_to_yaml(msg.parking, out);
     out << "\n";
   }
 }  // NOLINT(readability/fn_size)

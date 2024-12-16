@@ -101,6 +101,14 @@ class Display : public rclcpp::Node {
             i_ego_motion_ = *msg;
             b_is_ego_motion_ = true;
         }
+        inline void CallbackLeftLane(const ad_msgs::msg::LanePointData::SharedPtr msg) {
+            i_left_lane_ = *msg;
+            b_is_left_lane_ = true;
+        }
+        inline void CallbackRightLane(const ad_msgs::msg::LanePointData::SharedPtr msg) {
+            i_right_lane_ = *msg;
+            b_is_right_lane_ = true;
+        }
 
         // Algorithm function
         void DisplayVehicle(const ad_msgs::msg::VehicleState& vehicle_state,
@@ -129,6 +137,10 @@ class Display : public rclcpp::Node {
         void DisplayEgoMotion(const ad_msgs::msg::Mission& ego_motion,
                             const ad_msgs::msg::VehicleState& vehicle_state,
                             const rclcpp::Time& current_time);
+        void DisplayLeftLane(const ad_msgs::msg::LanePointData& left_lane,
+                            const rclcpp::Time& current_time);
+        void DisplayRightLane(const ad_msgs::msg::LanePointData& right_lane,
+                            const rclcpp::Time& current_time);
         
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
         // Variable
@@ -144,6 +156,8 @@ class Display : public rclcpp::Node {
         // custom Sub
         rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr              s_motion_;
         rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr              s_ego_motion_;
+        rclcpp::Subscription<ad_msgs::msg::LanePointData>::SharedPtr        s_left_lane_;
+        rclcpp::Subscription<ad_msgs::msg::LanePointData>::SharedPtr        s_right_lane_;
 
         // Input
         ad_msgs::msg::VehicleState          i_vehicle_state_;
@@ -156,6 +170,9 @@ class Display : public rclcpp::Node {
         // custom Input
         ad_msgs::msg::Mission               i_motion_;
         ad_msgs::msg::Mission               i_ego_motion_;
+        ad_msgs::msg::LanePointData         i_left_lane_;
+        ad_msgs::msg::LanePointData         i_right_lane_;
+
 
         // Mutex
         std::mutex mutex_vehicle_state_;
@@ -168,6 +185,8 @@ class Display : public rclcpp::Node {
         // custom mutex
         std::mutex mutex_motion_;
         std::mutex mutex_ego_motion_;
+        std::mutex mutex_left_lane_;
+        std::mutex mutex_right_lane_;
         
         // Publisher
         rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr       p_vehicle_marker_;
@@ -181,6 +200,8 @@ class Display : public rclcpp::Node {
         // custom Pub
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_motion_marker_;
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_ego_motion_marker_;
+        rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr       p_left_lane_marker_;
+        rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr       p_right_lane_marker_;
 
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;
@@ -197,7 +218,9 @@ class Display : public rclcpp::Node {
         bool b_is_poly_lanes_       = false;
         bool b_is_driving_way_      = false;
         bool b_is_motion_           = false;
-        bool b_is_ego_motion_           = false;
+        bool b_is_ego_motion_       = false;
+        bool b_is_left_lane_        = false;
+        bool b_is_right_lane_       = false;
 
         // Global Variable
         double time_vehicle_marker_ = 0.0;
@@ -206,6 +229,8 @@ class Display : public rclcpp::Node {
         double time_lane_points_marker_ = 0.0;
         double time_poly_lanes_marker_ = 0.0;
         double time_driving_way_marker_ = 0.0;
+        double time_left_lane_marker_ = 0.0;
+        double time_right_lane_marker_ = 0.0;
 };
 
 #endif // __DISPLAY_NODE_HPP__

@@ -18,6 +18,7 @@
 #include <rclcpp/message_info.hpp>
 
 // ROS Message Header
+#include <std_msgs/msg/bool.hpp>
 #include <ad_msgs/msg/mission.hpp>
 #include <ad_msgs/msg/mission_object.hpp>
 #include <ad_msgs/msg/mission_region.hpp>
@@ -35,6 +36,7 @@ namespace ros2_bridge {
         mission.speed_limit = msg.speed_limit;
         mission.road_condition = msg.road_condition;
         mission.road_slope = msg.road_slope;
+        mission.parking = msg.parking;
 
         mission.objects.clear();
         for (const auto& obj : msg.objects) {
@@ -59,11 +61,13 @@ namespace ros2_bridge {
                                                const std::vector<interface::MissionObject>& objects_merge,
                                                const std::string& road_condition,
                                                const std::string& road_slope,
-                                               const double& speed_limit) {
+                                               const double& speed_limit,
+                                               const bool& parking) {
         ad_msgs::msg::Mission msg;
         msg.speed_limit     = speed_limit;
         msg.road_condition  = road_condition;
         msg.road_slope      = road_slope;
+        msg.parking         = parking;
         
         msg.objects.clear();
         for(const auto& obj : objects_scc) {

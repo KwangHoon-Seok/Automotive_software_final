@@ -53,6 +53,8 @@ ScenarioRunner::ScenarioRunner(const std::string& node_name, const rclcpp::NodeO
     // Subscriber init
     s_vehicle_state_ = this->create_subscription<ad_msgs::msg::VehicleState> (
         "vehicle_state", qos_profile, std::bind(&ScenarioRunner::CallbackVehicleState, this, std::placeholders::_1));
+    s_track_end_ = this->create_subscription<std_msgs::msg::Bool> (
+        "track_end", qos_profile, std::bind(&ScenarioRunner::CallbackTrackEnd, this, std::placeholders::_1));
     
     // Publisher init
     p_detected_mission_ = this->create_publisher<ad_msgs::msg::Mission>(
@@ -117,6 +119,11 @@ void ScenarioRunner::Run() {
         vehicle_state = i_vehicle_state_;
     }
 
+    bool track_end; {
+        std::lock_guard<std::mutex> lock(mutex_track_end_);
+        track_end = b_track_end_;
+    }
+
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
     // Algorithm
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -140,7 +147,7 @@ void ScenarioRunner::Run() {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
     // Publish output
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-    p_detected_mission_->publish(ros2_bridge::UpdateMission(scc_objects, merge_objects, road_condition, road_slope, speed_limit));
+    p_detected_mission_->publish(ros2_bridge::UpdateMission(scc_objects, merge_objects, road_condition, road_slope, speed_limit, track_end));
     p_display_mission_->publish(ros2_bridge::UpdateMissionDisplay(display_scc_objects, display_merge_objects, display_road_slope, display_road_condition, display_speed_limit));
 }
 

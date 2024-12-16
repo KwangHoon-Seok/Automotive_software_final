@@ -50,7 +50,7 @@ void MotionPredictionNode::Run(const rclcpp::Time& current_time){
     ego_motion_.objects.clear();
     prediction(vehicle_state, mission_state);
     PublishMotion(current_time);
-
+    RCLCPP_INFO(this->get_logger(), "PARKING : %s", mission_state.parking ? "true" : "false");
     
 }
 
@@ -88,7 +88,7 @@ void MotionPredictionNode::prediction(const ad_msgs::msg::VehicleState& vehicle_
                         + cos(vehicle_state.yaw));
             ego_position.time = i * (prediction_time / interval);
             ego_motion_.objects.push_back(ego_position);
-            RCLCPP_INFO(this->get_logger(), "TIME : %f X: %f Y: %f", ego_position.time, ego_position.x, ego_position.y);
+            // RCLCPP_INFO(this->get_logger(), "TIME : %f X: %f Y: %f", ego_position.time, ego_position.x, ego_position.y);
         }
     }
     else{
@@ -97,7 +97,7 @@ void MotionPredictionNode::prediction(const ad_msgs::msg::VehicleState& vehicle_
             ego_position.y = vehicle_state.y + vehicle_state.velocity * sin(vehicle_state.yaw) * i * (prediction_time /interval);
             ego_position.time = i * (prediction_time / interval);
             ego_motion_.objects.push_back(ego_position);
-            RCLCPP_INFO(this->get_logger(), "TIME : %f X: %f Y: %f", ego_position.time, ego_position.x, ego_position.y);
+            // RCLCPP_INFO(this->get_logger(), "TIME : %f X: %f Y: %f", ego_position.time, ego_position.x, ego_position.y);
         }
     }
     

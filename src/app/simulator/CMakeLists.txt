@@ -52,7 +52,6 @@ add_executable(display
     src/display/display_node.cpp
 )
 
-
 ################################################################################
 # Link libraries and dependencies
 ################################################################################
@@ -71,10 +70,12 @@ set_target_properties(lane_detection_algorithm PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
+
 ## Link libraries to the executable
 target_link_libraries(vehicle
     vehicle_simulator_algorithm
 )
+
 target_link_libraries(lane_detection 
     ${Boost_LIBRARIES}
     ${Boost_SYSTEM_LIBRARY}

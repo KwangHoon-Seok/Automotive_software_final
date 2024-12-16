@@ -115,6 +115,11 @@ static bool _Mission__cdr_serialize(
     cdr << ros_message->speed_limit;
   }
 
+  // Field name: parking
+  {
+    cdr << (ros_message->parking ? true : false);
+  }
+
   return true;
 }
 
@@ -191,6 +196,13 @@ static bool _Mission__cdr_deserialize(
     cdr >> ros_message->speed_limit;
   }
 
+  // Field name: parking
+  {
+    uint8_t tmp;
+    cdr >> tmp;
+    ros_message->parking = tmp ? true : false;
+  }
+
   return true;
 }  // NOLINT(readability/fn_size)
 
@@ -231,6 +243,12 @@ size_t get_serialized_size_ad_msgs__msg__Mission(
   // field.name speed_limit
   {
     size_t item_size = sizeof(ros_message->speed_limit);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name parking
+  {
+    size_t item_size = sizeof(ros_message->parking);
     current_alignment += item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -318,6 +336,13 @@ size_t max_serialized_size_ad_msgs__msg__Mission(
     current_alignment += array_size * sizeof(uint64_t) +
       eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint64_t));
   }
+  // member: parking
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint8_t);
+    current_alignment += array_size * sizeof(uint8_t);
+  }
 
   size_t ret_val = current_alignment - initial_alignment;
   if (is_plain) {
@@ -327,7 +352,7 @@ size_t max_serialized_size_ad_msgs__msg__Mission(
     using DataType = ad_msgs__msg__Mission;
     is_plain =
       (
-      offsetof(DataType, speed_limit) +
+      offsetof(DataType, parking) +
       last_member_size
       ) == ret_val;
   }

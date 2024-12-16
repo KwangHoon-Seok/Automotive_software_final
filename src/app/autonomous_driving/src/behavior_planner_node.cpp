@@ -110,6 +110,11 @@ void BehaviorPlannerNode::updatePlannerState()
     } else {
         o_behavior_state_ = REF_VEL_TRACKING; // No obstacles in significant range
     }
+    
+    // jw
+    if (i_mission_state_.parking == true){
+        o_behavior_state_ = PARKING;
+    }
 
     // Log the results
     // RCLCPP_INFO(this->get_logger(),
@@ -120,10 +125,10 @@ void BehaviorPlannerNode::updatePlannerState()
 void BehaviorPlannerNode::velocity_planner(){
     if(i_mission_state_.road_condition == "None")
     {
-        o_ref_velocity_ = 40.0;
+        o_ref_velocity_ = 15.0;
     }
     else{
-        o_ref_velocity_ = 20.0;
+        o_ref_velocity_ = 10.0;
     }
 }
 

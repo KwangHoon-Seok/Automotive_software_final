@@ -82,7 +82,7 @@ void resize_function__Mission__objects(void * untyped_member, size_t size)
   member->resize(size);
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember Mission_message_member_array[4] = {
+static const ::rosidl_typesupport_introspection_cpp::MessageMember Mission_message_member_array[5] = {
   {
     "objects",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
@@ -150,13 +150,30 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember Mission_messa
     nullptr,  // fetch(index, &value) function pointer
     nullptr,  // assign(index, value) function pointer
     nullptr  // resize(index) function pointer
+  },
+  {
+    "parking",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_BOOLEAN,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(ad_msgs::msg::Mission, parking),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
   }
 };
 
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers Mission_message_members = {
   "ad_msgs::msg",  // message namespace
   "Mission",  // message name
-  4,  // number of fields
+  5,  // number of fields
   sizeof(ad_msgs::msg::Mission),
   Mission_message_member_array,  // message members
   Mission_init_function,  // function to initialize message memory (memory has to be allocated)

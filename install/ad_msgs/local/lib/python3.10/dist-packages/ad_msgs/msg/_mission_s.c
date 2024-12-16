@@ -133,6 +133,15 @@ bool ad_msgs__msg__mission__convert_from_py(PyObject * _pymsg, void * _ros_messa
     ros_message->speed_limit = PyFloat_AS_DOUBLE(field);
     Py_DECREF(field);
   }
+  {  // parking
+    PyObject * field = PyObject_GetAttrString(_pymsg, "parking");
+    if (!field) {
+      return false;
+    }
+    assert(PyBool_Check(field));
+    ros_message->parking = (Py_True == field);
+    Py_DECREF(field);
+  }
 
   return true;
 }
@@ -222,6 +231,17 @@ PyObject * ad_msgs__msg__mission__convert_to_py(void * raw_ros_message)
     field = PyFloat_FromDouble(ros_message->speed_limit);
     {
       int rc = PyObject_SetAttrString(_pymessage, "speed_limit", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // parking
+    PyObject * field = NULL;
+    field = PyBool_FromLong(ros_message->parking ? 1 : 0);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "parking", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;

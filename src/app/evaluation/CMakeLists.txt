@@ -65,6 +65,7 @@ set_target_properties(evaluation_algorithm PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
+
 ## Evaluation Node
 target_link_libraries(evaluation
     ${Boost_LIBRARIES}

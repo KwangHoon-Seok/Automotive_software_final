@@ -56,7 +56,7 @@ void ControlNode::Run() {
     
     if (drive_mode == REF_VEL_TRACKING)
     {
-        control_signal = computePID(15, vehicle_state.velocity, 0.6);
+        control_signal = computePID(target_speed, vehicle_state.velocity, 0.6);
         if (control_signal > 0)
         {
             o_vehicle_command_.accel = std::min(control_signal, 0.5);
