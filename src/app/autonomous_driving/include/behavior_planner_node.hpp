@@ -47,6 +47,7 @@ class BehaviorPlannerNode : public rclcpp::Node {
         double current_velocity_;
         double ref_vel_;
         geometry_msgs::msg::Point static_object_position_;
+        int merge_flag = 0;
         // Publishers
         rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_behavior_state_;
         rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_ref_velocity_;

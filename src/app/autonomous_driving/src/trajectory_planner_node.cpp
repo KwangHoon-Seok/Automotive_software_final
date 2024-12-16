@@ -39,6 +39,8 @@ TrajectoryNode::TrajectoryNode(const std::string &node_name, const double &loop_
 
     p_best_trajectory_ = this->create_publisher<ad_msgs::msg::PolyfitLaneData>(
         "/ego/merge_path", qos_profile);
+    p_target_point_ = this->create_publisher<geometry_msgs::msg::Point>(
+        "/merge_target", qos_profile);
 
     RCLCPP_INFO(this->get_logger(), "TrajectoryNode has been initialized.");
 }
@@ -79,7 +81,7 @@ void TrajectoryNode::Run() {
     geometry_msgs::msg::Point static_position = i_static_position_;
     // std::vector<Point> target_points;
     double drive_mode = static_cast<double>(behavior_state_float.data);
-
+    geometry_msgs::msg::Point target_point;
 
     Point current_position = {0.0 , 0.0};
     yaw = normalize(static_cast<double>(vehicle_state.yaw));
@@ -100,9 +102,19 @@ void TrajectoryNode::Run() {
         target_points.push_back(left_point);
         Point right_point = RightTargetPoint(static_position, 4.0);
         target_points.push_back(right_point);
-        Point back_point = BackTargetPoint(static_position, 20.0);
+        Point back_point = BackTargetPoint(static_position, 25);
         target_points.push_back(back_point);
-            
+        
+        if (target_flag == 0){
+            merge_target.x = back_point.x;
+            merge_target.y = back_point.y;
+            target_flag = 1;
+        }
+        target_point.x = merge_target.x;
+        target_point.y = merge_target.y;
+        target_point.z = 0.0;
+        p_target_point_->publish(target_point);
+
         slope_second_right = (back_point.y - right_point.y) / (back_point.x - right_point.x);
         slope_second_left = (back_point.y - left_point.y) / (back_point.x - left_point.x);
         slope_first_right = (right_point.y - 0.0) / (right_point.x - 0.0);
@@ -124,6 +136,7 @@ void TrajectoryNode::Run() {
     static int is_flag = 0;
     if (drive_mode == MERGE)
     {
+
         if (!is_best_path){
             best_path.frame_id = "ego/body";
             best_path.id = "0";
@@ -131,6 +144,8 @@ void TrajectoryNode::Run() {
             best_path.a1 = 0.0;
             best_path.a2 = 0.0;
             best_path.a3 = 0.0;
+            best_path.a4 = 0.0;
+            best_path.a5 = 0.0;
             is_best_path = true;
         }
         for (size_t i = 1; i < 3; ++i){
@@ -147,6 +162,15 @@ void TrajectoryNode::Run() {
             spline_msg.a5 = coeffs[0];
             spline_msg.merge = 1.0;
             spline_array_msg.polyfitlanes.push_back(spline_msg);
+        }
+        for (const auto& path : spline_array_msg.polyfitlanes) {
+            double ttc = CalculateTTC(path, vehicle_state, object_prediction, 4.0, 0.1, 4.0);
+            // Update best path only if conditions are met
+            RCLCPP_INFO(this->get_logger(), "path id %s ttc: %.2f", path.id.c_str(), ttc);
+            if ((path.id == "2") && ttc >=0.5 && ttc < 1.8 && is_flag == 0) {
+                best_path = path;
+                is_flag = 1;
+            }
         }
         o_trajectories_ = spline_array_msg;
         p_trajectory_candidates_->publish(o_trajectories_);
@@ -173,19 +197,6 @@ void TrajectoryNode::Run() {
         p_trajectory_candidates_->publish(o_trajectories_);
     }
 
-    // if (drive_mode == MERGE) {
-    //     double min_ttc = 10000;
-    //     for (const auto& path : spline_array_msg.polyfitlanes) {
-    //         double ttc = CalculateTTC(path, vehicle_state, object_prediction, 3.0, 0.1, 3.5);
-    //         // Update best path only if conditions are met
-    //         RCLCPP_INFO(this->get_logger(), "path id %s ttc: %.2f", path.id.c_str(), ttc);
-    //         if ((path.id == "4" || path.id == "5") && ttc > 1.8 && ttc < 3.0 && is_flag == 0) {
-    //             best_path = path;
-    //             is_flag = 1;
-    //         }
-    //     }
-    // }
-    // Publish the best trajectory
     
     p_best_trajectory_->publish(best_path);
 }
@@ -200,10 +211,10 @@ Point TrajectoryNode::RightTargetPoint(const geometry_msgs::msg::Point& static_p
     double local_y = std::sin(-i_vehicle_state_.yaw) * dx + std::cos(-i_vehicle_state_.yaw) * dy;
 
     // Apply lateral offset in the local frame (right side is positive lateral offset)
-    double right_x = local_x;
+    double right_x = local_x - 3.0;
     double right_y = local_y - lateral_offset;
 
-    RCLCPP_INFO(this->get_logger(), "Right Point in Local Frame - X: %.2f, Y: %.2f", right_x, right_y);
+    //CLCPP_INFO(this->get_logger(), "Right Point in Local Frame - X: %.2f, Y: %.2f", right_x, right_y);
 
     return {right_x, right_y};
 }
@@ -222,7 +233,7 @@ Point TrajectoryNode::LeftTargetPoint(const geometry_msgs::msg::Point& static_po
     double left_x = local_x;
     double left_y = local_y + lateral_offset;
 
-    RCLCPP_INFO(this->get_logger(), "Left Point in Local Frame - X: %.2f, Y: %.2f", left_x, left_y);
+    //RCLCPP_INFO(this->get_logger(), "Left Point in Local Frame - X: %.2f, Y: %.2f", left_x, left_y);
 
     return {left_x, left_y};
 }
@@ -239,9 +250,9 @@ Point TrajectoryNode::BackTargetPoint(const geometry_msgs::msg::Point& static_po
 
     // Apply backward offset in the local frame
     double back_x = local_x + back_distance; // Moving backward along the local x-axis
-    double back_y = local_y + 7.0;                 // No change in the y-axis
+    double back_y = local_y + 8.5;                 
 
-    RCLCPP_INFO(this->get_logger(), "Back Point in Local Frame - X: %.2f, Y: %.2f", back_x, back_y);
+    //RCLCPP_INFO(this->get_logger(), "Back Point in Local Frame - X: %.2f, Y: %.2f", back_x, back_y);
 
     return {back_x, back_y};
 }
@@ -257,7 +268,10 @@ double TrajectoryNode::CalculateTTC(
     double interval,
     double collision_threshold) {
     
-    double ttc = 20000;
+    static bool previous_dynamic_present = false;
+
+    double ttc = 20000; // 초기값을 큰 값으로 설정
+    bool has_dynamic_object = false; // Dynamic 객체 존재 여부 확인 플래그
 
     // Ego 경로 샘플링
     std::vector<prediction_points> ego_path_points = SampleEgoPath(path, ego_state, time_horizon, interval);
@@ -265,14 +279,15 @@ double TrajectoryNode::CalculateTTC(
     for (const auto& object : object_prediction.objects) {
         if (object.object_type != "Dynamic") continue;
 
-        // Object prediction에서 시간과 위치를 가져옴
+        has_dynamic_object = true; // Dynamic 객체 존재 플래그 설정
+
+        // Object prediction에서 시간과 위치를 가져옴 -> global frame
         for (const auto& ego_point : ego_path_points) {
             // 시간 일치 확인
             if (std::abs(object.time - ego_point.time) > interval) continue;
 
             // 충돌 거리 계산
             double distance = std::hypot(object.x - ego_point.x, object.y - ego_point.y);
-            // RCLCPP_INFO(this->get_logger(),"충돌 거리 : %.2f", distance);
             if (distance < collision_threshold) {
                 ttc = std::min(ttc, ego_point.time); // TTC 업데이트
                 break; // 해당 객체에 대해 더 이상 확인하지 않음
@@ -280,8 +295,17 @@ double TrajectoryNode::CalculateTTC(
         }
     }
 
+    if (has_dynamic_object == false){
+        if (previous_dynamic_present == true){
+            ttc = 2.0;
+        }
+    }
+
+    previous_dynamic_present = has_dynamic_object;
+
     return ttc;
 }
+
 
 
 std::vector<prediction_points> TrajectoryNode::SampleEgoPath(const ad_msgs::msg::PolyfitLaneData& path, const ad_msgs::msg::VehicleState& ego_state, double time_horizon, double interval) {
@@ -294,7 +318,7 @@ std::vector<prediction_points> TrajectoryNode::SampleEgoPath(const ad_msgs::msg:
     }
     for (double t = 0; t <= time_horizon; t += interval) {
         double x = velocity * t;
-        double y = path.a0 + path.a1 * x + path.a2 * x * x + path.a3 * x * x * x;
+        double y = path.a0 + path.a1 * x + path.a2 * x * x + path.a3 * x * x * x + path.a4 * x * x * x * x + path.a5 * x * x * x * x * x;
 
         Point local_point = {x, y};
         Point global_point = LocalToGlobal(local_point, ego_state);
@@ -367,7 +391,7 @@ std::vector<double> TrajectoryNode::ComputeCubicSpline(const std::vector<Point>&
 // 5차 다항식
 std::vector<double> TrajectoryNode::ComputeQuinticSpline(const std::vector<Point>& points, double slope_start, double slope_first_right, double slope_first_left, double slope_second_right, double slope_second_left, double slope_end, const ad_msgs::msg::VehicleState vehicle_state) {
     if (points.size() != 3) {
-        throw std::invalid_argument("ComputeCubicSpline requires exactly 4 points.");
+        throw std::invalid_argument("ComputeCubicSpline requires exactly 3 points.");
     }
 
     // 시작점과 중간점 끝점의 좌표
@@ -388,7 +412,7 @@ std::vector<double> TrajectoryNode::ComputeQuinticSpline(const std::vector<Point
     // 오른쪽 라인
     if (y1 < 0)
     {
-        b << y0, y1, y2, slope_start, slope_first_right, slope_second_right;
+        b << y0, y1, y2, slope_start, slope_first_right/2, slope_second_right/4;
     }
     else
     {
@@ -398,8 +422,10 @@ std::vector<double> TrajectoryNode::ComputeQuinticSpline(const std::vector<Point
 
     // 연립 방정식 풀이
     Eigen::VectorXd coeffs = A.colPivHouseholderQr().solve(b);
+    // Eigen::VectorXd coeffs = A.jacobiSvd(Eigen::ComputeThinU | Eigen::ComputeThinV).solve(b);
 
-    // 반환: [a3, a2, a1, a0]
+
+    // 반환: [a5, a4, a3, a2, a1, a0]
     return {coeffs(0), coeffs(1), coeffs(2), coeffs(3), coeffs(4), coeffs(5)};
 }
 

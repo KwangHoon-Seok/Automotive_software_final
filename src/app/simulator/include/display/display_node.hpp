@@ -48,6 +48,7 @@
 #include <std_msgs/msg/color_rgba.hpp>
 #include <std_msgs/msg/float32.hpp>
 #include <ad_msgs/msg/polyfit_lane_data.hpp>
+#include <std_msgs/msg/float64_multi_array.hpp>
 
 // Parameter Header
 #include "display/display_config.hpp"
@@ -112,6 +113,11 @@ class Display : public rclcpp::Node {
             i_best_path_ = *msg;
             b_is_best_path_ = true;
         }
+        inline void CallbackGlobalWaypoint(const std_msgs::msg::Float64MultiArray::SharedPtr msg) {
+            i_global_waypoint_ = *msg;
+            b_is_global_waypoint_ = true;
+        }
+
         // Algorithm function
         void DisplayVehicle(const ad_msgs::msg::VehicleState& vehicle_state,
                             const rclcpp::Time& current_time,
@@ -150,6 +156,8 @@ class Display : public rclcpp::Node {
                                     const rclcpp::Time& current_time);
         void DisplayBestPath(const ad_msgs::msg::PolyfitLaneData& best_path,
                             const rclcpp::Time& current_time);
+        void DisplayGlobalWaypoint(const std_msgs::msg::Float64MultiArray& global_waypoint,
+                                    const rclcpp::Time& current_time);
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
         // Variable
@@ -166,7 +174,7 @@ class Display : public rclcpp::Node {
         rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr              s_motion_;
         rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr              s_ego_motion_;
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneData>::SharedPtr      s_best_path_;
-
+        rclcpp::Subscription<std_msgs::msg::Float64MultiArray>::SharedPtr   s_global_waypoint_;
         // Input
         ad_msgs::msg::VehicleState          i_vehicle_state_;
         ad_msgs::msg::MissionDisplay        i_mission_;
@@ -179,7 +187,7 @@ class Display : public rclcpp::Node {
         ad_msgs::msg::Mission               i_motion_;
         ad_msgs::msg::Mission               i_ego_motion_;
         ad_msgs::msg::PolyfitLaneData       i_best_path_;
-
+        std_msgs::msg::Float64MultiArray    i_global_waypoint_;
         // Mutex
         std::mutex mutex_vehicle_state_;
         std::mutex mutex_mission_;
@@ -192,6 +200,7 @@ class Display : public rclcpp::Node {
         std::mutex mutex_motion_;
         std::mutex mutex_ego_motion_;
         std::mutex mutex_best_path_;
+        std::mutex mutex_global_waypoint_;
 
         // Publisher
         rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr       p_vehicle_marker_;
@@ -206,6 +215,7 @@ class Display : public rclcpp::Node {
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_motion_marker_;
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_ego_motion_marker_;
         rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_best_path_marker_;
+        rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr  p_global_waypoint_marker;
 
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;
@@ -225,6 +235,8 @@ class Display : public rclcpp::Node {
         bool b_is_motion_           = false;
         bool b_is_ego_motion_       = false;
         bool b_is_best_path_        = false;
+        bool b_is_global_waypoint_  = false;
+
         // Global Variable
         double time_vehicle_marker_ = 0.0;
         double time_csv_lanes_marker_ = 0.0;
@@ -233,6 +245,7 @@ class Display : public rclcpp::Node {
         double time_poly_lanes_marker_ = 0.0;
         double time_driving_way_marker_ = 0.0;
         double time_local_path_marker_ = 0.0;
+        double time_global_waypoint_marker_ = 0.0;
 };
 
 #endif // __DISPLAY_NODE_HPP__

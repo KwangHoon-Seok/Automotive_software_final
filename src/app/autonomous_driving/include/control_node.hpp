@@ -20,6 +20,8 @@
 #include <ad_msgs/msg/polyfit_lane_data.hpp>
     // behavior planner 정보
 #include <std_msgs/msg/float32.hpp>
+#include <geometry_msgs/msg/point.hpp>
+#include <std_msgs/msg/float64_multi_array.hpp>
 
 class ControlNode : public rclcpp::Node {
     public:
@@ -32,6 +34,15 @@ class ControlNode : public rclcpp::Node {
         double computePID(double target_speed, double current_speed, double kp);
         double computePID_ACC(double target_distance, double obstacle_distance, double kp);
         double PurePursuit(const ad_msgs::msg::PolyfitLaneData &driving_way);
+        double GlobalPurePursuit(const ad_msgs::msg::VehicleState &vehicle_state, 
+                                double lookahead_distance, double max_steering_angle);
+        std::vector<geometry_msgs::msg::Point> SampleGlobalPath(
+            const std::array<double, 6>& coeffs,  // 5차 다항식 계수: [a0, a1, a2, a3, a4, a5]
+            const ad_msgs::msg::VehicleState& vehicle_state,  // 차량 상태 (x, y, yaw - 글로벌 yaw)
+            double start_x,  // 시작 x 좌표 (로컬 기준)
+            double end_x,    // 끝 x 좌표 (로컬 기준)
+            double step      // 샘플링 간격
+        );
         // Variables for Algorithm
         double l_d;
         double g_x = 5.0;
@@ -51,13 +62,17 @@ class ControlNode : public rclcpp::Node {
         double distance_error_prev_ = 0.0;
 
         double behavior_state = 0.0;
+        std::vector<geometry_msgs::msg::Point> global_waypoints;
         // merge 관련 flag 전역 선언
         bool merge_completed = false;
         bool path_initialized = false;
         bool merge_flag = false;
         double target_x;
+        double merge_target_x;
+        bool goal_reached_flag = false;
         // Publishers
         rclcpp::Publisher<ad_msgs::msg::VehicleCommand>::SharedPtr p_vehicle_command_;
+        rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr p_global_waypoint_;
 
         // Subscribers
         rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;
@@ -67,6 +82,7 @@ class ControlNode : public rclcpp::Node {
         rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_behavior_state_;
         rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_ref_vel_;
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneData>::SharedPtr s_merge_path_;
+        rclcpp::Subscription<geometry_msgs::msg::Point>::SharedPtr s_merge_target_;
 
         // Callback Functions
         inline void CallbackVehicleState(const ad_msgs::msg::VehicleState::SharedPtr msg) {
@@ -99,6 +115,10 @@ class ControlNode : public rclcpp::Node {
             i_merge_path_ = *msg;
             // RCLCPP_INFO(this->get_logger(), "제발 나 좀 받아와라");
         }
+        inline void CallbackMergeTarget(const geometry_msgs::msg::Point::SharedPtr msg) {
+            std::lock_guard<std::mutex> lock(mutex_merge_target_);
+            i_merge_target_ = *msg;
+        }
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;
 
@@ -110,7 +130,7 @@ class ControlNode : public rclcpp::Node {
         std_msgs::msg::Float32 i_behavior_state_;
         std_msgs::msg::Float32 i_ref_vel_;
         ad_msgs::msg::PolyfitLaneData i_merge_path_;
-
+        geometry_msgs::msg::Point i_merge_target_;
         // Outputs 
         ad_msgs::msg::VehicleCommand o_vehicle_command_;
 
@@ -122,5 +142,6 @@ class ControlNode : public rclcpp::Node {
         std::mutex mutex_behavior_state_;
         std::mutex mutex_ref_vel_;
         std::mutex mutex_merge_path_;
+        std::mutex mutex_merge_target_;
 };  
 #endif

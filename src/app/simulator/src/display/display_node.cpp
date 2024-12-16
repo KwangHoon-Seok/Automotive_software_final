@@ -62,6 +62,8 @@ Display::Display(const std::string& node_name, const rclcpp::NodeOptions& option
         "/ego/ego_prediction", qos_profile, std::bind(&Display::CallbackEgoMotion, this, std::placeholders::_1));
     s_best_path_ = this->create_subscription<ad_msgs::msg::PolyfitLaneData>(
         "/ego/merge_path", qos_profile, std::bind(&Display::CallbackBestPath, this, std::placeholders::_1));
+    s_global_waypoint_ = this->create_subscription<std_msgs::msg::Float64MultiArray>(
+        "/global_points", qos_profile, std::bind(&Display::CallbackGlobalWaypoint, this, std::placeholders::_1));
 
     // Publisher init
     p_vehicle_marker_ = this->create_publisher<visualization_msgs::msg::Marker> (
@@ -89,6 +91,9 @@ Display::Display(const std::string& node_name, const rclcpp::NodeOptions& option
         "ego_prediction_marker", qos_profile); 
     p_best_path_marker_ = this->create_publisher<visualization_msgs::msg::MarkerArray> (
         "ego_best_path_marker", qos_profile);
+    p_global_waypoint_marker = this->create_publisher<visualization_msgs::msg::MarkerArray> (
+        "global_waypoint", qos_profile);
+
 
     // Timer init
     t_run_node_ = this->create_wall_timer(
@@ -175,6 +180,12 @@ void Display::Run() {
         }
     }
 
+    std_msgs::msg::Float64MultiArray global_waypoint; {
+        if (b_is_global_waypoint_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_global_waypoint_);
+            global_waypoint = i_global_waypoint_;
+        }
+    }
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
     // Algorithm
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - // 
@@ -232,6 +243,13 @@ void Display::Run() {
         if ((current_time.seconds() - time_local_path_marker_) > 0.2) {
             time_local_path_marker_ = current_time.seconds();
             DisplayLocalPath(i_local_path_, current_time, 0.1, vehicle_state);
+        }
+    }
+
+    if (b_is_global_waypoint_ == true) {
+        if((current_time.seconds() - time_global_waypoint_marker_) > 0.2) {
+            time_global_waypoint_marker_ = current_time.seconds();
+            DisplayGlobalWaypoint(i_global_waypoint_, current_time);
         }
     }
 }
@@ -957,6 +975,62 @@ void Display::DisplayBestPath(const ad_msgs::msg::PolyfitLaneData& best_path,
     
     p_driving_way_marker_->publish(markerArray);
 }
+
+void Display::DisplayGlobalWaypoint(const std_msgs::msg::Float64MultiArray& waypoints,
+                                       const rclcpp::Time& current_time) {
+    if (waypoints.data.empty() || waypoints.data.size() % 3 != 0) {
+        RCLCPP_WARN(this->get_logger(), "Invalid waypoint data. Ensure data size is a multiple of 3.");
+        return;
+    }
+
+    static int base_id = 70000; // Unique ID for markers
+    visualization_msgs::msg::MarkerArray markerArray;
+
+    size_t num_points = waypoints.data.size() / 3;
+    for (size_t i = 0; i < num_points; ++i) {
+        double x = waypoints.data[i * 3];
+        double y = waypoints.data[i * 3 + 1];
+        double z = waypoints.data[i * 3 + 2];
+
+        visualization_msgs::msg::Marker marker;
+        marker.header.frame_id = "world"; 
+        marker.header.stamp = current_time;
+
+        marker.ns = "float64_multiarray_display";
+        marker.id = base_id++;
+
+        marker.type = visualization_msgs::msg::Marker::SPHERE;
+        marker.action = visualization_msgs::msg::Marker::ADD;
+
+        marker.pose.position.x = x;
+        marker.pose.position.y = y;
+        marker.pose.position.z = z;
+
+        marker.pose.orientation.x = 0.0;
+        marker.pose.orientation.y = 0.0;
+        marker.pose.orientation.z = 0.0;
+        marker.pose.orientation.w = 1.0;
+
+        marker.color.r = 0.0f;
+        marker.color.g = 1.0f; // Green for visibility
+        marker.color.b = 0.0f;
+        marker.color.a = 1.0;
+
+        marker.scale.x = 0.2; // Sphere size
+        marker.scale.y = 0.2;
+        marker.scale.z = 0.2;
+        marker.lifetime = rclcpp::Duration(0, int64_t(0.5 * 1e9)); // 0.5 seconds lifetime
+
+        markerArray.markers.push_back(marker);
+    }
+
+    base_id += markerArray.markers.size();
+
+    // Publish the marker array
+    p_global_waypoint_marker->publish(markerArray);
+}
+
+
 
 int main(int argc, char **argv) {
     std::string node_name = "display";

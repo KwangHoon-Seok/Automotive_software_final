@@ -56,23 +56,66 @@ void MotionPredictionNode::prediction(const ad_msgs::msg::VehicleState& vehicle_
     ad_msgs::msg::MissionObject position;
     float prediction_time = 3;
     float interval = 30;
+    // 이전 yaw_rate를 저장하기 위한 static 변수 추가
+    static double previous_yaw_rate = 0.0;
 
-    if(mission_state.objects.size() > 0){
-        for(const auto& object : mission_state.objects){
-            if(object.is_reach_end == false && object.object_type == "Dynamic"){
-                for (int i = 1; i < interval; i++){
-                    position.x = object.x + object.velocity * cos(object.yaw) * i * (prediction_time /interval);
-                    position.y = object.y + object.velocity * sin(object.yaw) * i * (prediction_time /interval);
-                    position.time = i * (prediction_time / interval);
-                    position.object_type = "Dynamic";
-                    motion_.objects.push_back(position);
-                    // RCLCPP_INFO(this->get_logger(), "TIME : %f X: %f Y: %f", position.time, position.x, position.y);
+    if (mission_state.objects.size() > 0) {
+        for (const auto& object : mission_state.objects) {
+            if (object.is_reach_end == false && object.object_type == "Dynamic") {
+                double yaw_rate_to_use = 0.0;
+
+                // 자차의 yaw_rate를 사용하되, 멈춰 있을 경우 이전 yaw_rate 사용
+                if (std::abs(vehicle_state.velocity) < 0.5) { // 자차가 정지 상태
+                    yaw_rate_to_use = previous_yaw_rate;
+                } else {
+                    yaw_rate_to_use = vehicle_state.yaw_rate;
+                    previous_yaw_rate = yaw_rate_to_use; // yaw_rate 갱신
                 }
 
+                // CTRV 모델 적용
+                if (std::abs(yaw_rate_to_use) > 1e-6) {
+                    for (int i = 1; i < interval; i++) {
+                        position.x = object.x + (object.velocity / yaw_rate_to_use) *
+                                    (sin(object.yaw + yaw_rate_to_use * i * (prediction_time / interval)) 
+                                    - sin(object.yaw));
+                        position.y = object.y + (object.velocity / yaw_rate_to_use) *
+                                    (-cos(object.yaw + yaw_rate_to_use * i * (prediction_time / interval)) 
+                                    + cos(object.yaw));
+                        position.time = i * (prediction_time / interval);
+                        position.object_type = "Dynamic";
+                        motion_.objects.push_back(position);
+                        // RCLCPP_INFO(this->get_logger(), "CTRV Dynamic - TIME : %f X: %f Y: %f", position.time, position.x, position.y);
+                    }
+                } else { // Straight-line motion (yaw_rate ~ 0)
+                    for (int i = 1; i < interval; i++) {
+                        position.x = object.x + object.velocity * cos(object.yaw) * i * (prediction_time / interval);
+                        position.y = object.y + object.velocity * sin(object.yaw) * i * (prediction_time / interval);
+                        position.time = i * (prediction_time / interval);
+                        position.object_type = "Dynamic";
+                        motion_.objects.push_back(position);
+                        // RCLCPP_INFO(this->get_logger(), "Straight-line Dynamic - TIME : %f X: %f Y: %f", position.time, position.x, position.y);
+                    }
+                }
             }
-
         }
     }
+
+
+
+    // if(mission_state.objects.size() > 0){
+    //     for(const auto& object : mission_state.objects){
+    //         if(object.is_reach_end == false && object.object_type == "Dynamic"){
+    //             for (int i = 1; i < interval; i++){
+    //                 position.x = object.x + object.velocity * cos(object.yaw) * i * (prediction_time /interval);
+    //                 position.y = object.y + object.velocity * sin(object.yaw) * i * (prediction_time /interval);
+    //                 position.time = i * (prediction_time / interval);
+    //                 position.object_type = "Dynamic";
+    //                 motion_.objects.push_back(position);
+    //                 // RCLCPP_INFO(this->get_logger(), "TIME : %f X: %f Y: %f", position.time, position.x, position.y);
+    //             }
+    //         }
+    //     }
+    // }
 
     // CTRV Model
     ad_msgs::msg::MissionObject ego_position;

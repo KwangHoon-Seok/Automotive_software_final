@@ -95,11 +95,16 @@ class TrajectoryNode : public rclcpp::Node
         
 
         double slope_end = 0.0;
+        Point merge_target = {0.0, 0.0};
+
+        int target_flag = 0;
         std::vector<Point> target_points;
+        
         // Publishers
         rclcpp::Publisher<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr p_trajectory_candidates_;
         rclcpp::Publisher<ad_msgs::msg::PolyfitLaneData>::SharedPtr p_best_trajectory_;
-
+        rclcpp::Publisher<geometry_msgs::msg::Point>::SharedPtr p_target_point_;
+        
         // Subscribers
         rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneData>::SharedPtr s_driving_way_;
