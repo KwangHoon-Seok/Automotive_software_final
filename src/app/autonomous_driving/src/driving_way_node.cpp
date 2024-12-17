@@ -144,13 +144,13 @@ void DrivingWayNode::getMeanPoints(const ad_msgs::msg::LanePointData& lane_point
     if(mean_point.x - 3.0 < 0.0){
         is_completed = true;
         is_completed_ = 2.0;
-        RCLCPP_INFO(this->get_logger(), "--------- PARKING DONE ---------");
+        //RCLCPP_INFO(this->get_logger(), "--------- PARKING DONE ---------");
 
     }
     // parking 중중
     else{
         is_completed_ = 1.0;
-        RCLCPP_INFO(this->get_logger(), " PARKING ... ");
+        //RCLCPP_INFO(this->get_logger(), " PARKING ... ");
 
     }
     
@@ -200,21 +200,21 @@ void DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, 
     // merge 중
     if(merge_mode == 1.0){
         stop_lane_detection = true;
-        RCLCPP_INFO(this->get_logger(), " MERGE .... ");
+        //RCLCPP_INFO(this->get_logger(), " MERGE .... ");
     }
     // merge 끝
     else if(merge_mode == 2.0){
         stop_lane_detection = false;
         merge_completed = true;
         merge_mode = 3.0;
-        RCLCPP_INFO(this->get_logger(), "-------------  MERGE DONE -------------- ");
+        //RCLCPP_INFO(this->get_logger(), "-------------  MERGE DONE -------------- ");
     }
 
     if(!stop_lane_detection){
 
         if(driving_way.a3 > 0.1 || driving_way.a3 < -8.1){
             is_error = true;
-            RCLCPP_INFO(this->get_logger(), " ERROR ");
+            //RCLCPP_INFO(this->get_logger(), " ERROR ");
             
         }
         // Merge 끝냈으면 한번만 DBSCAN 이용해서 Driving_way 찾고 다시 주행

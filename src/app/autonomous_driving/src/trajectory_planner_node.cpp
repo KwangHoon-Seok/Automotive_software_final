@@ -32,6 +32,13 @@ TrajectoryNode::TrajectoryNode(const std::string &node_name, const double &loop_
     s_static_position_ = this->create_subscription<geometry_msgs::msg::Point>(
         "/static/position", qos_profile,
         std::bind(&TrajectoryNode::CallbackStaticPosition, this, std::placeholders::_1));
+    s_mission_state_ = this->create_subscription<ad_msgs::msg::Mission>(
+        "/ego/mission", 10,
+        std::bind(&TrajectoryNode::CallbackMissionState, this, std::placeholders::_1));
+    s_driving_way_ = this->create_subscription<ad_msgs::msg::PolyfitLaneData>(
+        "/ego/driving_way",10,
+        std::bind(&TrajectoryNode::CallbackDrivingWay, this, std::placeholders::_1));
+
 
     // Publishers
     p_trajectory_candidates_ = this->create_publisher<ad_msgs::msg::PolyfitLaneDataArray>(
@@ -73,13 +80,23 @@ void TrajectoryNode::Run() {
     // Lock the mutex for thread safety
     std::lock_guard<std::mutex> lock_vehicle_state(mutex_vehicle_state_);
     std::lock_guard<std::mutex> lock_behavior_state(mutex_behavior_state_);
+    std::lock_guard<std::mutex> lock_mission_state(mutex_mission_state_);
+    std::lock_guard<std::mutex> lock_driving_way(mutex_driving_way_);
 
     std_msgs::msg::Float32 behavior_state_float = i_behavior_state_;
     ad_msgs::msg::PolyfitLaneData driving_way = i_driving_way_;
     ad_msgs::msg::VehicleState vehicle_state = i_vehicle_state_;
     ad_msgs::msg::Mission object_prediction = i_object_prediction_;
     geometry_msgs::msg::Point static_position = i_static_position_;
+    ad_msgs::msg::Mission mission_state = i_mission_state_;
     // std::vector<Point> target_points;
+    double curve_position = computeDynamic(vehicle_state, mission_state);
+    if (curve_position > 0){
+        object_position_flag = 1.0; // 1.0 => left
+    }else{
+        object_position_flag = 2.0; // 2.0 -> right
+    }
+
     double drive_mode = static_cast<double>(behavior_state_float.data);
     geometry_msgs::msg::Point target_point;
 
@@ -182,8 +199,8 @@ void TrajectoryNode::Run() {
         for (const auto& path : spline_array_msg.polyfitlanes) {
             double ttc = CalculateTTC(path, vehicle_state, object_prediction, 4.0, 0.1, 3.0);
             // Update best path only if conditions are met
-            RCLCPP_INFO(this->get_logger(), "path id %s ttc: %.2f", path.id.c_str(), ttc);
-            if (ttc >=0.5 && ttc < 2.0 && is_flag == 0) {
+            //RCLCPP_INFO(this->get_logger(), "path id %s ttc: %.2f", path.id.c_str(), ttc);
+            if (ttc >=0.5 && ttc < 1.5 && is_flag == 0) {
                 best_path = path;
                 is_flag = 1;
             }
@@ -262,6 +279,8 @@ Point TrajectoryNode::BackTargetPoint(const geometry_msgs::msg::Point& static_po
     double dx = static_position.x - i_vehicle_state_.x;
     double dy = static_position.y - i_vehicle_state_.y;
     
+    double driving_way_x = 15.0;
+    driving_way_y = driving_way.a3 * std::pow(driving_way_x,3) + driving_way.a2 * std::pow(driving_way_x, 2) + driving_way.a1 * driving_way_x + driving_way.a0;
     // Convert to the local frame using the vehicle's yaw
     double local_x = std::cos(-i_vehicle_state_.yaw) * dx - std::sin(-i_vehicle_state_.yaw) * dy;
     double local_y = std::sin(-i_vehicle_state_.yaw) * dx + std::cos(-i_vehicle_state_.yaw) * dy;
@@ -269,16 +288,29 @@ Point TrajectoryNode::BackTargetPoint(const geometry_msgs::msg::Point& static_po
     // Apply backward offset in the local frame
     double back_x = local_x + back_distance; // Moving backward along the local x-axis
     double y_offset = 0.0;
-    if (yaw_rate > 0.1) {
-        y_offset = 3.0;
-    } else if (yaw_rate < -0.1) {
-        y_offset = -3.0;
+    RCLCPP_INFO(this->get_logger(), "position flag %.2f", object_position_flag);
+    if (driving_way_y > 0.5) {
+        if (object_position_flag == 1.0){
+            y_offset = 3.0;
+            RCLCPP_INFO(this->get_logger(), "왼쪽 커브 - 왼쪽 장애물");
+        } else if(object_position_flag == 2.0){
+            y_offset = 4.0;
+            RCLCPP_INFO(this->get_logger(), "왼쪽 커브 - 오른쪽 장애물");
+        }
+
+    } else if (driving_way_y < -0.5) {
+        if (object_position_flag == 1.0){
+            y_offset = -5.0;
+        } else if(object_position_flag == 2.0){
+            y_offset = -3.0;
+        }
     } else{
         y_offset = 0.0;
     }
     double back_y = local_y + y_offset;                 
     // double back_y = driving_way.a3 * std::pow(back_x, 3) + driving_way.a2 * std::pow(back_x, 2) + driving_way.a1 * back_x + driving_way.a0;
     //RCLCPP_INFO(this->get_logger(), "Back Point in Local Frame - X: %.2f, Y: %.2f", back_x, back_y);
+    RCLCPP_INFO(this->get_logger(), "driving_way_y: %.8f", driving_way_y);
 
     return {back_x, back_y};
 }
@@ -463,8 +495,41 @@ double TrajectoryNode::ComputeBoundaryCondition(const Point& static_position ,co
     double local_x = std::cos(-vehicle_state_.yaw) * dx - std::sin(-vehicle_state_.yaw) * dy;
     double local_y = std::sin(-vehicle_state_.yaw) * dx + std::cos(-vehicle_state_.yaw) * dy;
     double slope = 3 * driving_way.a3 * std::pow(local_x, 2) + 2 * driving_way.a2 * local_x + driving_way.a1;
-    
+    // RCLCPP_INFO(this->get_logger(), "dasd: %.2f", driving_way.a3);
     return slope;
+}
+
+double TrajectoryNode::computeDynamic(const ad_msgs::msg::VehicleState& vehicle_state, const ad_msgs::msg::Mission& mission_state){
+    double distance = 10000;
+    double temp_distance;
+    double min_y;
+    for (const auto& object : mission_state.objects)
+    {
+        if (object.object_type == "Dynamic"){
+            double dx = object.x - vehicle_state.x;
+            double dy = object.y - vehicle_state.y;
+            double local_x = std::cos(-vehicle_state.yaw) * dx - std::sin(-vehicle_state.yaw) * dy;
+            double local_y = std::sin(-vehicle_state.yaw) * dx + std::cos(-vehicle_state.yaw) * dy;
+            temp_distance = std::sqrt(local_x * local_x + local_y * local_y);
+            if (temp_distance < distance)
+            {
+                distance = temp_distance;
+                min_y = local_y;
+                if(!is_init_){
+                    previous_y = local_y;
+                    is_init_ = true;
+                }
+                else{
+                    object_y_rate = previous_y - local_y;
+                    previous_y = local_y;
+                }
+            }
+        }else{
+            object_y_rate = 0.0;
+        }
+    }
+    // RCLCPP_INFO(this->get_logger(), "Dynamic object's min-y : %.2f", min_y);
+    return min_y;
 }
 
 int main(int argc, char **argv) {

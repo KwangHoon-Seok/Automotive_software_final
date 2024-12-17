@@ -52,9 +52,12 @@ void ControlNode::Run() {
     std::lock_guard<std::mutex> lock_ref_vel(mutex_ref_vel_);
     std::lock_guard<std::mutex> lock_behavior_state(mutex_behavior_state_);
     std::lock_guard<std::mutex> lock_merge_path(mutex_merge_path_);
+    std::lock_guard<std::mutex> lock_driving_way(mutex_driving_way_);
 
     ad_msgs::msg::VehicleState vehicle_state = i_vehicle_state_;
     std_msgs::msg::Float32 behavior_state_float = i_behavior_state_;
+    ad_msgs::msg::PolyfitLaneData driving_way = i_driving_way_;
+
     double drive_mode = static_cast<double>(behavior_state_float.data);
     std_msgs::msg::Float32 ref_vel_float = i_ref_vel_;
     double target_speed = static_cast<double>(ref_vel_float.data);
@@ -118,20 +121,28 @@ void ControlNode::Run() {
             if (merge_path.merge == 1) {
                 tracked_path = merge_path;
                 path_initialized = true;
-                merge_target_x = target_x - 3.0;
+                double driving_way_x = 15.0;
+                driving_y = driving_way.a3 * std::pow(driving_way_x,3) + driving_way.a2 * std::pow(driving_way_x, 2) + driving_way.a1 * driving_way_x + driving_way.a0;
+                
+                if ( (driving_y <= 0.5) && (driving_y >= -0.5)){
+                    merge_target_x = target_x - 0.0;
+                }else{
+                    merge_target_x = target_x - 3.0;
+                }
+
                 std::array<double, 6> coeffs = {merge_path.a0, merge_path.a1, merge_path.a2,
                                         merge_path.a3, merge_path.a4, merge_path.a5};
                 global_waypoints = SampleGlobalPath(coeffs, vehicle_state, 0.0, merge_target_x, 0.1);
                 for (const auto& point : global_waypoints) {
-                    RCLCPP_INFO(this->get_logger(), "Global Point - X: %.2f, Y: %.2f", point.x, point.y);
+                    //RCLCPP_INFO(this->get_logger(), "Global Point - X: %.2f, Y: %.2f", point.x, point.y);
                 }
-                RCLCPP_INFO(this->get_logger(), "Valid path received. Starting merge with path ID: %s", tracked_path.id.c_str());
+                //RCLCPP_INFO(this->get_logger(), "Valid path received. Starting merge with path ID: %s", tracked_path.id.c_str());
             } else {
                 o_vehicle_command_.accel = 0.0;
                 o_vehicle_command_.brake = 1.0;
                 o_vehicle_command_.steering = 0.0;
                 p_vehicle_command_->publish(o_vehicle_command_);  
-                RCLCPP_WARN(this->get_logger(), "Waiting for a valid path...");
+                //RCLCPP_WARN(this->get_logger(), "Waiting for a valid path...");
             }
         }
 
@@ -145,9 +156,9 @@ void ControlNode::Run() {
                 if (goal_reached_flag) { // 목표 지점 도달 확인
                     merge_completed = true;
                     
-                    RCLCPP_INFO(this->get_logger(), "Merge completed. Switching to next mode.");
+                    //RCLCPP_INFO(this->get_logger(), "Merge completed. Switching to next mode.");
                 } else{
-                    RCLCPP_INFO(this->get_logger(), "Keep Merge");
+                    //RCLCPP_INFO(this->get_logger(), "Keep Merge");
                 }
 
                 // 속도 제어 및 경로 추적
@@ -169,7 +180,7 @@ void ControlNode::Run() {
 
         // 병합 완료 후 제동
         if (merge_completed) {
-            RCLCPP_INFO(this->get_logger(), "Merge Completed");
+            //RCLCPP_INFO(this->get_logger(), "Merge Completed");
             o_vehicle_command_.accel = 0.00;
             o_vehicle_command_.brake = 1.0;
             o_vehicle_command_.steering = 0.0;
@@ -292,15 +303,15 @@ double ControlNode::GlobalPurePursuit(const ad_msgs::msg::VehicleState &vehicle_
     double dy_to_goal = final_point.y - vehicle_state.y;
     double distance_to_goal = std::sqrt(dx_to_goal * dx_to_goal + dy_to_goal * dy_to_goal);
 
-    if (distance_to_goal < 2.5) { 
+    if (distance_to_goal < 4.0) { 
         goal_reached_flag = true;
         RCLCPP_INFO(this->get_logger(), "Goal reached! Distance to goal: %.2f", distance_to_goal);
         return 0.0; // 조향값 0 반환
     } else {
         goal_reached_flag = false;
     }
-    RCLCPP_INFO(this->get_logger(), "Final Point - X: %.2f, Y: %.2f", final_point.x, final_point.y);
-    RCLCPP_INFO(this->get_logger(), "Current Point - X: %.2f, Y: %.2f", vehicle_state.x, vehicle_state.y);
+    //RCLCPP_INFO(this->get_logger(), "Final Point - X: %.2f, Y: %.2f", final_point.x, final_point.y);
+    //RCLCPP_INFO(this->get_logger(), "Current Point - X: %.2f, Y: %.2f", vehicle_state.x, vehicle_state.y);
 
     // Global frame
     double dx = target_point.x - vehicle_state.x;
@@ -322,7 +333,7 @@ double ControlNode::GlobalPurePursuit(const ad_msgs::msg::VehicleState &vehicle_
     double steering_value = std::max(-1.0, std::min(1.0, steering_angle / max_steering_angle));
     // Log target point and steering angle
     // RCLCPP_INFO(this->get_logger(), "Target Point - X: %.2f, Y: %.2f", target_point.x, target_point.y);
-    RCLCPP_INFO(this->get_logger(), "Steering Angle: %.2f ", steering_value);
+    //RCLCPP_INFO(this->get_logger(), "Steering Angle: %.2f ", steering_value);
 
     return steering_value;
 }

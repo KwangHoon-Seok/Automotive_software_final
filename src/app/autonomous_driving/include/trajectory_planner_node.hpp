@@ -82,6 +82,7 @@ class TrajectoryNode : public rclcpp::Node
         Point BackTargetPoint(const geometry_msgs::msg::Point& static_position, double back_distance, const ad_msgs::msg::PolyfitLaneData& driving_way, const ad_msgs::msg::VehicleState& vehicle_state);
         std::vector<double> ComputeQuinticSpline(const std::vector<Point>& points, double slope_start, double slope_first_right, double slope_first_list, double slope_second_right, double slope_second_left, double slope_end, const ad_msgs::msg::VehicleState vehicle_state);
         double ComputeBoundaryCondition(const Point& static_position ,const ad_msgs::msg::PolyfitLaneData& driving_way, const ad_msgs::msg::VehicleState& vehicle_state_);
+        double computeDynamic(const ad_msgs::msg::VehicleState& vehicle_state, const ad_msgs::msg::Mission& mission_state);
         // Variabls for Algorithm
         double yaw = 0.0;
         int path_flag = 0;
@@ -100,6 +101,13 @@ class TrajectoryNode : public rclcpp::Node
 
         int target_flag = 0;
         std::vector<Point> target_points;
+        double object_position_flag = 0.0;
+        double previous_y = 0.0;
+        double object_y_rate = 0.0;
+        bool is_init_ = false;
+        double driving_way_y = 0.0;
+
+        ad_msgs::msg::PolyfitLaneData driving_coeff;
         
         // Publishers
         rclcpp::Publisher<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr p_trajectory_candidates_;
@@ -113,7 +121,7 @@ class TrajectoryNode : public rclcpp::Node
         rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr s_object_prediction_;
         rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_behavior_state_;
         rclcpp::Subscription<geometry_msgs::msg::Point>::SharedPtr s_static_position_;
-
+        rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr s_mission_state_;
         // Callback Functions
         inline void CallbackVehicleState(const ad_msgs::msg::VehicleState::SharedPtr msg) {
             std::lock_guard<std::mutex> lock(mutex_vehicle_state_);
@@ -145,17 +153,21 @@ class TrajectoryNode : public rclcpp::Node
             i_static_position_ = *msg;
         }
 
+        inline void CallbackMissionState(const ad_msgs::msg::Mission::SharedPtr msg) {
+            std::lock_guard<std::mutex> lock(mutex_mission_state_);
+            i_mission_state_ = *msg;
+        }
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;
 
         // Inputs
         ad_msgs::msg::VehicleState i_vehicle_state_;
         ad_msgs::msg::PolyfitLaneData i_driving_way_;
-        ad_msgs::msg::Mission i_mission_state_;
         ad_msgs::msg::Mission i_ego_prediction_;
         ad_msgs::msg::Mission i_object_prediction_;
         std_msgs::msg::Float32 i_behavior_state_;
         geometry_msgs::msg::Point i_static_position_;
+        ad_msgs::msg::Mission i_mission_state_;
 
         // Outputs
         ad_msgs::msg::PolyfitLaneDataArray o_trajectories_;
@@ -168,6 +180,7 @@ class TrajectoryNode : public rclcpp::Node
         std::mutex mutex_obeject_prediction_;
         std::mutex mutex_behavior_state_;
         std::mutex mutex_static_position_;
+        std::mutex mutex_mission_state_;
 };
 
 #endif 

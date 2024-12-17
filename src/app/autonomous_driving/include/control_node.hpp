@@ -73,6 +73,8 @@ class ControlNode : public rclcpp::Node {
         double merge_target_x;
         bool goal_reached_flag = false;
         std_msgs::msg::Float32 merge_msg;
+
+        double driving_y = 0.0;
         // Publishers
         rclcpp::Publisher<ad_msgs::msg::VehicleCommand>::SharedPtr p_vehicle_command_;
         rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr p_global_waypoint_;
