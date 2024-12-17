@@ -289,7 +289,7 @@ Point TrajectoryNode::BackTargetPoint(const geometry_msgs::msg::Point& static_po
     double back_x = local_x + back_distance; // Moving backward along the local x-axis
     double y_offset = 0.0;
     RCLCPP_INFO(this->get_logger(), "position flag %.2f", object_position_flag);
-    if (driving_way_y > 0.5) {
+    if (driving_way_y > 0.2) {
         if (object_position_flag == 1.0){
             y_offset = 3.0;
             RCLCPP_INFO(this->get_logger(), "왼쪽 커브 - 왼쪽 장애물");
@@ -298,7 +298,7 @@ Point TrajectoryNode::BackTargetPoint(const geometry_msgs::msg::Point& static_po
             RCLCPP_INFO(this->get_logger(), "왼쪽 커브 - 오른쪽 장애물");
         }
 
-    } else if (driving_way_y < -0.5) {
+    } else if (driving_way_y < -0.2) {
         if (object_position_flag == 1.0){
             y_offset = -5.0;
         } else if(object_position_flag == 2.0){
