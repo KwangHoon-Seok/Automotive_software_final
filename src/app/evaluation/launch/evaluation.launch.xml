@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Declare arguments as strings where appropriate -->
+  <arg name="loop_rate" default="50"/>
+  <arg name="lane_id" default="'1'" />
+  <arg name="time_limit" default="240.0"/>
+  <arg name="lane_departure" default="4.5"/>
+
+  <!-- Launch evaluation node -->
+  <node pkg="evaluation" exec="evaluation" name="evaluation_node" output="screen">
+    <param name="evaluation/loop_rate" value="$(var loop_rate)"/>
+    <param name="evaluation/lane_id" value="$(var lane_id)"/>
+    <param name="evaluation/time_limit" value="$(var time_limit)"/>
+    <param name="evaluation/lane_departure" value="$(var lane_departure)"/>
+
+    <param name="evaluation/parking_success_threshold" value="3.0"/>
+    <param name="evaluation/parking_slot_0_x" value=" 467.003601" />
+    <param name="evaluation/parking_slot_0_y" value="253.592713" />
+    <param name="evaluation/parking_slot_1_x" value=" 471.484236" />
+    <param name="evaluation/parking_slot_1_y" value="243.546622" />
+    <param name="evaluation/parking_slot_2_x" value="462.522965" />
+    <param name="evaluation/parking_slot_2_y" value="263.638804" />
+  </node>
+</launch>

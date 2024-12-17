@@ -1,0 +1,12 @@
+# Logs
+*.log
+
+# build directory
+build/
+install/
+
+# ROS
+build/
+devel/
+install/
+log/
