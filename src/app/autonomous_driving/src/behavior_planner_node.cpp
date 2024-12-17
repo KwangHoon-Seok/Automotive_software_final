@@ -16,6 +16,9 @@ BehaviorPlannerNode::BehaviorPlannerNode(const std::string& node_name, const dou
     s_mission_state_ = this->create_subscription<ad_msgs::msg::Mission>(
         "/ego/mission", qos_profile,
         std::bind(&BehaviorPlannerNode::CallbackMissionState, this, std::placeholders::_1));
+    s_parking_state_ = this->create_subscription<std_msgs::msg::Float32>(
+        "/ego/parking_state", qos_profile,
+        std::bind(&BehaviorPlannerNode::CallbackParkingState, this, std::placeholders::_1));
 
 
     // Publishers
@@ -38,7 +41,7 @@ void BehaviorPlannerNode::Run()
 {
     std::lock_guard<std::mutex> lock_vehicle(mutex_vehicle_state_);
     std::lock_guard<std::mutex> lock_mission(mutex_mission_state_);
-
+    std::lock_guard<std::mutex> lock_parking(mutex_parking_state_);
     // Update behavior state based on the latest vehicle and mission data
     updatePlannerState();
     velocity_planner();
@@ -69,6 +72,9 @@ void BehaviorPlannerNode::updatePlannerState()
     double yaw = i_vehicle_state_.yaw;
     double yaw_rate = i_vehicle_state_.yaw_rate;
     bool static_object_found = false;
+    std_msgs::msg::Float32 parking_state_float = i_parking_state_;
+    double parking_state = static_cast<double>(parking_state_float.data);
+
 
     
 
@@ -88,7 +94,7 @@ void BehaviorPlannerNode::updatePlannerState()
         // Determine the threshold condition based on yaw_rate
         bool condition = false;
         if (yaw_rate > 0) {
-            condition = (dy_local >= lane_width_threshold);
+            condition = (dy_local >= lane_width_threshold && dy_local <= 2.5);
         } else if (yaw_rate < -0.2) {
             condition = (dy_local <= lane_width_threshold);
         }
@@ -120,15 +126,21 @@ void BehaviorPlannerNode::updatePlannerState()
 
     // Decide behavior state based on the closest distances
         // Decide behavior state with priority: Static > Dynamic
-    if (closest_static_distance < 50.0 && merge_flag == 0) {
-        o_behavior_state_ = MERGE; // Static obstacle within 20m
-    } else if (closest_dynamic_distance < 20.0) {
-        o_behavior_state_ = ACC; // Dynamic obstacle within 20m
-        if (closest_dynamic_distance < 10.0) {
-            o_behavior_state_ = AEB; // Dynamic obstacle within 10m
+    if (parking_state == 1.0){
+        o_behavior_state_ = PARKING_START;
+    } else if (parking_state == 2.0){
+        o_behavior_state_ = PARKING_END;
+    } else{
+        if (closest_static_distance < 50.0 && merge_flag == 0) {
+            o_behavior_state_ = MERGE; // Static obstacle within 20m
+        } else if (closest_dynamic_distance < 20.0) {
+            o_behavior_state_ = ACC; // Dynamic obstacle within 20m
+            if (closest_dynamic_distance < 10.0) {
+                o_behavior_state_ = AEB; // Dynamic obstacle within 10m
+            }
+        } else {
+            o_behavior_state_ = REF_VEL_TRACKING; // No obstacles in significant range
         }
-    } else {
-        o_behavior_state_ = REF_VEL_TRACKING; // No obstacles in significant range
     }
 
     // Static object 좌표 퍼블리시

@@ -178,15 +178,15 @@ trajectory_planner_node: /opt/ros/humble/lib/libsensor_msgs__rosidl_generator_py
 trajectory_planner_node: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_c.so
 trajectory_planner_node: /opt/ros/humble/lib/libsensor_msgs__rosidl_generator_c.so
 trajectory_planner_node: /opt/ros/humble/lib/libnav_msgs__rosidl_generator_py.so
-trajectory_planner_node: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_c.so
-trajectory_planner_node: /opt/ros/humble/lib/libnav_msgs__rosidl_generator_c.so
 trajectory_planner_node: /opt/ros/humble/lib/libgeometry_msgs__rosidl_generator_py.so
 trajectory_planner_node: /opt/ros/humble/lib/libstd_msgs__rosidl_generator_py.so
 trajectory_planner_node: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_py.so
 trajectory_planner_node: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+trajectory_planner_node: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_c.so
 trajectory_planner_node: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_c.so
 trajectory_planner_node: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_c.so
 trajectory_planner_node: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+trajectory_planner_node: /opt/ros/humble/lib/libnav_msgs__rosidl_generator_c.so
 trajectory_planner_node: /opt/ros/humble/lib/libgeometry_msgs__rosidl_generator_c.so
 trajectory_planner_node: /opt/ros/humble/lib/libstd_msgs__rosidl_generator_c.so
 trajectory_planner_node: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_c.so

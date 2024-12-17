@@ -98,11 +98,13 @@ void TrajectoryNode::Run() {
     if(drive_mode == MERGE)
     {
         
+        Point static_positions = {static_position.x, static_position.y};
+
         Point left_point = LeftTargetPoint(static_position, 4.0);
         target_points.push_back(left_point);
         Point right_point = RightTargetPoint(static_position, 4.0);
         target_points.push_back(right_point);
-        Point back_point = BackTargetPoint(static_position, 25);
+        Point back_point = BackTargetPoint(static_position, 20, driving_way);
         target_points.push_back(back_point);
         
         if (target_flag == 0){
@@ -115,10 +117,16 @@ void TrajectoryNode::Run() {
         target_point.z = 0.0;
         p_target_point_->publish(target_point);
 
+        double gradient_first = ComputeBoundaryCondition(static_positions, driving_way, vehicle_state);
+        // double gradient_second = ComputeBoundaryCondition(back_point, driving_way, vehicle_state);
         slope_second_right = (back_point.y - right_point.y) / (back_point.x - right_point.x);
         slope_second_left = (back_point.y - left_point.y) / (back_point.x - left_point.x);
-        slope_first_right = (right_point.y - 0.0) / (right_point.x - 0.0);
-        slope_first_left = (left_point.y - 0.0) / (left_point.x - 0.0);
+        // slope_first_right = (right_point.y - 0.0) / (right_point.x - 0.0);
+        // slope_first_left = (left_point.y - 0.0) / (left_point.x - 0.0);
+        slope_first_right = gradient_first;
+        slope_first_left = gradient_first;
+        // slope_second_right = gradient_first;
+        // slope_second_left = gradient_first;
 
     }else
     {
@@ -134,6 +142,14 @@ void TrajectoryNode::Run() {
     static ad_msgs::msg::PolyfitLaneData best_path;
     static bool is_best_path = 0;
     static int is_flag = 0;
+    double curve = 0.0;
+    if (vehicle_state.yaw_rate > 0){
+        curve = 1.0;
+    } else {
+        curve = 2.0;
+    }
+    std::string curve_condition = std::to_string(curve);
+
     if (drive_mode == MERGE)
     {
 
@@ -164,10 +180,10 @@ void TrajectoryNode::Run() {
             spline_array_msg.polyfitlanes.push_back(spline_msg);
         }
         for (const auto& path : spline_array_msg.polyfitlanes) {
-            double ttc = CalculateTTC(path, vehicle_state, object_prediction, 4.0, 0.1, 4.0);
+            double ttc = CalculateTTC(path, vehicle_state, object_prediction, 4.0, 0.1, 3.0);
             // Update best path only if conditions are met
             RCLCPP_INFO(this->get_logger(), "path id %s ttc: %.2f", path.id.c_str(), ttc);
-            if (ttc >=0.5 && ttc < 1.8 && is_flag == 0) {
+            if (ttc >=1.0 && ttc < 2.0 && is_flag == 0) {
                 best_path = path;
                 is_flag = 1;
             }
@@ -239,7 +255,7 @@ Point TrajectoryNode::LeftTargetPoint(const geometry_msgs::msg::Point& static_po
 }
 
 
-Point TrajectoryNode::BackTargetPoint(const geometry_msgs::msg::Point& static_position, double back_distance) {
+Point TrajectoryNode::BackTargetPoint(const geometry_msgs::msg::Point& static_position, double back_distance, const ad_msgs::msg::PolyfitLaneData& driving_way) {
     // Calculate the relative position in the global frame
     double dx = static_position.x - i_vehicle_state_.x;
     double dy = static_position.y - i_vehicle_state_.y;
@@ -250,8 +266,8 @@ Point TrajectoryNode::BackTargetPoint(const geometry_msgs::msg::Point& static_po
 
     // Apply backward offset in the local frame
     double back_x = local_x + back_distance; // Moving backward along the local x-axis
-    double back_y = local_y + 8.5;                 
-
+    double back_y = local_y + 6.5;                 
+    // double back_y = driving_way.a3 * std::pow(back_x, 3) + driving_way.a2 * std::pow(back_x, 2) + driving_way.a1 * back_x + driving_way.a0;
     //RCLCPP_INFO(this->get_logger(), "Back Point in Local Frame - X: %.2f, Y: %.2f", back_x, back_y);
 
     return {back_x, back_y};
@@ -412,11 +428,11 @@ std::vector<double> TrajectoryNode::ComputeQuinticSpline(const std::vector<Point
     // 오른쪽 라인
     if (y1 < 0)
     {
-        b << y0, y1, y2, slope_start, slope_first_right/2, slope_second_right/4;
+        b << y0, y1, y2, slope_start, slope_first_right, slope_second_right ;
     }
     else
     {
-        b << y0, y1, y2, slope_start, slope_first_left, slope_second_left;
+        b << y0, y1, y2, slope_start, slope_first_left, slope_second_left  ;
     }
     
 
@@ -429,7 +445,17 @@ std::vector<double> TrajectoryNode::ComputeQuinticSpline(const std::vector<Point
     return {coeffs(0), coeffs(1), coeffs(2), coeffs(3), coeffs(4), coeffs(5)};
 }
 
+double TrajectoryNode::ComputeBoundaryCondition(const Point& static_position ,const ad_msgs::msg::PolyfitLaneData& driving_way, const ad_msgs::msg::VehicleState& vehicle_state_){
+    double dx = static_position.x - vehicle_state_.x;
+    double dy = static_position.y - vehicle_state_.y;
 
+    // Convert to the local frame using the vehicle's yaw
+    double local_x = std::cos(-vehicle_state_.yaw) * dx - std::sin(-vehicle_state_.yaw) * dy;
+    double local_y = std::sin(-vehicle_state_.yaw) * dx + std::cos(-vehicle_state_.yaw) * dy;
+    double slope = 3 * driving_way.a3 * std::pow(local_x, 2) + 2 * driving_way.a2 * local_x + driving_way.a1;
+    
+    return slope;
+}
 
 int main(int argc, char **argv) {
     std::string node_name = "trajectory_planner_node";

@@ -34,6 +34,7 @@ ControlNode::ControlNode(const std::string& node_name, const double& loop_rate,
     // Publisher
     p_vehicle_command_ = this->create_publisher<ad_msgs::msg::VehicleCommand>("/ego/vehicle_command", qos_profile);
     p_global_waypoint_ = this->create_publisher<std_msgs::msg::Float64MultiArray>("/global_points", qos_profile);
+    p_merge_completed_ = this->create_publisher<std_msgs::msg::Float32>("/ego/merge_complete", qos_profile);
 
     // Timer
     t_run_node_ = this->create_wall_timer(
@@ -62,6 +63,7 @@ void ControlNode::Run() {
     double lead_distance = static_cast<double>(lead_distance_float.data);
     double target_distance = 15;
     double control_signal;
+    
 
     double target_x = i_merge_target_.x;
 //---------------------------------REF_VEL_TRACKING---------------------------------------//
@@ -106,7 +108,9 @@ void ControlNode::Run() {
     }
 
     if (merge_flag == true) {
-
+        
+        
+        merge_msg.data = 1.0;
         static ad_msgs::msg::PolyfitLaneData tracked_path; // 유효한 경로를 저장
 
         // 유효한 경로가 올 때까지 정지
@@ -140,13 +144,14 @@ void ControlNode::Run() {
 
                 if (goal_reached_flag) { // 목표 지점 도달 확인
                     merge_completed = true;
+                    
                     RCLCPP_INFO(this->get_logger(), "Merge completed. Switching to next mode.");
                 } else{
                     RCLCPP_INFO(this->get_logger(), "Keep Merge");
                 }
 
                 // 속도 제어 및 경로 추적
-                double control_signal = computePID(6, vehicle_state.velocity, 0.6);
+                double control_signal = computePID(7, vehicle_state.velocity, 0.6);
                 if (control_signal > 0) {
                     o_vehicle_command_.accel = std::min(control_signal, 0.5);
                     o_vehicle_command_.brake = 0.0;
@@ -169,9 +174,32 @@ void ControlNode::Run() {
             o_vehicle_command_.brake = 1.0;
             o_vehicle_command_.steering = 0.0;
             p_vehicle_command_->publish(o_vehicle_command_);
-            std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+            merge_msg.data = 2.0;
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
             merge_flag = false;
         }
+    }
+
+//--------------------------------------PARKING_START------------------------------//
+    if (drive_mode == PARKING_START)
+    {
+        control_signal = computePID(8, vehicle_state.velocity, 0.6);
+        if (control_signal > 0)
+        {
+            o_vehicle_command_.accel = std::min(control_signal, 0.5);
+            o_vehicle_command_.brake = 0.0;
+        }else{
+            o_vehicle_command_.accel = 0.0;
+            o_vehicle_command_.brake = std::min(-control_signal, max_brake);
+        }
+        yaw = PurePursuit(i_driving_way_);
+    }
+
+//--------------------------------------PARKING_END--------------------------------//
+    if (drive_mode == PARKING_END)
+    {
+        o_vehicle_command_.accel = 0.0;
+        o_vehicle_command_.brake = 1.0;
     }
 
     // global_waypoint publish
@@ -185,10 +213,9 @@ void ControlNode::Run() {
 
     //o_vehicle_command_.accel = 0.0;
     o_vehicle_command_.steering = yaw;  
-
-    // Publish Vehicle 
-
-
+    // Publish merge complete flag 
+    p_merge_completed_->publish(merge_msg);
+    // Publish Vehicle Command
     p_vehicle_command_->publish(o_vehicle_command_);
 }
 

@@ -1,6 +1,12 @@
 #ifndef __DRIVING_WAY_NODE_HPP__
 #define __DRIVING_WAY_NODE_HPP__
 
+#define AEB 1
+#define ACC 2
+#define MERGE 3
+#define REF_VEL_TRACKING 4
+
+
 // STD Header
 #include <memory>
 #include <vector>
@@ -60,7 +66,7 @@ private:
     // Algorithm Functions
     void getMeanPoints(const ad_msgs::msg::LanePointData& lane_points, ad_msgs::msg::LanePointData& left_lane, ad_msgs::msg::LanePointData& right_lane);
     void getParkingWay(ad_msgs::msg::PolyfitLaneData& driving_way);
-    void lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, std_msgs::msg::Float32& behavior_state, const ad_msgs::msg::LanePointData& lane_points);
+    void lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, const ad_msgs::msg::LanePointData& lane_points);
     std::vector<int> regionQuery(const std::vector<Point>& points, int pointIdx, float epsilon);
     void expandCluster(std::vector<Point>& points, int pointIdx, int clusterID, float epsilon, size_t min_samples);
     void populatePolyLanes(ad_msgs::msg::PolyfitLaneDataArray& poly_lanes);
@@ -83,7 +89,17 @@ private:
     bool will_parking = false;
     bool start_parking = false;
     bool is_completed = false;
+    bool stop_lane_detection = false;
+    bool merge_completed = false;
     float max_x;
+    float is_completed_;
+    float merge_state_;
+    double merge_mode;
+    double drive_mode;
+
+    std_msgs::msg::Float32 is_completed_msg;
+    std_msgs::msg::Float32 merge_state_msg;
+    
     
     geometry_msgs::msg::Point mean_point;
 
@@ -121,6 +137,7 @@ private:
     rclcpp::Publisher<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr p_poly_lanes_;
     rclcpp::Publisher<ad_msgs::msg::LanePointData>::SharedPtr p_left_lane_;
     rclcpp::Publisher<ad_msgs::msg::LanePointData>::SharedPtr p_right_lane_;
+    rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_is_completed_;
 
 
     // Subscribers
@@ -128,6 +145,7 @@ private:
     rclcpp::Subscription<ad_msgs::msg::LanePointData>::SharedPtr s_lane_points_;
     rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;
     rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr s_mission_state_;
+    rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_merge_state_;
 
     // // Callback Functions
     // inline void CallbackLanePoints(const ad_msgs::msg::LanePointData::SharedPtr msg) {
@@ -161,7 +179,12 @@ private:
         mutex_mission_state_.lock();
         i_mission_state_ = *msg;
         mutex_mission_state_.unlock();
-        }
+    }
+    inline void CallbackMergeState(const std_msgs::msg::Float32::SharedPtr msg) {
+        mutex_merge_state_.lock();
+        i_merge_state_ = *msg;
+        mutex_merge_state_.unlock();
+    }
 
     // Timer
     rclcpp::TimerBase::SharedPtr t_run_node_;
@@ -170,8 +193,8 @@ private:
     ad_msgs::msg::LanePointData i_lane_points_;
     ad_msgs::msg::VehicleState i_vehicle_state_;
     std_msgs::msg::Float32 i_behavior_state_;
-    std_msgs::msg::Float32 i_behavior_state_;
     ad_msgs::msg::Mission i_mission_state_;
+    std_msgs::msg::Float32 i_merge_state_;
 
     // Outputs
     ad_msgs::msg::PolyfitLaneData o_driving_way_;
@@ -183,8 +206,8 @@ private:
     std::mutex mutex_lane_points_;
     std::mutex mutex_vehicle_state_;
     std::mutex mutex_behavior_;
-    std::mutex mutex_behavior_;
     std::mutex mutex_mission_state_;
+    std::mutex mutex_merge_state_;
 };
 
 #endif // __DRIVING_WAY_NODE_HPP__

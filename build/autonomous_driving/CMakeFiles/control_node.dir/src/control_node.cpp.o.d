@@ -621,4 +621,16 @@ CMakeFiles/control_node.dir/src/control_node.cpp.o: \
  /opt/ros/humble/include/std_msgs/std_msgs/msg/float32.hpp \
  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float32__struct.hpp \
  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float32__builder.hpp \
- /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float32__traits.hpp
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float32__traits.hpp \
+ /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/point.hpp \
+ /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/point__struct.hpp \
+ /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/point__builder.hpp \
+ /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/point__traits.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/float64_multi_array.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float64_multi_array__struct.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/multi_array_layout__struct.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/multi_array_dimension__struct.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float64_multi_array__builder.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/float64_multi_array__traits.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/multi_array_layout__traits.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/multi_array_dimension__traits.hpp

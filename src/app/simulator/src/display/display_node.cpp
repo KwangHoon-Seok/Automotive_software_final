@@ -173,6 +173,40 @@ void Display::Run() {
             mission = i_mission_;
         }
     }
+
+    ad_msgs::msg::Mission motion; {
+        if (b_is_motion_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_motion_);
+            motion = i_motion_;
+        }
+    }
+
+    ad_msgs::msg::Mission ego_motion; {
+        if (b_is_ego_motion_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_motion_);
+            ego_motion = i_ego_motion_;
+        }
+    }
+
+    std_msgs::msg::Float64MultiArray global_waypoint; {
+        if (b_is_global_waypoint_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_global_waypoint_);
+            global_waypoint = i_global_waypoint_;
+        }
+    }
+
+    ad_msgs::msg::LanePointData left_lane; {
+        if (b_is_left_lane_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_left_lane_);
+            left_lane = i_left_lane_;
+        }
+    }
+    ad_msgs::msg::LanePointData right_lane; {
+        if (b_is_right_lane_ == true) {
+            std::lock_guard<std::mutex> lock(mutex_right_lane_);
+            right_lane = i_right_lane_;
+        }
+    }
     
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
     // Algorithm
@@ -993,105 +1027,6 @@ void Display::DisplayLocalPath(const ad_msgs::msg::PolyfitLaneDataArray& local_p
     // RCLCPP_INFO(this->get_logger(), "Published %d markers for local_path", markerArray.markers.size());
 }
 
-void Display::DisplayMotion(const ad_msgs::msg::Mission& motion,
-                             const ad_msgs::msg::VehicleState& vehicle_state,
-                             const rclcpp::Time& current_time){
-
-    visualization_msgs::msg::MarkerArray motion_marker_array;
-    int id = 0;
-
-    for (auto motion : motion.objects) {
-        visualization_msgs::msg::Marker motion_marker;
-        motion_marker.header.frame_id = "world";
-        motion_marker.header.stamp = current_time;
-        motion_marker.ns = "motion";
-        motion_marker.id = id;
-        motion_marker.type = visualization_msgs::msg::Marker::CYLINDER;
-
-        float radius = 2.0;
-        float height = 0.2;
-        motion_marker.scale.x = radius * 2; // 지름 = 반지름 * 2
-        motion_marker.scale.y = radius * 2;
-        motion_marker.scale.z = height;    // 높이
-
-     
-        motion_marker.color.a = 0.5 * motion.time; // 투명도
-        motion_marker.color.r = 0.0; 
-        motion_marker.color.g = 0.0; 
-        motion_marker.color.b = 1.0; 
-
-      
-        motion_marker.pose.position.x = motion.x; 
-        motion_marker.pose.position.y = motion.y;
-        motion_marker.pose.position.z = 0.05; 
-
-     
-        motion_marker.pose.orientation.x = 0.0;
-        motion_marker.pose.orientation.y = 0.0;
-        motion_marker.pose.orientation.z = 0.0;
-        motion_marker.pose.orientation.w = 1.0;
-
-
-        motion_marker.lifetime = rclcpp::Duration::from_seconds(0.01);
-        motion_marker_array.markers.push_back(motion_marker);
-
-        id++;
-    }
-
-    
-    
-    p_motion_marker_->publish(motion_marker_array);
-}
-
-void Display::DisplayEgoMotion(const ad_msgs::msg::Mission& ego_motion,
-                             const ad_msgs::msg::VehicleState& vehicle_state,
-                             const rclcpp::Time& current_time){
-
-    visualization_msgs::msg::MarkerArray ego_motion_marker_array;
-    int id = 0;
-
-    for (auto ego_motion : ego_motion.objects) {
-        visualization_msgs::msg::Marker ego_motion_marker;
-        ego_motion_marker.header.frame_id = "world";
-        ego_motion_marker.header.stamp = current_time;
-        ego_motion_marker.ns = "ego_motion";
-        ego_motion_marker.id = id;
-        ego_motion_marker.type = visualization_msgs::msg::Marker::CYLINDER;
-
-        float radius = 2.0;
-        float height = 0.2;
-        ego_motion_marker.scale.x = radius * 2; // 지름 = 반지름 * 2
-        ego_motion_marker.scale.y = radius * 2;
-        ego_motion_marker.scale.z = height;    // 높이
-
-     
-        ego_motion_marker.color.a = 0.5 * ego_motion.time; // 투명도
-        ego_motion_marker.color.r = 0.7; 
-        ego_motion_marker.color.g = 0.7; 
-        ego_motion_marker.color.b = 0.0; 
-
-      
-        ego_motion_marker.pose.position.x = ego_motion.x; 
-        ego_motion_marker.pose.position.y = ego_motion.y;
-        ego_motion_marker.pose.position.z = 0.05; 
-
-     
-        ego_motion_marker.pose.orientation.x = 0.0;
-        ego_motion_marker.pose.orientation.y = 0.0;
-        ego_motion_marker.pose.orientation.z = 0.0;
-        ego_motion_marker.pose.orientation.w = 1.0;
-
-
-        ego_motion_marker.lifetime = rclcpp::Duration::from_seconds(0.01);
-        ego_motion_marker_array.markers.push_back(ego_motion_marker);
-
-        id++;
-    }
-
-    
-    
-    p_ego_motion_marker_->publish(ego_motion_marker_array);
-}
 
 void Display::DisplayBestPath(const ad_msgs::msg::PolyfitLaneData& best_path,
                                 const rclcpp::Time& current_time) {

@@ -79,8 +79,9 @@ class TrajectoryNode : public rclcpp::Node
         //temp fucntion
         Point RightTargetPoint(const geometry_msgs::msg::Point& static_position, double lateral_offset);
         Point LeftTargetPoint(const geometry_msgs::msg::Point& static_position, double lateral_offset);
-        Point BackTargetPoint(const geometry_msgs::msg::Point& static_position, double back_distance);
+        Point BackTargetPoint(const geometry_msgs::msg::Point& static_position, double back_distance, const ad_msgs::msg::PolyfitLaneData& driving_way);
         std::vector<double> ComputeQuinticSpline(const std::vector<Point>& points, double slope_start, double slope_first_right, double slope_first_list, double slope_second_right, double slope_second_left, double slope_end, const ad_msgs::msg::VehicleState vehicle_state);
+        double ComputeBoundaryCondition(const Point& static_position ,const ad_msgs::msg::PolyfitLaneData& driving_way, const ad_msgs::msg::VehicleState& vehicle_state_);
         // Variabls for Algorithm
         double yaw = 0.0;
         int path_flag = 0;

@@ -184,6 +184,15 @@ class Display : public rclcpp::Node {
         rclcpp::Subscription<ad_msgs::msg::LanePointData>::SharedPtr        s_lane_points_;
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr s_poly_lanes_;
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneData>::SharedPtr      s_driving_way_;
+        rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr              s_motion_;
+        rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr              s_ego_motion_;
+        rclcpp::Subscription<ad_msgs::msg::PolyfitLaneData>::SharedPtr      s_best_path_;
+        rclcpp::Subscription<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr s_local_path_;
+        rclcpp::Subscription<std_msgs::msg::Float64MultiArray>::SharedPtr   s_global_waypoint_;
+        rclcpp::Subscription<ad_msgs::msg::LanePointData>::SharedPtr        s_left_lane_;
+        rclcpp::Subscription<ad_msgs::msg::LanePointData>::SharedPtr        s_right_lane_;
+
+
 
         // Input
         ad_msgs::msg::VehicleState          i_vehicle_state_;
@@ -193,6 +202,14 @@ class Display : public rclcpp::Node {
         ad_msgs::msg::LanePointDataArray    i_roi_lanes_;
         ad_msgs::msg::PolyfitLaneDataArray  i_poly_lanes_;
         ad_msgs::msg::PolyfitLaneData       i_driving_way_;
+        ad_msgs::msg::Mission               i_motion_;
+        ad_msgs::msg::Mission               i_ego_motion_;
+        ad_msgs::msg::LanePointData         i_left_lane_;
+        ad_msgs::msg::LanePointData         i_right_lane_;
+        ad_msgs::msg::PolyfitLaneDataArray  i_local_path_;
+        ad_msgs::msg::PolyfitLaneData       i_best_path_;
+        std_msgs::msg::Float64MultiArray    i_global_waypoint_;
+
 
         // Mutex
         std::mutex mutex_vehicle_state_;
@@ -258,6 +275,10 @@ class Display : public rclcpp::Node {
         double time_lane_points_marker_ = 0.0;
         double time_poly_lanes_marker_ = 0.0;
         double time_driving_way_marker_ = 0.0;
+        double time_local_path_marker_ = 0.0;
+        double time_global_waypoint_marker_ = 0.0;
+        double time_left_lane_marker_ = 0.0;
+        double time_right_lane_marker_ = 0.0;
 };
 
 #endif // __DISPLAY_NODE_HPP__

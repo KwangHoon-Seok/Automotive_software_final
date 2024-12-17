@@ -5,6 +5,8 @@
 #define ACC 2
 #define MERGE 3
 #define REF_VEL_TRACKING 4
+#define PARKING_START 5
+#define PARKING_END 6
 
 // STD Header
 #include <mutex>
@@ -70,9 +72,11 @@ class ControlNode : public rclcpp::Node {
         double target_x;
         double merge_target_x;
         bool goal_reached_flag = false;
+        std_msgs::msg::Float32 merge_msg;
         // Publishers
         rclcpp::Publisher<ad_msgs::msg::VehicleCommand>::SharedPtr p_vehicle_command_;
         rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr p_global_waypoint_;
+        rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_merge_completed_;
 
         // Subscribers
         rclcpp::Subscription<ad_msgs::msg::VehicleState>::SharedPtr s_vehicle_state_;

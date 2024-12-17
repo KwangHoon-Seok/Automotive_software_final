@@ -1,7 +1,7 @@
 #include "driving_way_node.hpp"
 
 DrivingWayNode::DrivingWayNode(const std::string& node_name, const double& loop_rate, const rclcpp::NodeOptions& options)
-    : Node(node_name, options) {
+    : Node(node_name, options), is_completed_(0.0) {
     RCLCPP_INFO(this->get_logger(), "Initializing DrivingWayNode...");
     
     auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(10));
@@ -17,12 +17,17 @@ DrivingWayNode::DrivingWayNode(const std::string& node_name, const double& loop_
     s_mission_state_ = this->create_subscription<ad_msgs::msg::Mission>(
         "/ego/mission", qos_profile,
         std::bind(&DrivingWayNode::CallbackMissionState, this, std::placeholders::_1));
+    s_merge_state_ = this->create_subscription<std_msgs::msg::Float32>(
+        "/ego/merge_complete", qos_profile,
+        std::bind(&DrivingWayNode::CallbackMergeState, this, std::placeholders::_1));
 
     // Publishers
     p_driving_way_ = this->create_publisher<ad_msgs::msg::PolyfitLaneData>("/ego/driving_way", qos_profile);
     p_poly_lanes_ = this->create_publisher<ad_msgs::msg::PolyfitLaneDataArray>("/ego/poly_lanes", qos_profile);
     p_left_lane_ = this->create_publisher<ad_msgs::msg::LanePointData>("/ego/left_lane", qos_profile);
     p_right_lane_ = this->create_publisher<ad_msgs::msg::LanePointData>("/ego/right_lane", qos_profile);
+    p_is_completed_ = this->create_publisher<std_msgs::msg::Float32>("/ego/parking_state", qos_profile);
+    
     // Timer init
     t_run_node_ = this->create_wall_timer(
         std::chrono::milliseconds(static_cast<int64_t>(1000 / loop_rate)),
@@ -54,13 +59,23 @@ void DrivingWayNode::Run(const rclcpp::Time& current_time) {
     mutex_mission_state_.lock();
     ad_msgs::msg::Mission mission_state = i_mission_state_;
     mutex_mission_state_.unlock();
+
+    mutex_behavior_.lock();
+    std_msgs::msg::Float32 merge_state = i_merge_state_;
+    mutex_behavior_.unlock();
+
+    drive_mode = static_cast<double>(behavior_state.data);
+    // 이미 한번 merge 됐으면 ㄴㄴㄴ
+    if(merge_mode != 3.0){
+        merge_mode = static_cast<double>(merge_state.data);
+    }
     
     if (lane_points.point.empty()) {
         // RCLCPP_WARN(this->get_logger(), "No lane points received. Skipping processing...");
         return;
     }
     else{
-        RCLCPP_INFO(this->get_logger(), " lane point size: %zu", lane_points.point.size());
+        // RCLCPP_INFO(this->get_logger(), " lane point size: %zu", lane_points.point.size());
     }
 
     ad_msgs::msg::PolyfitLaneDataArray poly_lanes;
@@ -73,11 +88,11 @@ void DrivingWayNode::Run(const rclcpp::Time& current_time) {
     right_lane.frame_id = "ego/body";
 
     
-    RCLCPP_INFO(this->get_logger(), "PARKING : %s", mission_state.parking ? "true" : "false");
+    // RCLCPP_INFO(this->get_logger(), "PARKING : %s", mission_state.parking ? "true" : "false");
 
     
     if(start_parking || mission_state.parking == true){
-        RCLCPP_INFO(this->get_logger(), "START PARKING");
+        // RCLCPP_INFO(this->get_logger(), "START PARKING");
         getMeanPoints(lane_points, left_lane, right_lane);
         getParkingWay(driving_way);
     }
@@ -86,7 +101,7 @@ void DrivingWayNode::Run(const rclcpp::Time& current_time) {
         process_lanes(left_lane, right_lane);
         populatePolyLanes(poly_lanes);
         populateCenterLane(driving_way);
-        lane_condition(driving_way, behavior_state, lane_points);
+        lane_condition(driving_way, lane_points);
     }
     
     
@@ -95,6 +110,8 @@ void DrivingWayNode::Run(const rclcpp::Time& current_time) {
     o_poly_lanes_ = poly_lanes;
     o_left_lane_ = left_lane;
     o_right_lane_ = right_lane;
+    is_completed_msg.data = is_completed_;
+    
     
 
     PublishDrivingWay(current_time);
@@ -123,13 +140,22 @@ void DrivingWayNode::getMeanPoints(const ad_msgs::msg::LanePointData& lane_point
     right_lane.point.push_back(mean_point);
 
 
-
-    if(mean_point.x < 0.0){
+    // parking 완료
+    if(mean_point.x - 1.8 < 0.0){
         is_completed = true;
+        is_completed_ = 2.0;
+        RCLCPP_INFO(this->get_logger(), "--------- PARKING DONE ---------");
+
+    }
+    // parking 중중
+    else{
+        is_completed_ = 1.0;
+        RCLCPP_INFO(this->get_logger(), " PARKING ... ");
+
     }
     
-    RCLCPP_INFO(this->get_logger(), "Mean Point (X: %.4f , Y: %.4f)", mean_point.x, mean_point.y);
-    RCLCPP_INFO(this->get_logger(), "Complete : %s" , is_completed ? "True" : "False");
+    // RCLCPP_INFO(this->get_logger(), "Mean Point (X: %.4f , Y: %.4f)", mean_point.x, mean_point.y);
+    // RCLCPP_INFO(this->get_logger(), "Complete : %s" , is_completed ? "True" : "False");
 
 }
 
@@ -163,32 +189,57 @@ void DrivingWayNode::getParkingWay(ad_msgs::msg::PolyfitLaneData& driving_way){
 
 }
 
-void DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, std_msgs::msg::Float32& behavior_state, const ad_msgs::msg::LanePointData& lane_points){
+void DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, const ad_msgs::msg::LanePointData& lane_points){
 
     // is_error를 판별하는 조건문 -> merge때 나 아예 경로 이탈을 해결
     // if((driving_way.a0 > 0.1 || driving_way.a3 < -8.1)){
     //     is_error = true;
     //     // RCLCPP_INFO(this->get_logger(), " ERROR ");
     // }
-    if(driving_way.a3 > 0.1 || driving_way.a3 < -8.1){
-        is_error = true;
-        RCLCPP_INFO(this->get_logger(), " ERROR ");
-        
+
+    // merge 중
+    if(merge_mode == 1.0){
+        stop_lane_detection = true;
+        RCLCPP_INFO(this->get_logger(), " MERGE .... ");
     }
-    else if (will_parking && !start_parking){
-        driving_way = prev_driving_way_;
-        if (max_x > 15){
-            start_parking = true;
+    // merge 끝
+    else if(merge_mode == 2.0){
+        stop_lane_detection = false;
+        merge_completed = true;
+        merge_mode = 3.0;
+        RCLCPP_INFO(this->get_logger(), "-------------  MERGE DONE -------------- ");
+    }
+
+    if(!stop_lane_detection){
+
+        if(driving_way.a3 > 0.1 || driving_way.a3 < -8.1){
+            is_error = true;
+            RCLCPP_INFO(this->get_logger(), " ERROR ");
+            
         }
-    }
-    // PARKING 전
-    else if((max_x < 10 && lane_points.point.size() < 40)){
-        will_parking = true;
-    }
-    else{
-        prev_driving_way_ = driving_way;
-        is_error = false;
-        // RCLCPP_INFO(this->get_logger(), " Normal driving mode ");
+        // Merge 끝냈으면 한번만 DBSCAN 이용해서 Driving_way 찾고 다시 주행
+        else if(merge_completed){
+            is_error = true;
+            merge_completed = false;
+        }
+        // PARKING LANE이 들어올 때까지 이전 driving_way로 전진
+        else if (will_parking && !start_parking){
+            driving_way = prev_driving_way_;
+            if (max_x > 15){
+                start_parking = true;
+            }
+        }
+        // PARKING 전
+        else if((max_x < 10 && lane_points.point.size() < 40)){
+            will_parking = true;
+        }
+        
+        else{
+            prev_driving_way_ = driving_way;
+            is_error = false;
+            // RCLCPP_INFO(this->get_logger(), " Normal driving mode ");
+        }
+    
     }
 
     
@@ -484,7 +535,7 @@ void DrivingWayNode::process_lanes(ad_msgs::msg::LanePointData& left_lane, ad_ms
         }
     }
     
-    RCLCPP_INFO(this->get_logger(), "LANE MAX.X : %.3f", max_x);
+    // RCLCPP_INFO(this->get_logger(), "LANE MAX.X : %.3f", max_x);
     
     if (X_LEFT.size() >= 4 && X_RIGHT.size() >= 4){
         A_LEFT = calculateA(X_LEFT, Y_LEFT);
@@ -598,6 +649,7 @@ void DrivingWayNode::PublishDrivingWay(const rclcpp::Time& current_time) {
     p_poly_lanes_->publish(o_poly_lanes_);
     p_left_lane_->publish(o_left_lane_);
     p_right_lane_->publish(o_right_lane_);
+    p_is_completed_->publish(is_completed_msg);
     
 }
 int main(int argc, char **argv) {
