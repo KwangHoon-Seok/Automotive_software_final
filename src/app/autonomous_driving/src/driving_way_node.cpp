@@ -141,7 +141,7 @@ void DrivingWayNode::getMeanPoints(const ad_msgs::msg::LanePointData& lane_point
 
 
     // parking 완료
-    if(mean_point.x - 1.8 < 0.0){
+    if(mean_point.x - 3.0 < 0.0){
         is_completed = true;
         is_completed_ = 2.0;
         RCLCPP_INFO(this->get_logger(), "--------- PARKING DONE ---------");
@@ -230,7 +230,7 @@ void DrivingWayNode::lane_condition(ad_msgs::msg::PolyfitLaneData& driving_way, 
             }
         }
         // PARKING 전
-        else if((max_x < 10 && lane_points.point.size() < 40)){
+        else if((max_x < 8.0 && lane_points.point.size() < 40)){
             will_parking = true;
         }
         

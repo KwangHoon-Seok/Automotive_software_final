@@ -179,7 +179,8 @@ Visualization Manager:
           Enabled: true
           Name: PolyfitLanes
           Namespaces:
-            {}
+            LEFT: true
+            RIGHT: true
           Topic:
             Depth: 5
             Durability Policy: Volatile
@@ -231,7 +232,7 @@ Visualization Manager:
           Enabled: true
           Name: DrivingWay
           Namespaces:
-            {}
+            MID: true
           Topic:
             Depth: 5
             Durability Policy: Volatile
@@ -242,17 +243,18 @@ Visualization Manager:
       Enabled: true
       Name: LaneMarker
     - Class: rviz_default_plugins/MarkerArray
-      Enabled: false
+      Enabled: true
       Name: Mission
       Namespaces:
-        {}
+        object: true
+        region: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /ego/mission_marker
-      Value: false
+      Value: true
     - Class: rviz_default_plugins/MarkerArray
       Enabled: true
       Name: MarkerArray
@@ -281,7 +283,7 @@ Visualization Manager:
       Enabled: true
       Name: Marker
       Namespaces:
-        {}
+        "": true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -294,7 +296,7 @@ Visualization Manager:
       Enabled: true
       Name: Marker
       Namespaces:
-        {}
+        "": true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -437,5 +439,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1908
-  X: -32
-  Y: -32
+  X: 0
+  Y: 0

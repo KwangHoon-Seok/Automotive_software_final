@@ -104,7 +104,7 @@ void TrajectoryNode::Run() {
         target_points.push_back(left_point);
         Point right_point = RightTargetPoint(static_position, 4.0);
         target_points.push_back(right_point);
-        Point back_point = BackTargetPoint(static_position, 20, driving_way);
+        Point back_point = BackTargetPoint(static_position, 15, driving_way);
         target_points.push_back(back_point);
         
         if (target_flag == 0){
@@ -183,7 +183,7 @@ void TrajectoryNode::Run() {
             double ttc = CalculateTTC(path, vehicle_state, object_prediction, 4.0, 0.1, 3.0);
             // Update best path only if conditions are met
             RCLCPP_INFO(this->get_logger(), "path id %s ttc: %.2f", path.id.c_str(), ttc);
-            if (ttc >=1.0 && ttc < 2.0 && is_flag == 0) {
+            if (ttc >=0.5 && ttc < 2.0 && is_flag == 0) {
                 best_path = path;
                 is_flag = 1;
             }
@@ -266,7 +266,7 @@ Point TrajectoryNode::BackTargetPoint(const geometry_msgs::msg::Point& static_po
 
     // Apply backward offset in the local frame
     double back_x = local_x + back_distance; // Moving backward along the local x-axis
-    double back_y = local_y + 6.5;                 
+    double back_y = local_y + 3.0;                 
     // double back_y = driving_way.a3 * std::pow(back_x, 3) + driving_way.a2 * std::pow(back_x, 2) + driving_way.a1 * back_x + driving_way.a0;
     //RCLCPP_INFO(this->get_logger(), "Back Point in Local Frame - X: %.2f, Y: %.2f", back_x, back_y);
 

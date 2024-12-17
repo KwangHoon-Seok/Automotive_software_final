@@ -118,7 +118,7 @@ void ControlNode::Run() {
             if (merge_path.merge == 1) {
                 tracked_path = merge_path;
                 path_initialized = true;
-                merge_target_x = target_x;
+                merge_target_x = target_x - 3.0;
                 std::array<double, 6> coeffs = {merge_path.a0, merge_path.a1, merge_path.a2,
                                         merge_path.a3, merge_path.a4, merge_path.a5};
                 global_waypoints = SampleGlobalPath(coeffs, vehicle_state, 0.0, merge_target_x, 0.1);
@@ -151,7 +151,7 @@ void ControlNode::Run() {
                 }
 
                 // 속도 제어 및 경로 추적
-                double control_signal = computePID(7, vehicle_state.velocity, 0.6);
+                double control_signal = computePID(5, vehicle_state.velocity, 0.6);
                 if (control_signal > 0) {
                     o_vehicle_command_.accel = std::min(control_signal, 0.5);
                     o_vehicle_command_.brake = 0.0;
@@ -183,7 +183,7 @@ void ControlNode::Run() {
 //--------------------------------------PARKING_START------------------------------//
     if (drive_mode == PARKING_START)
     {
-        control_signal = computePID(8, vehicle_state.velocity, 0.6);
+        control_signal = computePID(6, vehicle_state.velocity, 0.6);
         if (control_signal > 0)
         {
             o_vehicle_command_.accel = std::min(control_signal, 0.5);
