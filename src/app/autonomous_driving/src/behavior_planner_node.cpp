@@ -19,6 +19,9 @@ BehaviorPlannerNode::BehaviorPlannerNode(const std::string& node_name, const dou
     s_parking_state_ = this->create_subscription<std_msgs::msg::Float32>(
         "/ego/parking_state", qos_profile,
         std::bind(&BehaviorPlannerNode::CallbackParkingState, this, std::placeholders::_1));
+    s_merge_complete_ = this->create_subscription<std_msgs::msg::Float32>(
+        "/ego/merge_complete", qos_profile,
+        std::bind(&BehaviorPlannerNode::CallbackMergeComplete, this, std::placeholders::_1));
 
 
     // Publishers
@@ -93,14 +96,16 @@ void BehaviorPlannerNode::updatePlannerState()
 
         // Determine the threshold condition based on yaw_rate
         bool condition = false;
-        if (yaw_rate > 0) {
+        if (yaw_rate > 0.1) {
             condition = (dy_local >= lane_width_threshold && dy_local <= 2.5);
-        } else if (yaw_rate < -0.2) {
-            condition = (dy_local <= lane_width_threshold);
+        } else if (yaw_rate < -0.1) {
+            condition = (dy_local <= lane_width_threshold && dy_local >= -1.5);
+        } else{
+            condition = (dy_local > -1.5 && dy_local <1.5);
         }
 
         // Update the closest distances based on object type
-        if (dx_local > 0 && condition) {
+        if (condition) {
             if (object.object_type == "Static") {
                 if (dx > 0) {
                     if (distance < closest_static_distance) {
@@ -155,6 +160,11 @@ void BehaviorPlannerNode::updatePlannerState()
 }
 
 void BehaviorPlannerNode::velocity_planner() {
+
+    std_msgs::msg::Float32 merge_flag_float = i_merge_complete_;
+    double merge_flag = static_cast<double>(merge_flag_float.data);
+
+
     if (i_mission_state_.road_condition == "None") {
         bool has_static_object = false;
 
@@ -164,13 +174,22 @@ void BehaviorPlannerNode::velocity_planner() {
                 break;
             }
         }
-        if (has_static_object) {
-            o_ref_velocity_ = 5.0;
-        } else {
+
+        if(has_static_object) {
+            merge_velocity_flag = 1.0;
+        }
+
+        if(merge_velocity_flag == 1.0){
+            if(merge_flag == 0.0) {
+                o_ref_velocity_ = 5.0;
+            } else{
+                o_ref_velocity_ = 15.0;
+            }
+        } else{
             o_ref_velocity_ = 15.0;
         }
-    } else {
-        o_ref_velocity_ = 7.5;
+    }else{
+        o_ref_velocity_ = 10.0;
     }
 }
 

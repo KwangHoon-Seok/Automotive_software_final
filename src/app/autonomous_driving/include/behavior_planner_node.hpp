@@ -51,6 +51,8 @@ class BehaviorPlannerNode : public rclcpp::Node {
         double ref_vel_;
         geometry_msgs::msg::Point static_object_position_;
         int merge_flag = 0;
+
+        double merge_velocity_flag = 0.0;
         // Publishers
         rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_behavior_state_;
         rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr p_ref_velocity_;
@@ -63,6 +65,7 @@ class BehaviorPlannerNode : public rclcpp::Node {
         rclcpp::Subscription<ad_msgs::msg::PolyfitLaneDataArray>::SharedPtr s_obstacle_way_; // motion prediction결과
         rclcpp::Subscription<ad_msgs::msg::Mission>::SharedPtr s_mission_state_;
         rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_parking_state_;
+        rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr s_merge_complete_;
 
         // Callback Functions 
         inline void CallbackVehicleState(const ad_msgs::msg::VehicleState::SharedPtr msg) {
@@ -89,6 +92,12 @@ class BehaviorPlannerNode : public rclcpp::Node {
         std::lock_guard<std::mutex> lock(mutex_parking_state_);
         i_parking_state_ = *msg;
         }
+
+        inline void CallbackMergeComplete(const std_msgs::msg::Float32::SharedPtr msg) {
+            std::lock_guard<std::mutex> lock(mutex_merge_complete_);
+            i_merge_complete_ = *msg;
+        }
+
         // Timer
         rclcpp::TimerBase::SharedPtr t_run_node_;
 
@@ -98,6 +107,7 @@ class BehaviorPlannerNode : public rclcpp::Node {
         ad_msgs::msg::PolyfitLaneDataArray i_obstacle_way_;
         ad_msgs::msg::Mission i_mission_state_;
         std_msgs::msg::Float32 i_parking_state_;
+        std_msgs::msg::Float32 i_merge_complete_;
 
         // Outputs 
         float o_behavior_state_;  // 1: ACC, 2: AEB, 3: Merge, 4: Reference Velocity Tracking, 5: PARKING_START, 6: PARKING_END
@@ -109,6 +119,7 @@ class BehaviorPlannerNode : public rclcpp::Node {
         std::mutex mutex_obstacle_way_;
         std::mutex mutex_mission_state_;
         std::mutex mutex_parking_state_;
+        std::mutex mutex_merge_complete_;
 
 }; 
 #endif // __BEHAVIOR_PLANNER_NODE_HPP__
